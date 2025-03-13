@@ -1,0 +1,1 @@
+vsim work.testbench -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
