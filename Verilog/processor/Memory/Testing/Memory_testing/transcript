@@ -1,0 +1,121 @@
+# Compile of cpu_bram.v was successful.
+# Compile of cpu_bram_d.v was successful.
+# Compile of memory_tester.sv failed with 1 errors.
+# 3 compiles, 1 failed with 1 error.
+# Compile of memory_tester.sv was successful.
+vsim work.memory_tester.sv -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.memory_tester.sv -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 18:20:15 on Mar 13,2025
+# ** Error (suppressible): (vsim-19) Failed to access library 'work.memory_tester' at "work.memory_tester".
+# No such file or directory. (errno = ENOENT)
+# Error loading design
+# End time: 18:20:18 on Mar 13,2025, Elapsed time: 0:00:03
+# Errors: 1, Warnings: 6
+vsim work.memory_tester -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.memory_tester -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 18:20:31 on Mar 13,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Error: (vopt-13130) Failed to find design unit 'memory_tester'.
+#         Searched libraries:
+#             C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf
+#             work
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=1.
+# Error loading design
+# End time: 18:20:35 on Mar 13,2025, Elapsed time: 0:00:04
+# Errors: 1, Warnings: 2
+vsim work.memory_tester.sv -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.memory_tester.sv -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 18:20:51 on Mar 13,2025
+# ** Error (suppressible): (vsim-19) Failed to access library 'work.memory_tester' at "work.memory_tester".
+# No such file or directory. (errno = ENOENT)
+# Error loading design
+# End time: 18:20:53 on Mar 13,2025, Elapsed time: 0:00:02
+# Errors: 1, Warnings: 1
+vsim work.memory_tester.sv -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.memory_tester.sv -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 18:22:48 on Mar 13,2025
+# ** Error (suppressible): (vsim-19) Failed to access library 'work.memory_tester' at "work.memory_tester".
+# No such file or directory. (errno = ENOENT)
+# Error loading design
+# End time: 18:22:50 on Mar 13,2025, Elapsed time: 0:00:02
+# Errors: 1, Warnings: 1
+cd I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_testing
+vsim work.memory_tester -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.memory_tester -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 18:24:03 on Mar 13,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Error: (vopt-13130) Failed to find design unit 'memory_tester'.
+#         Searched libraries:
+#             C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf
+#             work
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=1.
+# Error loading design
+# End time: 18:24:07 on Mar 13,2025, Elapsed time: 0:00:04
+# Errors: 1, Warnings: 2
+vsim work.memory_tester -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.memory_tester -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 18:24:28 on Mar 13,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Error: (vopt-13130) Failed to find design unit 'memory_tester'.
+#         Searched libraries:
+#             C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf
+#             work
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=1.
+# Error loading design
+# End time: 18:24:33 on Mar 13,2025, Elapsed time: 0:00:05
+# Errors: 1, Warnings: 2
+# Compile of memory_tester.sv was successful.
+vsim work.memory_tester -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.memory_tester -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 18:24:41 on Mar 13,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.memory_tester(fast)
+# Loading work.cpu_bram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.cpu_bram_d(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast__1)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast__1)
+add wave -position insertpoint  \
+sim:/memory_tester/aclr \
+sim:/memory_tester/address \
+sim:/memory_tester/byteena \
+sim:/memory_tester/clock \
+sim:/memory_tester/data \
+sim:/memory_tester/i \
+sim:/memory_tester/q_mem1 \
+sim:/memory_tester/q_mem2 \
+sim:/memory_tester/rden \
+sim:/memory_tester/wren
+run -all
+# ===== Begin Memory Tests =====
+# [Addr 0] Wrote: 0xa0000000 | mem1=0xa0000000, mem2=0xa0000000
+# [Addr 1] Wrote: 0xa0000001 | mem1=0xa0000001, mem2=0xa0000001
+# [Addr 2] Wrote: 0xa0000002 | mem1=0xa0000002, mem2=0xa0000002
+# [Addr 3] Wrote: 0xa0000003 | mem1=0xa0000003, mem2=0xa0000003
+# [Addr 4] Wrote: 0xa0000004 | mem1=0xa0000004, mem2=0xa0000004
+# Partial Write Test @ Address 0x000A:
+#   Wrote 0xDEAD_BEEF with byteena=4'b0011 (low half only).
+#   mem1 read = 0x0000beef
+#   mem2 read = 0x0000beef
+# Partial Write Test @ Address 0x000B:
+#   Wrote 0x1234_ABCD with byteena=4'b1100 (upper half only).
+#   mem1 read = 0x12340000
+#   mem2 read = 0x12340000
+# ===== All Tests Complete =====
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_testing/memory_tester.sv(156)
+#    Time: 320 ns  Iteration: 0  Instance: /memory_tester
+# 1
+# Break in Module memory_tester at I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_testing/memory_tester.sv line 156
+# Compile of memory_tester.sv was successful.

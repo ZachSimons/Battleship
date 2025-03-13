@@ -1,0 +1,15 @@
+I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_testing/cpu_bram.v {1 {vlog -work work -vopt -stats=none I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_testing/cpu_bram.v
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module cpu_bram
+
+Top level modules:
+	cpu_bram
+
+} {} {}} I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_testing/cpu_bram_d.v {1 {vlog -work work -vopt -stats=none I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_testing/cpu_bram_d.v
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module cpu_bram_d
+
+Top level modules:
+	cpu_bram_d
+
+} {} {}}
