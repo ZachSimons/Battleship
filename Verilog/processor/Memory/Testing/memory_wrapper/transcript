@@ -1,0 +1,18 @@
+# Compile of wapper_tb.sv was successful.
+# Compile of data_memory_wrapper.sv was successful.
+# Compile of dmemory.v was successful.
+# 3 compiles, 0 failed with no errors.
+# Compile of wapper_tb.sv was successful.
+vsim work.wrapper_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.wrapper_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 18:13:38 on Mar 16,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Error (suppressible): I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(25): (vopt-2912) Port 'wr_en' not found in module 'data_memory_wrapper' (3rd connection).
+# ** Error (suppressible): I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(25): (vopt-2912) Port 'wr_data' not found in module 'data_memory_wrapper' (6th connection).
+# ** Error (suppressible): I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(25): (vopt-2912) Port 'address' not found in module 'data_memory_wrapper' (7th connection).
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=3, Warnings=1.
+# Error loading design
+# End time: 18:13:43 on Mar 16,2025, Elapsed time: 0:00:05
+# Errors: 3, Warnings: 8

@@ -10,8 +10,8 @@ module memory_tester;
     reg  [3:0]   byteena;
     reg          clock;
     reg  [31:0]  data;
-    reg          rden;
-    reg          wren;
+    reg  [1:0]   rden;
+    reg  [1:0]   wren;
     wire [31:0]  q_mem1;
     wire [31:0]  q_mem2;
 
@@ -25,8 +25,8 @@ module memory_tester;
         .byteena (byteena),
         .clock   (clock),
         .data    (data),
-        .rden    (rden),
-        .wren    (wren),
+        .rden    (rden[0]),
+        .wren    (wren[0]),
         .q       (q_mem1)
     );
 
@@ -36,8 +36,8 @@ module memory_tester;
         .byteena (byteena),
         .clock   (clock),
         .data    (data),
-        .rden    (rden),
-        .wren    (wren),
+        .rden    (rden[1]),
+        .wren    (wren[1]),
         .q       (q_mem2)
     );
 
@@ -78,17 +78,17 @@ module memory_tester;
             // Write data
             address = i;
             data    = 32'hA000_0000 + i; // just a pattern
-            wren    = 1;
+            wren    = 2'b11;
             rden    = 0;
             #10;  // wait 1 clock cycle
             wren    = 0;
-            #10;  // wait another cycle to safely end the write
+            @(negedge clock);  // wait another cycle to safely end the write
 
             // Read data back
-            rden    = 1;
+            rden    = 2'b11;
             #10;  // wait 1 clock cycle to latch data
             rden    = 0;
-            #10;  // wait another cycle for stable output
+            @(negedge clock);  // wait another cycle for stable output
 
             // Check outputs
             $display("[Addr %0d] Wrote: 0x%08h | mem1=0x%08h, mem2=0x%08h",
@@ -105,14 +105,16 @@ module memory_tester;
         // Example: Write only the lower 16 bits of the word
         address = 16'h000A;
         data    = 32'hDEAD_BEEF;
-        byteena = 4'b0011;  // Only write the lower half-word
+        
+        
+        //byteena = 4'b0011;  // Only write the lower half-word
         wren    = 1;
         #10;
         wren    = 0;
         #10;
 
         // Now read it back
-        rden = 1;
+        rden = 3;
         #10;
         rden = 0;
         #10;
@@ -132,13 +134,13 @@ module memory_tester;
         address = 16'h000B;
         data    = 32'h1234_ABCD;
         byteena = 4'b1100;  // Only write the upper half-word
-        wren    = 1;
+        wren    = 3;
         #10;
         wren    = 0;
         #10;
 
         // Read it back
-        rden = 1;
+        rden = 3;
         #10;
         rden = 0;
         #10;
@@ -153,6 +155,13 @@ module memory_tester;
 
         // Done with tests
         $display("===== All Tests Complete =====");
+
+
+
+        
+
+
+
         $stop;
     end
 

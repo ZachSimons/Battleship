@@ -1,0 +1,15 @@
+I:/ece554/Battleship/Verilog/processor/dmemory.v {1 {vlog -work work -vopt -stats=none I:/ece554/Battleship/Verilog/processor/dmemory.v
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module dmemory
+
+Top level modules:
+	dmemory
+
+} {} {}} I:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv {1 {vlog -work work -vopt -sv -stats=none I:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module data_memory_wrapper
+
+Top level modules:
+	data_memory_wrapper
+
+} {} {}}
