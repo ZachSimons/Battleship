@@ -7,7 +7,7 @@ module memory(
     input logic         mem_wrt_en_mem,
     input logic         reg_wrt_en_mem,
     input logic         random_mem,
-    input logic         rdi_mem.
+    input logic         rdi_mem,
     input logic [1:0]   width_mem,
     input logic [1:0]   wb_sel_mem,
     input logic [4:0]   wrt_reg_mem,
@@ -16,7 +16,7 @@ module memory(
     input logic [31:0]  reg2_data_mem,
     input logic [31:0]  alu_mem,
     output logic        reg_wrt_en_wb,
-    output logic [1:0]  wb_sel_wb
+    output logic [1:0]  wb_sel_wb,
     output logic [4:0]  wrt_reg_wb,
     output logic [31:0] read_data_wb,
     output logic [31:0] pc_wb,
@@ -25,10 +25,21 @@ module memory(
 
 
 //////////////MODULE INSTANTIATION///////////////////
+data_memory_wrapper dmem (
+    .clk(clk),
+    .rst_n(rst_n),
+    .wrt_en(mem_wrt_en_mem),
+    .rd_en(mem_rd_en_mem),
+    .mem_unsigned(mem_unsigned_mem),
+    .width(width_mem),
+    .wrt_data(reg2_data_mem),
+    .wrt_addr(alu_mem),
+    .rd_data(/*TODO*/)
+);
 
 
 /////////////////PIPELINE STAGE FF///////////////////
-always_ff @(posedge clk, negedge rst) begin
+always_ff @(posedge clk, negedge rst_n) begin
     if(!rst_n) begin
         reg_wrt_en_wb <= '0;
         wb_sel_wb <= '0;
@@ -51,7 +62,7 @@ end
 
 ////////////////COMBINATIONAL LOGIC//////////////////
 
-
+////////////Linear Feedback Register/////////////////
 
 
 

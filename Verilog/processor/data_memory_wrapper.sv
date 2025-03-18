@@ -42,10 +42,10 @@ end
 
 always_comb begin
     case({mem_unsigned, width}) 
-        3'b001: rd_data = {{5'd24{1'b0}}, wrap_rd_data[7:0]};              //LH
-        3'b010: rd_data = {{5'd16{1'b0}}, wrap_rd_data[15:0]};             //LB
-        3'b101: rd_data = {{5'd24{wrap_rd_data[7]}}, wrap_rd_data[7:0]};   //LBU
-        3'b110: rd_data = {{5'd16{wrap_rd_data[15]}}, wrap_rd_data[15:0]}; //LHU
+        3'b101: rd_data = {{5'd24{1'b0}}, wrap_rd_data[7:0]};              //LH
+        3'b110: rd_data = {{5'd16{1'b0}}, wrap_rd_data[15:0]};             //LB
+        3'b001: rd_data = {{5'd24{wrap_rd_data[7]}}, wrap_rd_data[7:0]};   //LBU
+        3'b010: rd_data = {{5'd16{wrap_rd_data[15]}}, wrap_rd_data[15:0]}; //LHU
         default: rd_data = wrap_rd_data;                                   //LW
     endcase
 end
