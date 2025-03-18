@@ -1,5 +1,5 @@
 module instruction_decoder(
-    input instruction [31:0],
+    input [31:0] instruction,
     output random,
     output ppu_send,
     output write_en,
