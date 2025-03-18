@@ -1,0 +1,29 @@
+I:/Battleship/Verilog/processor/branch_ctrl.sv {1 {vlog -work work -vopt -sv -stats=none I:/Battleship/Verilog/processor/branch_ctrl.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module branch_ctrl
+
+Top level modules:
+	branch_ctrl
+
+} {} {}} I:/Battleship/Verilog/processor/alu.sv {1 {vlog -work work -vopt -sv -stats=none I:/Battleship/Verilog/processor/alu.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module alu
+
+Top level modules:
+	alu
+
+} {} {}} I:/Battleship/Verilog/processor/execute.sv {1 {vlog -work work -vopt -sv -stats=none I:/Battleship/Verilog/processor/execute.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module execute
+
+Top level modules:
+	execute
+
+} {} {}} I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv {1 {vlog -work work -vopt -sv -stats=none I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module Execute_tb
+
+Top level modules:
+	Execute_tb
+
+} {} {}}

@@ -1,0 +1,87 @@
+# Compile of Branch_Control_tb.sv was successful.
+# Compile of branch_ctrl.sv was successful.
+# 2 compiles, 0 failed with no errors.
+vsim -voptargs=+acc work.Branch_Control_tb
+# vsim -voptargs="+acc" work.Branch_Control_tb 
+# Start time: 17:34:24 on Mar 18,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.Branch_Control_tb(fast)
+# Loading work.branch_ctrl(fast)
+add wave -position insertpoint sim:/Branch_Control_tb/*
+run -all
+# YAHOO!! All tests passed!
+# ** Note: $stop    : I:/Battleship/Verilog/Testing/Branch_Control/Branch_Control_tb.sv(99)
+#    Time: 12288 ns  Iteration: 0  Instance: /Branch_Control_tb
+# Break in Module Branch_Control_tb at I:/Battleship/Verilog/Testing/Branch_Control/Branch_Control_tb.sv line 99
+restart
+# Compile of Branch_Control_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.Branch_Control_tb(fast)
+# Loading work.branch_ctrl(fast)
+run -all
+# YAHOO!! All tests passed!
+# ** Note: $stop    : I:/Battleship/Verilog/Testing/Branch_Control/Branch_Control_tb.sv(99)
+#    Time: 6291456 ns  Iteration: 0  Instance: /Branch_Control_tb
+# Break in Module Branch_Control_tb at I:/Battleship/Verilog/Testing/Branch_Control/Branch_Control_tb.sv line 99
+# End time: 17:38:18 on Mar 18,2025, Elapsed time: 0:03:54
+# Errors: 0, Warnings: 2
+# Closing project I:/Battleship/Verilog/Testing/Branch_Control/Branch_Control.mpf
+# reading C:/intelFPGA_lite/23.1std/questa_fse/win64/../modelsim.ini
+# Loading project ALU
+# Compile of ALU_tb.sv was successful.
+vsim work._opt
+# vsim work._opt 
+# Start time: 17:38:32 on Mar 18,2025
+# ** Warning: (vsim-1963) Explicit invocation on automatically named optimized design "_opt" will not cause it to be locked.
+# Loading sv_std.std
+# Loading work.ALU_tb(fast)
+# Loading work.alu(fast)
+add wave -position insertpoint sim:/ALU_tb/*
+run -all
+# YAHOO!! All tests passed!
+# ** Note: $stop    : I:/Battleship/Verilog/Testing/ALU/ALU_tb.sv(111)
+#    Time: 12288 ns  Iteration: 0  Instance: /ALU_tb
+# Break in Module ALU_tb at I:/Battleship/Verilog/Testing/ALU/ALU_tb.sv line 111
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading sv_std.std
+# Loading work.ALU_tb(fast)
+# Warning in wave window restart: (vish-4014) No objects found matching '/ALU_tb/err'. 
+# Warning in wave window restart: (vish-4014) No objects found matching '/ALU_tb/inA'. 
+# Warning in wave window restart: (vish-4014) No objects found matching '/ALU_tb/inB'. 
+# Warning in wave window restart: (vish-4014) No objects found matching '/ALU_tb/out'. 
+# Warning in wave window restart: (vish-4014) No objects found matching '/ALU_tb/expected'. 
+# Warning in wave window restart: (vish-4014) No objects found matching '/ALU_tb/alu_op'. 
+# Warning in wave window restart: (vish-4014) No objects found matching '/ALU_tb/option_bit'. 
+# Warning in wave window restart: (vish-4014) No objects found matching '/ALU_tb/count'. 
+add wave -position insertpoint sim:/ALU_tb/*
+quit -sim
+# End time: 17:39:11 on Mar 18,2025, Elapsed time: 0:00:39
+# Errors: 0, Warnings: 1
+vsim work.ALU_tb -voptargs=+acc
+# vsim work.ALU_tb -voptargs="+acc" 
+# Start time: 17:39:22 on Mar 18,2025
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.ALU_tb(fast)
+# Loading work.alu(fast)
+add wave -position insertpoint sim:/ALU_tb/*
+run -all
+# YAHOO!! All tests passed!
+# ** Note: $stop    : I:/Battleship/Verilog/Testing/ALU/ALU_tb.sv(111)
+#    Time: 6291456 ns  Iteration: 0  Instance: /ALU_tb
+# Break in Module ALU_tb at I:/Battleship/Verilog/Testing/ALU/ALU_tb.sv line 111
+quit -sim
+# End time: 17:40:31 on Mar 18,2025, Elapsed time: 0:01:09
+# Errors: 0, Warnings: 4

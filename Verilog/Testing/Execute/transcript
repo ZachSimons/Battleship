@@ -1,0 +1,72 @@
+# Compile of Execute_tb.sv was successful.
+# Compile of alu.sv was successful.
+# Compile of branch_ctrl.sv was successful.
+# Compile of execute.sv failed with 3 errors.
+# 4 compiles, 1 failed with 3 errors.
+# Compile of execute.sv failed with 19 errors.
+# Compile of Execute_tb.sv failed with 1 errors.
+# Compile of execute.sv failed with 19 errors.
+# 2 compiles, 2 failed with 20 errors.
+# Compile of Execute_tb.sv failed with 1 errors.
+# Compile of execute.sv failed with 18 errors.
+# 2 compiles, 2 failed with 19 errors.
+# Compile of Execute_tb.sv failed with 1 errors.
+# Compile of execute.sv was successful.
+# 2 compiles, 1 failed with 1 error.
+# Compile of Execute_tb.sv was successful.
+vsim work.Execute_tb -voptargs=+acc
+# vsim work.Execute_tb -voptargs="+acc" 
+# Start time: 18:37:05 on Mar 18,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Error: I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv(50): (vopt-2123) Missing argument for format specification '%h'.
+# ** Error: I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv(55): (vopt-2123) Missing argument for format specification '%h'.
+# ** Error: I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv(62): (vopt-2123) Missing argument for format specification '%h'.
+# ** Error: I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv(67): (vopt-2123) Missing argument for format specification '%h'.
+# ** Error: I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv(72): (vopt-2123) Missing argument for format specification '%h'.
+# ** Error: I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv(77): (vopt-2123) Missing argument for format specification '%h'.
+# ** Error: I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv(82): (vopt-2123) Missing argument for format specification '%h'.
+# ** Error: I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv(87): (vopt-2123) Missing argument for format specification '%h'.
+# ** Error: I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv(92): (vopt-2123) Missing argument for format specification '%h'.
+# Optimization failed
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 12.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=10, Warnings=1.
+# Error loading design
+# End time: 18:37:10 on Mar 18,2025, Elapsed time: 0:00:05
+# Errors: 10, Warnings: 8
+# Compile of Execute_tb.sv was successful.
+vsim -voptargs=+acc work.Execute_tb
+# vsim -voptargs="+acc" work.Execute_tb 
+# Start time: 18:37:44 on Mar 18,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.Execute_tb(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+add wave -position insertpoint sim:/Execute_tb/*
+run -all
+# YAHOO!! All tests passed!
+# ** Note: $stop    : I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv(107)
+#    Time: 10485780 ns  Iteration: 1  Instance: /Execute_tb
+# Break in Module Execute_tb at I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv line 107
+# Compile of Execute_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.Execute_tb(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+run -all
+# YAHOO!! All tests passed!
+# ** Note: $stop    : I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv(125)
+#    Time: 10485780 ns  Iteration: 1  Instance: /Execute_tb
+# Break in Module Execute_tb at I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv line 125
+# End time: 18:55:11 on Mar 18,2025, Elapsed time: 0:17:27
+# Errors: 0, Warnings: 2
