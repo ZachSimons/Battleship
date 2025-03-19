@@ -24,6 +24,7 @@ module decode(
     output rti_ex,
     output data_sel_ex,
     output wrt_en_ex,
+    output rdi_ex,
     output [3:0] alu_op_ex,
     output [3:0] bj_inst_ex,
     output auipc,
@@ -31,13 +32,14 @@ module decode(
     output [1:0] type_sel_ex,
     output rsi_ex,
     output sac,
-    output snd
+    output snd,
+    output uad
 );
 
 
 logic [31:0] src_data1;
 logic [31:0] imm[4:0];
-logic random, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi;
+logic random, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi;
 logic [1:0] wb_sel, width, type_sel;
 logic [3:0] alu_op, bj_inst;
 
@@ -76,6 +78,7 @@ always_ff @(posedge clk, negedge rst_n) begin
         bj_inst_ex <= 0;
         type_sel_ex <= 0;
         rsi_ex <= 0;
+        rdi_ex <= 0;
     end
     else begin
         read_data1_ex <=read_data1;
@@ -97,6 +100,7 @@ always_ff @(posedge clk, negedge rst_n) begin
         bj_inst_ex <= bj_inst;
         type_sel_ex <= type_sel;
         rsi_ex <= rsi;
+        rdi_ex <= rdi;
     end
 end
 
@@ -134,7 +138,9 @@ instruction_decoder DECODE(
     .type_sel(type_sel),
     .rsi(rsi),
     .sac(sac),
-    .snd(snd)
+    .snd(snd),
+    .uad(uad),
+    .rdi(rdi)
 );
 
 
