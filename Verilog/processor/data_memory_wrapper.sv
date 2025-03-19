@@ -21,7 +21,6 @@ logic not_aligned;
 
 
 //input address is 15 bits total wrt_addr [14:0]
-
 //////////////MODULE INSTANTIATION///////////////////
 //Swappable if more or less data-memory is needed
 dmembank dbank0 (
@@ -66,37 +65,37 @@ dmembank dbank3 (
 
 ////////////////////////LOGIC//////////////////////////
 //not_aligned if half operation is requested and wrt_addr is odd or a full word operation is requested and wrt_addr != 0
-assign not_aligned = ((width == 2'b10) & wrt_addr[0]) | ((width == 2'b00) & (wrt_addr[1:0] != 2'b00))
+assign not_aligned = ((width == 2'b10) & wrt_addr[0]) | ((width == 2'b00) & (wrt_addr[1:0] != 2'b00));
 
 assign mem_error = not_aligned; 
 
 //bank wrt_en signals
-assign wrt_en_control = {not_aligned, wrt_en, width, wrt_addr[1:0]}
+assign wrt_en_control = {not_aligned, wrt_en, width, wrt_addr[1:0]};
 always_comb begin
     case(wrt_en_control) 
-        6'b010100: bank_wrt_en = 4'b0001        //width 01 and addr 00 (byte @ b0)
-        6'b010101: bank_wrt_en = 4'b0010        //width 01 and addr 01 (byte @ b1)
-        6'b010110: bank_wrt_en = 4'b0100        //width 01 and addr 10 (byte @ b2)
-        6'b010111: bank_wrt_en = 4'b1000        //width 01 and addr 11 (byte @ b3)
-        6'b011000: bank_wrt_en = 4'b0011        //width 10 and addr 00 (half @ b0 & b1)
-        6'b011010: bank_wrt_en = 4'b1100        //width 10 and addr 10 (half @ b2 & b3)
-        6'b010000: bank_wrt_en = 4'b1111        //width 00 and addr 00 (full word)
-        default:   bank_wrt_en = 4'b0000        //No write currently happening                          
+        6'b010100: bank_wrt_en = 4'b0001;        //width 01 and addr 00 (byte @ b0)
+        6'b010101: bank_wrt_en = 4'b0010;        //width 01 and addr 01 (byte @ b1)
+        6'b010110: bank_wrt_en = 4'b0100;        //width 01 and addr 10 (byte @ b2)
+        6'b010111: bank_wrt_en = 4'b1000;        //width 01 and addr 11 (byte @ b3)
+        6'b011000: bank_wrt_en = 4'b0011;        //width 10 and addr 00 (half @ b0 & b1)
+        6'b011010: bank_wrt_en = 4'b1100;        //width 10 and addr 10 (half @ b2 & b3)
+        6'b010000: bank_wrt_en = 4'b1111;        //width 00 and addr 00 (full word)
+        default:   bank_wrt_en = 4'b0000;        //No write currently happening                          
     endcase
 end
 
 //bank rd_en signals
-assign rd_en_control = {not_aligned, rd_en, width, wrt_addr[1:0]}
+assign rd_en_control = {not_aligned, rd_en, width, wrt_addr[1:0]};
 always_comb begin
     case(rd_en_control) 
-        6'b010100: bank_rd_en = 4'b0001        //width 01 and addr 00 (byte @ b0)
-        6'b010101: bank_rd_en = 4'b0010        //width 01 and addr 01 (byte @ b1)
-        6'b010110: bank_rd_en = 4'b0100        //width 01 and addr 10 (byte @ b2)
-        6'b010111: bank_rd_en = 4'b1000        //width 01 and addr 11 (byte @ b3)
-        6'b011000: bank_rd_en = 4'b0011        //width 10 and addr 00 (half @ b0 & b1)
-        6'b011010: bank_rd_en = 4'b1100        //width 10 and addr 10 (half @ b2 & b3)
-        6'b010000: bank_rd_en = 4'b1111        //width 00 and addr 00 (full word)
-        default:   bank_rd_en = 4'b0000        //No write currently happening                          
+        6'b010100: bank_rd_en = 4'b0001;        //width 01 and addr 00 (byte @ b0)
+        6'b010101: bank_rd_en = 4'b0010;        //width 01 and addr 01 (byte @ b1)
+        6'b010110: bank_rd_en = 4'b0100;        //width 01 and addr 10 (byte @ b2)
+        6'b010111: bank_rd_en = 4'b1000;        //width 01 and addr 11 (byte @ b3)
+        6'b011000: bank_rd_en = 4'b0011;        //width 10 and addr 00 (half @ b0 & b1)
+        6'b011010: bank_rd_en = 4'b1100;        //width 10 and addr 10 (half @ b2 & b3)
+        6'b010000: bank_rd_en = 4'b1111;        //width 00 and addr 00 (full word)
+        default:   bank_rd_en = 4'b0000;        //No write currently happening                          
     endcase
 end
 
@@ -131,7 +130,7 @@ always_comb begin
 end
 
 //bank read_data signals
-assign rd_data_control = {mem_unsigned, width, wrt_addr[1:0]}
+assign rd_data_control = {mem_unsigned, width, wrt_addr[1:0]};
 always_comb begin
     case(rd_data_control) 
         5'b00000: rd_data = {bank3_rd_data, bank2_rd_data, bank1_rd_data, bank0_rd_data}; //Load full 

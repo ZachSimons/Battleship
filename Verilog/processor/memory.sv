@@ -1,4 +1,5 @@
 // Have two IPs (one for D-Memory and one for I-Memory)
+`timescale 1 ps / 1 ps
 module memory(
     input logic         clk,
     input logic         rst_n,
@@ -16,6 +17,7 @@ module memory(
     input logic [31:0]  reg2_data_mem,
     input logic [31:0]  alu_mem,
     output logic        reg_wrt_en_wb,
+    output logic        mem_error,
     output logic [1:0]  wb_sel_wb,
     output logic [4:0]  wrt_reg_wb,
     output logic [31:0] read_data_wb,
@@ -23,10 +25,8 @@ module memory(
     output logic [31:0] alu_wb
 );
 //////////////NET INSTANTIATION/////////////////////
-logic [31:0] lfsr; 
-
-
-
+logic [31:0] lfsr, wrapper_rd_data, random_mux, rdi_mux;
+logic [15:0] lfsr16;
 
 //////////////MODULE INSTANTIATION///////////////////
 data_memory_wrapper dmem (
@@ -38,9 +38,9 @@ data_memory_wrapper dmem (
     .width(width_mem),
     .wrt_data(reg2_data_mem),
     .wrt_addr(alu_mem),
-    .rd_data(/*TODO*/)
+    .rd_data(wrapper_rd_data),
+    .mem_error(mem_error)
 );
-
 
 /////////////////PIPELINE STAGE FF///////////////////
 always_ff @(posedge clk, negedge rst_n) begin
@@ -53,11 +53,10 @@ always_ff @(posedge clk, negedge rst_n) begin
         alu_wb <= '0;
     end
     else begin
-        //TODO add FF passthroughs
         reg_wrt_en_wb <= reg_wrt_en_mem;
         wb_sel_wb <= wb_sel_mem;
         wrt_reg_wb <= wrt_reg_mem; 
-        //TODO read_data_wb <= 
+        read_data_wb <= rdi_mux;
         pc_wb <= pc_mem;
         alu_wb <= alu_mem;
     end
@@ -65,21 +64,22 @@ end
 
 
 ////////////////COMBINATIONAL LOGIC//////////////////
-
-
+//Stage Muxes
+assign random_mux = random_mem ? lfsr : wrapper_rd_data;
+assign rdi_mux = rdi_mem ? random_mux : rdi_data; 
 
 
 ////////////Linear Feedback Register/////////////////
 always_ff @(posedge clk, negedge rst_n) begin
     if(~rst_n) begin
-        lfsr <= 32'h2fe7b8ab;
+        lfsr16 <= 16'hb8ab;
     end
-    else begin //Determine Taps 32, 30, 26, 25
-        lfsr <= {lfsr[30:0], (lfsr[31] ^ lfsr[29] ^ lfsr [25] ^ lfsr[24])};
+    else begin //Determine Taps 16, 15, 13, 4
+        lfsr16 <= {lfsr16[14:0], (lfsr16[15] ^ lfsr16[14] ^ lfsr16[12] ^ lfsr16[3])};
     end
 end
 
-
+assign lfsr = {{5'd16{lfsr16[15]}}, lfsr16};
 
 
 endmodule

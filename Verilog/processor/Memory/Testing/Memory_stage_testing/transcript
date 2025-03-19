@@ -1,0 +1,117 @@
+# Compile of mem_stage_tb.sv failed with 16 errors.
+# Compile of data_memory_wrapper.sv was successful.
+# Compile of dmembank.v was successful.
+# Compile of memory.sv failed with 1 errors.
+# 4 compiles, 2 failed with 17 errors.
+# Compile of mem_stage_tb.sv failed with 16 errors.
+# Compile of data_memory_wrapper.sv was successful.
+# Compile of dmembank.v was successful.
+# Compile of memory.sv failed with 1 errors.
+# 4 compiles, 2 failed with 17 errors.
+# Compile of mem_stage_tb.sv failed with 16 errors.
+# Compile of memory.sv was successful.
+# 2 compiles, 1 failed with 16 errors.
+# Compile of mem_stage_tb.sv was successful.
+vsim work.mem_stage_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.mem_stage_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 16:09:31 on Mar 19,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.mem_stage_tb(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# ** Error (suppressible): (vsim-3009) [TSCALE] - Module 'mem_stage_tb' does not have a timeunit/timeprecision specification in effect, but other modules do.
+#    Time: 0 ns  Iteration: 0  Instance: /mem_stage_tb/idut/dmem/dbank0 File: I:/ece554/Battleship/Verilog/processor/dmembank.v
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Error loading design
+# End time: 16:09:36 on Mar 19,2025, Elapsed time: 0:00:05
+# Errors: 1, Warnings: 10
+# Compile of memory.sv was successful.
+vsim work.mem_stage_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.mem_stage_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 16:10:10 on Mar 19,2025
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.mem_stage_tb(fast)
+# Loading work.memory(fast)
+# ** Error (suppressible): (vsim-3009) [TSCALE] - Module 'mem_stage_tb' does not have a timeunit/timeprecision specification in effect, but other modules do.
+#    Time: 0 ns  Iteration: 0  Instance: /mem_stage_tb/idut File: I:/ece554/Battleship/Verilog/processor/memory.sv
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Error loading design
+# End time: 16:10:14 on Mar 19,2025, Elapsed time: 0:00:04
+# Errors: 1, Warnings: 3
+# Compile of mem_stage_tb.sv was successful.
+vsim work.mem_stage_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.mem_stage_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 16:10:39 on Mar 19,2025
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.mem_stage_tb(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# ** Warning: (vsim-PLI-3003) [TOFD] - System task or function '$disply' is not defined.
+#    Time: 0 ps  Iteration: 0  Instance: /mem_stage_tb File: I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_stage_testing/mem_stage_tb.sv Line: 82
+add wave -position insertpoint sim:/mem_stage_tb/*
+run -all
+# Compile of mem_stage_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.mem_stage_tb(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# ** Warning: (vsim-PLI-3003) [TOFD] - System task or function '$disply' is not defined.
+#    Time: 0 ps  Iteration: 0  Instance: /mem_stage_tb File: I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_stage_testing/mem_stage_tb.sv Line: 82
+run -all
+# ** Note: $stop    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_stage_testing/mem_stage_tb.sv(107)
+#    Time: 10080 ps  Iteration: 1  Instance: /mem_stage_tb
+# Break in Module mem_stage_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_stage_testing/mem_stage_tb.sv line 107
+# Compile of mem_stage_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.mem_stage_tb(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# ** Warning: (vsim-PLI-3003) [TOFD] - System task or function '$disply' is not defined.
+#    Time: 0 ps  Iteration: 0  Instance: /mem_stage_tb File: I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_stage_testing/mem_stage_tb.sv Line: 83
+run -all
+# ** Note: $stop    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_stage_testing/mem_stage_tb.sv(109)
+#    Time: 10080 ps  Iteration: 1  Instance: /mem_stage_tb
+# Break in Module mem_stage_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_stage_testing/mem_stage_tb.sv line 109
