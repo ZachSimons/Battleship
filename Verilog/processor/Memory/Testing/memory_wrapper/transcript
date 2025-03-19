@@ -1,18 +1,300 @@
 # Compile of wapper_tb.sv was successful.
 # Compile of data_memory_wrapper.sv was successful.
-# Compile of dmemory.v was successful.
-# 3 compiles, 0 failed with no errors.
-# Compile of wapper_tb.sv was successful.
+# 2 compiles, 0 failed with no errors.
 vsim work.wrapper_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
 # vsim work.wrapper_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
-# Start time: 18:13:38 on Mar 16,2025
+# Start time: 16:26:06 on Mar 18,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
-# ** Error (suppressible): I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(25): (vopt-2912) Port 'wr_en' not found in module 'data_memory_wrapper' (3rd connection).
-# ** Error (suppressible): I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(25): (vopt-2912) Port 'wr_data' not found in module 'data_memory_wrapper' (6th connection).
-# ** Error (suppressible): I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(25): (vopt-2912) Port 'address' not found in module 'data_memory_wrapper' (7th connection).
-# Optimization failed
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=3, Warnings=1.
-# Error loading design
-# End time: 18:13:43 on Mar 16,2025, Elapsed time: 0:00:05
-# Errors: 3, Warnings: 8
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.wrapper_tb(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmemory(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+add wave -position insertpoint  \
+sim:/wrapper_tb/CLK_PERIOD \
+sim:/wrapper_tb/clk \
+sim:/wrapper_tb/rst_n \
+sim:/wrapper_tb/wrt_en \
+sim:/wrapper_tb/rd_en \
+sim:/wrapper_tb/width \
+sim:/wrapper_tb/mem_unsigned \
+sim:/wrapper_tb/wrt_data \
+sim:/wrapper_tb/wrt_addr \
+sim:/wrapper_tb/rd_data
+run -all
+# [TEST 1 - Byte Signed] wrt_addr=0x00000000 Read=0x0000008f (Expect sign-extended: 0xFFFFFF8F)
+# [TEST 2 - Byte Unsigned] wrt_addr=0x00000000 Read=0x0000008f (Expect zero-extended: 0x0000008F)
+# [TEST 3 - Halfword Signed] wrt_addr=0x00000001 Read=0xffffffcd
+# [TEST 4 - Halfword Unsigned] wrt_addr=0x00000001 Read=0x000000cd
+# [TEST 5 - Word Read] wrt_addr=0x00000002 Read=0xffffbeef (Expect 0xDEAD_BEEF)
+# All tests complete.
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(148)
+#    Time: 150 ns  Iteration: 0  Instance: /wrapper_tb
+# 1
+# Break in Module wrapper_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv line 148
+add wave -position insertpoint  \
+sim:/wrapper_tb/dut/wrap_rd_data \
+sim:/wrapper_tb/dut/wrap_wrt_data
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.wrapper_tb(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmemory(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+run -all
+# [TEST 1 - Byte Signed] wrt_addr=0x00000000 Read=0x0000008f (Expect sign-extended: 0xFFFFFF8F)
+# [TEST 2 - Byte Unsigned] wrt_addr=0x00000000 Read=0x0000008f (Expect zero-extended: 0x0000008F)
+# [TEST 3 - Halfword Signed] wrt_addr=0x00000001 Read=0xffffffcd
+# [TEST 4 - Halfword Unsigned] wrt_addr=0x00000001 Read=0x000000cd
+# [TEST 5 - Word Read] wrt_addr=0x00000002 Read=0xffffbeef (Expect 0xDEAD_BEEF)
+# All tests complete.
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(148)
+#    Time: 150 ns  Iteration: 0  Instance: /wrapper_tb
+# 1
+# Break in Module wrapper_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv line 148
+# Compile of data_memory_wrapper.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.wrapper_tb(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmemory(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+run -all
+# [TEST 1 - Byte Signed] wrt_addr=0x00000000 Read=0x0000008f (Expect sign-extended: 0xFFFFFF8F)
+# [TEST 2 - Byte Unsigned] wrt_addr=0x00000000 Read=0x0000008f (Expect zero-extended: 0x0000008F)
+# [TEST 3 - Halfword Signed] wrt_addr=0x00000001 Read=0xffffffcd
+# [TEST 4 - Halfword Unsigned] wrt_addr=0x00000001 Read=0x000000cd
+# [TEST 5 - Word Read] wrt_addr=0x00000002 Read=0xffffbeef (Expect 0xDEAD_BEEF)
+# All tests complete.
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(148)
+#    Time: 150 ns  Iteration: 0  Instance: /wrapper_tb
+# 1
+# Break in Module wrapper_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv line 148
+add wave -position insertpoint  \
+sim:/wrapper_tb/dut/control
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.wrapper_tb(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmemory(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+run -all
+# [TEST 1 - Byte Signed] wrt_addr=0x00000000 Read=0x0000008f (Expect sign-extended: 0xFFFFFF8F)
+# [TEST 2 - Byte Unsigned] wrt_addr=0x00000000 Read=0x0000008f (Expect zero-extended: 0x0000008F)
+# [TEST 3 - Halfword Signed] wrt_addr=0x00000001 Read=0xffffffcd
+# [TEST 4 - Halfword Unsigned] wrt_addr=0x00000001 Read=0x000000cd
+# [TEST 5 - Word Read] wrt_addr=0x00000002 Read=0xffffbeef (Expect 0xDEAD_BEEF)
+# All tests complete.
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(148)
+#    Time: 150 ns  Iteration: 0  Instance: /wrapper_tb
+# 1
+# Break in Module wrapper_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv line 148
+# Causality operation skipped due to absence of debug database file
+# Compile of data_memory_wrapper.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.wrapper_tb(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmemory(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+run -all
+# [TEST 1 - Byte Signed] wrt_addr=0x00000000 Read=0x0000008f (Expect sign-extended: 0xFFFFFF8F)
+# [TEST 2 - Byte Unsigned] wrt_addr=0x00000000 Read=0x0000008f (Expect zero-extended: 0x0000008F)
+# [TEST 3 - Halfword Signed] wrt_addr=0x00000001 Read=0xffffffcd
+# [TEST 4 - Halfword Unsigned] wrt_addr=0x00000001 Read=0x000000cd
+# [TEST 5 - Word Read] wrt_addr=0x00000002 Read=0xffffbeef (Expect 0xDEAD_BEEF)
+# All tests complete.
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(148)
+#    Time: 150 ns  Iteration: 0  Instance: /wrapper_tb
+# 1
+# Break in Module wrapper_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv line 148
+add wave -position insertpoint  \
+sim:/wrapper_tb/dut/wrt_en \
+sim:/wrapper_tb/dut/rd_en \
+sim:/wrapper_tb/dut/mem_unsigned \
+sim:/wrapper_tb/dut/width \
+sim:/wrapper_tb/dut/wrt_data \
+sim:/wrapper_tb/dut/wrt_addr \
+sim:/wrapper_tb/dut/rd_data \
+sim:/wrapper_tb/dut/wrap_rd_data \
+sim:/wrapper_tb/dut/wrap_wrt_data
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.wrapper_tb(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmemory(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+run -all
+# [TEST 1 - Byte Signed] wrt_addr=0x00000000 Read=0x0000008f (Expect sign-extended: 0xFFFFFF8F)
+# [TEST 2 - Byte Unsigned] wrt_addr=0x00000000 Read=0x0000008f (Expect zero-extended: 0x0000008F)
+# [TEST 3 - Halfword Signed] wrt_addr=0x00000001 Read=0xffffffcd
+# [TEST 4 - Halfword Unsigned] wrt_addr=0x00000001 Read=0x000000cd
+# [TEST 5 - Word Read] wrt_addr=0x00000002 Read=0xffffbeef (Expect 0xDEAD_BEEF)
+# All tests complete.
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(148)
+#    Time: 150 ns  Iteration: 0  Instance: /wrapper_tb
+# 1
+# Break in Module wrapper_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv line 148
+# Compile of data_memory_wrapper.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.wrapper_tb(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmemory(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+run -all
+# [TEST 1 - Byte Signed] wrt_addr=0x00000000 Read=0x0000008f (Expect sign-extended: 0xFFFFFF8F)
+# [TEST 2 - Byte Unsigned] wrt_addr=0x00000000 Read=0x0000008f (Expect zero-extended: 0x0000008F)
+# [TEST 3 - Halfword Signed] wrt_addr=0x00000001 Read=0xffffffcd
+# [TEST 4 - Halfword Unsigned] wrt_addr=0x00000001 Read=0x000000cd
+# [TEST 5 - Word Read] wrt_addr=0x00000002 Read=0xffffbeef (Expect 0xDEAD_BEEF)
+# All tests complete.
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(148)
+#    Time: 150 ns  Iteration: 0  Instance: /wrapper_tb
+# 1
+# Break in Module wrapper_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv line 148
+# Compile of data_memory_wrapper.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.wrapper_tb(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmemory(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+run -all
+# [TEST 1 - Byte Signed] wrt_addr=0x00000000 Read=0x0000008f (Expect sign-extended: 0xFFFFFF8F)
+# [TEST 2 - Byte Unsigned] wrt_addr=0x00000000 Read=0x0000008f (Expect zero-extended: 0x0000008F)
+# [TEST 3 - Halfword Signed] wrt_addr=0x00000001 Read=0xffffffcd
+# [TEST 4 - Halfword Unsigned] wrt_addr=0x00000001 Read=0x000000cd
+# [TEST 5 - Word Read] wrt_addr=0x00000002 Read=0xffffbeef (Expect 0xDEAD_BEEF)
+# All tests complete.
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(148)
+#    Time: 150 ns  Iteration: 0  Instance: /wrapper_tb
+# 1
+# Break in Module wrapper_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv line 148
+# Compile of wapper_tb.sv was successful.
+# Compile of data_memory_wrapper.sv was successful.
+# 2 compiles, 0 failed with no errors.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.wrapper_tb(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmemory(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+run -all
+# [TEST 1 - Byte Signed] wrt_addr=0x00000000 Read=0xffffff8f (Expect sign-extended: 0xFFFFFF8F)
+# [TEST 2 - Byte Unsigned] wrt_addr=0x00000000 Read=0x0000008f (Expect zero-extended: 0x0000008F)
+# [TEST 3 - Halfword Signed] wrt_addr=0x00000001 Read=0x000000cd
+# [TEST 4 - Halfword Unsigned] wrt_addr=0x00000001 Read=0x000000cd
+# [TEST 5 - Word Read] wrt_addr=0x00000002 Read=0xffffbeef (Expect 0xDEAD_BEEF)
+# All tests complete.
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(148)
+#    Time: 150 ns  Iteration: 0  Instance: /wrapper_tb
+# 1
+# Break in Module wrapper_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv line 148
+# Compile of data_memory_wrapper.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.wrapper_tb(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmemory(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+run -all
+# [TEST 1 - Byte Signed] wrt_addr=0x00000000 Read=0xffffff8f (Expect sign-extended: 0xFFFFFF8F)
+# [TEST 2 - Byte Unsigned] wrt_addr=0x00000000 Read=0x0000008f (Expect zero-extended: 0x0000008F)
+# [TEST 3 - Halfword Signed] wrt_addr=0x00000001 Read=0xffffabcd
+# [TEST 4 - Halfword Unsigned] wrt_addr=0x00000001 Read=0x0000abcd
+# [TEST 5 - Word Read] wrt_addr=0x00000002 Read=0xffffbeef (Expect 0xDEAD_BEEF)
+# All tests complete.
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(148)
+#    Time: 150 ns  Iteration: 0  Instance: /wrapper_tb
+# 1
+# Break in Module wrapper_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv line 148
+# Compile of wapper_tb.sv was successful.
+run -all
+# Compile of wapper_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.wrapper_tb(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmemory(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+run -all
+# [TEST 1 - Byte Signed] wrt_addr=0x00000000 Read=0xffffff8f (Expect sign-extended: 0xFFFFFF8F)
+# [TEST 2 - Byte Unsigned] wrt_addr=0x00000000 Read=0x0000008f (Expect zero-extended: 0x0000008F)
+# [TEST 3 - Halfword Signed] wrt_addr=0x00000001 Read=0xffffabcd (Expect zero-extended: 0xFFFFABCD)
+# [TEST 4 - Halfword Unsigned] wrt_addr=0x00000001 Read=0x0000abcd (Expect zero-extended: 0x0000ABCD)
+# [TEST 5 - Word Read] wrt_addr=0x00000002 Read=0xdeadbeef (Expect 0xDEAD_BEEF)
+# All tests complete.
+# ** Note: $finish    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv(147)
+#    Time: 150 ns  Iteration: 0  Instance: /wrapper_tb
+# 1
+# Break in Module wrapper_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv line 147

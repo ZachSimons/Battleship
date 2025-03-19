@@ -22,6 +22,10 @@ module memory(
     output logic [31:0] pc_wb,
     output logic [31:0] alu_wb
 );
+//////////////NET INSTANTIATION/////////////////////
+logic [31:0] lfsr; 
+
+
 
 
 //////////////MODULE INSTANTIATION///////////////////
@@ -62,7 +66,18 @@ end
 
 ////////////////COMBINATIONAL LOGIC//////////////////
 
+
+
+
 ////////////Linear Feedback Register/////////////////
+always_ff @(posedge clk, negedge rst_n) begin
+    if(~rst_n) begin
+        lfsr <= 32'h2fe7b8ab;
+    end
+    else begin //Determine Taps 32, 30, 26, 25
+        lfsr <= {lfsr[30:0], (lfsr[31] ^ lfsr[29] ^ lfsr [25] ^ lfsr[24])};
+    end
+end
 
 
 

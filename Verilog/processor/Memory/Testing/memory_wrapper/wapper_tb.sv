@@ -65,7 +65,7 @@ module wrapper_tb();
     // -------------------------------------------------
     // Write 0xFF to wrt_addr 0x0 (lowest 8 bits = 0xFF)
     wrt_en   = 1'b1;
-    width    = 2'b10;         // Byte
+    width    = 2'b01;         // Byte
     wrt_data = 32'hFFFFFF8F;  // Low byte = 0xFF
     wrt_addr = 32'h0;
     #CLK_PERIOD;
@@ -73,7 +73,7 @@ module wrapper_tb();
     #CLK_PERIOD;
 
     // Read back as signed (mem_unsigned = 0)
-    width        = 2'b10; // Byte
+    width        = 2'b01; // Byte
     mem_unsigned = 1'b0;  // Signed
     rd_en        = 1'b1;
     #CLK_PERIOD; // wait 1 cycle for read
@@ -95,7 +95,7 @@ module wrapper_tb();
     // Write 0xABCD to wrt_addr 0x4 (lowest 16 bits)
     rd_en         = 1'b0;         
     wrt_en        = 1'b1;
-    width         = 2'b01;         // Halfword
+    width         = 2'b10;         // Halfword
     mem_unsigned  = 1'b0;          // Signed
     wrt_data      = 32'hFFFFABCD;  // Low halfword = 0xABCD
     wrt_addr      = 32'h1;
@@ -104,11 +104,11 @@ module wrapper_tb();
     #CLK_PERIOD;
 
     // Read back as signed
-    width         = 2'b01; // Halfword
+    width         = 2'b10; // Halfword
     mem_unsigned  = 1'b0;  // Signed
     rd_en         = 1'b1;
     #CLK_PERIOD;
-    $display("[TEST 3 - Halfword Signed] wrt_addr=0x%08h Read=0x%08h",
+    $display("[TEST 3 - Halfword Signed] wrt_addr=0x%08h Read=0x%08h (Expect zero-extended: 0xFFFFABCD)",
              wrt_addr, rd_data);
 
     // -------------------------------------------------
@@ -116,7 +116,7 @@ module wrapper_tb();
     // -------------------------------------------------
     mem_unsigned = 1'b1;  // Unsigned
     #CLK_PERIOD;
-    $display("[TEST 4 - Halfword Unsigned] wrt_addr=0x%08h Read=0x%08h",
+    $display("[TEST 4 - Halfword Unsigned] wrt_addr=0x%08h Read=0x%08h (Expect zero-extended: 0x0000ABCD)",
              wrt_addr, rd_data);
 
     // -------------------------------------------------
@@ -134,7 +134,6 @@ module wrapper_tb();
 
     // Read back full word
     rd_en   = 1'b1; 
-    width   = 2'b10; // Word
     
     #CLK_PERIOD;
     $display("[TEST 5 - Word Read] wrt_addr=0x%08h Read=0x%08h (Expect 0xDEAD_BEEF)",

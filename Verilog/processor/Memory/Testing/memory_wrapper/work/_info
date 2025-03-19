@@ -1,6 +1,22 @@
 m255
 K4
 z2
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
 !s11f vlog 2023.3 2023.07, Jul 17 2023
 13
 !s112 1.1
@@ -9,45 +25,57 @@ z2
 !i10f 100
 cModel Technology
 dI:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_testing
+T_opt
+!s110 1742334979
+VMRJjN7ZNioC[aQ4^;@5VA3
+04 10 4 work wrapper_tb fast 0
+=11-4cd71794d373-67d9ec01-2ad-37b8
+R1
+!s12b OEM100
+!s124 OEM10U3 
+o-quiet -auto_acc_if_foreign -work work -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf +acc
+Z2 tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
 vdata_memory_wrapper
 2I:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv
-Z0 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z1 !s110 1742166769
+Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+!s110 1742334719
 !i10b 1
-!s100 ]MD5HlNdHzfN>41?m=I<f0
-IfZCQ>Uo1W9]X[h4KX6<NT1
+!s100 S1W_iU?WDEk5lLd5:PE_A1
+IeiDOgoe38?RFQ6dYd[1@K1
 S1
-Z2 dI:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper
-w1742166564
+Z4 dI:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper
+w1742334715
 8I:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv
 FI:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv
-!i122 1
-L0 1 57
-Z3 VDg1SIo80bB@j0V0VzS_@n1
-Z4 OL;L;2023.3;77
+!i122 12
+L0 1 59
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+Z6 OL;L;2023.3;77
 r1
 !s85 0
 31
-!s108 1742166769.000000
+!s108 1742334719.000000
 !s107 I:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv|
 !i113 0
-Z5 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-Z6 tCvgOpt 0
+Z7 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
 vdmemory
 2I:/ece554/Battleship/Verilog/processor/dmemory.v
 !s110 1742166770
 !i10b 1
 !s100 =2BUZBIfY7:F@Ro:20i8K0
 IFZ;lhWl8ZZW;kkolWF?ch2
-R2
+R4
 w1742164907
 8I:/ece554/Battleship/Verilog/processor/dmemory.v
 FI:/ece554/Battleship/Verilog/processor/dmemory.v
 !i122 2
 L0 40 71
-R3
-R4
+R5
+R6
 r1
 !s85 0
 31
@@ -56,54 +84,54 @@ r1
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/ece554/Battleship/Verilog/processor/dmemory.v|
 !i113 0
 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R6
+R2
 vtb_data_memory_wrapper
-Z7 2I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv
-R0
-R1
+Z8 2I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv
+R3
+!s110 1742166769
 !i10b 1
 !s100 GL>cPcN<X>8b7VE50cj`;2
 IkW7j@UMkEHViS1GbYHoSF1
 S1
-R2
-w1742166662
-Z8 8I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv
-Z9 FI:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv
-!i122 0
-Z10 L0 3 142
-R3
 R4
+w1742166662
+Z9 8I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv
+Z10 FI:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv
+!i122 0
+L0 3 142
+R5
+R6
 r1
 !s85 0
 31
 !s108 1742166768.000000
-!s107 I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv|
-Z11 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv|
+Z11 !s107 I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv|
+Z12 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv|
 !i113 0
+R7
+R2
+vwrapper_tb
+R8
+R3
+!s110 1742334954
+!i10b 1
+!s100 5MUmDNM4lZkEPe`knB<YL3
+IThbHK=Qg;[oA3YbfQa:KE0
+S1
+R4
+w1742334935
+R9
+R10
+!i122 14
+L0 3 148
 R5
 R6
-vwrapper_tb
-R7
-R0
-!s110 1742166808
-!i10b 1
-!s100 BHi]=flHH8@c]2[Dbd`1Z2
-Io8jCakdoL4DP=doH[j3VG3
-S1
-R2
-w1742166804
-R8
-R9
-!i122 3
-R10
-R3
-R4
 r1
 !s85 0
 31
-!s108 1742166808.000000
-Z12 !s107 I:/ece554/Battleship/Verilog/processor/Memory/Testing/memory_wrapper/wapper_tb.sv|
+!s108 1742334953.000000
 R11
+R12
 !i113 0
-R5
-R6
+R7
+R2
