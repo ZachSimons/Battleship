@@ -11,7 +11,12 @@ logic [15:0] source_ip = 16'h0001;
 logic [15:0] dest_ip = 16'h0002;
 logic [15:0] size = 16'h000C;
 logic [15:0] checksum_noninv;
+logic [15:0][4] packet_head;
 
-assign checksum_noninv = source_ip + dest_ip + 16'h0011 + size
+assign checksum_noninv = source_ip + dest_ip + 16'h0011 + size;
+
+assign packet_head = {source_ip, dest_ip, size, !checksum_noninv}; 
+
+assign packet_out = {packet_head, data_in};
 
 endmodule
