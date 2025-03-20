@@ -115,3 +115,5 @@ run -all
 # ** Note: $stop    : I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_stage_testing/mem_stage_tb.sv(109)
 #    Time: 10080 ps  Iteration: 1  Instance: /mem_stage_tb
 # Break in Module mem_stage_tb at I:/ece554/Battleship/Verilog/processor/Memory/Testing/Memory_stage_testing/mem_stage_tb.sv line 109
+# End time: 16:19:07 on Mar 19,2025, Elapsed time: 0:08:28
+# Errors: 0, Warnings: 3
