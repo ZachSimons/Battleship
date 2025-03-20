@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #define BOARD_SIZE 10
 #define NUM_SQUARES (BOARD_SIZE * BOARD_SIZE)
 #define MAX_SHIPS 5
@@ -23,13 +21,17 @@
 
 int my_board[NUM_SQUARES];
 int enemy_board[NUM_SQUARES];
-char ship_sizes = {2, 3, 3, 4, 5};
-char ship_letter = {''}
+char ship_sizes[MAX_SHIPS] = {2, 3, 3, 4, 5};
+char ship_letter[MAX_SHIPS] = {'d', 's', 'c', 'b', 'a'};
+int guess = 0;
 
-void clear_board() {
+void clear_board(int board) {
     for(int i = 0; i < NUM_SQUARES; i++) {
-        my_board[i] = 0;
-        enemy_board[i] = 0;
+        if(board) {
+            my_board[i] = 0;
+        } else {
+            enemy_board[i] = 0;
+        }
     }
 }
 
@@ -47,43 +49,72 @@ int place_ship(int board, int square, int v, int type) {
     }
     for(int i = 0; i < size; i++) {
         if(board) {
-            my_board[square] = SET_TYPE(type) | SET_E_BIT(1) | SET_V_BIT(v) | SET_SEG(i);
+            if(GET_E_BIT(my_board[square + inc*i])) {
+                return 0;
+            }
         } else {
-            enemy_board[square] = SET_TYPE(type) | SET_E_BIT(1) | SET_V_BIT(v) | SET_SEG(i);
+            if(GET_E_BIT(enemy_board[square + inc*i])) {
+                return 0;
+            }
+        }
+    }
+    for(int i = 0; i < size; i++) {
+        if(board) {
+            my_board[square + inc*i] |= SET_TYPE(type) | SET_E_BIT(1) | SET_V_BIT(v) | SET_SEG(i);
+        } else {
+            enemy_board[square + inc*i] |= SET_TYPE(type) | SET_E_BIT(1) | SET_V_BIT(v) | SET_SEG(i);
         }
     }
 }
 
-void print_board(int board) {
+int check_win(int board) {
     for(int i = 0; i < NUM_SQUARES; i++) {
-        for(int j = 0; j < BOARD_SIZE; j++) {
-            if(board) {
-                if(GET_E_BIT(my_board[i*10 + j])) {
-                    int type = GET_TYPE(my_board[i*10 + j]);
-                    if(type())
-                } else {
-                    if(GET_M_BIT(my_board[i*10 + j])) {
-                        printf("|.O|");
-                    } else {
-                        printf("|..|");
-                    }
-                }
-            } else {
-
+        if(board) {
+            if(GET_E_BIT(my_board[i]) && !GET_M_BIT(my_board[i])) {
+                return 0;
             }
+        } else {
+            if(GET_E_BIT(enemy_board[i])) {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+// Interrupt handler
+void interrupt_handler(int rsi) {
+    // read
+    if(rsi > (100 << 1)) {
+        // PS2
+        if(rsi == 'w') {
+
+        } else if(rsi == 'a') {
+            if(guess % 10 != 0) {
+                guess -= 1;
+            }
+        } else if(rsi == 's') {
+
+        } else if(rsi == 'd') {
+            if(guess % 10 != 9) {
+                guess += 1;
+            }
+        } else {
+            // snd guess
         }
     }
 }
 
 int main() {
-    int test = SET_BOARD_SEL(0) | SET_SHIP_POS(22) | SET_SEL_BIT(0) | SET_E_BIT(1) | SET_M_BIT(0) | SET_V_BIT(0) | SET_TYPE(3) | SET_SEG(4);
-    printf("%d\n", test);
-    printf("%d\n", GET_BOARD_SEL(test));
-    printf("%d\n", GET_SHIP_POS(test));
-    printf("%d\n", GET_SEL_BIT(test));
-    printf("%d\n", GET_E_BIT(test));
-    printf("%d\n", GET_M_BIT(test));
-    printf("%d\n", GET_V_BIT(test));
-    printf("%d\n", GET_TYPE(test));
-    printf("%d\n", GET_SEG(test));
+    for(int i = 0; i < 5; i++) {
+        int pos = rand() % 100;
+        int v = rand() % 2;
+        while(!place_ship(i, pos, v, i)) {
+            pos = rand() % 100;
+            v = rand() % 2;
+        }
+    }
+    while(1) {
+        // Run Accelerator
+    }
 }
