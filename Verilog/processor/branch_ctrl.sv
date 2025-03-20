@@ -1,8 +1,9 @@
-module branch_ctrl(bj_inst, inA, inB, branch);
-
-    input [3:0] bj_inst;
-    input [31:0] inA, inB;
-    output logic branch;
+module branch_ctrl(
+    input       [3:0]   bj_inst,
+    input       [31:0]  inA,
+    input       [31:0]  inB,
+    output logic        branch
+);
 
     always_comb begin
         case(bj_inst)
@@ -11,6 +12,9 @@ module branch_ctrl(bj_inst, inA, inB, branch);
             end
             4'b1001: begin // BNE
                 branch = inA != inB;
+            end
+            4'b1011: begin // JALR + JAL
+                branch = 1'b1;
             end
             4'b1100: begin // BLT
                 branch = inA < inB;

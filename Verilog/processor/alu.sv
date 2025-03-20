@@ -1,9 +1,10 @@
-module alu(inA, inB, out, alu_op, option_bit);
-
-    input [31:0] inA, inB;
-    input [2:0] alu_op;
-    input option_bit;
-    output logic [31:0] out;
+module alu(
+    input           [31:0]  inA,
+    input           [31:0]  inB,
+    input           [2:0]   alu_op,
+    input                   option_bit,
+    output logic    [31:0]  out   
+);
 
     always_comb begin
         case(alu_op)
