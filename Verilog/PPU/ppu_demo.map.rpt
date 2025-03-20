@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ppu_demo
-Fri Mar 14 15:34:28 2025
+Thu Mar 20 18:20:42 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -20,19 +20,20 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
  12. State Machine - |ppu_demo|PPU:ppu_mod|vga_driver:draw|h_state
  13. Registers Removed During Synthesis
  14. General Register Statistics
- 15. Registers Packed Into Inferred Megafunctions
- 16. Multiplexer Restructuring Statistics (Restructuring Performed)
- 17. Source assignments for PPU:ppu_mod|altsyncram:mem_rtl_0|altsyncram_ijd1:auto_generated
- 18. Parameter Settings for User Entity Instance: vga_pll:pll|vga_pll_0002:vga_pll_inst|altera_pll:altera_pll_i
- 19. Parameter Settings for User Entity Instance: PPU:ppu_mod
+ 15. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 16. Source assignments for PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component|altsyncram_v4j1:auto_generated
+ 17. Parameter Settings for User Entity Instance: vga_pll:pll|vga_pll_0002:vga_pll_inst|altera_pll:altera_pll_i
+ 18. Parameter Settings for User Entity Instance: PPU:ppu_mod
+ 19. Parameter Settings for User Entity Instance: PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component
  20. Parameter Settings for User Entity Instance: PPU:ppu_mod|vga_driver:draw
- 21. Parameter Settings for Inferred Entity Instance: PPU:ppu_mod|altsyncram:mem_rtl_0
- 22. altsyncram Parameter Settings by Entity Instance
- 23. Port Connectivity Checks: "vga_pll:pll"
- 24. Post-Synthesis Netlist Statistics for Top Partition
- 25. Elapsed Time Per Partition
- 26. Analysis & Synthesis Messages
- 27. Analysis & Synthesis Suppressed Messages
+ 21. altsyncram Parameter Settings by Entity Instance
+ 22. Port Connectivity Checks: "PPU:ppu_mod|vga_driver:draw"
+ 23. Port Connectivity Checks: "PPU:ppu_mod|board_rom:rom"
+ 24. Port Connectivity Checks: "vga_pll:pll"
+ 25. Post-Synthesis Netlist Statistics for Top Partition
+ 26. Elapsed Time Per Partition
+ 27. Analysis & Synthesis Messages
+ 28. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -59,16 +60,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Mar 14 15:34:27 2025          ;
+; Analysis & Synthesis Status     ; Successful - Thu Mar 20 18:20:42 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; ppu_demo                                       ;
 ; Top-level Entity Name           ; ppu_demo                                       ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 60                                             ;
+; Total registers                 ; 74                                             ;
 ; Total pins                      ; 37                                             ;
 ; Total virtual pins              ; 0                                              ;
-; Total block memory bits         ; 2,807,136                                      ;
+; Total block memory bits         ; 1,871,424                                      ;
 ; Total DSP Blocks                ; 1                                              ;
 ; Total HSSI RX PCSs              ; 0                                              ;
 ; Total HSSI PMA RX Deserializers ; 0                                              ;
@@ -182,37 +183,36 @@ https://fpgasoftware.intel.com/eula.
 ;     Processor 2            ;   0.0%      ;
 ;     Processor 3            ;   0.0%      ;
 ;     Processor 4            ;   0.0%      ;
-;     Processor 5            ;   0.0%      ;
-;     Processor 6            ;   0.0%      ;
-;     Processors 7-14        ;   0.0%      ;
+;     Processors 5-14        ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                   ;
-+------------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path   ; Used in Netlist ; File Type                                             ; File Name with Absolute Path                                                    ; Library ;
-+------------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------------+---------+
-; VGA_Controller.v                   ; yes             ; User Verilog HDL File                                 ; I:/ECE554/Battleship/Verilog/PPU/VGA_Controller.v                               ;         ;
-; ppu_demo.v                         ; yes             ; User Verilog HDL File                                 ; I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v                                     ;         ;
-; PPU.sv                             ; yes             ; User SystemVerilog HDL File                           ; I:/ECE554/Battleship/Verilog/PPU/PPU.sv                                         ;         ;
-; vga_pll.v                          ; yes             ; User Wizard-Generated File                            ; I:/ECE554/Battleship/Verilog/PPU/vga_pll.v                                      ; vga_pll ;
-; vga_pll/vga_pll_0002.v             ; yes             ; User Verilog HDL File                                 ; I:/ECE554/Battleship/Verilog/PPU/vga_pll/vga_pll_0002.v                         ; vga_pll ;
-; board_green.hex                    ; yes             ; Auto-Found Hexadecimal (Intel-Format) File            ; I:/ECE554/Battleship/Verilog/PPU/board_green.hex                                ;         ;
-; altera_pll.v                       ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altera_pll.v          ;         ;
-; altsyncram.tdf                     ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
-; stratix_ram_block.inc              ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
-; lpm_mux.inc                        ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
-; lpm_decode.inc                     ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/lpm_decode.inc        ;         ;
-; aglobal231.inc                     ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/aglobal231.inc        ;         ;
-; a_rdenreg.inc                      ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/a_rdenreg.inc         ;         ;
-; altrom.inc                         ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altrom.inc            ;         ;
-; altram.inc                         ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altram.inc            ;         ;
-; altdpram.inc                       ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altdpram.inc          ;         ;
-; db/altsyncram_ijd1.tdf             ; yes             ; Auto-Generated Megafunction                           ; I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_ijd1.tdf                         ;         ;
-; db/ppu_demo.ram0_PPU_14356.hdl.mif ; yes             ; Auto-Generated Auto-Found Memory Initialization File  ; I:/ECE554/Battleship/Verilog/PPU/db/ppu_demo.ram0_PPU_14356.hdl.mif             ;         ;
-; db/mux_qib.tdf                     ; yes             ; Auto-Generated Megafunction                           ; I:/ECE554/Battleship/Verilog/PPU/db/mux_qib.tdf                                 ;         ;
-+------------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                  ;
++--------------------------------------------------+-----------------+----------------------------------------+---------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path                 ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                    ; Library ;
++--------------------------------------------------+-----------------+----------------------------------------+---------------------------------------------------------------------------------+---------+
+; VGA_Controller.v                                 ; yes             ; User Verilog HDL File                  ; I:/ECE554/Battleship/Verilog/PPU/VGA_Controller.v                               ;         ;
+; ppu_demo.v                                       ; yes             ; User Verilog HDL File                  ; I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v                                     ;         ;
+; PPU.sv                                           ; yes             ; User SystemVerilog HDL File            ; I:/ECE554/Battleship/Verilog/PPU/PPU.sv                                         ;         ;
+; vga_pll.v                                        ; yes             ; User Wizard-Generated File             ; I:/ECE554/Battleship/Verilog/PPU/vga_pll.v                                      ; vga_pll ;
+; vga_pll/vga_pll_0002.v                           ; yes             ; User Verilog HDL File                  ; I:/ECE554/Battleship/Verilog/PPU/vga_pll/vga_pll_0002.v                         ; vga_pll ;
+; board_rom.v                                      ; yes             ; User Wizard-Generated File             ; I:/ECE554/Battleship/Verilog/PPU/board_rom.v                                    ;         ;
+; altera_pll.v                                     ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altera_pll.v          ;         ;
+; altsyncram.tdf                                   ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
+; stratix_ram_block.inc                            ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
+; lpm_mux.inc                                      ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
+; lpm_decode.inc                                   ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/lpm_decode.inc        ;         ;
+; aglobal231.inc                                   ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/aglobal231.inc        ;         ;
+; a_rdenreg.inc                                    ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/a_rdenreg.inc         ;         ;
+; altrom.inc                                       ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altrom.inc            ;         ;
+; altram.inc                                       ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altram.inc            ;         ;
+; altdpram.inc                                     ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altdpram.inc          ;         ;
+; db/altsyncram_v4j1.tdf                           ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_v4j1.tdf                         ;         ;
+; c:/users/jecampos3/downloads/board_green_565.mif ; yes             ; Auto-Found Memory Initialization File  ; c:/users/jecampos3/downloads/board_green_565.mif                                ;         ;
+; db/decode_l2a.tdf                                ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/decode_l2a.tdf                              ;         ;
+; db/mux_rib.tdf                                   ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/mux_rib.tdf                                 ;         ;
++--------------------------------------------------+-----------------+----------------------------------------+---------------------------------------------------------------------------------+---------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------+
@@ -220,20 +220,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+------------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                        ;
 +---------------------------------------------+------------------------------------------------------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 154                                                                          ;
+; Estimate of Logic utilization (ALMs needed) ; 143                                                                          ;
 ;                                             ;                                                                              ;
-; Combinational ALUT usage for logic          ; 204                                                                          ;
-;     -- 7 input functions                    ; 26                                                                           ;
-;     -- 6 input functions                    ; 77                                                                           ;
-;     -- 5 input functions                    ; 39                                                                           ;
-;     -- 4 input functions                    ; 11                                                                           ;
-;     -- <=3 input functions                  ; 51                                                                           ;
+; Combinational ALUT usage for logic          ; 211                                                                          ;
+;     -- 7 input functions                    ; 19                                                                           ;
+;     -- 6 input functions                    ; 55                                                                           ;
+;     -- 5 input functions                    ; 28                                                                           ;
+;     -- 4 input functions                    ; 28                                                                           ;
+;     -- <=3 input functions                  ; 81                                                                           ;
 ;                                             ;                                                                              ;
-; Dedicated logic registers                   ; 60                                                                           ;
+; Dedicated logic registers                   ; 74                                                                           ;
 ;                                             ;                                                                              ;
 ; I/O pins                                    ; 37                                                                           ;
 ; Total MLAB memory bits                      ; 0                                                                            ;
-; Total block memory bits                     ; 2807136                                                                      ;
+; Total block memory bits                     ; 1871424                                                                      ;
 ;                                             ;                                                                              ;
 ; Total DSP Blocks                            ; 1                                                                            ;
 ;                                             ;                                                                              ;
@@ -241,37 +241,38 @@ https://fpgasoftware.intel.com/eula.
 ;     -- PLLs                                 ; 1                                                                            ;
 ;                                             ;                                                                              ;
 ; Maximum fan-out node                        ; vga_pll:pll|vga_pll_0002:vga_pll_inst|altera_pll:altera_pll_i|outclk_wire[0] ;
-; Maximum fan-out                             ; 422                                                                          ;
-; Total fan-out                               ; 2391                                                                         ;
-; Average fan-out                             ; 3.42                                                                         ;
+; Maximum fan-out                             ; 316                                                                          ;
+; Total fan-out                               ; 4822                                                                         ;
+; Average fan-out                             ; 8.02                                                                         ;
 +---------------------------------------------+------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                          ;
-+-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------+-----------------+--------------+
-; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                    ; Entity Name     ; Library Name ;
-+-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------+-----------------+--------------+
-; |ppu_demo                                 ; 204 (0)             ; 60 (0)                    ; 2807136           ; 1          ; 37   ; 0            ; |ppu_demo                                                                              ; ppu_demo        ; work         ;
-;    |PPU:ppu_mod|                          ; 204 (34)            ; 60 (1)                    ; 2807136           ; 1          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod                                                                  ; PPU             ; work         ;
-;       |altsyncram:mem_rtl_0|              ; 96 (0)              ; 4 (0)                     ; 2807136           ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|altsyncram:mem_rtl_0                                             ; altsyncram      ; work         ;
-;          |altsyncram_ijd1:auto_generated| ; 96 (0)              ; 4 (4)                     ; 2807136           ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|altsyncram:mem_rtl_0|altsyncram_ijd1:auto_generated              ; altsyncram_ijd1 ; work         ;
-;             |mux_qib:mux2|                ; 96 (96)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|altsyncram:mem_rtl_0|altsyncram_ijd1:auto_generated|mux_qib:mux2 ; mux_qib         ; work         ;
-;       |vga_driver:draw|                   ; 74 (74)             ; 55 (55)                   ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|vga_driver:draw                                                  ; vga_driver      ; work         ;
-;    |vga_pll:pll|                          ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll                                                                  ; vga_pll         ; vga_pll      ;
-;       |vga_pll_0002:vga_pll_inst|         ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll|vga_pll_0002:vga_pll_inst                                        ; vga_pll_0002    ; vga_pll      ;
-;          |altera_pll:altera_pll_i|        ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll|vga_pll_0002:vga_pll_inst|altera_pll:altera_pll_i                ; altera_pll      ; work         ;
-+-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------+-----------------+--------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------+-----------------+--------------+
+; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                       ; Entity Name     ; Library Name ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------+-----------------+--------------+
+; |ppu_demo                                    ; 211 (0)             ; 74 (0)                    ; 1871424           ; 1          ; 37   ; 0            ; |ppu_demo                                                                                                                 ; ppu_demo        ; work         ;
+;    |PPU:ppu_mod|                             ; 211 (42)            ; 74 (19)                   ; 1871424           ; 1          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod                                                                                                     ; PPU             ; work         ;
+;       |board_rom:rom|                        ; 15 (0)              ; 8 (0)                     ; 1871424           ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_rom:rom                                                                                       ; board_rom       ; work         ;
+;          |altsyncram:altsyncram_component|   ; 15 (0)              ; 8 (0)                     ; 1871424           ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component                                                       ; altsyncram      ; work         ;
+;             |altsyncram_v4j1:auto_generated| ; 15 (0)              ; 8 (8)                     ; 1871424           ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component|altsyncram_v4j1:auto_generated                        ; altsyncram_v4j1 ; work         ;
+;                |decode_l2a:rden_decode|      ; 15 (15)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component|altsyncram_v4j1:auto_generated|decode_l2a:rden_decode ; decode_l2a      ; work         ;
+;       |vga_driver:draw|                      ; 154 (154)           ; 47 (47)                   ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|vga_driver:draw                                                                                     ; vga_driver      ; work         ;
+;    |vga_pll:pll|                             ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll                                                                                                     ; vga_pll         ; vga_pll      ;
+;       |vga_pll_0002:vga_pll_inst|            ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll|vga_pll_0002:vga_pll_inst                                                                           ; vga_pll_0002    ; vga_pll      ;
+;          |altera_pll:altera_pll_i|           ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll|vga_pll_0002:vga_pll_inst|altera_pll:altera_pll_i                                                   ; altera_pll      ; work         ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------+-----------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis RAM Summary                                                                                                                                                                    ;
-+----------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+---------+------------------------------------+
-; Name                                                                       ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size    ; MIF                                ;
-+----------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+---------+------------------------------------+
-; PPU:ppu_mod|altsyncram:mem_rtl_0|altsyncram_ijd1:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 116964       ; 24           ; --           ; --           ; 2807136 ; db/ppu_demo.ram0_PPU_14356.hdl.mif ;
-+----------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+---------+------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                           ;
++-----------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+---------+--------------------------------------------------+
+; Name                                                                                                ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size    ; MIF                                              ;
++-----------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+---------+--------------------------------------------------+
+; PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component|altsyncram_v4j1:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 116964       ; 16           ; --           ; --           ; 1871424 ; C:/Users/jecampos3/Downloads/board_green_565.mif ;
++-----------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+---------+--------------------------------------------------+
 
 
 +-----------------------------------------------+
@@ -279,20 +280,21 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------+-------------+
 ; Statistic                       ; Number Used ;
 +---------------------------------+-------------+
-; Independent 18x18 plus 36       ; 1           ;
+; Two Independent 18x18           ; 1           ;
 ; Total number of DSP blocks      ; 1           ;
 ;                                 ;             ;
 ; Fixed Point Unsigned Multiplier ; 1           ;
 +---------------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis IP Cores Summary                                                                   ;
-+--------+--------------+---------+--------------+--------------+-----------------------+-----------------+
-; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance       ; IP Include File ;
-+--------+--------------+---------+--------------+--------------+-----------------------+-----------------+
-; Altera ; altera_pll   ; 23.1    ; N/A          ; N/A          ; |ppu_demo|vga_pll:pll ; vga_pll.v       ;
-+--------+--------------+---------+--------------+--------------+-----------------------+-----------------+
++-----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis IP Cores Summary                                                                                 ;
++--------+--------------+---------+--------------+--------------+-------------------------------------+-----------------+
+; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                     ; IP Include File ;
++--------+--------------+---------+--------------+--------------+-------------------------------------+-----------------+
+; Altera ; altera_pll   ; 23.1    ; N/A          ; N/A          ; |ppu_demo|vga_pll:pll               ; vga_pll.v       ;
+; Altera ; ROM: 1-PORT  ; 23.1    ; N/A          ; N/A          ; |ppu_demo|PPU:ppu_mod|board_rom:rom ; board_rom.v     ;
++--------+--------------+---------+--------------+--------------+-------------------------------------+-----------------+
 
 
 Encoding Type:  One-Hot
@@ -321,29 +323,33 @@ Encoding Type:  One-Hot
 +------------------------+----------------------+-----------------------+-----------------------+------------------------+
 
 
-+-------------------------------------------------------------+
-; Registers Removed During Synthesis                          ;
-+----------------------------------------+--------------------+
-; Register name                          ; Reason for Removal ;
-+----------------------------------------+--------------------+
-; PPU:ppu_mod|vga_driver:draw|v_state~7  ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|v_state~8  ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|v_state~9  ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|v_state~10 ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|v_state~11 ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|v_state~12 ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|v_state~13 ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|v_state~14 ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|h_state~7  ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|h_state~8  ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|h_state~9  ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|h_state~10 ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|h_state~11 ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|h_state~12 ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|h_state~13 ; Lost fanout        ;
-; PPU:ppu_mod|vga_driver:draw|h_state~14 ; Lost fanout        ;
-; Total Number of Removed Registers = 16 ;                    ;
-+----------------------------------------+--------------------+
++-------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                  ;
++--------------------------------------------+----------------------------------------+
+; Register name                              ; Reason for Removal                     ;
++--------------------------------------------+----------------------------------------+
+; PPU:ppu_mod|vga_driver:draw|red_reg[0..2]  ; Stuck at GND due to stuck port data_in ;
+; PPU:ppu_mod|vga_driver:draw|green_reg[0,1] ; Stuck at GND due to stuck port data_in ;
+; PPU:ppu_mod|vga_driver:draw|blue_reg[0..2] ; Stuck at GND due to stuck port data_in ;
+; PPU:ppu_mod|curr_y[0]                      ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|v_state~7      ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|v_state~8      ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|v_state~9      ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|v_state~10     ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|v_state~11     ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|v_state~12     ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|v_state~13     ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|v_state~14     ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|h_state~7      ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|h_state~8      ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|h_state~9      ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|h_state~10     ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|h_state~11     ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|h_state~12     ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|h_state~13     ; Lost fanout                            ;
+; PPU:ppu_mod|vga_driver:draw|h_state~14     ; Lost fanout                            ;
+; Total Number of Removed Registers = 25     ;                                        ;
++--------------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -351,25 +357,14 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 60    ;
-; Number of registers using Synchronous Clear  ; 44    ;
+; Total registers                              ; 74    ;
+; Number of registers using Synchronous Clear  ; 36    ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 30    ;
+; Number of registers using Asynchronous Clear ; 48    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 40    ;
+; Number of registers using Clock Enable       ; 28    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
-
-
-+-------------------------------------------------------+
-; Registers Packed Into Inferred Megafunctions          ;
-+------------------------+-----------------------+------+
-; Register Name          ; Megafunction          ; Type ;
-+------------------------+-----------------------+------+
-; PPU:ppu_mod|b_in[0..7] ; PPU:ppu_mod|mem_rtl_0 ; RAM  ;
-; PPU:ppu_mod|g_in[0..7] ; PPU:ppu_mod|mem_rtl_0 ; RAM  ;
-; PPU:ppu_mod|r_in[0..7] ; PPU:ppu_mod|mem_rtl_0 ; RAM  ;
-+------------------------+-----------------------+------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -377,19 +372,19 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
-; 3:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|green_reg[1] ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|v_counter[0] ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|h_counter[0] ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|v_counter[1] ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|h_counter[4] ;
+; 18:1               ; 16 bits   ; 192 LEs       ; 160 LEs              ; 32 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|blue_reg[7]  ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------+
-; Source assignments for PPU:ppu_mod|altsyncram:mem_rtl_0|altsyncram_ijd1:auto_generated ;
-+---------------------------------+--------------------+------+--------------------------+
-; Assignment                      ; Value              ; From ; To                       ;
-+---------------------------------+--------------------+------+--------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                        ;
-+---------------------------------+--------------------+------+--------------------------+
++-----------------------------------------------------------------------------------------------------------------+
+; Source assignments for PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component|altsyncram_v4j1:auto_generated ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                ;
++---------------------------------+--------------------+------+---------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                 ;
++---------------------------------+--------------------+------+---------------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------------+
@@ -646,7 +641,70 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+---------------------------------+
 ; BOARD_WIDTH    ; 342   ; Signed Integer                  ;
 ; BOARD_HEIGHT   ; 342   ; Signed Integer                  ;
+; BOARD_OFFSET_X ; 140   ; Signed Integer                  ;
+; BOARD_OFFSET_Y ; 70    ; Signed Integer                  ;
 +----------------+-------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component ;
++------------------------------------+--------------------------------------------------+----------------+
+; Parameter Name                     ; Value                                            ; Type           ;
++------------------------------------+--------------------------------------------------+----------------+
+; BYTE_SIZE_BLOCK                    ; 8                                                ; Untyped        ;
+; AUTO_CARRY_CHAINS                  ; ON                                               ; AUTO_CARRY     ;
+; IGNORE_CARRY_BUFFERS               ; OFF                                              ; IGNORE_CARRY   ;
+; AUTO_CASCADE_CHAINS                ; ON                                               ; AUTO_CASCADE   ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                                              ; IGNORE_CASCADE ;
+; WIDTH_BYTEENA                      ; 1                                                ; Untyped        ;
+; OPERATION_MODE                     ; ROM                                              ; Untyped        ;
+; WIDTH_A                            ; 16                                               ; Signed Integer ;
+; WIDTHAD_A                          ; 17                                               ; Signed Integer ;
+; NUMWORDS_A                         ; 116964                                           ; Signed Integer ;
+; OUTDATA_REG_A                      ; CLOCK0                                           ; Untyped        ;
+; ADDRESS_ACLR_A                     ; NONE                                             ; Untyped        ;
+; OUTDATA_ACLR_A                     ; NONE                                             ; Untyped        ;
+; WRCONTROL_ACLR_A                   ; NONE                                             ; Untyped        ;
+; INDATA_ACLR_A                      ; NONE                                             ; Untyped        ;
+; BYTEENA_ACLR_A                     ; NONE                                             ; Untyped        ;
+; WIDTH_B                            ; 1                                                ; Untyped        ;
+; WIDTHAD_B                          ; 1                                                ; Untyped        ;
+; NUMWORDS_B                         ; 1                                                ; Untyped        ;
+; INDATA_REG_B                       ; CLOCK1                                           ; Untyped        ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1                                           ; Untyped        ;
+; RDCONTROL_REG_B                    ; CLOCK1                                           ; Untyped        ;
+; ADDRESS_REG_B                      ; CLOCK1                                           ; Untyped        ;
+; OUTDATA_REG_B                      ; UNREGISTERED                                     ; Untyped        ;
+; BYTEENA_REG_B                      ; CLOCK1                                           ; Untyped        ;
+; INDATA_ACLR_B                      ; NONE                                             ; Untyped        ;
+; WRCONTROL_ACLR_B                   ; NONE                                             ; Untyped        ;
+; ADDRESS_ACLR_B                     ; NONE                                             ; Untyped        ;
+; OUTDATA_ACLR_B                     ; NONE                                             ; Untyped        ;
+; RDCONTROL_ACLR_B                   ; NONE                                             ; Untyped        ;
+; BYTEENA_ACLR_B                     ; NONE                                             ; Untyped        ;
+; WIDTH_BYTEENA_A                    ; 1                                                ; Signed Integer ;
+; WIDTH_BYTEENA_B                    ; 1                                                ; Untyped        ;
+; RAM_BLOCK_TYPE                     ; AUTO                                             ; Untyped        ;
+; BYTE_SIZE                          ; 8                                                ; Untyped        ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                        ; Untyped        ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ                             ; Untyped        ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ                             ; Untyped        ;
+; INIT_FILE                          ; C:/Users/jecampos3/Downloads/board_green_565.mif ; Untyped        ;
+; INIT_FILE_LAYOUT                   ; PORT_A                                           ; Untyped        ;
+; MAXIMUM_DEPTH                      ; 0                                                ; Untyped        ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS                                           ; Untyped        ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL                                           ; Untyped        ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS                                           ; Untyped        ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                                           ; Untyped        ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN                                  ; Untyped        ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN                                  ; Untyped        ;
+; ENABLE_ECC                         ; FALSE                                            ; Untyped        ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                                            ; Untyped        ;
+; WIDTH_ECCSTATUS                    ; 3                                                ; Untyped        ;
+; DEVICE_FAMILY                      ; Cyclone V                                        ; Untyped        ;
+; CBXI_PARAMETER                     ; altsyncram_v4j1                                  ; Untyped        ;
++------------------------------------+--------------------------------------------------+----------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -677,85 +735,44 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: PPU:ppu_mod|altsyncram:mem_rtl_0        ;
-+------------------------------------+------------------------------------+----------------+
-; Parameter Name                     ; Value                              ; Type           ;
-+------------------------------------+------------------------------------+----------------+
-; BYTE_SIZE_BLOCK                    ; 8                                  ; Untyped        ;
-; AUTO_CARRY_CHAINS                  ; ON                                 ; AUTO_CARRY     ;
-; IGNORE_CARRY_BUFFERS               ; OFF                                ; IGNORE_CARRY   ;
-; AUTO_CASCADE_CHAINS                ; ON                                 ; AUTO_CASCADE   ;
-; IGNORE_CASCADE_BUFFERS             ; OFF                                ; IGNORE_CASCADE ;
-; WIDTH_BYTEENA                      ; 1                                  ; Untyped        ;
-; OPERATION_MODE                     ; ROM                                ; Untyped        ;
-; WIDTH_A                            ; 24                                 ; Untyped        ;
-; WIDTHAD_A                          ; 17                                 ; Untyped        ;
-; NUMWORDS_A                         ; 116964                             ; Untyped        ;
-; OUTDATA_REG_A                      ; UNREGISTERED                       ; Untyped        ;
-; ADDRESS_ACLR_A                     ; NONE                               ; Untyped        ;
-; OUTDATA_ACLR_A                     ; NONE                               ; Untyped        ;
-; WRCONTROL_ACLR_A                   ; NONE                               ; Untyped        ;
-; INDATA_ACLR_A                      ; NONE                               ; Untyped        ;
-; BYTEENA_ACLR_A                     ; NONE                               ; Untyped        ;
-; WIDTH_B                            ; 1                                  ; Untyped        ;
-; WIDTHAD_B                          ; 1                                  ; Untyped        ;
-; NUMWORDS_B                         ; 1                                  ; Untyped        ;
-; INDATA_REG_B                       ; CLOCK1                             ; Untyped        ;
-; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1                             ; Untyped        ;
-; RDCONTROL_REG_B                    ; CLOCK1                             ; Untyped        ;
-; ADDRESS_REG_B                      ; CLOCK1                             ; Untyped        ;
-; OUTDATA_REG_B                      ; UNREGISTERED                       ; Untyped        ;
-; BYTEENA_REG_B                      ; CLOCK1                             ; Untyped        ;
-; INDATA_ACLR_B                      ; NONE                               ; Untyped        ;
-; WRCONTROL_ACLR_B                   ; NONE                               ; Untyped        ;
-; ADDRESS_ACLR_B                     ; NONE                               ; Untyped        ;
-; OUTDATA_ACLR_B                     ; NONE                               ; Untyped        ;
-; RDCONTROL_ACLR_B                   ; NONE                               ; Untyped        ;
-; BYTEENA_ACLR_B                     ; NONE                               ; Untyped        ;
-; WIDTH_BYTEENA_A                    ; 1                                  ; Untyped        ;
-; WIDTH_BYTEENA_B                    ; 1                                  ; Untyped        ;
-; RAM_BLOCK_TYPE                     ; AUTO                               ; Untyped        ;
-; BYTE_SIZE                          ; 8                                  ; Untyped        ;
-; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                          ; Untyped        ;
-; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ               ; Untyped        ;
-; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ               ; Untyped        ;
-; INIT_FILE                          ; db/ppu_demo.ram0_PPU_14356.hdl.mif ; Untyped        ;
-; INIT_FILE_LAYOUT                   ; PORT_A                             ; Untyped        ;
-; MAXIMUM_DEPTH                      ; 0                                  ; Untyped        ;
-; CLOCK_ENABLE_INPUT_A               ; NORMAL                             ; Untyped        ;
-; CLOCK_ENABLE_INPUT_B               ; NORMAL                             ; Untyped        ;
-; CLOCK_ENABLE_OUTPUT_A              ; NORMAL                             ; Untyped        ;
-; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                             ; Untyped        ;
-; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN                    ; Untyped        ;
-; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN                    ; Untyped        ;
-; ENABLE_ECC                         ; FALSE                              ; Untyped        ;
-; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                              ; Untyped        ;
-; WIDTH_ECCSTATUS                    ; 3                                  ; Untyped        ;
-; DEVICE_FAMILY                      ; Cyclone V                          ; Untyped        ;
-; CBXI_PARAMETER                     ; altsyncram_ijd1                    ; Untyped        ;
-+------------------------------------+------------------------------------+----------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
++-------------------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                                      ;
++-------------------------------------------+-----------------------------------------------------------+
+; Name                                      ; Value                                                     ;
++-------------------------------------------+-----------------------------------------------------------+
+; Number of entity instances                ; 1                                                         ;
+; Entity Instance                           ; PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; ROM                                                       ;
+;     -- WIDTH_A                            ; 16                                                        ;
+;     -- NUMWORDS_A                         ; 116964                                                    ;
+;     -- OUTDATA_REG_A                      ; CLOCK0                                                    ;
+;     -- WIDTH_B                            ; 1                                                         ;
+;     -- NUMWORDS_B                         ; 1                                                         ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                    ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                              ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                      ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                 ;
++-------------------------------------------+-----------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------+
-; altsyncram Parameter Settings by Entity Instance                             ;
-+-------------------------------------------+----------------------------------+
-; Name                                      ; Value                            ;
-+-------------------------------------------+----------------------------------+
-; Number of entity instances                ; 1                                ;
-; Entity Instance                           ; PPU:ppu_mod|altsyncram:mem_rtl_0 ;
-;     -- OPERATION_MODE                     ; ROM                              ;
-;     -- WIDTH_A                            ; 24                               ;
-;     -- NUMWORDS_A                         ; 116964                           ;
-;     -- OUTDATA_REG_A                      ; UNREGISTERED                     ;
-;     -- WIDTH_B                            ; 1                                ;
-;     -- NUMWORDS_B                         ; 1                                ;
-;     -- ADDRESS_REG_B                      ; CLOCK1                           ;
-;     -- OUTDATA_REG_B                      ; UNREGISTERED                     ;
-;     -- RAM_BLOCK_TYPE                     ; AUTO                             ;
-;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                        ;
-+-------------------------------------------+----------------------------------+
++---------------------------------------------------------+
+; Port Connectivity Checks: "PPU:ppu_mod|vga_driver:draw" ;
++------------+-------+----------+-------------------------+
+; Port       ; Type  ; Severity ; Details                 ;
++------------+-------+----------+-------------------------+
+; r_in[2..0] ; Input ; Info     ; Stuck at GND            ;
+; g_in[1..0] ; Input ; Info     ; Stuck at GND            ;
+; b_in[2..0] ; Input ; Info     ; Stuck at GND            ;
++------------+-------+----------+-------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "PPU:ppu_mod|board_rom:rom"                                                                                                                                                            ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                                                                                                                                             ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; address ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (17 bits) it drives.  The 15 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------+
@@ -772,31 +789,36 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 60                          ;
-;     CLR               ; 10                          ;
+; arriav_ff             ; 74                          ;
+;     CLR               ; 28                          ;
 ;     CLR SCLR          ; 10                          ;
-;     ENA               ; 6                           ;
+;     ENA               ; 2                           ;
 ;     ENA CLR SCLR      ; 10                          ;
-;     ENA SCLR          ; 24                          ;
-; arriav_lcell_comb     ; 205                         ;
-;     arith             ; 20                          ;
+;     ENA SCLR          ; 16                          ;
+;     plain             ; 8                           ;
+; arriav_lcell_comb     ; 212                         ;
+;     arith             ; 55                          ;
+;         0 data inputs ; 2                           ;
 ;         1 data inputs ; 20                          ;
-;     extend            ; 26                          ;
-;         7 data inputs ; 26                          ;
-;     normal            ; 159                         ;
+;         2 data inputs ; 30                          ;
+;         3 data inputs ; 3                           ;
+;     extend            ; 19                          ;
+;         7 data inputs ; 19                          ;
+;     normal            ; 138                         ;
 ;         0 data inputs ; 1                           ;
-;         2 data inputs ; 24                          ;
-;         3 data inputs ; 7                           ;
-;         4 data inputs ; 11                          ;
-;         5 data inputs ; 39                          ;
-;         6 data inputs ; 77                          ;
+;         1 data inputs ; 1                           ;
+;         2 data inputs ; 22                          ;
+;         3 data inputs ; 3                           ;
+;         4 data inputs ; 28                          ;
+;         5 data inputs ; 28                          ;
+;         6 data inputs ; 55                          ;
 ; arriav_mac            ; 1                           ;
 ; boundary_port         ; 37                          ;
 ; generic_pll           ; 1                           ;
-; stratixv_ram_block    ; 360                         ;
+; stratixv_ram_block    ; 240                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 3.00                        ;
-; Average LUT depth     ; 1.88                        ;
+; Max LUT depth         ; 4.40                        ;
+; Average LUT depth     ; 2.43                        ;
 +-----------------------+-----------------------------+
 
 
@@ -805,7 +827,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -815,7 +837,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Fri Mar 14 15:28:16 2025
+    Info: Processing started: Thu Mar 20 18:20:29 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ppu_demo -c ppu_demo
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
@@ -829,8 +851,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file vga_pll
     Info (12023): Found entity 1: vga_pll File: I:/ECE554/Battleship/Verilog/PPU/vga_pll.v Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file vga_pll/vga_pll_0002.v
     Info (12023): Found entity 1: vga_pll_0002 File: I:/ECE554/Battleship/Verilog/PPU/vga_pll/vga_pll_0002.v Line: 2
-Info (12021): Found 1 design units, including 1 entities, in source file sprite_mem.v
-    Info (12023): Found entity 1: sprite_mem File: I:/ECE554/Battleship/Verilog/PPU/sprite_mem.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file board_rom.v
+    Info (12023): Found entity 1: board_rom File: I:/ECE554/Battleship/Verilog/PPU/board_rom.v Line: 40
 Info (12127): Elaborating entity "ppu_demo" for the top level hierarchy
 Info (12128): Elaborating entity "vga_pll" for hierarchy "vga_pll:pll" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 31
 Info (12128): Elaborating entity "vga_pll_0002" for hierarchy "vga_pll:pll|vga_pll_0002:vga_pll_inst" File: I:/ECE554/Battleship/Verilog/PPU/vga_pll.v Line: 19
@@ -899,42 +921,50 @@ Info (12133): Instantiated megafunction "vga_pll:pll|vga_pll_0002:vga_pll_inst|a
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
 Info (12128): Elaborating entity "PPU" for hierarchy "PPU:ppu_mod" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 43
-Warning (10030): Net "mem.data_a" at PPU.sv(13) has no driver or initial value, using a default initial value '0' File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 13
-Warning (10030): Net "mem.waddr_a" at PPU.sv(13) has no driver or initial value, using a default initial value '0' File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 13
-Warning (10030): Net "mem.we_a" at PPU.sv(13) has no driver or initial value, using a default initial value '0' File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 13
-Info (12128): Elaborating entity "vga_driver" for hierarchy "PPU:ppu_mod|vga_driver:draw" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 59
-Info (19000): Inferred 1 megafunctions from design logic
-    Info (276029): Inferred altsyncram megafunction from the following design logic: "PPU:ppu_mod|mem_rtl_0" 
-        Info (286033): Parameter OPERATION_MODE set to ROM
-        Info (286033): Parameter WIDTH_A set to 24
-        Info (286033): Parameter WIDTHAD_A set to 17
-        Info (286033): Parameter NUMWORDS_A set to 116964
-        Info (286033): Parameter OUTDATA_REG_A set to UNREGISTERED
-        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
-        Info (286033): Parameter OUTDATA_ACLR_A set to NONE
-        Info (286033): Parameter INDATA_ACLR_A set to NONE
-        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
-        Info (286033): Parameter INIT_FILE set to db/ppu_demo.ram0_PPU_14356.hdl.mif
-Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|altsyncram:mem_rtl_0"
-Info (12133): Instantiated megafunction "PPU:ppu_mod|altsyncram:mem_rtl_0" with the following parameter:
-    Info (12134): Parameter "OPERATION_MODE" = "ROM"
-    Info (12134): Parameter "WIDTH_A" = "24"
-    Info (12134): Parameter "WIDTHAD_A" = "17"
-    Info (12134): Parameter "NUMWORDS_A" = "116964"
-    Info (12134): Parameter "OUTDATA_REG_A" = "UNREGISTERED"
-    Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
-    Info (12134): Parameter "OUTDATA_ACLR_A" = "NONE"
-    Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
-    Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
-    Info (12134): Parameter "INIT_FILE" = "db/ppu_demo.ram0_PPU_14356.hdl.mif"
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ijd1.tdf
-    Info (12023): Found entity 1: altsyncram_ijd1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_ijd1.tdf Line: 30
-Info (12021): Found 1 design units, including 1 entities, in source file db/mux_qib.tdf
-    Info (12023): Found entity 1: mux_qib File: I:/ECE554/Battleship/Verilog/PPU/db/mux_qib.tdf Line: 23
+Warning (10230): Verilog HDL assignment warning at PPU.sv(59): truncated value with size 32 to match size of target (8) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 59
+Warning (10230): Verilog HDL assignment warning at PPU.sv(60): truncated value with size 32 to match size of target (8) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 60
+Warning (10230): Verilog HDL assignment warning at PPU.sv(61): truncated value with size 32 to match size of target (8) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 61
+Info (12128): Elaborating entity "board_rom" for hierarchy "PPU:ppu_mod|board_rom:rom" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 22
+Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/board_rom.v Line: 82
+Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/board_rom.v Line: 82
+Info (12133): Instantiated megafunction "PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/board_rom.v Line: 82
+    Info (12134): Parameter "address_aclr_a" = "NONE"
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "init_file" = "C:/Users/jecampos3/Downloads/board_green_565.mif"
+    Info (12134): Parameter "intended_device_family" = "Cyclone V"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+    Info (12134): Parameter "numwords_a" = "116964"
+    Info (12134): Parameter "operation_mode" = "ROM"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "CLOCK0"
+    Info (12134): Parameter "widthad_a" = "17"
+    Info (12134): Parameter "width_a" = "16"
+    Info (12134): Parameter "width_byteena_a" = "1"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_v4j1.tdf
+    Info (12023): Found entity 1: altsyncram_v4j1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_v4j1.tdf Line: 32
+Info (12128): Elaborating entity "altsyncram_v4j1" for hierarchy "PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component|altsyncram_v4j1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_l2a.tdf
+    Info (12023): Found entity 1: decode_l2a File: I:/ECE554/Battleship/Verilog/PPU/db/decode_l2a.tdf Line: 23
+Info (12128): Elaborating entity "decode_l2a" for hierarchy "PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component|altsyncram_v4j1:auto_generated|decode_l2a:rden_decode" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_v4j1.tdf Line: 41
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_rib.tdf
+    Info (12023): Found entity 1: mux_rib File: I:/ECE554/Battleship/Verilog/PPU/db/mux_rib.tdf Line: 23
+Info (12128): Elaborating entity "mux_rib" for hierarchy "PPU:ppu_mod|board_rom:rom|altsyncram:altsyncram_component|altsyncram_v4j1:auto_generated|mux_rib:mux2" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_v4j1.tdf Line: 42
+Info (12128): Elaborating entity "vga_driver" for hierarchy "PPU:ppu_mod|vga_driver:draw" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 79
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "VGA_B[0]" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 19
+    Warning (13410): Pin "VGA_B[1]" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 19
+    Warning (13410): Pin "VGA_B[2]" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 19
+    Warning (13410): Pin "VGA_G[0]" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 21
+    Warning (13410): Pin "VGA_G[1]" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 21
+    Warning (13410): Pin "VGA_R[0]" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 23
+    Warning (13410): Pin "VGA_R[1]" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 23
+    Warning (13410): Pin "VGA_R[2]" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 23
     Warning (13410): Pin "VGA_SYNC_N" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 24
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 16 registers lost all their fanouts during netlist optimizations.
+Info (17049): 17 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file I:/ECE554/Battleship/Verilog/PPU/ppu_demo.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 5 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
@@ -947,18 +977,18 @@ Warning (21074): Design contains 6 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "KEY[1]" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 15
     Warning (15610): No output dependent on input pin "KEY[2]" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 15
     Warning (15610): No output dependent on input pin "KEY[3]" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 15
-Info (21057): Implemented 607 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 499 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 29 output pins
-    Info (21061): Implemented 208 logic cells
-    Info (21064): Implemented 360 RAM segments
+    Info (21061): Implemented 220 logic cells
+    Info (21064): Implemented 240 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 1 DSP elements
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 14 warnings
-    Info: Peak virtual memory: 5218 megabytes
-    Info: Processing ended: Fri Mar 14 15:34:28 2025
-    Info: Elapsed time: 00:06:12
-    Info: Total CPU time (on all processors): 00:06:11
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 23 warnings
+    Info: Peak virtual memory: 4910 megabytes
+    Info: Processing ended: Thu Mar 20 18:20:43 2025
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:14
 
 
 +------------------------------------------+
