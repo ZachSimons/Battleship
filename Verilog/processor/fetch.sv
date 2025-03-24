@@ -21,6 +21,7 @@ logic [31:0] branch_mux, rti_mux, interrupt_mux, prog_mux;
 
 //////////////MODULE INSTANTIATION///////////////////
 //Make byte addressable (not as complicated as d-memory)
+/*
 inst_memory_wrapper imem(
     .clk(clk),
     .rst_n(rst_n),
@@ -29,7 +30,7 @@ inst_memory_wrapper imem(
     .addr(prog_mux),
     .rd_data(instruction_fe)
 );
-
+*/
 
 /////////////////PIPELINE STAGE FF///////////////////
 //TODO impliment flushing & nops at some point

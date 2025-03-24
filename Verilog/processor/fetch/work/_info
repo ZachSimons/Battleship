@@ -1,0 +1,125 @@
+m255
+K4
+z2
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+R0
+R1
+!s11f vlog 2023.2_1 2023.05, May 12 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+d/filespace/j/jcobian/ece554/misc_testing
+T_opt
+!s110 1742859623
+ViU0YFLlSnnSAK;bGoeBdM2
+04 8 4 work fetch_tb fast 0
+=2-000ae431a4f1-67e1ed67-62e8a-91fc4
+R1
+!s12b OEM100
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+OE;O;2023.2_1;77
+vfetch
+2/filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch.sv
+Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+!s110 1742859524
+!i10b 1
+!s100 i1MBlm<Y:zZWl]bligz[02
+Id^CI;nEHC<YGd4bV2z:ni2
+S1
+Z4 d/filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch
+w1742859515
+8/filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch.sv
+F/filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch.sv
+!i122 1
+L0 1 94
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+Z6 OE;L;2023.2_1;77
+r1
+!s85 0
+31
+!s108 1742859524.000000
+!s107 /filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch.sv|
+!i113 0
+Z7 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vfetch_tb
+2/filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv
+R3
+!s110 1742859616
+!i10b 1
+!s100 iCCUHT0dN<M113TW`IMbg2
+IaFTVQ3Ac29DDP?Pa]YT_A0
+S1
+R4
+w1742859606
+8/filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv
+F/filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv
+!i122 4
+L0 1 181
+R5
+R6
+r1
+!s85 0
+31
+!s108 1742859615.000000
+!s107 /filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv|
+!i113 0
+R7
+R2
+vimembank
+2/filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v
+Z8 !s110 1742859525
+!i10b 1
+!s100 dMX;NBbHY9I5ihGl:B4Jj2
+I?ob^=P:_83f9?CUY2<]Ez2
+R4
+w1742696458
+8/filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v
+F/filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v
+!i122 2
+L0 40 68
+R5
+R6
+r1
+!s85 0
+31
+Z9 !s108 1742859525.000000
+!s107 /filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v|
+!i113 0
+o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vinst_memory_wrapper
+2/filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv
+R3
+R8
+!i10b 1
+!s100 4JJU<Aa8PdKa]^_6RWY]K2
+ISYALSUkSZQ7mVSgHS^:3<2
+S1
+R4
+w1742697223
+8/filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv
+F/filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv
+!i122 3
+L0 1 63
+R5
+R6
+r1
+!s85 0
+31
+R9
+!s107 /filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv|
+!i113 0
+R7
+R2

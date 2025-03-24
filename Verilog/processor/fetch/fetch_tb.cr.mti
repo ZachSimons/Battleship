@@ -1,0 +1,29 @@
+/filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module inst_memory_wrapper
+
+Top level modules:
+	inst_memory_wrapper
+
+} {} {}} /filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch.sv
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module fetch
+
+Top level modules:
+	fetch
+
+} {} {}} /filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module fetch_tb
+
+Top level modules:
+	fetch_tb
+
+} {} {}} /filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v {1 {vlog -work work -vopt -stats=none /filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module imembank
+
+Top level modules:
+	imembank
+
+} {} {}}
