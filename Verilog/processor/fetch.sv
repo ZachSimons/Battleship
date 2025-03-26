@@ -6,53 +6,78 @@ module fetch(
     input rsi, //Interrupt handled -> got to next instruction and clear I-Reg
     input interrupt_key, //I-Reg enable signal
     input interrupt_eth,
-    input prog_en,
-    input [31:0] prog_data,
-    input [31:0] prog_addr,
     input [31:0] pc_ex,
     output logic [31:0] instruction_dec,
     output logic [31:0] pc_dec
 );
 //////////////NET INSTANTIATION/////////////////////
-logic interrupt_latch, interrupt_control; //Doesn't have to be a latched signal 
-logic [31:0] i_reg, nxt_pc, pc, instruction_fe;
-logic [31:0] branch_mux, rti_mux, interrupt_mux, prog_mux;
+logic interrupt_latch, interrupt_control, warmup; //Doesn't have to be a latched signal 
+logic [1:0]  flush;
+logic [31:0] i_reg, nxt_pc, pc, instruction_fe, nxt_pc_sync;
+logic [31:0] inst_pc, inst_pc_sync; //These signals are for testing purposes
+logic [31:0] branch_mux, rti_mux, pc_control;
 
 
 //////////////MODULE INSTANTIATION///////////////////
 //Make byte addressable (not as complicated as d-memory)
-/*
-inst_memory_wrapper imem(
+placeholder_mem imem(
     .clk(clk),
-    .rst_n(rst_n),
-    .wrt_en(prog_en), 
-    .wrt_data(prog_data),
-    .addr(prog_mux),
-    .rd_data(instruction_fe)
+    .rst_n(rst_n | branch),
+    .addr(pc[7:0]),
+    .q(instruction_fe[7:0])
 );
-*/
+
 
 /////////////////PIPELINE STAGE FF///////////////////
-//TODO impliment flushing & nops at some point
+//NOP Is encoded as addi x0 x0 0 -> 32'h00000013;
+//TODO impliment flushing & nops at some pointr
 always_ff @(posedge clk, negedge rst_n) begin
     if(!rst_n) begin
-        instruction_dec <= '0;
+        instruction_dec <= 32'h00000013; //Needs to be halt or NOP
         pc_dec <= '0;
     end
+    else if (|flush | ~warmup) begin
+        pc_dec <= 0;
+        instruction_dec <= 32'h00000013; 
+    end
     else begin
-        instruction_dec <= instruction_fe;
-        pc_dec <= nxt_pc;
+        instruction_dec <= {{5'd24{1'b0}},instruction_fe[7:0]}; //TODO CHANGE THIS FOR TESTING ONLY
+        pc_dec <= nxt_pc_sync;
     end
 end
 
-////////////////////// LOGIC ////////////////////////
-assign branch_mux = branch ? pc_ex : nxt_pc;
-assign rti_mux = rti ? i_reg : branch_mux;
-assign interrupt_mux = interrupt_control ? 32'h00000004 : rti_mux; 
-assign nxt_pc = pc + 4;
-assign interrupt_control = (interrupt_key | interrupt_eth) & ~interrupt_latch;
-assign prog_mux = prog_en ? prog_addr : pc; 
+//rst_n warmup
+always_ff @(posedge clk) begin //TODO fix bug regarding rst_n asserted between clock cycles
+    warmup <= rst_n; 
+end 
 
+//PC syncronization
+always_ff @(posedge clk, negedge rst_n) begin
+    if(!rst_n) begin
+        nxt_pc_sync <= '0;
+        inst_pc_sync <= '0;
+        inst_pc <= 0;
+    end 
+    else begin
+        nxt_pc_sync <= nxt_pc;
+        inst_pc_sync <= pc;
+        inst_pc <= inst_pc_sync;
+    end
+end
+
+//TODO debounce may need to only detect interrupt_key and interrupt_eth rising edges
+
+////////////////////// LOGIC ////////////////////////
+assign interrupt_control = (interrupt_key | interrupt_eth) & ~interrupt_latch;
+
+assign pc_control = interrupt_control ? 32'h00000001 : //TODO for testing purposes the address is 1 MAKE SURE TO CHANGE
+                    rti               ? i_reg        : branch_mux; 
+assign branch_mux = branch ? pc_ex : nxt_pc;
+
+assign nxt_pc = pc + 1; //TODO for testing purposes this is 1 MAKE SURE TO CHANGE
+
+
+//TODO may need to debounce rti and rsi depending on if they are sync to the cpu pipeline
 //While interrupt being handled another interrupt must not be able to happen
 //Interrupt latcher
 always_ff @(posedge clk, negedge rst_n) begin
@@ -65,8 +90,15 @@ always_ff @(posedge clk, negedge rst_n) begin
     else if(interrupt_key | interrupt_eth) begin
         interrupt_latch <= 1;
     end
-
 end
+
+
+//Flushing logic since memory accesses are delayed a cycle
+assign flush[0] = branch | interrupt_control | rti;
+always_ff @(posedge clk) begin
+    flush[1] <= flush[0];
+end
+
 
 //Instruction register to hold nxt_pc
 always_ff @(posedge clk, negedge rst_n) begin
@@ -81,12 +113,13 @@ always_ff @(posedge clk, negedge rst_n) begin
     end
 end
 
+//PC register
 always_ff @(posedge clk, negedge rst_n) begin
     if(!rst_n) begin
         pc <= '0;
     end
     else begin
-        pc <= interrupt_mux;
+        pc <= pc_control;
     end
 end
 

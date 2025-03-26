@@ -2235,7 +2235,7 @@ suppress = 8780 ;an explanation can be had by running: verror 8780
 ; FlatLibPageDeleteThreshold = 1000
 
 [Project]
-** Warning: ; Warning -- Do not edit the project properties directly.
+; Warning -- Do not edit the project properties directly.
 ;            Property names are dynamic in nature and property
 ;            values have special syntax.  Changing property data directly
 ;            can result in a corrupt MPF file.  All project properties
@@ -2244,14 +2244,14 @@ Project_Version = 6
 Project_DefaultLib = work
 Project_SortMethod = unused
 Project_Files_Count = 4
-Project_File_0 = /filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv
-Project_File_P_0 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1742697223 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 3 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_1 = /filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch.sv
-Project_File_P_1 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1742859515 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 1 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_2 = /filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv
-Project_File_P_2 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1742859606 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 0 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_3 = /filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v
-Project_File_P_3 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1742696458 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 2 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_0 = C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv
+Project_File_P_0 = cover_toggle 0 vlog_protect 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 last_compile 1743017542 folder {Top Level} cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 cover_optlevel 3 vlog_showsource 0 vlog_hazard 0 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 1 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_1 = C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/pc_sync_tb.sv
+Project_File_P_1 = cover_toggle 0 vlog_protect 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 folder {Top Level} cover_branch 0 cover_fsm 0 last_compile 1743010829 vlog_noload 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 cover_optlevel 3 vlog_showsource 0 vlog_hazard 0 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 3 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_2 = C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/placeholder_mem.sv
+Project_File_P_2 = cover_toggle 0 vlog_protect 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 last_compile 1742865281 folder {Top Level} cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 cover_optlevel 3 vlog_showsource 0 vlog_hazard 0 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 2 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_3 = C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch.sv
+Project_File_P_3 = cover_toggle 0 vlog_protect 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 last_compile 1743016080 folder {Top Level} cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 cover_optlevel 3 vlog_showsource 0 vlog_hazard 0 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 0 cover_expr 0 dont_compile 0 cover_stmt 0
 Project_Sim_Count = 0
 Project_Folder_Count = 0
 Echo_Compile_Output = 0
@@ -2299,5 +2299,5 @@ DEBUGDATABASE_DoubleClick = Edit
 DEBUGDATABASE_CustomDoubleClick = 
 DEBUGARCHIVE_DoubleClick = Edit
 DEBUGARCHIVE_CustomDoubleClick = 
-Project_Major_Version = 2023
-Project_Minor_Version = 2
+Project_Major_Version = 10
+Project_Minor_Version = 4
