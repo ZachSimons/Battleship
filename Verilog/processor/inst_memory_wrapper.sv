@@ -10,6 +10,9 @@ module inst_memory_wrapper(
 logic [7:0] bank0_wrt_data, bank1_wrt_data, bank2_wrt_data, bank3_wrt_data, bank0_rd_data, bank1_rd_data, bank2_rd_data, bank3_rd_data;
 logic [3:0] bank_wrt_en;
 
+
+//TODO Fix this such that it increments like byte addressable memory but isn't actually byte addressable
+
 //////////////MODULE INSTANTIATION///////////////////
 //banks are the same size as dmem (8K)
 //Swappable if need more or less data
