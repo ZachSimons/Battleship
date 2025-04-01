@@ -9,7 +9,7 @@ module accelerator(
 );
 
     
-    localparam [2:0] ship_length[4:0] = '{2,3,3,4,5};
+    localparam bit [2:0] ship_length[4:0] = '{2,3,3,4,5};
     localparam board_num = 0;
     
     logic unsigned [6:0] ship_pos[4:0];
