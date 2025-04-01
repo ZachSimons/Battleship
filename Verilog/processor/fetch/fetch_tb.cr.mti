@@ -1,0 +1,15 @@
+C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/pc_sync_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/pc_sync_tb.sv
+Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
+-- Compiling module pc_sync_tb
+
+Top level modules:
+	pc_sync_tb
+
+} {} {}} C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/placeholder_mem.sv {1 {vlog -work work -sv -stats=none C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/placeholder_mem.sv
+Model Technology ModelSim ALTERA vlog 10.4d Compiler 2015.12 Dec 30 2015
+-- Compiling module placeholder_mem
+
+Top level modules:
+	placeholder_mem
+
+} {} {}}
