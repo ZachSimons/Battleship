@@ -27,9 +27,6 @@ module decode(
     output rdi_ex,
     output [3:0] alu_op_ex,
     output [3:0] bj_inst_ex,
-    output auipc,
-    output imm_sel,
-    output [1:0] type_sel_ex,
     output rsi_ex,
     output sac,
     output snd,
@@ -76,7 +73,6 @@ always_ff @(posedge clk, negedge rst_n) begin
         wrt_en_ex <= 0;
         alu_op_ex <= 0;
         bj_inst_ex <= 0;
-        type_sel_ex <= 0;
         rsi_ex <= 0;
         rdi_ex <= 0;
     end
@@ -98,7 +94,6 @@ always_ff @(posedge clk, negedge rst_n) begin
         wrt_en_ex <= wrt_en;
         alu_op_ex <= alu_op;
         bj_inst_ex <= bj_inst;
-        type_sel_ex <= type_sel;
         rsi_ex <= rsi;
         rdi_ex <= rdi;
     end

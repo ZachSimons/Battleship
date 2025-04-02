@@ -17,6 +17,7 @@ module execute(
     input                   rd_en_exe,
     input                   jalr_exe,
     input                   data_sel_exe,
+    input                   rdi_ex,
     output logic    [31:0]  next_pc_mem,
     output logic    [31:0]  write_data_mem,
     output logic    [31:0]  alu_result_mem,
@@ -29,10 +30,12 @@ module execute(
     output logic            reg_wrt_en_mem,
     output logic            read_unsigned_mem,
     output logic            rd_en_mem,
-    output logic            branch
+    output logic            branch,
+    output logic            rdi_mem
 );
 
     logic [31:0] alu_inB, branch_base, alu_result_exe;
+    
 
     assign alu_inB = data_sel_exe ? imm : reg2;
     assign branch_base = jalr_exe ? reg1 : next_pc_exe;
@@ -54,6 +57,7 @@ module execute(
             reg_wrt_en_mem <= 0;
             read_unsigned_mem <= 0;
             rd_en_mem <= 0;
+            rdi_mem <= 0;
         end else begin
             next_pc_mem <= next_pc_exe;
             write_data_mem <= reg2;
@@ -66,6 +70,7 @@ module execute(
             reg_wrt_en_mem <= reg_wrt_en_exe;
             read_unsigned_mem <= read_unsigned_exe;
             rd_en_mem <= rd_en_exe;
+            rdi_mem <= rdi_ex;
         end
     end
 
