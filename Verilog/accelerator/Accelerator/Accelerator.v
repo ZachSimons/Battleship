@@ -15,7 +15,7 @@ module Accelerator(
 	output		     [6:0]		HEX0,
 	output		     [6:0]		HEX1,
 	output		     [6:0]		HEX2,
-	output		     [6:0]		HEX3,
+	output		     [6:0]		HEX3, 
 	output		     [6:0]		HEX4,
 	output		     [6:0]		HEX5,
 
@@ -37,6 +37,7 @@ module Accelerator(
 
 wire clk, rst_n, update_ship, start, update_board, valid_out;
 wire [31:0] data;
+reg [31:0] count;
 
 parameter HEX_0 = 7'b1000000;		// zero
 parameter HEX_1 = 7'b1111001;		// one
@@ -73,13 +74,20 @@ accelerator ACC(
     .valid_out(valid_out)
 );
 
+always @(posedge clk) begin
+	if(~rst_n) begin
+		count <= 0;
+	end
+	else begin
+		count <= count + 1;
+	end
+end
 
-
-assign start = KEY[1];
+assign data = count;
+assign start = KEY[3];
+assign update_ship = KEY[2];
+assign update_board = KEY[1];
 assign rst_n = KEY[0];
-assign data = {SW[0], SW[1], SW[2], SW[3], SW[4], SW[5], SW[6], SW[7], SW[8], SW[9], KEY[1], KEY[2], KEY[3], SW[0], SW[1], SW[2], SW[3], SW[4], SW[5], SW[6], SW[7], SW[8], SW[9], KEY[1], KEY[2], KEY[3], KEY[2], KEY[3], KEY[1], KEY[3], KEY[2], KEY[2]};
-assign update_board = SW[5];
-assign update_ship = SW[6];
 assign LEDR = {{8{1'b0}}, valid_out, 1'b0};
 
 endmodule

@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Tue Apr  1 17:13:59 2025
+Analysis & Synthesis Status : Successful - Thu Apr  3 16:13:03 2025
 Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 Revision Name : Accelerator
 Top-level Entity Name : Accelerator
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 40
+Total registers : 272
 Total pins : 70
 Total virtual pins : 0
 Total block memory bits : 0

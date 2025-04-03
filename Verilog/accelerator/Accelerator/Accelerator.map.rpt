@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Accelerator
-Tue Apr  1 17:13:59 2025
+Thu Apr  3 16:13:03 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -14,13 +14,13 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. User-Specified and Inferred Latches
-  9. Registers Removed During Synthesis
- 10. General Register Statistics
- 11. Multiplexer Restructuring Statistics (Restructuring Performed)
- 12. Parameter Settings for User Entity Instance: Top-level Entity: |Accelerator
- 13. Post-Synthesis Netlist Statistics for Top Partition
- 14. Elapsed Time Per Partition
- 15. Analysis & Synthesis Messages
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |Accelerator
+ 12. Post-Synthesis Netlist Statistics for Top Partition
+ 13. Elapsed Time Per Partition
+ 14. Analysis & Synthesis Messages
+ 15. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -47,13 +47,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Tue Apr  1 17:13:59 2025          ;
+; Analysis & Synthesis Status     ; Successful - Thu Apr  3 16:13:03 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; Accelerator                                    ;
 ; Top-level Entity Name           ; Accelerator                                    ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 40                                             ;
+; Total registers                 ; 272                                            ;
 ; Total pins                      ; 70                                             ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 0                                              ;
@@ -163,14 +163,18 @@ https://fpgasoftware.intel.com/eula.
 ; Maximum allowed            ; 14          ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 6           ;
+; Maximum used               ; 14          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
 ;     Processor 2            ;   0.0%      ;
 ;     Processor 3            ;   0.0%      ;
-;     Processors 4-5         ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
 ;     Processor 6            ;   0.0%      ;
+;     Processor 7            ;   0.0%      ;
+;     Processor 8            ;   0.0%      ;
+;     Processors 9-14        ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -184,31 +188,31 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------+---------+
 
 
-+------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                                  ;
-+---------------------------------------------+--------------------------------+
-; Resource                                    ; Usage                          ;
-+---------------------------------------------+--------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 770                            ;
-;                                             ;                                ;
-; Combinational ALUT usage for logic          ; 1417                           ;
-;     -- 7 input functions                    ; 3                              ;
-;     -- 6 input functions                    ; 79                             ;
-;     -- 5 input functions                    ; 513                            ;
-;     -- 4 input functions                    ; 624                            ;
-;     -- <=3 input functions                  ; 198                            ;
-;                                             ;                                ;
-; Dedicated logic registers                   ; 40                             ;
-;                                             ;                                ;
-; I/O pins                                    ; 70                             ;
-;                                             ;                                ;
-; Total DSP Blocks                            ; 0                              ;
-;                                             ;                                ;
-; Maximum fan-out node                        ; accelerator:ACC|ship_pos[0][3] ;
-; Maximum fan-out                             ; 81                             ;
-; Total fan-out                               ; 6353                           ;
-; Average fan-out                             ; 3.98                           ;
-+---------------------------------------------+--------------------------------+
++------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                ;
++---------------------------------------------+--------------+
+; Resource                                    ; Usage        ;
++---------------------------------------------+--------------+
+; Estimate of Logic utilization (ALMs needed) ; 2276         ;
+;                                             ;              ;
+; Combinational ALUT usage for logic          ; 3266         ;
+;     -- 7 input functions                    ; 4            ;
+;     -- 6 input functions                    ; 1219         ;
+;     -- 5 input functions                    ; 538          ;
+;     -- 4 input functions                    ; 491          ;
+;     -- <=3 input functions                  ; 1014         ;
+;                                             ;              ;
+; Dedicated logic registers                   ; 272          ;
+;                                             ;              ;
+; I/O pins                                    ; 70           ;
+;                                             ;              ;
+; Total DSP Blocks                            ; 0            ;
+;                                             ;              ;
+; Maximum fan-out node                        ; KEY[0]~input ;
+; Maximum fan-out                             ; 382          ;
+; Total fan-out                               ; 16082        ;
+; Average fan-out                             ; 4.37         ;
++---------------------------------------------+--------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -216,8 +220,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name          ; Entity Name ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------+-------------+--------------+
-; |Accelerator               ; 1417 (0)            ; 40 (0)                    ; 0                 ; 0          ; 70   ; 0            ; |Accelerator                 ; Accelerator ; work         ;
-;    |accelerator:ACC|       ; 1417 (1417)         ; 40 (40)                   ; 0                 ; 0          ; 0    ; 0            ; |Accelerator|accelerator:ACC ; accelerator ; work         ;
+; |Accelerator               ; 3266 (32)           ; 272 (32)                  ; 0                 ; 0          ; 70   ; 0            ; |Accelerator                 ; Accelerator ; work         ;
+;    |accelerator:ACC|       ; 3234 (3234)         ; 240 (240)                 ; 0                 ; 0          ; 0    ; 0            ; |Accelerator|accelerator:ACC ; accelerator ; work         ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -227,223 +231,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------------+---------------------+------------------------+
 ; Latch Name                                         ; Latch Enable Signal ; Free of Timing Hazards ;
 +----------------------------------------------------+---------------------+------------------------+
-; accelerator:ACC|valid_temp[0]                      ; KEY[1]              ; yes                    ;
-; accelerator:ACC|valid_temp[1]                      ; KEY[1]              ; yes                    ;
-; accelerator:ACC|valid_temp[2]                      ; KEY[1]              ; yes                    ;
-; accelerator:ACC|valid_temp[3]                      ; KEY[1]              ; yes                    ;
-; accelerator:ACC|valid_temp[4]                      ; KEY[1]              ; yes                    ;
+; accelerator:ACC|valid_temp[1]                      ; KEY[3]              ; yes                    ;
+; accelerator:ACC|valid_temp[2]                      ; KEY[3]              ; yes                    ;
+; accelerator:ACC|valid_temp[3]                      ; KEY[3]              ; yes                    ;
+; accelerator:ACC|valid_temp[4]                      ; KEY[3]              ; yes                    ;
+; accelerator:ACC|valid_temp[0]                      ; KEY[3]              ; yes                    ;
 ; Number of user-specified and inferred latches = 5  ;                     ;                        ;
 +----------------------------------------------------+---------------------+------------------------+
 Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
-
-
-+---------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                    ;
-+-----------------------------------------+---------------------------------------------+
-; Register name                           ; Reason for Removal                          ;
-+-----------------------------------------+---------------------------------------------+
-; accelerator:ACC|game_state[99][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[99][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[98][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[98][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[97][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[97][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[96][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[96][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[95][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[95][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[94][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[94][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[93][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[93][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[92][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[92][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[91][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[91][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[90][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[90][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[89][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[89][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[88][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[88][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[87][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[87][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[86][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[86][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[85][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[85][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[84][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[84][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[83][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[83][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[82][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[82][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[81][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[81][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[80][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[80][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[79][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[79][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[78][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[78][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[77][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[77][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[76][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[76][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[75][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[75][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[74][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[74][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[73][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[73][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[72][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[72][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[71][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[71][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[70][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[70][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[69][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[69][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[68][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[68][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[67][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[67][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[66][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[66][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[65][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[65][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[64][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[64][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[63][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[63][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[62][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[62][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[61][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[61][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[60][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[60][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[59][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[59][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[58][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[58][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[57][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[57][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[56][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[56][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[55][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[55][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[54][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[54][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[53][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[53][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[52][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[52][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[51][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[51][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[50][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[50][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[49][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[49][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[48][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[48][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[47][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[47][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[46][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[46][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[45][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[45][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[44][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[44][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[43][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[43][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[42][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[42][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[41][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[41][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[40][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[40][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[39][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[39][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[38][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[38][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[37][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[37][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[36][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[36][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[35][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[35][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[34][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[34][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[33][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[33][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[32][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[32][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[31][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[31][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[30][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[30][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[29][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[29][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[28][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[28][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[27][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[27][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[26][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[26][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[25][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[25][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[24][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[24][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[23][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[23][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[22][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[22][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[21][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[21][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[20][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[20][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[19][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[19][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[18][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[18][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[17][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[17][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[16][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[16][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[15][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[15][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[14][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[14][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[13][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[13][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[12][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[12][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[11][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[11][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[10][1]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[10][0]       ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[9][1]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[9][0]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[8][1]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[8][0]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[7][1]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[7][0]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[6][1]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[6][0]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[5][1]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[5][0]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[4][1]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[4][0]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[3][1]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[3][0]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[2][1]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[2][0]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[1][1]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[1][0]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[0][1]        ; Stuck at GND due to stuck port clock_enable ;
-; accelerator:ACC|game_state[0][0]        ; Stuck at GND due to stuck port clock_enable ;
-; Total Number of Removed Registers = 200 ;                                             ;
-+-----------------------------------------+---------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -451,27 +246,156 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 40    ;
-; Number of registers using Synchronous Clear  ; 0     ;
+; Total registers                              ; 272   ;
+; Number of registers using Synchronous Clear  ; 272   ;
 ; Number of registers using Synchronous Load   ; 40    ;
-; Number of registers using Asynchronous Clear ; 40    ;
+; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 40    ;
+; Number of registers using Clock Enable       ; 240   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                            ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                  ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[0][2] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[4][0] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[2][0] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[1][6] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[3][6] ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[0][0]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[1][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[2][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[3][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[4][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[5][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[6][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[7][0]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[8][0]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[9][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[10][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[11][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[12][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[13][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[14][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[15][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[16][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[17][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[18][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[19][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[20][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[21][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[22][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[23][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[24][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[25][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[26][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[27][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[28][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[29][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[30][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[31][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[32][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[33][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[34][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[35][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[36][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[37][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[38][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[39][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[40][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[41][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[42][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[43][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[44][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[45][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[46][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[47][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[48][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[49][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[50][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[51][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[52][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[53][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[54][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[55][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[56][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[57][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[58][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[59][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[60][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[61][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[62][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[63][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[64][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[65][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[66][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[67][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[68][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[69][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[70][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[71][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[72][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[73][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[74][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[75][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[76][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[77][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[78][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[79][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[80][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[81][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[82][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[83][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[84][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[85][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[86][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[87][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[88][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[89][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[90][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[91][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[92][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[93][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[94][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[95][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[96][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[97][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[98][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[99][0] ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[0][1]    ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_vert[4]      ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[2][2]    ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[1][1]    ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[3][1]    ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux0              ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux17             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux18             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux8              ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux13             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux32             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux40             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux43             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux50             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux29             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux22             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux5              ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux11             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux15             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux36             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux39             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux47             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux49             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux53             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux56             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux30             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux26             ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux25             ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux20             ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux3              ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux6              ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux34             ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux44             ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux55             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------+
@@ -505,25 +429,27 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 40                          ;
-;     ENA CLR SLD       ; 40                          ;
-; arriav_lcell_comb     ; 1418                        ;
-;     arith             ; 56                          ;
+; arriav_ff             ; 272                         ;
+;     ENA SCLR          ; 200                         ;
+;     ENA SCLR SLD      ; 40                          ;
+;     SCLR              ; 32                          ;
+; arriav_lcell_comb     ; 3267                        ;
+;     arith             ; 88                          ;
 ;         0 data inputs ; 7                           ;
-;         1 data inputs ; 49                          ;
-;     extend            ; 3                           ;
-;         7 data inputs ; 3                           ;
-;     normal            ; 1359                        ;
+;         1 data inputs ; 81                          ;
+;     extend            ; 4                           ;
+;         7 data inputs ; 4                           ;
+;     normal            ; 3175                        ;
 ;         0 data inputs ; 1                           ;
-;         2 data inputs ; 38                          ;
-;         3 data inputs ; 104                         ;
-;         4 data inputs ; 624                         ;
-;         5 data inputs ; 513                         ;
-;         6 data inputs ; 79                          ;
+;         2 data inputs ; 60                          ;
+;         3 data inputs ; 866                         ;
+;         4 data inputs ; 491                         ;
+;         5 data inputs ; 538                         ;
+;         6 data inputs ; 1219                        ;
 ; boundary_port         ; 70                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 10.10                       ;
-; Average LUT depth     ; 9.25                        ;
+; Max LUT depth         ; 9.00                        ;
+; Average LUT depth     ; 8.23                        ;
 +-----------------------+-----------------------------+
 
 
@@ -532,7 +458,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:03     ;
+; Top            ; 00:00:05     ;
 +----------------+--------------+
 
 
@@ -542,7 +468,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Tue Apr  1 17:13:45 2025
+    Info: Processing started: Thu Apr  3 16:12:48 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Accelerator -c Accelerator
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
@@ -559,13 +485,13 @@ Warning (10034): Output port "HEX2" at accelerator.v(17) has no driver File: I:/
 Warning (10034): Output port "HEX3" at accelerator.v(18) has no driver File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 18
 Warning (10034): Output port "HEX4" at accelerator.v(19) has no driver File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 19
 Warning (10034): Output port "HEX5" at accelerator.v(20) has no driver File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 20
-Info (12128): Elaborating entity "accelerator" for hierarchy "accelerator:ACC" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 74
-Warning (10240): Verilog HDL Always Construct warning at accelerator.sv(56): inferring latch(es) for variable "valid_temp", which holds its previous value in one or more paths through the always construct File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 56
-Info (10041): Inferred latch for "valid_temp[0]" at accelerator.sv(59) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 59
-Info (10041): Inferred latch for "valid_temp[1]" at accelerator.sv(59) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 59
-Info (10041): Inferred latch for "valid_temp[2]" at accelerator.sv(59) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 59
-Info (10041): Inferred latch for "valid_temp[3]" at accelerator.sv(59) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 59
-Info (10041): Inferred latch for "valid_temp[4]" at accelerator.sv(59) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 59
+Info (12128): Elaborating entity "accelerator" for hierarchy "accelerator:ACC" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 75
+Warning (10240): Verilog HDL Always Construct warning at accelerator.sv(54): inferring latch(es) for variable "valid_temp", which holds its previous value in one or more paths through the always construct File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 54
+Info (10041): Inferred latch for "valid_temp[0]" at accelerator.sv(57) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 57
+Info (10041): Inferred latch for "valid_temp[1]" at accelerator.sv(57) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 57
+Info (10041): Inferred latch for "valid_temp[2]" at accelerator.sv(57) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 57
+Info (10041): Inferred latch for "valid_temp[3]" at accelerator.sv(57) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 57
+Info (10041): Inferred latch for "valid_temp[4]" at accelerator.sv(57) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 57
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "HEX0[0]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 15
     Warning (13410): Pin "HEX0[1]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 15
@@ -619,20 +545,37 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LEDR[8]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 26
     Warning (13410): Pin "LEDR[9]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 26
 Info (286030): Timing-Driven Synthesis is running
+Info (144001): Generated suppressed messages file I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/Accelerator.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 3 input pin(s) that do not drive logic
+Warning (21074): Design contains 13 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "CLOCK2_50" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 9
     Warning (15610): No output dependent on input pin "CLOCK3_50" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 10
     Warning (15610): No output dependent on input pin "CLOCK4_50" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 11
-Info (21057): Implemented 1527 device resources after synthesis - the final resource count might be different
+    Warning (15610): No output dependent on input pin "SW[0]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[1]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[2]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[3]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[4]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[5]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[6]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[7]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[8]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[9]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+Info (21057): Implemented 3576 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 18 input pins
     Info (21059): Implemented 52 output pins
-    Info (21061): Implemented 1457 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 67 warnings
-    Info: Peak virtual memory: 4869 megabytes
-    Info: Processing ended: Tue Apr  1 17:13:59 2025
-    Info: Elapsed time: 00:00:14
-    Info: Total CPU time (on all processors): 00:00:16
+    Info (21061): Implemented 3506 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 77 warnings
+    Info: Peak virtual memory: 4892 megabytes
+    Info: Processing ended: Thu Apr  3 16:13:03 2025
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:18
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/Accelerator.map.smsg.
 
 

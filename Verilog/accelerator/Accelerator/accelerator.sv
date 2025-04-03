@@ -21,7 +21,7 @@ module accelerator(
     assign valid_out = &valid_temp;
 
     //ship registers
-    always_ff @(posedge clk, negedge rst_n) begin
+    always_ff @(posedge clk) begin
         if(~rst_n) begin //reset all ship pos/vert to 0
             for(int i = 0; i < 5; i++) begin
                 ship_pos[i] <= 0;
@@ -41,11 +41,9 @@ module accelerator(
     end
 
     //gamestate register
-    always_ff @(posedge clk, negedge rst_n) begin
+    always_ff @(posedge clk) begin
         if(~rst_n) begin //reset game state to a full board of 0's
-            for(int i = 0; i < 100; i++) begin
-                game_state[i] <= 0;
-            end
+            game_state = '{default: '0};
         end
         else if (update_board && (data[13]==board_num))begin //if matching board is updated
             game_state[data[31:25]] <= data[22:21]; //on ppu gamestate update set square to respective status
