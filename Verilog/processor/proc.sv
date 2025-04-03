@@ -58,9 +58,9 @@ logic regwrten_wb_dec;
 logic [4:0] wrtreg_wb_dec;
 logic [31:0] wbdata_wb_dec;
 
-
-
-
+//Forwarding
+logic [4:0] rdreg1_dec_ex, rdreg2_dec_ex;
+logic [1:0] forward_control1, forward_control2;
 
 //////////////MODULE INSTANTIATION///////////////////
 fetch proc_fe(
@@ -109,7 +109,9 @@ decode proc_de(
     .rsi_ex(rsi_de_fe), 
     .sac(sac),            //TODO to external device
     .snd(snd),            //TODO to external device
-    .uad(uad)             //TODO to external device
+    .uad(uad),             //TODO to external device
+    .read_register1_ex(rdreg1_dec_ex),
+    .read_register2_ex(rdreg2_dec_ex)
 );
 
 execute proc_ex(
@@ -132,6 +134,9 @@ execute proc_ex(
     .jalr_exe(jalr_dec_ex),
     .data_sel_exe(datasel_dec_ex),
     .rdi_ex(rdi_dec_ex),
+    .forward_control1(forward_control1),
+    .forward_control2(forward_control2),
+    .wbdata_wb_ex(wbdata_wb_dec),
     .next_pc_mem(nxtpc_ex_mem),
     .write_data_mem(memwrtdata_ex_mem),
     .alu_result_mem(aluresult_ex_mem),
@@ -173,6 +178,17 @@ memory proc_mem(
     .alu_wb(alu_mem_wb)
 );
 
+
+forwarding proc_forward(
+    .mem_wb_reg_write(regwrten_mem_wb),
+    .ex_mem_reg_write(regwrten_ex_mem),
+    .id_ex_reg_reg1(rdreg1_dec_ex),
+    .id_ex_reg_reg2(rdreg2_dec_ex),
+    .mem_wb_reg(wrtreg_mem_wb),
+    .ex_mem_reg(wrtreg_ex_mem),
+    .forward_control1(forward_control1),
+    .forward_control2(forward_control2)
+);
 
 //////////////////////WB STAGE//////////////////////
 
