@@ -1,0 +1,421 @@
+m255
+K4
+z2
+!s12c _opt
+Z0 !s99 nomlopt
+!s11f vlog 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z1 dI:/ece554/Battleship/Verilog/processor
+T_opt
+!s110 1743720234
+V`<5iPMeXKco4dWOOM^4G@0
+04 22 4 work instruction_decoder_tb fast 0
+=1-4cd717943a25-67ef0f29-193-5304
+R0
+!s12b OEM100
+!s124 OEM10U2 
+o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
+valu
+2I:/ece554/Battleship/Verilog/processor/alu.sv
+Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z4 !s110 1743718807
+!i10b 1
+!s100 Lh_gBjSZ9EOA9332F;dW63
+I[:3M<CPi2U9@g4_V4nIc]1
+S1
+R1
+Z5 w1743715510
+8I:/ece554/Battleship/Verilog/processor/alu.sv
+FI:/ece554/Battleship/Verilog/processor/alu.sv
+!i122 0
+L0 1 38
+Z6 VDg1SIo80bB@j0V0VzS_@n1
+Z7 OL;L;2023.3;77
+r1
+!s85 0
+31
+Z8 !s108 1743718807.000000
+!s107 I:/ece554/Battleship/Verilog/processor/alu.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/alu.sv|
+!i113 0
+Z9 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vbranch_ctrl
+2I:/ece554/Battleship/Verilog/processor/branch_ctrl.sv
+R3
+R4
+!i10b 1
+!s100 fV85zH9nb@lUcS;:jH8b=1
+ISHYL4Ie1J=z=67>:LnO892
+S1
+R1
+R5
+8I:/ece554/Battleship/Verilog/processor/branch_ctrl.sv
+FI:/ece554/Battleship/Verilog/processor/branch_ctrl.sv
+!i122 1
+L0 1 36
+R6
+R7
+r1
+!s85 0
+31
+R8
+!s107 I:/ece554/Battleship/Verilog/processor/branch_ctrl.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/branch_ctrl.sv|
+!i113 0
+R9
+R2
+vdata_memory_wrapper
+2I:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv
+R3
+Z10 !s110 1743718808
+!i10b 1
+!s100 [L57d3U:]kZ:Qa7c9m7P93
+InLd>6IP@nk?VR3O[glB860
+S1
+R1
+R5
+8I:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv
+FI:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv
+!i122 2
+L0 1 158
+R6
+R7
+r1
+!s85 0
+31
+Z11 !s108 1743718808.000000
+!s107 I:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/data_memory_wrapper.sv|
+!i113 0
+R9
+R2
+vdecode
+2I:/ece554/Battleship/Verilog/processor/decode.sv
+R3
+!s110 1743720207
+!i10b 1
+!s100 _5YUeT0hMo=OYmzCEMVlz0
+I`VAHGP2J=BdObZK5HSk`92
+S1
+R1
+w1743720189
+8I:/ece554/Battleship/Verilog/processor/decode.sv
+FI:/ece554/Battleship/Verilog/processor/decode.sv
+!i122 15
+L0 1 143
+R6
+R7
+r1
+!s85 0
+31
+!s108 1743720207.000000
+!s107 I:/ece554/Battleship/Verilog/processor/decode.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/decode.sv|
+!i113 0
+R9
+R2
+vdmembank
+2I:/ece554/Battleship/Verilog/processor/dmembank.v
+R10
+!i10b 1
+!s100 5``R]<N^kGQo:M8E2;9ie3
+IgBc>U[NSbVT]Q9DP4mh7X2
+R1
+R5
+8I:/ece554/Battleship/Verilog/processor/dmembank.v
+FI:/ece554/Battleship/Verilog/processor/dmembank.v
+!i122 3
+L0 40 71
+R6
+R7
+r1
+!s85 0
+31
+R11
+!s107 I:/ece554/Battleship/Verilog/processor/dmembank.v|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/dmembank.v|
+!i113 0
+R9
+R2
+vexecute
+2I:/ece554/Battleship/Verilog/processor/execute.sv
+R3
+Z12 !s110 1743718809
+!i10b 1
+!s100 9XWhB<0bDG92dfn^9h^=X0
+IP7g9cWU14c_H3z>Z8WFbW1
+S1
+R1
+R5
+8I:/ece554/Battleship/Verilog/processor/execute.sv
+FI:/ece554/Battleship/Verilog/processor/execute.sv
+!i122 4
+L0 1 77
+R6
+R7
+r1
+!s85 0
+31
+Z13 !s108 1743718809.000000
+!s107 I:/ece554/Battleship/Verilog/processor/execute.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/execute.sv|
+!i113 0
+R9
+R2
+vfetch
+2I:/ece554/Battleship/Verilog/processor/fetch.sv
+R3
+R12
+!i10b 1
+!s100 ]RWUe8b3=FaL9_IT3N_`m0
+In^287Y:[^iU]LF`ROFF@Q1
+S1
+R1
+w1743718651
+8I:/ece554/Battleship/Verilog/processor/fetch.sv
+FI:/ece554/Battleship/Verilog/processor/fetch.sv
+!i122 5
+L0 1 127
+R6
+R7
+r1
+!s85 0
+31
+R13
+!s107 I:/ece554/Battleship/Verilog/processor/fetch.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/fetch.sv|
+!i113 0
+R9
+R2
+vimembank
+2I:/ece554/Battleship/Verilog/processor/imembank.v
+Z14 !s110 1743718810
+!i10b 1
+!s100 dMX;NBbHY9I5ihGl:B4Jj2
+IcMJ`gjI;CE5@DJOg_0RFO0
+R1
+Z15 w1743715511
+8I:/ece554/Battleship/Verilog/processor/imembank.v
+FI:/ece554/Battleship/Verilog/processor/imembank.v
+!i122 6
+L0 40 68
+R6
+R7
+r1
+!s85 0
+31
+R13
+!s107 I:/ece554/Battleship/Verilog/processor/imembank.v|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/imembank.v|
+!i113 0
+R9
+R2
+vinst_memory_wrapper
+2I:/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv
+R3
+R14
+!i10b 1
+!s100 B5m?zXE_]7LjEKdaNbkRh2
+I?Y^4Y^ZOnRIONWN>BdEng3
+S1
+R1
+R15
+8I:/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv
+FI:/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv
+!i122 7
+L0 1 66
+R6
+R7
+r1
+!s85 0
+31
+Z16 !s108 1743718810.000000
+!s107 I:/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv|
+!i113 0
+R9
+R2
+vinstruction_decoder
+2I:/ece554/Battleship/Verilog/processor/instruction_decoder.sv
+R3
+R14
+!i10b 1
+!s100 1lWHUN>`HoS5eY:>z`9i`3
+IKWH]OJY8mSY[OVFM46ejk3
+S1
+R1
+R15
+8I:/ece554/Battleship/Verilog/processor/instruction_decoder.sv
+FI:/ece554/Battleship/Verilog/processor/instruction_decoder.sv
+!i122 8
+L0 1 105
+R6
+R7
+r1
+!s85 0
+31
+R16
+!s107 I:/ece554/Battleship/Verilog/processor/instruction_decoder.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/instruction_decoder.sv|
+!i113 0
+R9
+R2
+vinstruction_decoder_tb
+2I:/ece554/Battleship/Verilog/processor/decode/instruction_decoder_tb.sv
+R3
+!s110 1743720226
+!i10b 1
+!s100 g:D5h0zLS;ZRd`B6;D0A=2
+IG9dHmVQh7[gA^>Il@7M<62
+S1
+R1
+R5
+8I:/ece554/Battleship/Verilog/processor/decode/instruction_decoder_tb.sv
+FI:/ece554/Battleship/Verilog/processor/decode/instruction_decoder_tb.sv
+!i122 16
+L0 1 156
+R6
+R7
+r1
+!s85 0
+31
+!s108 1743720226.000000
+!s107 I:/ece554/Battleship/Verilog/processor/decode/instruction_decoder_tb.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/decode/instruction_decoder_tb.sv|
+!i113 0
+R9
+R2
+vmemory
+2I:/ece554/Battleship/Verilog/processor/memory.sv
+R3
+Z17 !s110 1743718811
+!i10b 1
+!s100 FRTh0YE;GF7[28c_IbYbP0
+I@JI>Q[GTGDklZ3gYmS_7o2
+S1
+R1
+R15
+8I:/ece554/Battleship/Verilog/processor/memory.sv
+FI:/ece554/Battleship/Verilog/processor/memory.sv
+!i122 9
+L0 3 83
+R6
+R7
+r1
+!s85 0
+31
+R16
+!s107 I:/ece554/Battleship/Verilog/processor/memory.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/memory.sv|
+!i113 0
+R9
+R2
+vplaceholder_mem
+2I:/ece554/Battleship/Verilog/processor/placeholder_mem.sv
+R3
+R17
+!i10b 1
+!s100 WSJLJDn2YAf9i_;bP<Jc03
+ITT[CPHz>UJLzBfdZD^8:70
+S1
+R1
+w1743718707
+8I:/ece554/Battleship/Verilog/processor/placeholder_mem.sv
+FI:/ece554/Battleship/Verilog/processor/placeholder_mem.sv
+!i122 10
+L0 1 26
+R6
+R7
+r1
+!s85 0
+31
+Z18 !s108 1743718811.000000
+!s107 I:/ece554/Battleship/Verilog/processor/placeholder_mem.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/placeholder_mem.sv|
+!i113 0
+R9
+R2
+vproc
+2I:/ece554/Battleship/Verilog/processor/proc.sv
+R3
+!s110 1743719763
+!i10b 1
+!s100 YWnM5?FIQSnW@8fCOFIlO2
+I<nNi_727Ug9BZKmGP3oLk0
+S1
+R1
+w1743719761
+8I:/ece554/Battleship/Verilog/processor/proc.sv
+FI:/ece554/Battleship/Verilog/processor/proc.sv
+!i122 13
+L0 1 328
+R6
+R7
+r1
+!s85 0
+31
+!s108 1743719763.000000
+!s107 I:/ece554/Battleship/Verilog/processor/proc.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/proc.sv|
+!i113 0
+R9
+R2
+vproc_tb
+2I:/ece554/Battleship/Verilog/processor/proc_tb.sv
+R3
+Z19 !s110 1743718812
+!i10b 1
+!s100 Gkdj2dij6MH:kJGMIfNQ40
+I^af8H7IdOd1MVzF_RGomb0
+S1
+R1
+w1743717526
+8I:/ece554/Battleship/Verilog/processor/proc_tb.sv
+FI:/ece554/Battleship/Verilog/processor/proc_tb.sv
+!i122 11
+L0 3 56
+R6
+R7
+r1
+!s85 0
+31
+R18
+!s107 I:/ece554/Battleship/Verilog/processor/proc_tb.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/proc_tb.sv|
+!i113 0
+R9
+R2
+vregisterfile
+2I:/ece554/Battleship/Verilog/processor/registerfile.sv
+R3
+R19
+!i10b 1
+!s100 _BnP385466SFRD=;484gR1
+I7WLEJjhGNfVnJg`UK;oW43
+S1
+R1
+R15
+8I:/ece554/Battleship/Verilog/processor/registerfile.sv
+FI:/ece554/Battleship/Verilog/processor/registerfile.sv
+!i122 12
+L0 1 52
+R6
+R7
+r1
+!s85 0
+31
+!s108 1743718812.000000
+!s107 I:/ece554/Battleship/Verilog/processor/registerfile.sv|
+!s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/registerfile.sv|
+!i113 0
+R9
+R2

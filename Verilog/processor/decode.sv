@@ -7,45 +7,46 @@ module decode(
     input branch,
     input [4:0] write_reg,
     input [31:0] write_data,
-    output [31:0] read_data1_ex,
-    output [31:0] read_data2_ex,
-    output [31:0] imm_out_ex,
-    output [31:0] next_pc_ex,
-    output [4:0] write_reg_ex,
-    output [31:0] read_data1_dec,
-    output random_ex,
-    output ppu_send,
-    output write_en_ex,
-    output [1:0] wb_sel_ex,
-    output unsigned_sel_ex,
-    output rd_en_ex,
-    output [1:0] width_ex,
-    output jalr_ex,
-    output rti_ex,
-    output data_sel_ex,
-    output wrt_en_ex,
-    output rdi_ex,
-    output [3:0] alu_op_ex,
-    output [3:0] bj_inst_ex,
-    output rsi_ex,
-    output sac,
-    output snd,
-    output uad
+    output logic [31:0] read_data1_ex,
+    output logic [31:0] read_data2_ex,
+    output logic [31:0] imm_out_ex,
+    output logic [31:0] next_pc_ex,
+    output logic [4:0] write_reg_ex,
+    output logic [31:0] read_data1_dec,
+    output logic random_ex,
+    output logic ppu_send,
+    output logic write_en_ex,
+    output logic [1:0] wb_sel_ex,
+    output logic unsigned_sel_ex,
+    output logic rd_en_ex,
+    output logic [1:0] width_ex,
+    output logic jalr_ex,
+    output logic rti_ex,
+    output logic data_sel_ex,
+    output logic wrt_en_ex,
+    output logic rdi_ex,
+    output logic [3:0] alu_op_ex,
+    output logic [3:0] bj_inst_ex,
+    output logic rsi_ex,
+    output logic sac,
+    output logic snd,
+    output logic uad
 );
 
 
 logic [31:0] src_data1;
 logic [31:0] imm[4:0];
-logic random, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi;
+logic random, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi, auipc, imm_sel;
 logic [1:0] wb_sel, width, type_sel;
 logic [3:0] alu_op, bj_inst;
+logic [31:0] read_data2, imm_out;
 
 //sign extensions
-assign imm[0]= {20{instruction[31]},instruction[31:20]};
-assign imm[1]= {20{instruction[31]},instruction[31:25],instruction[11:7]};
-assign imm[2]= {21{instruction[31]},instruction[7],instruction[30:27],instruction[11:6]};
+assign imm[0]= {{20{instruction[31]}},instruction[31:20]};
+assign imm[1]= {{20{instruction[31]}},instruction[31:25],instruction[11:7]};
+assign imm[2]= {{21{instruction[31]}},instruction[7],instruction[30:27],instruction[11:6]};
 assign imm[3]= instruction[31:12] << 12;
-assign imm[4]= {13{instruction[31]},instruction[19:12],instruction[20],instruction[30:21]}
+assign imm[4]= {{13{instruction[31]}},instruction[19:12],instruction[20],instruction[30:21]};
 
 //muxs
 assign imm_out = imm_sel ? imm[type_sel] : imm[0];

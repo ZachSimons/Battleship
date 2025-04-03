@@ -23,7 +23,7 @@ logic [31:0] branch_mux, rti_mux, pc_control;
 placeholder_mem imem(
     .clk(clk),
     .rst_n(rst_n), //HUH do I need this????
-    .addr(pc[7:0]),
+    .addr(pc),
     .q(instruction_fe)
 );
 
