@@ -12,7 +12,7 @@ module fetch(
 );
 //////////////NET INSTANTIATION/////////////////////
 logic interrupt_latch, interrupt_control, warmup; //Doesn't have to be a latched signal 
-logic [1:0]  flush;
+logic [1:0]  stall;
 logic [31:0] i_reg, nxt_pc, pc, instruction_fe, nxt_pc_sync;
 logic [31:0] inst_pc, inst_pc_sync; //These signals are for testing purposes
 logic [31:0] branch_mux, rti_mux, pc_control;
@@ -22,26 +22,26 @@ logic [31:0] branch_mux, rti_mux, pc_control;
 //Make byte addressable (not as complicated as d-memory)
 placeholder_mem imem(
     .clk(clk),
-    .rst_n(rst_n | branch),
+    .rst_n(rst_n), //HUH do I need this????
     .addr(pc[7:0]),
-    .q(instruction_fe[7:0])
+    .q(instruction_fe)
 );
 
 
 /////////////////PIPELINE STAGE FF///////////////////
 //NOP Is encoded as addi x0 x0 0 -> 32'h00000013;
-//TODO impliment flushing & nops at some pointr
+//TODO impliment stalling & nops at some pointr
 always_ff @(posedge clk, negedge rst_n) begin
     if(!rst_n) begin
         instruction_dec <= 32'h00000013; //Needs to be halt or NOP
         pc_dec <= '0;
     end
-    else if (|flush | ~warmup) begin
+    else if (|stall | ~warmup) begin
         pc_dec <= 0;
         instruction_dec <= 32'h00000013; 
     end
     else begin
-        instruction_dec <= {{5'd24{1'b0}},instruction_fe[7:0]}; //TODO CHANGE THIS FOR TESTING ONLY
+        instruction_dec <= instruction_fe;
         pc_dec <= nxt_pc_sync;
     end
 end
@@ -70,11 +70,11 @@ end
 ////////////////////// LOGIC ////////////////////////
 assign interrupt_control = (interrupt_key | interrupt_eth) & ~interrupt_latch;
 
-assign pc_control = interrupt_control ? 32'h00000001 : //TODO for testing purposes the address is 1 MAKE SURE TO CHANGE
+assign pc_control = interrupt_control ? 32'h00000004: //TODO for testing purposes the address is 1 MAKE SURE TO CHANGE
                     rti               ? i_reg        : branch_mux; 
 assign branch_mux = branch ? pc_ex : nxt_pc;
 
-assign nxt_pc = pc + 1; //TODO for testing purposes this is 1 MAKE SURE TO CHANGE
+assign nxt_pc = pc + 4; //TODO for testing purposes this is 1 MAKE SURE TO CHANGE
 
 
 //TODO may need to debounce rti and rsi depending on if they are sync to the cpu pipeline
@@ -93,10 +93,10 @@ always_ff @(posedge clk, negedge rst_n) begin
 end
 
 
-//Flushing logic since memory accesses are delayed a cycle
-assign flush[0] = branch | interrupt_control | rti;
+//Staling logic since memory accesses are delayed a cycle
+assign stall[0] = branch | interrupt_control | rti;
 always_ff @(posedge clk) begin
-    flush[1] <= flush[0];
+    stall[1] <= stall[0];
 end
 
 

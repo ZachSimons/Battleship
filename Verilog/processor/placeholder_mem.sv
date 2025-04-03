@@ -2,11 +2,11 @@ module placeholder_mem(
     input clk,
     input rst_n,
     input [7:0] addr,
-    output [7:0] q
+    output [31:0] q
 );
 
-logic [7:0] bram [0:255];
-logic [7:0] addr_q;
+logic [31:0] bram [0:255];
+logic [31:0] addr_q;
 
 initial begin
     $readmemh("rom_contents.hex", bram);

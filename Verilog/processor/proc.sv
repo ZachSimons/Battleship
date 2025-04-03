@@ -17,8 +17,8 @@ module proc(
 //Instantate all modules (DONE)
 //Connect all modules up (DONE)
 //Determine processor inputs (DONE)
-//Syntheise memory and fetch stages
-//Implement stalling for D-mem & I-mem
+//Syntheise memory and fetch stages 
+//Implement stalling for D-mem & I-mem 
 //Implement hazards for pipeline
 //Test with basic instructions
 //Implement forwarding (once processor is working)
