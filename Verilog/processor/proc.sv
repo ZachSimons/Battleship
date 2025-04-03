@@ -189,6 +189,8 @@ end
 assign regwrten_wb_dec = regwrten_mem_wb;
 assign wrtreg_wb_dec = wrtreg_mem_wb;
 
+///////////////Flushing and Stalling Logic///////////
+
 
 
 

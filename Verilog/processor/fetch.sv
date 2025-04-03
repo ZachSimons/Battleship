@@ -6,6 +6,8 @@ module fetch(
     input rsi, //Interrupt handled -> got to next instruction and clear I-Reg
     input interrupt_key, //I-Reg enable signal
     input interrupt_eth,
+    input flush,
+    input stall,
     input [31:0] pc_ex,
     output logic [31:0] instruction_dec,
     output logic [31:0] pc_dec
