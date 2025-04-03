@@ -27,6 +27,10 @@ module proc(
 //Signal naming convention signalname_comingfrom_goingto example: nxtpc_fe_dec
 //Module naming convention means the stage of the pipeline a signal is in. 
 
+
+//Flushing and Stalling
+logic flush, stall;
+
 //Fetch
 logic rti_de_fe, rsi_de_fe, branch_ex_fe;
 logic [31:0] inst_fe_dec, nxtpc_fe_dec;
@@ -207,7 +211,8 @@ assign wrtreg_wb_dec = wrtreg_mem_wb;
 
 ///////////////Flushing and Stalling Logic///////////
 
-
+assign flush = //TODO flushing logic
+assign stall = //TODO stalling logic 
 
 
 

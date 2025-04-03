@@ -16,7 +16,6 @@ module fetch(
 logic interrupt_latch, interrupt_control, warmup; //Doesn't have to be a latched signal 
 logic [1:0]  stall;
 logic [31:0] i_reg, nxt_pc, pc, instruction_fe, nxt_pc_sync;
-logic [31:0] inst_pc, inst_pc_sync; //These signals are for testing purposes
 logic [31:0] branch_mux, rti_mux, pc_control;
 
 
@@ -30,6 +29,11 @@ placeholder_mem imem(
 );
 
 
+//TODO for stall
+//1. Add write_disable for f-d FFs
+//2. Add wirte_disable for PC
+//2. Add Flushing logic for d-f FFs
+
 /////////////////PIPELINE STAGE FF///////////////////
 //NOP Is encoded as addi x0 x0 0 -> 32'h00000013;
 //TODO impliment stalling & nops at some pointr
@@ -38,17 +42,22 @@ always_ff @(posedge clk, negedge rst_n) begin
         instruction_dec <= 32'h00000013; //Needs to be halt or NOP
         pc_dec <= '0;
     end
-    else if (|stall | ~warmup) begin
+    else if (/*Flush*/) begin
         pc_dec <= 0;
         instruction_dec <= 32'h00000013; 
     end
+    else if (/*stall*/) begin
+        pc_dec <= pc_dec;
+        instruction_dec <= instruction_dec;
+    end
     else begin
         instruction_dec <= instruction_fe;
-        pc_dec <= nxt_pc_sync;
+        pc_dec <= nxt_pc;
     end
 end
 
-//rst_n warmup
+//TODO fix later
+//rst_n warmup 
 always_ff @(posedge clk) begin //TODO fix bug regarding rst_n asserted between clock cycles
     warmup <= rst_n; 
 end 
@@ -57,30 +66,44 @@ end
 always_ff @(posedge clk, negedge rst_n) begin
     if(!rst_n) begin
         nxt_pc_sync <= '0;
-        inst_pc_sync <= '0;
-        inst_pc <= 0;
     end 
     else begin
         nxt_pc_sync <= nxt_pc;
-        inst_pc_sync <= pc;
-        inst_pc <= inst_pc_sync;
     end
 end
 
 //TODO debounce may need to only detect interrupt_key and interrupt_eth rising edges
 ////////////////////// LOGIC ////////////////////////
-assign interrupt_control = (interrupt_key | interrupt_eth) & ~interrupt_latch;
 
+//What happens when interrupt and stall both happen?
+
+
+//PC control Logic 
 assign pc_control = interrupt_control ? 32'h00000004: //TODO for testing purposes the address is 1 MAKE SURE TO CHANGE
                     rti               ? i_reg        : branch_mux; 
 assign branch_mux = branch ? pc_ex : nxt_pc;
 
+//Need to not increase the pc when stalling/hazard
 assign nxt_pc = pc + 4; //TODO for testing purposes this is 1 MAKE SURE TO CHANGE
 
+//PC register
+always_ff @(posedge clk, negedge rst_n) begin
+    if(!rst_n) begin
+        pc <= '0;
+    end
+    else if (/*stall*/) begin
+        pc <= pc;
+    end
+    else begin
+        pc <= pc_control;
+    end
+end
 
+//Interrupt Logic
 //TODO may need to debounce rti and rsi depending on if they are sync to the cpu pipeline
 //While interrupt being handled another interrupt must not be able to happen
-//Interrupt latcher
+assign interrupt_control = (interrupt_key | interrupt_eth) & ~interrupt_latch;
+
 always_ff @(posedge clk, negedge rst_n) begin
     if(!rst_n) begin
         interrupt_latch <= 0;
@@ -92,14 +115,6 @@ always_ff @(posedge clk, negedge rst_n) begin
         interrupt_latch <= 1;
     end
 end
-
-
-//Staling logic since memory accesses are delayed a cycle
-assign stall[0] = branch | interrupt_control | rti;
-always_ff @(posedge clk) begin
-    stall[1] <= stall[0];
-end
-
 
 //Instruction register to hold nxt_pc
 always_ff @(posedge clk, negedge rst_n) begin
@@ -114,15 +129,7 @@ always_ff @(posedge clk, negedge rst_n) begin
     end
 end
 
-//PC register
-always_ff @(posedge clk, negedge rst_n) begin
-    if(!rst_n) begin
-        pc <= '0;
-    end
-    else begin
-        pc <= pc_control;
-    end
-end
+
 
 
 endmodule
