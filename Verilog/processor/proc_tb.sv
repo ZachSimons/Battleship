@@ -48,11 +48,11 @@ module proc_tb;
     #200;
 
     // Show register values
-    $display("x1 = %h", dut.proc_de.register_file_inst.regfile[1]);
-    $display("x2 = %h", dut.proc_de.register_file_inst.regfile[2]);
-    $display("x3 = %h", dut.proc_de.register_file_inst.regfile[3]);
+    $display("x1 = %h", dut.proc_de.REGFILE.regfile[1]);
+    $display("x2 = %h", dut.proc_de.REGFILE.regfile[2]);
+    $display("x3 = %h", dut.proc_de.REGFILE.regfile[3]);
 
-    $finish;
+    $stop;
   end
 
 endmodule
