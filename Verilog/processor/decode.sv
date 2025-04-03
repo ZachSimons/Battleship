@@ -1,6 +1,7 @@
 module decode(
     input clk,
     input rst_n,
+    input hazard,
     input [31:0] instruction,
     input [31:0] next_pc,
     input write_enable,
@@ -84,27 +85,27 @@ always_ff @(posedge clk, negedge rst_n) begin
         read_register2_ex <= 0;
     end
     else begin
-        read_data1_ex <=read_data1;
-        read_data2_ex <= read_data2;
-        imm_out_ex <= imm_out;
-        next_pc_ex <= next_pc;
-        write_reg_ex <= write_reg;
-        random_ex <= random;
-        write_en_ex <= write_en;
-        wb_sel_ex <= wb_sel;
-        unsigned_sel_ex <= unsigned_sel;
-        rd_en_ex <= rd_en;
-        width_ex <= width;
-        jalr_ex <= jalr;
-        rti_ex <= rti;
-        data_sel_ex <= data_sel;
-        wrt_en_ex <= wrt_en;
-        alu_op_ex <= alu_op;
-        bj_inst_ex <= bj_inst;
-        rsi_ex <= rsi;
-        rdi_ex <= rdi;
-        read_register1_ex <= read_register1;
-        read_register2_ex <= read_register2;
+        read_data1_ex <= ~hazard ? read_data1 : 0;
+        read_data2_ex <= ~hazard ? read_data2 : 0;
+        imm_out_ex <= ~hazard ? imm_out : 0;
+        next_pc_ex <= ~hazard ? next_pc : 0;
+        write_reg_ex <= ~hazard ? write_reg : 0;
+        random_ex <= ~hazard ? random : 0;
+        write_en_ex <= ~hazard ? write_en : 0;
+        wb_sel_ex <= ~hazard ? wb_sel : 0;
+        unsigned_sel_ex <= ~hazard ? unsigned_sel : 0;
+        rd_en_ex <= ~hazard ? rd_en : 0;
+        width_ex <= ~hazard ? width : 0;
+        jalr_ex <= ~hazard ? jalr : 0;
+        rti_ex <= ~hazard ? rti : 0;
+        data_sel_ex <= ~hazard ? data_sel : 0;
+        wrt_en_ex <= ~hazard ? wrt_en : 0;
+        alu_op_ex <= ~hazard ? alu_op : 0;
+        bj_inst_ex <= ~hazard ? bj_inst : 0;
+        rsi_ex <= ~hazard ? rsi : 0;
+        rdi_ex <= ~hazard ? rdi : 0;
+        read_register1_ex <= ~hazard ? read_register1 : 0;
+        read_register2_ex <= ~hazard ? read_register2 : 0;
     end
 end
 
