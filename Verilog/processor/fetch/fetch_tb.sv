@@ -41,7 +41,7 @@ rsi = 0;
 interrupt_eth = 0;
 interrupt_key = 0;
 pc_ex = 0;
-pc_tracker = 1; 
+pc_tracker = 4; 
 err_cnt = 0;
 
 repeat(2) @(posedge clk);
@@ -58,21 +58,21 @@ for(int i = 0; i < 4; i++) begin
         $display("PC didn't increment correctly on iteration %d : %d : %d", i, pc_dec, pc_tracker);
         err_cnt++;
     end
-    pc_tracker += 1;
+    pc_tracker += 4;
 end
 
 
 //Test that when a branch was detected we flushed the pipeline register 
 //and waited for correct pc and instruction
 @(negedge clk)
-pc_ex = 32'd10;
+pc_ex = 32'd40;
 branch = 1;
 
 @(negedge clk);
 branch = 0;
 repeat (2) @(posedge clk);
 #1;
-if(idut.inst_pc != 10) begin
+if(idut.inst_pc != 40) begin
     $display("pc_ex wasn't used");
     err_cnt++;
 end
@@ -94,11 +94,11 @@ interrupt_eth = 0;
 
 repeat (2) @(posedge clk);
 #1;
-if(pc_dec != 32'd2) begin
+if(pc_dec != 32'd8) begin
     $display("interrupt PC didn't update");
     err_cnt++;
 end
-if(idut.i_reg != 32'd16) begin
+if(idut.i_reg != 32'd64) begin
     $display("i_reg has incorrect value");
     err_cnt++;
 end
@@ -106,7 +106,7 @@ end
 
 @(posedge clk);
 #1;
-if(pc_dec != 32'd3) begin
+if(pc_dec != 32'd12) begin
     $display("PC after interrrupt didn't increment properly");
     err_cnt++;
 end
@@ -120,12 +120,12 @@ interrupt_eth = 1;
 @(posedge clk)
 #1
 interrupt_eth = 0;
-if(idut.i_reg != 32'd16) begin
+if(idut.i_reg != 32'd64) begin
     $display("i_reg updated when it shouldn't have");
     err_cnt++;
 end
 
-if(pc_dec != 32'd4) begin
+if(pc_dec != 32'd16) begin
     $display("updated interrupt when interrupt signal was currenlty being handled");
     err_cnt++;
 end
@@ -138,7 +138,7 @@ rti = 1;
 rti = 0;
 repeat (2) @(posedge clk);
 #1;
-if(pc_dec != 32'd17) begin
+if(pc_dec != 32'd68) begin
     $display("failed to return from interrupt %d", pc_dec);
     err_cnt++;
 end
@@ -154,11 +154,11 @@ interrupt_key = 0;
 
 repeat (2) @(posedge clk);
 #1;
-if(pc_dec != 32'd2) begin
+if(pc_dec != 32'd8) begin
     $display("interrupt PC didn't update");
     err_cnt++;
 end
-if(idut.i_reg != 32'd24) begin
+if(idut.i_reg != 32'd96) begin
     $display("i_reg has incorrect value");
     err_cnt++;
 end
@@ -166,7 +166,7 @@ end
 
 @(posedge clk);
 #1;
-if(pc_dec != 32'd3) begin
+if(pc_dec != 32'd12) begin
     $display("PC after interrrupt didn't increment properly");
     err_cnt++;
 end
@@ -178,7 +178,7 @@ rsi = 1;
 rsi = 0;
 @(posedge clk);
 #1;
-if(pc_dec != 32'd5) begin
+if(pc_dec != 32'd20) begin
     $display("Failed to continue");
     err_cnt++;
 end

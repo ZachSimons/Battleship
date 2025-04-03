@@ -28,15 +28,15 @@ OE;O;2023.2_1;77
 R2
 vfetch
 Z4 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
-Z5 !s110 1743016866
+Z5 !s110 1743716192
 !i10b 1
-!s100 M?:[LVm2GWWnAPBaE?7VZ0
-IPki=5KYW2@Wl?VdIR;XDh0
+!s100 LSGfm_PVe6]8MnD4bmiYf0
+I8>Y]9OO1:[_H3Y0SFS1i;3
 Z6 VDg1SIo80bB@j0V0VzS_@n1
 !s105 fetch_sv_unit
 S1
 Z7 dC:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch
-w1743016080
+w1743715416
 8C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch.sv
 FC:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch.sv
 L0 1
@@ -44,22 +44,22 @@ Z8 OV;L;10.4d;61
 r1
 !s85 0
 31
-Z9 !s108 1743016866.000000
+Z9 !s108 1743716192.000000
 !s107 C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch.sv|
 !i113 1
 Z10 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 vfetch_tb
 R4
-!s110 1743017547
+Z11 !s110 1743716884
 !i10b 1
-!s100 oEcMkoC8NX;C;Voog9[CV3
-IWBJ^1RKQJXVmeEE02Va9A2
+!s100 JHOHI8NGCNJia3XU]okmi3
+I3V[<l8KmOd6nVhAR;0V`A3
 R6
 !s105 fetch_tb_sv_unit
 S1
 R7
-w1743017542
+w1743716879
 8C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv
 FC:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv
 L0 1
@@ -67,29 +67,29 @@ R8
 r1
 !s85 0
 31
-!s108 1743017547.000000
+Z12 !s108 1743716884.000000
 !s107 C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/fetch_tb.sv|
 !i113 1
 R10
 vimembank
 2/filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v
-Z11 !s110 1742859525
+Z13 !s110 1742859525
 !i10b 1
 !s100 dMX;NBbHY9I5ihGl:B4Jj2
 I?ob^=P:_83f9?CUY2<]Ez2
-Z12 d/filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch
+Z14 d/filespace/j/jcobian/ece554/Battleship/Verilog/processor/fetch
 w1742696458
 8/filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v
 F/filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v
 !i122 2
 L0 40 68
 R6
-Z13 OE;L;2023.2_1;77
+Z15 OE;L;2023.2_1;77
 r1
 !s85 0
 31
-Z14 !s108 1742859525.000000
+Z16 !s108 1742859525.000000
 !s107 /filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/j/jcobian/ece554/Battleship/Verilog/processor/imembank.v|
 !i113 0
@@ -98,23 +98,23 @@ R3
 vinst_memory_wrapper
 2/filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv
 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-R11
+R13
 !i10b 1
 !s100 4JJU<Aa8PdKa]^_6RWY]K2
 ISYALSUkSZQ7mVSgHS^:3<2
 S1
-R12
+R14
 w1742697223
 8/filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv
 F/filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv
 !i122 3
 L0 1 63
 R6
-R13
+R15
 r1
 !s85 0
 31
-R14
+R16
 !s107 /filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/j/jcobian/ece554/Battleship/Verilog/processor/inst_memory_wrapper.sv|
 !i113 0
@@ -130,7 +130,7 @@ R6
 !s105 pc_sync_tb_sv_unit
 S1
 R7
-w1743010829
+w1743714206
 8C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/pc_sync_tb.sv
 FC:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/pc_sync_tb.sv
 L0 1
@@ -145,24 +145,24 @@ R9
 R10
 vplaceholder_mem
 R4
-R5
+R11
 !i10b 1
-!s100 WE_nzBKi8og1QPRzhS7AM0
-I7n5Ri3M:7o8T_O2J:JMh62
+!s100 LZ[B917n;cXI@<ZZEZYJS0
+I4i`2>]=daOE@SLnbXS=_V3
 R6
 !s105 placeholder_mem_sv_unit
 S1
 R7
-w1742865281
-8C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/placeholder_mem.sv
-FC:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/placeholder_mem.sv
+w1743716680
+8C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/placeholder_mem.sv
+FC:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/placeholder_mem.sv
 L0 1
 R8
 r1
 !s85 0
 31
-R9
-!s107 C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/placeholder_mem.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/fetch/placeholder_mem.sv|
+R12
+!s107 C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/placeholder_mem.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/jcob0/OneDrive/Desktop/ece554/Battleship/Verilog/processor/placeholder_mem.sv|
 !i113 1
 R10

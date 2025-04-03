@@ -22,8 +22,8 @@ logic [31:0] branch_mux, rti_mux, pc_control;
 //Make byte addressable (not as complicated as d-memory)
 placeholder_mem imem(
     .clk(clk),
-    .rst_n(rst_n), //HUH do I need this????
-    .addr(pc[7:0]),
+    .rst_n(rst_n),
+    .addr(pc),
     .q(instruction_fe)
 );
 
@@ -66,7 +66,6 @@ always_ff @(posedge clk, negedge rst_n) begin
 end
 
 //TODO debounce may need to only detect interrupt_key and interrupt_eth rising edges
-
 ////////////////////// LOGIC ////////////////////////
 assign interrupt_control = (interrupt_key | interrupt_eth) & ~interrupt_latch;
 
