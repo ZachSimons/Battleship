@@ -30,7 +30,9 @@ module decode(
     output rsi_ex,
     output sac,
     output snd,
-    output uad
+    output uad,
+    output [4:0] read_register1_ex,
+    output [4:0] read_register2_ex
 );
 
 
@@ -39,6 +41,7 @@ logic [31:0] imm[4:0];
 logic random, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi;
 logic [1:0] wb_sel, width, type_sel;
 logic [3:0] alu_op, bj_inst;
+logic [4:0] read_register1, read_register2;
 
 //sign extensions
 assign imm[0]= {20{instruction[31]},instruction[31:20]};
@@ -52,6 +55,8 @@ assign imm_out = imm_sel ? imm[type_sel] : imm[0];
 assign read_data1 = auipc ? src_data1 : next_pc;
 
 assign read_data1_dec = read_data1;
+assign read_register1 = instruction[19:15];
+assign read_register2 = instruction[24:20];
 
 //pipeline
 always_ff @(posedge clk, negedge rst_n) begin
@@ -75,6 +80,8 @@ always_ff @(posedge clk, negedge rst_n) begin
         bj_inst_ex <= 0;
         rsi_ex <= 0;
         rdi_ex <= 0;
+        read_register1_ex <= 0;
+        read_register2_ex <= 0;
     end
     else begin
         read_data1_ex <=read_data1;
@@ -96,6 +103,8 @@ always_ff @(posedge clk, negedge rst_n) begin
         bj_inst_ex <= bj_inst;
         rsi_ex <= rsi;
         rdi_ex <= rdi;
+        read_register1_ex <= read_register1;
+        read_register2_ex <= read_register2;
     end
 end
 
