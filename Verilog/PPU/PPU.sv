@@ -4,20 +4,24 @@ input rst_n, vga_clk;
 output [7:0] r, g, b;
 output VGA_BLANK_N, VGA_HS, VGA_SYNC_N, VGA_VS, VGA_CLK;
 
-parameter BOARD_WIDTH = 342;
-parameter BOARD_HEIGHT = 342;
+parameter BOARD_WIDTH = 173;
+parameter BOARD_HEIGHT = 173;
 
 // add 1 due to board already being offseted on x & y by 1
-parameter BOARD_OFFSET_X = 140;
-parameter BOARD_OFFSET_Y = 70;
+parameter BOARD_OFFSET_X = 234;
+parameter BOARD1_OFFSET_Y = 67;
+parameter BOARD2_OFFSET_Y = BOARD1_OFFSET_Y + BOARD_HEIGHT;
 
 logic [9:0] next_x, next_y;
 logic [7:0] r_in, g_in, b_in;
+logic [7:0] rgb;
+logic [31:0] row_off;
 
-logic [15:0] rgb;
+// make this logic simpler
+assign row_off = (next_y >= BOARD2_OFFSET_Y) ? BOARD2_OFFSET_Y : BOARD1_OFFSET_Y;
 
 board_rom rom (
-	.address((BOARD_WIDTH * (next_y - BOARD_OFFSET_Y)) + (next_x - BOARD_OFFSET_X)),
+	.address((BOARD_WIDTH * (next_y - row_off)) + (next_x - BOARD_OFFSET_X)),
 	.clock(vga_clk),
 	.q(rgb));
 
@@ -56,9 +60,9 @@ always_ff @(posedge vga_clk, negedge rst_n) begin
     end
 end
 
-assign r_in = curr_x < BOARD_WIDTH+BOARD_OFFSET_X+1 && curr_x > BOARD_OFFSET_X && curr_y < BOARD_HEIGHT+BOARD_OFFSET_Y && curr_y > BOARD_OFFSET_Y-1 ? {rgb[15:11], 3'b0} : 0;
-assign g_in = curr_x < BOARD_WIDTH+BOARD_OFFSET_X+1 && curr_x > BOARD_OFFSET_X && curr_y < BOARD_HEIGHT+BOARD_OFFSET_Y && curr_y > BOARD_OFFSET_Y-1 ? {rgb[10:5], 2'b0} : 0;
-assign b_in = curr_x < BOARD_WIDTH+BOARD_OFFSET_X+1 && curr_x > BOARD_OFFSET_X && curr_y < BOARD_HEIGHT+BOARD_OFFSET_Y && curr_y > BOARD_OFFSET_Y-1 ? {rgb[4:0], 3'b0} : 0;
+assign r_in = curr_x < BOARD_WIDTH+BOARD_OFFSET_X && curr_x > BOARD_OFFSET_X-1 && curr_y < BOARD_HEIGHT+BOARD2_OFFSET_Y && curr_y > BOARD1_OFFSET_Y-1 ? {rgb[7:5], 5'b0} : '1;
+assign g_in = curr_x < BOARD_WIDTH+BOARD_OFFSET_X && curr_x > BOARD_OFFSET_X-1 && curr_y < BOARD_HEIGHT+BOARD2_OFFSET_Y && curr_y > BOARD1_OFFSET_Y-1 ? {rgb[4:2], 5'b0} : '1;
+assign b_in = curr_x < BOARD_WIDTH+BOARD_OFFSET_X && curr_x > BOARD_OFFSET_X-1 && curr_y < BOARD_HEIGHT+BOARD2_OFFSET_Y && curr_y > BOARD1_OFFSET_Y-1 ? {rgb[1:0], 6'b0} : '1;
 
 // vga controller
 vga_driver draw   ( .clock(vga_clk),        // 25 MHz PLL
