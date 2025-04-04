@@ -18,18 +18,25 @@ module proc(
 //Connect all modules up (DONE)
 //Determine processor inputs (DONE)
 //Syntheise memory and fetch stages 
-//Implement stalling for D-mem & I-mem 
-//Implement hazards for pipeline
+//Implement stalling for D-mem & I-mem (Done)
+//Implement hazards for pipeline (Done)
+//Implement forwarding (once processor is working) (Done)
 //Test with basic instructions
-//Implement forwarding (once processor is working)
 
 //////////////NET INSTANTIATION/////////////////////
 //Signal naming convention signalname_comingfrom_goingto example: nxtpc_fe_dec
 //Module naming convention means the stage of the pipeline a signal is in. 
 
+//Testing Signals
+logic memerror; 
 
-//Flushing and Stalling
-logic flush, stall;
+
+//Interrupt
+logic interrupt_latch, interrupt;
+
+//Flushing, stalling, and hazards
+logic flush, pfstall, stallmem, hazard, hazard_stall;
+logic [4:0] rdreg1_if_id, rdreg2_if_id, srcreg_if_id;
 
 //Fetch
 logic rti_de_fe, rsi_de_fe, branch_ex_fe;
@@ -70,11 +77,12 @@ logic [1:0] forward_control1, forward_control2;
 fetch proc_fe(
     .clk(clk),
     .rst_n(rst_n),
-    .branch(branch_ex_fe),            //        
+    .branch(branch_ex_fe),                    
     .rti(rti_de_fe),              
     .rsi(rsi_de_fe),            
-    .interrupt_key(interrupt_key), 
-    .interrupt_eth(interrupt_eth),
+    .interrupt(interrupt), 
+    .flush(flush),
+    .stall(hazard | stallmem),
     .pc_ex(branchpc_ex_fe),       
     .instruction_dec(inst_fe_dec),
     .pc_dec(nxtpc_fe_dec)
@@ -87,7 +95,9 @@ decode proc_de(
     .instruction(inst_fe_dec),
     .next_pc(nxtpc_fe_dec),
     .write_enable(regwrten_wb_dec), 
-    .branch(),                   //TODO This controls flushing
+    .flush(), //TODO This controls flushing
+    .hazard(hazard),
+    .stall_mem(stallmem),           
     .write_reg(wrtreg_wb_dec),   
     .write_data(wbdata_wb_dec),   
     .read_data1_ex(rd1_dec_ex),
@@ -115,7 +125,10 @@ decode proc_de(
     .snd(snd),            //TODO to external device
     .uad(uad),             //TODO to external device
     .read_register1_ex(rdreg1_dec_ex),
-    .read_register2_ex(rdreg2_dec_ex)
+    .read_register2_ex(rdreg2_dec_ex),
+    .read_register1_if_id(rdreg1_if_id),
+    .read_register2_if_id(rdreg2_if_id),
+    .src_register_if_id(srcreg_if_id)
 );
 
 execute proc_ex(
@@ -138,6 +151,7 @@ execute proc_ex(
     .jalr_exe(jalr_dec_ex),
     .data_sel_exe(datasel_dec_ex),
     .rdi_ex(rdi_dec_ex),
+    .stall_mem(stallmem),
     .forward_control1(forward_control1),
     .forward_control2(forward_control2),
     .wbdata_wb_ex(wbdata_wb_dec),
@@ -166,6 +180,7 @@ memory proc_mem(
     .reg_wrt_en_mem(regwrten_ex_mem),
     .random_mem(random_ex_mem),
     .rdi_mem(rdi_ex_mem),
+    .stallmem(stallmem),
     .width_mem(width_ex_mem),
     .wb_sel_mem(wbsel_ex_mem),
     .wrt_reg_mem(wrtreg_ex_mem),
@@ -174,7 +189,7 @@ memory proc_mem(
     .reg2_data_mem(memwrtdata_ex_mem),
     .alu_mem(aluresult_ex_mem),
     .reg_wrt_en_wb(regwrten_mem_wb),
-    .mem_error(/* don't nessesarly need*/),
+    .mem_error(memerror),
     .wb_sel_wb(wbsel_mem_wb),
     .wrt_reg_wb(wrtreg_mem_wb),
     .read_data_wb(readdata_mem_wb),
@@ -194,9 +209,21 @@ forwarding proc_forward(
     .forward_control2(forward_control2)
 );
 
+
+hazard proc_hazard(
+    .memread_id_ex(memrden_dec_ex),
+    .memread_ex_mem(memrden_ex_mem),
+    .memwrite_ex_mem(memwrten_ex_mem),
+    .src_reg1_if_id(rdreg1_if_id),
+    .src_reg2_if_id(rdreg2_if_id),
+    .dst_reg_id_ex(srcreg_if_id),
+    .hazard(hazard),
+    .stall_mem(hazard_stall)
+);
+
+
+
 //////////////////////WB STAGE//////////////////////
-
-
 always_comb begin
     case(wbsel_mem_wb) 
         2'b00: wbdata_wb_dec = {{31{1'b0}}, accelerator_data}; //TODO accelerator
@@ -209,12 +236,34 @@ end
 assign regwrten_wb_dec = regwrten_mem_wb;
 assign wrtreg_wb_dec = wrtreg_mem_wb;
 
-///////////////Flushing and Stalling Logic///////////
-
-assign flush = //TODO flushing logic
-assign stall = //TODO stalling logic 
 
 
+///////////////////Flushing/Stalling logic/////////////////////
+always_ff @(posedge clk) begin
+    pfstall <= flush; //After a flush a stall must happen to wait for I-mem
+end
+
+assign flush = branch_ex_fe | interrupt | rti_de_fe;
+assign stallmem = hazard_stall | pfstall; //To handle both Pc changing and 
+
+////////////////Interrupt Logic///////////////////////
+
+//TODO may need to debounce rti and rsi depending on if they are sync to the cpu pipeline
+//TODO debounce may need sync interrupt to the CPU pipeline
+//While interrupt being handled another interrupt must not be able to happen
+assign interrupt = (interrupt_key | interrupt_eth) & ~interrupt_latch;
+
+always_ff @(posedge clk, negedge rst_n) begin
+    if(!rst_n) begin
+        interrupt_latch <= 0;
+    end
+    else if(rti_de_fe | rsi_de_fe) begin
+        interrupt_latch <= 0;
+    end
+    else if(interrupt_key | interrupt_eth) begin
+        interrupt_latch <= 1;
+    end
+end
 
 
 
