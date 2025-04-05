@@ -18,6 +18,10 @@ module execute(
     input                   jalr_exe,
     input                   data_sel_exe,
     input                   rdi_ex,
+    input                   stall_mem,
+    input           [1:0]   forward_control1,
+    input           [1:0]   forward_control2,
+    input           [31:0]  wbdata_wb_ex,
     output logic    [31:0]  next_pc_mem,
     output logic    [31:0]  write_data_mem,
     output logic    [31:0]  alu_result_mem,
@@ -34,12 +38,18 @@ module execute(
     output logic            rdi_mem
 );
 
-    logic [31:0] alu_inB, branch_base, alu_result_exe;
+    logic [31:0] alu_inB_temp, alu_inB, alu_inA, branch_base, alu_result_exe;
     
 
-    assign alu_inB = data_sel_exe ? imm : reg2;
+    assign alu_inB_temp = data_sel_exe ? imm : reg2;
     assign branch_base = jalr_exe ? reg1 : next_pc_exe;
     assign branch_pc = branch_base + imm;
+
+    //Fowarding
+    assign alu_inA = (forward_control1 == 2'b01) ? wbdata_wb_ex :
+                     (forward_control1 == 2'b10) ? alu_result_mem : reg1;
+    assign alu_inB = (forward_control1 == 2'b01) ? wbdata_wb_ex :
+                     (forward_control1 == 2'b10) ? alu_result_mem : alu_inB_temp;
 
     alu EXE_ALU(.inA(reg1), .inB(alu_inB), .alu_op(alu_op_exe[2:0]), .option_bit(alu_op_exe[3]), .out(alu_result_exe));
     branch_ctrl EXE_BRANCH_CTRL(.bj_inst(bj_inst_exe), .inA(reg1), .inB(reg2), .branch(branch));
@@ -58,7 +68,7 @@ module execute(
             read_unsigned_mem <= 0;
             rd_en_mem <= 0;
             rdi_mem <= 0;
-        end else begin
+        end else if(~stall_mem) begin
             next_pc_mem <= next_pc_exe;
             write_data_mem <= reg2;
             alu_result_mem <= alu_result_exe;
