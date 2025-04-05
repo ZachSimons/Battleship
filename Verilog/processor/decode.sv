@@ -37,13 +37,15 @@ module decode(
     output logic [4:0] read_register2_ex,
     output logic [4:0] read_register1_if_id,
     output logic [4:0] read_register2_if_id,
-    output logic [4:0] src_register_if_id
+    output logic [4:0] src_register_if_id,
+    output logic ignore_fwd_ex,
+    output logic lui_ex
 );
 
 
 logic [31:0] src_data1;
 logic [31:0] imm[4:0];
-logic random, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi, auipc, imm_sel, fluhaz;
+logic random, lui, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi, auipc, imm_sel, fluhaz, ignore_fwd;
 logic [1:0] wb_sel, width, type_sel;
 logic [3:0] alu_op, bj_inst;
 logic [31:0] read_data2, imm_out;
@@ -56,7 +58,7 @@ assign imm[3]= instruction[31:12] << 12;
 assign imm[4]= {{13{instruction[31]}},instruction[19:12],instruction[20],instruction[30:21]};
 
 //muxs
-assign imm_out = imm_sel ? imm[type_sel] : imm[0];
+assign imm_out = imm_sel ? imm[type_sel+1] : imm[0];
 assign read_data1 = auipc ? src_data1 : next_pc;
 
 assign read_data1_dec = read_data1;
@@ -68,7 +70,7 @@ assign src_register_if_id = instruction[11:7];
 assign fluhaz = hazard | flush;
 
 //pipeline
-always_ff @(posedge clk, negedge rst_n) begin
+always_ff @(posedge clk) begin
     if(~rst_n) begin
         read_data1_ex <= 0;
         read_data2_ex <= 0;
@@ -91,6 +93,8 @@ always_ff @(posedge clk, negedge rst_n) begin
         rdi_ex <= 0;
         read_register1_ex <= 0;
         read_register2_ex <= 0;
+        ignore_fwd_ex <= 0;
+        lui_ex <= 0;
     end
     else if(~stall_mem) begin
         read_data1_ex <= ~fluhaz ? read_data1 : 0;
@@ -114,6 +118,8 @@ always_ff @(posedge clk, negedge rst_n) begin
         rdi_ex <= ~fluhaz ? rdi : 0;
         read_register1_ex <= ~fluhaz ? read_register1_if_id  : 0;
         read_register2_ex <= ~fluhaz ? read_register2_if_id  : 0;
+        ignore_fwd_ex <= ~fluhaz ? ignore_fwd : 0;
+        lui_ex <= ~fluhaz ? lui : 0;
     end
 end
 
@@ -153,7 +159,9 @@ instruction_decoder DECODE(
     .sac(sac),
     .snd(snd),
     .uad(uad),
-    .rdi(rdi)
+    .rdi(rdi),
+    .ignore_fwd(ignore_fwd),
+    .lui(lui)
 );
 
 

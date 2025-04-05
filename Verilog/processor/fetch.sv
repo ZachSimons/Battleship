@@ -47,7 +47,7 @@ always_ff @(posedge clk, negedge rst_n) begin
         pc_dec <= 0;
         instruction_dec <= 32'h00000013; //IDK if this needs to be combinational
     end
-    else if (stall) begin
+    else if (stall | warmup) begin
         pc_dec <= pc_dec;
         instruction_dec <= instruction_dec;
     end
@@ -56,6 +56,13 @@ always_ff @(posedge clk, negedge rst_n) begin
         pc_dec <= nxt_pc;
     end
 end
+
+//TODO fix later
+//rst_n warmup 
+always_ff @(posedge clk) begin //TODO fix bug regarding rst_n asserted between clock cycles
+    warmup <= !rst_n; 
+end 
+
 
 ////////////////////// LOGIC ////////////////////////
 
@@ -98,8 +105,5 @@ always_ff @(posedge clk, negedge rst_n) begin
         i_reg <= branch_mux;
     end
 end
-
-
-
 
 endmodule

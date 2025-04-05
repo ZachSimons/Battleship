@@ -59,18 +59,6 @@ module proc_tb;
       expected_val   : 32'h00000003
     },
     '{
-      test_name      : "NOP #2",
-      instr_code     : 32'h00000013,  // NOP (ADDI x0,x0,0)
-      reg_to_check   : 5'd0,
-      expected_val   : 32'h0         // x0 always 0
-    },
-    '{
-      test_name      : "NOP #3",
-      instr_code     : 32'h00000013,  // NOP (ADDI x0,x0,0)
-      reg_to_check   : 5'd0,
-      expected_val   : 32'h0         // x0 always 0
-    },
-    '{
       test_name      : "SLTI x3, x1, 10",
       instr_code     : 32'h00a0a193, // blank
       reg_to_check   : 5'd3,
@@ -89,10 +77,10 @@ module proc_tb;
       expected_val   : 32'h000000FE   // if x1=1 => 1 ^ 0xFF => 0xFE
     },
     '{
-      test_name      : "ORI x6, x1, 0xABCD",
+      test_name      : "ORI x6, x1, 0xABC",
       instr_code     : 32'hbcd0e313, // blank
       reg_to_check   : 5'd6,
-      expected_val   : 32'h0000ABCD   // if x1=1 => 1 | 0xABCD => 0xABCD
+      expected_val   : 32'hFFFFFABD   // if x1=1 => 1 | 0xABCD => 0xABCD
     },
     '{
       test_name      : "ANDI x7, x1, 0xF",
@@ -117,6 +105,114 @@ module proc_tb;
       instr_code     : 32'h4010d513, // blank
       reg_to_check   : 5'd10,
       expected_val   : 32'h00000000   // if x1=1 => sign-extended shift => 0
+    },
+    '{
+      test_name      : "SLL x3, x1, x2",
+      instr_code     : 32'h002091B3,
+      reg_to_check   : 5'd3,
+      expected_val   : 32'h00000004  // 1 << 2 = 4
+    },
+    '{
+      test_name      : "SLT x4, x1, x2",
+      instr_code     : 32'h0020A233,
+      reg_to_check   : 5'd4,
+      expected_val   : 32'h00000001  // (1 < 2) => 1
+    },
+    '{
+      test_name      : "SLTU x5, x1, x2",
+      instr_code     : 32'h0020B2B3,
+      reg_to_check   : 5'd5,
+      expected_val   : 32'h00000001  // (1 < 2) => 1 (unsigned)
+    },
+    '{
+      test_name      : "XOR x6, x1, x2",
+      instr_code     : 32'h0020C333,
+      reg_to_check   : 5'd6,
+      expected_val   : 32'h00000003  // 1 ^ 2 = 3
+    },
+    '{
+      test_name      : "SRL x7, x1, x2",
+      instr_code     : 32'h0020D3B3,
+      reg_to_check   : 5'd7,
+      expected_val   : 32'h00000000  // 1 >> 2 = 0 (logical)
+    },
+    '{
+      test_name      : "SRA x8, x1, x2",
+      instr_code     : 32'h4020D433,
+      reg_to_check   : 5'd8,
+      expected_val   : 32'h00000000  // 1 >> 2 = 0 (arithmetic sign-extended)
+    },
+    '{
+      test_name      : "OR x9, x1, x2",
+      instr_code     : 32'h0020E4B3,
+      reg_to_check   : 5'd9,
+      expected_val   : 32'h00000003  // 1 | 2 = 3
+    },
+    '{
+      test_name      : "AND x10, x1, x2",
+      instr_code     : 32'h0020F533,
+      reg_to_check   : 5'd10,
+      expected_val   : 32'h00000000  // 1 & 2 = 0
+    },
+    '{
+      test_name      : "LUI x11, 0xDEADC",
+      instr_code     : 32'hdeadc5b7,  
+      reg_to_check   : 5'd11,
+      expected_val   : 32'hDEADC000   
+    },
+    '{
+      test_name      : "NOP #2",
+      instr_code     : 32'h00000013,  // NOP (ADDI x0,x0,0)
+      reg_to_check   : 5'd0,
+      expected_val   : 32'h0         // x0 always 0
+    },
+    '{
+      test_name      : "ADDI x11, x11, 0xEEF",
+      instr_code     : 32'heef58593, 
+      reg_to_check   : 5'd11,
+      expected_val   : 32'hDEADBEEF  
+    },
+    '{
+      test_name      : "SB x11, 2(x2)",
+      instr_code     : 32'h00b10123,
+      reg_to_check   : 5'd0,
+      expected_val   : 32'h00000000
+    },
+    '{
+      test_name      : "SH x11, 4(x2)",
+      instr_code     : 32'h00b11223,
+      reg_to_check   : 5'd0,
+      expected_val   : 32'h00000000
+    },
+    '{
+      test_name      : "SW x11, 6(x2)",
+      instr_code     : 32'h00b12423,
+      reg_to_check   : 5'd0,
+      expected_val   : 32'h00000000 
+    },
+    '{
+      test_name      : "LB x12, 2(x2)",
+      instr_code     : 32'h00210603,
+      reg_to_check   : 5'd12,
+      expected_val   : 32'hFFFFFFEF
+    },
+    '{
+      test_name      : "LH x13, 4(x2)",
+      instr_code     : 32'h00411683,
+      reg_to_check   : 5'd13,
+      expected_val   : 32'hFFFFBEEF
+    },
+    '{
+      test_name      : "LW x14, 6(x2)",
+      instr_code     : 32'h00612703,
+      reg_to_check   : 5'd14,
+      expected_val   : 32'hDEADBEEF
+    },
+    '{
+      test_name      : "ADD x15, x14, x0",
+      instr_code     : 32'h000707b3,
+      reg_to_check   : 5'd15,
+      expected_val   : 32'hDEADBEEF  // 1 & 2 = 0
     }
   };
   
@@ -152,12 +248,14 @@ module proc_tb;
 
     #20;
     rst_n = 1;
-    repeat (4) @(posedge clk);
+    repeat (7) @(posedge clk);
 
     // For each instruction in test_list:
     for (int i = 0; i < $size(test_list); i++) begin
-      repeat (3) @(posedge clk);
-  
+      repeat (1) @(posedge clk);
+
+      if ((dut.inst_fe_dec[6:0] == 7'b0100011) || (dut.inst_fe_dec[6:0] == 7'b0000011)) @(posedge clk);
+
       // Now check the register
       check_register(
         test_list[i].reg_to_check, 

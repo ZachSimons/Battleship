@@ -45,7 +45,7 @@ logic [31:0] inst_fe_dec, nxtpc_fe_dec;
 
 //Decode
 logic random_dec_ex, regwrten_dec_ex, unsigned_dec_ex, memrden_dec_ex, jalr_dec_ex, datasel_dec_ex, 
-        memwrten_dec_ex, rdi_dec_ex;
+        memwrten_dec_ex, lui_ex, rdi_dec_ex, ignore_fwd_ex;
 logic [1:0] wbsel_dec_ex, width_dec_ex;
 logic [3:0] aluop_dec_ex, bjinst_dec_ex;
 logic [4:0] wrtreg_dec_ex;
@@ -128,7 +128,9 @@ decode proc_de(
     .read_register2_ex(rdreg2_dec_ex),
     .read_register1_if_id(rdreg1_if_id),
     .read_register2_if_id(rdreg2_if_id),
-    .src_register_if_id(srcreg_if_id)
+    .src_register_if_id(srcreg_if_id),
+    .ignore_fwd_ex(ignore_fwd_ex),
+    .lui_ex(lui_ex)
 );
 
 execute proc_ex(
@@ -137,6 +139,7 @@ execute proc_ex(
     .next_pc_exe(nxtpc_dec_ex),
     .reg1(rd1_dec_ex),
     .reg2(rd2_dec_ex),
+    .lui_ex(lui_ex),
     .imm(immout_dec_ex),
     .bj_inst_exe(bjinst_dec_ex),
     .alu_op_exe(aluop_dec_ex),
@@ -201,6 +204,7 @@ memory proc_mem(
 forwarding proc_forward(
     .mem_wb_reg_write(regwrten_mem_wb),
     .ex_mem_reg_write(regwrten_ex_mem),
+    .ignore_fwd_ex(ignore_fwd_ex),
     .id_ex_reg_reg1(rdreg1_dec_ex),
     .id_ex_reg_reg2(rdreg2_dec_ex),
     .mem_wb_reg(wrtreg_mem_wb),
@@ -245,12 +249,9 @@ end
 
 //TODO fix later
 //rst_n warmup 
-always_ff @(posedge clk) begin //TODO fix bug regarding rst_n asserted between clock cycles
-    warmup <= !rst_n; 
-end 
 
 assign flush = branch_ex_fe | interrupt | rti_de_fe;
-assign stallmem = hazard_stall | pfstall | warmup; //To handle both Pc changing and 
+assign stallmem = hazard_stall | pfstall; //To handle both Pc changing and 
 
 ////////////////Interrupt Logic///////////////////////
 //TODO may need to debounce rti and rsi depending on if they are sync to the cpu pipeline
