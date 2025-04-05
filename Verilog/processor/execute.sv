@@ -48,8 +48,8 @@ module execute(
     // Fowarding
     assign alu_inA = (forward_control1 == 2'b01) ? wbdata_wb_ex :
                      (forward_control1 == 2'b10) ? alu_result_mem : reg1;
-    assign alu_inB = (forward_control1 == 2'b01) ? wbdata_wb_ex :
-                     (forward_control1 == 2'b10) ? alu_result_mem : alu_inB_temp;
+    assign alu_inB = (forward_control2 == 2'b01) ? wbdata_wb_ex :
+                     (forward_control2 == 2'b10) ? alu_result_mem : alu_inB_temp;
     // assign alu_inA = reg1;
     // assign alu_inB = alu_inB_temp;
 

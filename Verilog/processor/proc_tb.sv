@@ -23,12 +23,6 @@ module proc_tb;
 
   test_info_t test_list[] = '{
     '{
-      test_name      : "NOP #1",
-      instr_code     : 32'h00000013,  // NOP (ADDI x0,x0,0)
-      reg_to_check   : 5'd0,
-      expected_val   : 32'h0         // x0 always 0
-    },
-    '{
       test_name      : "ADDI x1, x1, 1",
       instr_code     : 32'h00100093,  // sets x1 = x1 + 1
       reg_to_check   : 5'd1,
@@ -39,12 +33,6 @@ module proc_tb;
       instr_code     : 32'h00200113,  // sets x2 = x2 + 2
       reg_to_check   : 5'd2,
       expected_val   : 32'h00000002
-    },
-    '{
-      test_name      : "NOP #2",
-      instr_code     : 32'h00000013,  // NOP
-      reg_to_check   : 5'd0,
-      expected_val   : 32'h00000000
     },
     '{
       test_name      : "ADD x3, x1, x2",
