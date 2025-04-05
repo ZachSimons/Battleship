@@ -35,7 +35,7 @@ logic memerror;
 logic interrupt_latch, interrupt;
 
 //Flushing, stalling, and hazards
-logic flush, pfstall, stallmem, hazard, hazard_stall, warmup;
+logic flush, pfstall, stallmem, hazard, hazard_stall;
 logic [4:0] rdreg1_if_id, rdreg2_if_id, srcreg_if_id;
 
 //Fetch
@@ -254,6 +254,7 @@ assign flush = branch_ex_fe | interrupt | rti_de_fe;
 assign stallmem = hazard_stall | pfstall; //To handle both Pc changing and 
 
 ////////////////Interrupt Logic///////////////////////
+
 //TODO may need to debounce rti and rsi depending on if they are sync to the cpu pipeline
 //TODO debounce may need sync interrupt to the CPU pipeline
 //While interrupt being handled another interrupt must not be able to happen

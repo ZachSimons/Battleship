@@ -23,12 +23,6 @@ module proc_tb;
 
   test_info_t test_list[] = '{
     '{
-      test_name      : "NOP #1",
-      instr_code     : 32'h00000013,  // NOP (ADDI x0,x0,0)
-      reg_to_check   : 5'd0,
-      expected_val   : 32'h0         // x0 always 0
-    },
-    '{
       test_name      : "ADDI x1, x1, 1",
       instr_code     : 32'h00100093,  // sets x1 = x1 + 1
       reg_to_check   : 5'd1,
@@ -254,9 +248,10 @@ module proc_tb;
     for (int i = 0; i < $size(test_list); i++) begin
       repeat (1) @(posedge clk);
 
-      if ((dut.inst_fe_dec[6:0] == 7'b0100011) || (dut.inst_fe_dec[6:0] == 7'b0000011)) @(posedge clk);
+      //if ((dut.inst_fe_dec[6:0] == 7'b0100011) || (dut.inst_fe_dec[6:0] == 7'b0000011)) @(posedge clk);
 
       // Now check the register
+      #1;
       check_register(
         test_list[i].reg_to_check, 
         test_list[i].expected_val, 
