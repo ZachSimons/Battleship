@@ -41,12 +41,6 @@ module proc_tb;
       expected_val   : 32'h00000002
     },
     '{
-      test_name      : "NOP #2",
-      instr_code     : 32'h00000013,  // NOP
-      reg_to_check   : 5'd0,
-      expected_val   : 32'h00000000
-    },
-    '{
       test_name      : "ADD x3, x1, x2",
       instr_code     : 32'h002081B3,  // x3 = x1 + x2 => 1 + 2 = 3
       reg_to_check   : 5'd3,
@@ -63,6 +57,66 @@ module proc_tb;
       instr_code     : 32'h0020e2b3,  // x5 = x1 | x2 => 3
       reg_to_check   : 5'd5,
       expected_val   : 32'h00000003
+    },
+    '{
+      test_name      : "NOP #2",
+      instr_code     : 32'h00000013,  // NOP (ADDI x0,x0,0)
+      reg_to_check   : 5'd0,
+      expected_val   : 32'h0         // x0 always 0
+    },
+    '{
+      test_name      : "NOP #3",
+      instr_code     : 32'h00000013,  // NOP (ADDI x0,x0,0)
+      reg_to_check   : 5'd0,
+      expected_val   : 32'h0         // x0 always 0
+    },
+    '{
+      test_name      : "SLTI x3, x1, 10",
+      instr_code     : 32'h00a0a193, // blank
+      reg_to_check   : 5'd3,
+      expected_val   : 32'h00000001   // if x1=1 => (1 < 10) => 1
+    },
+    '{
+      test_name      : "SLTIU x4, x1, 10",
+      instr_code     : 32'h00a0b213, // blank
+      reg_to_check   : 5'd4,
+      expected_val   : 32'h00000001   // unsigned compare if x1=1 => 1
+    },
+    '{
+      test_name      : "XORI x5, x1, 0xFF",
+      instr_code     : 32'h0ff0c293, // blank
+      reg_to_check   : 5'd5,
+      expected_val   : 32'h000000FE   // if x1=1 => 1 ^ 0xFF => 0xFE
+    },
+    '{
+      test_name      : "ORI x6, x1, 0xABCD",
+      instr_code     : 32'hbcd0e313, // blank
+      reg_to_check   : 5'd6,
+      expected_val   : 32'h0000ABCD   // if x1=1 => 1 | 0xABCD => 0xABCD
+    },
+    '{
+      test_name      : "ANDI x7, x1, 0xF",
+      instr_code     : 32'h00f0f393, // blank
+      reg_to_check   : 5'd7,
+      expected_val   : 32'h00000001   // if x1=1 => 1 & 0xF => 1
+    },
+    '{
+      test_name      : "SLLI x8, x1, 2",
+      instr_code     : 32'h00209413, // blank
+      reg_to_check   : 5'd8,
+      expected_val   : 32'h00000004   // if x1=1 => (1 << 2) => 4
+    },
+    '{
+      test_name      : "SRLI x9, x1, 1",
+      instr_code     : 32'h0010d493, // blank
+      reg_to_check   : 5'd9,
+      expected_val   : 32'h00000000   // if x1=1 => (1 >>u 1) => 0
+    },
+    '{
+      test_name      : "SRAI x10, x1, 1",
+      instr_code     : 32'h4010d513, // blank
+      reg_to_check   : 5'd10,
+      expected_val   : 32'h00000000   // if x1=1 => sign-extended shift => 0
     }
   };
   
