@@ -17,13 +17,15 @@ module memory(
     input logic [31:0]  rdi_data,      
     input logic [31:0]  reg2_data_mem,
     input logic [31:0]  alu_mem,
+    input logic [31:0]  instruction_mem,
     output logic        reg_wrt_en_wb,
     output logic        mem_error,
     output logic [1:0]  wb_sel_wb,
     output logic [4:0]  wrt_reg_wb,
     output logic [31:0] read_data_wb,
     output logic [31:0] pc_wb,
-    output logic [31:0] alu_wb
+    output logic [31:0] alu_wb,
+    output logic [31:0] instruction_wb
 );
 //////////////NET INSTANTIATION/////////////////////
 logic [31:0] lfsr, wrapper_rd_data, random_mux, rdi_mux;
@@ -60,6 +62,7 @@ always_ff @(posedge clk, negedge rst_n) begin
         read_data_wb <= rdi_mux;
         pc_wb <= pc_mem;
         alu_wb <= alu_mem;
+        instruction_wb <= instruction_mem;
     end
 end
 

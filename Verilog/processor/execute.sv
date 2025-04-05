@@ -5,6 +5,7 @@ module execute(
     input           [31:0]  reg1,
     input           [31:0]  reg2,
     input           [31:0]  imm,
+    input           [31:0]  instruction_ex,
     input           [3:0]   bj_inst_exe,
     input           [3:0]   alu_op_exe,
     input           [1:0]   wb_sel_exe,
@@ -27,6 +28,7 @@ module execute(
     output logic    [31:0]  write_data_mem,
     output logic    [31:0]  alu_result_mem,
     output logic    [31:0]  branch_pc,
+    output logic    [31:0]  instruction_mem,
     output logic    [1:0]   wb_sel_mem,
     output logic    [1:0]   read_width_mem,
     output logic    [4:0]   wrt_dst_mem,
@@ -86,6 +88,7 @@ module execute(
             read_unsigned_mem <= read_unsigned_exe;
             rd_en_mem <= rd_en_exe;
             rdi_mem <= rdi_ex;
+            instruction_mem <= instruction_ex;
         end
     end
 

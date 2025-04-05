@@ -15,6 +15,7 @@ module decode(
     output logic [31:0] next_pc_ex,
     output logic [4:0] write_reg_ex,
     output logic [31:0] read_data1_dec,
+    output logic [31:0] instruction_ex,
     output logic random_ex,
     output logic ppu_send,
     output logic write_en_ex,
@@ -120,6 +121,7 @@ always_ff @(posedge clk) begin
         read_register2_ex <= ~fluhaz ? read_register2_if_id  : 0;
         ignore_fwd_ex <= ~fluhaz ? ignore_fwd : 0;
         lui_ex <= ~fluhaz ? lui : 0;
+        instruction_ex <= ~fluhaz ? instruction : '0;
     end
 end
 

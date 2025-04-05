@@ -49,20 +49,20 @@ logic random_dec_ex, regwrten_dec_ex, unsigned_dec_ex, memrden_dec_ex, jalr_dec_
 logic [1:0] wbsel_dec_ex, width_dec_ex;
 logic [3:0] aluop_dec_ex, bjinst_dec_ex;
 logic [4:0] wrtreg_dec_ex;
-logic [31:0] rd1_dec_ex, rd2_dec_ex, nxtpc_dec_ex, immout_dec_ex;
+logic [31:0] rd1_dec_ex, rd2_dec_ex, nxtpc_dec_ex, immout_dec_ex, instruction_dec_ex;
 
 
 //Execute
 logic random_ex_mem, memwrten_ex_mem, regwrten_ex_mem, unsigned_ex_mem, memrden_ex_mem, rdi_ex_mem;
 logic [1:0] wbsel_ex_mem, width_ex_mem;
 logic [4:0] wrtreg_ex_mem;
-logic [31:0] nxtpc_ex_mem, aluresult_ex_mem, memwrtdata_ex_mem, branchpc_ex_fe;
+logic [31:0] nxtpc_ex_mem, aluresult_ex_mem, memwrtdata_ex_mem, branchpc_ex_fe, instruction_ex_mem;
 
 //Memory
 logic regwrten_mem_wb;
 logic [1:0] wbsel_mem_wb;
 logic [4:0] wrtreg_mem_wb;
-logic [31:0] readdata_mem_wb, nxtpc_mem_wb, alu_mem_wb;
+logic [31:0] readdata_mem_wb, nxtpc_mem_wb, alu_mem_wb, instruction_mem_wb;
 
 //Writeback
 logic regwrten_wb_dec;
@@ -106,6 +106,7 @@ decode proc_de(
     .next_pc_ex(nxtpc_dec_ex),
     .write_reg_ex(wrtreg_dec_ex),
     .read_data1_dec(interface_data), //TODO to external Devices
+    .instruction_ex(instruction_dec_ex),              //
     .random_ex(random_dec_ex), 
     .ppu_send(ppu_send),            //TODO to external Device
     .write_en_ex(regwrten_dec_ex),   
@@ -141,6 +142,7 @@ execute proc_ex(
     .reg2(rd2_dec_ex),
     .lui_ex(lui_ex),
     .imm(immout_dec_ex),
+    .instruction_ex(instruction_dec_ex),
     .bj_inst_exe(bjinst_dec_ex),
     .alu_op_exe(aluop_dec_ex),
     .wb_sel_exe(wbsel_dec_ex),
@@ -162,6 +164,7 @@ execute proc_ex(
     .write_data_mem(memwrtdata_ex_mem),
     .alu_result_mem(aluresult_ex_mem),
     .branch_pc(branchpc_ex_fe), 
+    .instruction_mem(instruction_ex_mem),
     .wb_sel_mem(wbsel_ex_mem),
     .read_width_mem(width_ex_mem),
     .wrt_dst_mem(wrtreg_ex_mem),
@@ -170,7 +173,7 @@ execute proc_ex(
     .reg_wrt_en_mem(regwrten_ex_mem),
     .read_unsigned_mem(unsigned_ex_mem),
     .rd_en_mem(memrden_ex_mem),
-    .branch(branch_ex_fe)  ,
+    .branch(branch_ex_fe),
     .rdi_mem(rdi_ex_mem)                 
 );
 
@@ -191,13 +194,15 @@ memory proc_mem(
     .rdi_data(interrupt_source_data),   //TODO from external device
     .reg2_data_mem(memwrtdata_ex_mem),
     .alu_mem(aluresult_ex_mem),
+    .instruction_mem(instruction_ex_mem),
     .reg_wrt_en_wb(regwrten_mem_wb),
     .mem_error(memerror),
     .wb_sel_wb(wbsel_mem_wb),
     .wrt_reg_wb(wrtreg_mem_wb),
     .read_data_wb(readdata_mem_wb),
     .pc_wb(nxtpc_mem_wb),
-    .alu_wb(alu_mem_wb)
+    .alu_wb(alu_mem_wb),
+    .instruction_wb(instruction_mem_wb)
 );
 
 
@@ -215,6 +220,8 @@ forwarding proc_forward(
 
 
 hazard proc_hazard(
+    .clk(clk),
+    .rst_n(rst_n),
     .memread_id_ex(memrden_dec_ex),
     .memread_ex_mem(memrden_ex_mem),
     .memwrite_ex_mem(memwrten_ex_mem),
@@ -251,7 +258,7 @@ end
 //rst_n warmup 
 
 assign flush = branch_ex_fe | interrupt | rti_de_fe;
-assign stallmem = hazard_stall | pfstall; //To handle both Pc changing and 
+assign stallmem = hazard_stall; //| pfstall; //To handle both Pc changing and 
 
 ////////////////Interrupt Logic///////////////////////
 

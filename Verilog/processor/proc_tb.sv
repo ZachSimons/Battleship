@@ -248,7 +248,7 @@ module proc_tb;
     for (int i = 0; i < $size(test_list); i++) begin
       repeat (1) @(posedge clk);
 
-      //if ((dut.inst_fe_dec[6:0] == 7'b0100011) || (dut.inst_fe_dec[6:0] == 7'b0000011)) @(posedge clk);
+      if ((dut.instruction_ex_mem[6:0] == 7'b0100011) || (dut.instruction_ex_mem[6:0] == 7'b0000011)) @(posedge clk);
 
       // Now check the register
       #1;
