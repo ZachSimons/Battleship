@@ -46,10 +46,12 @@ module execute(
     assign branch_pc = branch_base + imm;
 
     //Fowarding
-    assign alu_inA = (forward_control1 == 2'b01) ? wbdata_wb_ex :
-                     (forward_control1 == 2'b10) ? alu_result_mem : reg1;
-    assign alu_inB = (forward_control1 == 2'b01) ? wbdata_wb_ex :
-                     (forward_control1 == 2'b10) ? alu_result_mem : alu_inB_temp;
+    // assign alu_inA = (forward_control1 == 2'b01) ? wbdata_wb_ex :
+    //                  (forward_control1 == 2'b10) ? alu_result_mem : reg1;
+    // assign alu_inB = (forward_control1 == 2'b01) ? wbdata_wb_ex :
+    //                  (forward_control1 == 2'b10) ? alu_result_mem : alu_inB_temp;
+    assign alu_inA = reg1;
+    assign alu_inB = alu_inB_temp;
 
     alu EXE_ALU(.inA(reg1), .inB(alu_inB), .alu_op(alu_op_exe[2:0]), .option_bit(alu_op_exe[3]), .out(alu_result_exe));
     branch_ctrl EXE_BRANCH_CTRL(.bj_inst(bj_inst_exe), .inA(reg1), .inB(reg2), .branch(branch));

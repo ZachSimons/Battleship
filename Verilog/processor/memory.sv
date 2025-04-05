@@ -9,6 +9,7 @@ module memory(
     input logic         reg_wrt_en_mem,
     input logic         random_mem,
     input logic         rdi_mem,
+    input logic         stallmem,
     input logic [1:0]   width_mem,
     input logic [1:0]   wb_sel_mem,
     input logic [4:0]   wrt_reg_mem,
@@ -52,7 +53,7 @@ always_ff @(posedge clk, negedge rst_n) begin
         pc_wb <= '0;
         alu_wb <= '0;
     end
-    else begin
+    else if (!stallmem) begin
         reg_wrt_en_wb <= reg_wrt_en_mem;
         wb_sel_wb <= wb_sel_mem;
         wrt_reg_wb <= wrt_reg_mem; 

@@ -13,7 +13,7 @@ module fetch(
 );
 //////////////NET INSTANTIATION/////////////////////
 logic warmup; //Doesn't have to be a latched signal 
-logic [31:0] i_reg, nxt_pc, pc_q, instruction_fe;
+logic [31:0] i_reg, nxt_pc, pc_q, instruction_fe, imem_out;
 logic [31:0] branch_mux, rti_mux, pc_d;
 
 
@@ -23,10 +23,10 @@ placeholder_mem imem(
     .clk(clk),
     .rst_n(rst_n),
     .addr(pc_q),
-    .q(instruction_fe)
+    .q(imem_out)
 );
 
-
+assign instruction_fe = (^imem_out === 1'bX) ? 32'h00000013 : imem_out;
 
 
 //Flushing -> IFD needs to go to 0 and NOP. PC still needs to update to the correct value
@@ -60,7 +60,7 @@ end
 //TODO fix later
 //rst_n warmup 
 always_ff @(posedge clk) begin //TODO fix bug regarding rst_n asserted between clock cycles
-    warmup <= rst_n; 
+    warmup <= !rst_n; 
 end 
 
 
@@ -82,7 +82,7 @@ always_ff @(posedge clk, negedge rst_n) begin
     if(!rst_n) begin
         pc_q <= '0;
     end
-    else if (stall /*& ~interrupt*/) begin
+    else if (stall | flush | warmup /*& ~interrupt*/) begin
         pc_q <= pc_q;
     end
     else begin
