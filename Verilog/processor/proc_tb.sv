@@ -47,18 +47,6 @@ module proc_tb;
       expected_val   : 32'h00000000
     },
     '{
-      test_name      : "NOP #3",
-      instr_code     : 32'h00000013,  // NOP
-      reg_to_check   : 5'd0,
-      expected_val   : 32'h00000000
-    },
-    '{
-      test_name      : "NOP #4",
-      instr_code     : 32'h00000013,  // NOP
-      reg_to_check   : 5'd0,
-      expected_val   : 32'h00000000
-    },
-    '{
       test_name      : "ADD x3, x1, x2",
       instr_code     : 32'h002081B3,  // x3 = x1 + x2 => 1 + 2 = 3
       reg_to_check   : 5'd3,

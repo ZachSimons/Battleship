@@ -73,139 +73,6 @@ logic [31:0] wbdata_wb_dec;
 logic [4:0] rdreg1_dec_ex, rdreg2_dec_ex;
 logic [1:0] forward_control1, forward_control2;
 
-//`ifdef SIMULATION  // Only included during simulation
-
-typedef enum logic [7:0] {
-    INVALID,
-    LUI,
-    AUIPC,
-    JAL,
-    JALR,
-    BEQ,
-    BNE,
-    BLT,
-    BGE,
-    BLTU,
-    BGEU,
-    LB,
-    LH,
-    LW,
-    LBU,
-    LHU,
-    SB,
-    SH,
-    SW,
-    ADDI,
-    SLTI,
-    SLTIU,
-    XORI,
-    ORI,
-    ANDI,
-    SLLI,
-    SRLI,
-    SRAI,
-    ADD,
-    SUB,
-    SLL,
-    SLT,
-    SLTU,
-    XOR,
-    SRL,
-    SRA,
-    OR,
-    AND,
-    RTI,
-    RSI,
-    RDI,
-    SND,
-    UGS,
-    SAC,
-    LDR,
-    UAD
-} instr_t;
-
-instr_t decoded_instr_dbg;
-
-always_comb begin
-    unique case (inst_fe_dec[6:0])  // opcode
-        7'b0110111: decoded_instr_dbg = LUI;
-        7'b0010111: decoded_instr_dbg = AUIPC;
-        7'b1101111: decoded_instr_dbg = JAL;
-        7'b1100111: decoded_instr_dbg = JALR;
-        7'b1100011: begin
-            case (inst_fe_dec[14:12])
-                3'b000: decoded_instr_dbg = BEQ;
-                3'b001: decoded_instr_dbg = BNE;
-                3'b100: decoded_instr_dbg = BLT;
-                3'b101: decoded_instr_dbg = BGE;
-                3'b110: decoded_instr_dbg = BLTU;
-                3'b111: decoded_instr_dbg = BGEU;
-                default: decoded_instr_dbg = INVALID;
-            endcase
-        end
-        7'b0000011: begin
-            case (inst_fe_dec[14:12])
-                3'b000: decoded_instr_dbg = LB;
-                3'b001: decoded_instr_dbg = LH;
-                3'b010: decoded_instr_dbg = LW;
-                3'b100: decoded_instr_dbg = LBU;
-                3'b101: decoded_instr_dbg = LHU;
-                default: decoded_instr_dbg = INVALID;
-            endcase
-        end
-        7'b0100011: begin
-            case (inst_fe_dec[14:12])
-                3'b000: decoded_instr_dbg = SB;
-                3'b001: decoded_instr_dbg = SH;
-                3'b010: decoded_instr_dbg = SW;
-                default: decoded_instr_dbg = INVALID;
-            endcase
-        end
-        7'b0010011: begin
-            case (inst_fe_dec[14:12])
-                3'b000: decoded_instr_dbg = ADDI;
-                3'b010: decoded_instr_dbg = SLTI;
-                3'b011: decoded_instr_dbg = SLTIU;
-                3'b100: decoded_instr_dbg = XORI;
-                3'b110: decoded_instr_dbg = ORI;
-                3'b111: decoded_instr_dbg = ANDI;
-                3'b001: decoded_instr_dbg = SLLI;
-                3'b101: decoded_instr_dbg = (inst_fe_dec[31:25] == 7'b0000000) ? SRLI :
-                                            (inst_fe_dec[31:25] == 7'b0100000) ? SRAI :
-                                            INVALID;
-                default: decoded_instr_dbg = INVALID;
-            endcase
-        end
-        7'b0110011: begin
-            case ({inst_fe_dec[31:25], inst_fe_dec[14:12]})
-                {7'b0000000, 3'b000}: decoded_instr_dbg = ADD;
-                {7'b0100000, 3'b000}: decoded_instr_dbg = SUB;
-                {7'b0000000, 3'b001}: decoded_instr_dbg = SLL;
-                {7'b0000000, 3'b010}: decoded_instr_dbg = SLT;
-                {7'b0000000, 3'b011}: decoded_instr_dbg = SLTU;
-                {7'b0000000, 3'b100}: decoded_instr_dbg = XOR;
-                {7'b0000000, 3'b101}: decoded_instr_dbg = SRL;
-                {7'b0100000, 3'b101}: decoded_instr_dbg = SRA;
-                {7'b0000000, 3'b110}: decoded_instr_dbg = OR;
-                {7'b0000000, 3'b111}: decoded_instr_dbg = AND;
-                default: decoded_instr_dbg = INVALID;
-            endcase
-        end
-        // Custom opcodes
-        7'b0001000: decoded_instr_dbg = RTI;
-        7'b0001001: decoded_instr_dbg = RSI;
-        7'b0001010: decoded_instr_dbg = RDI;
-        7'b0001011: decoded_instr_dbg = SND;
-        7'b0101000: decoded_instr_dbg = UGS;
-        7'b0101001: decoded_instr_dbg = SAC;
-        7'b0101010: decoded_instr_dbg = LDR;
-        7'b0101011: decoded_instr_dbg = UAD;
-        default: decoded_instr_dbg = INVALID;
-    endcase
-end
-
-//`endif  // SIMULATION
-
 //////////////MODULE INSTANTIATION///////////////////
 fetch proc_fe(
     .clk(clk),
@@ -399,7 +266,138 @@ always_ff @(posedge clk, negedge rst_n) begin
 end
 
 
+//`ifdef SIMULATION  // Only included during simulation
 
+typedef enum logic [7:0] {
+    INVALID,
+    LUI,
+    AUIPC,
+    JAL,
+    JALR,
+    BEQ,
+    BNE,
+    BLT,
+    BGE,
+    BLTU,
+    BGEU,
+    LB,
+    LH,
+    LW,
+    LBU,
+    LHU,
+    SB,
+    SH,
+    SW,
+    ADDI,
+    SLTI,
+    SLTIU,
+    XORI,
+    ORI,
+    ANDI,
+    SLLI,
+    SRLI,
+    SRAI,
+    ADD,
+    SUB,
+    SLL,
+    SLT,
+    SLTU,
+    XOR,
+    SRL,
+    SRA,
+    OR,
+    AND,
+    RTI,
+    RSI,
+    RDI,
+    SND,
+    UGS,
+    SAC,
+    LDR,
+    UAD
+} instr_t;
+
+instr_t decoded_instr_dbg;
+
+always_comb begin
+    unique case (inst_fe_dec[6:0])  // opcode
+        7'b0110111: decoded_instr_dbg = LUI;
+        7'b0010111: decoded_instr_dbg = AUIPC;
+        7'b1101111: decoded_instr_dbg = JAL;
+        7'b1100111: decoded_instr_dbg = JALR;
+        7'b1100011: begin
+            case (inst_fe_dec[14:12])
+                3'b000: decoded_instr_dbg = BEQ;
+                3'b001: decoded_instr_dbg = BNE;
+                3'b100: decoded_instr_dbg = BLT;
+                3'b101: decoded_instr_dbg = BGE;
+                3'b110: decoded_instr_dbg = BLTU;
+                3'b111: decoded_instr_dbg = BGEU;
+                default: decoded_instr_dbg = INVALID;
+            endcase
+        end
+        7'b0000011: begin
+            case (inst_fe_dec[14:12])
+                3'b000: decoded_instr_dbg = LB;
+                3'b001: decoded_instr_dbg = LH;
+                3'b010: decoded_instr_dbg = LW;
+                3'b100: decoded_instr_dbg = LBU;
+                3'b101: decoded_instr_dbg = LHU;
+                default: decoded_instr_dbg = INVALID;
+            endcase
+        end
+        7'b0100011: begin
+            case (inst_fe_dec[14:12])
+                3'b000: decoded_instr_dbg = SB;
+                3'b001: decoded_instr_dbg = SH;
+                3'b010: decoded_instr_dbg = SW;
+                default: decoded_instr_dbg = INVALID;
+            endcase
+        end
+        7'b0010011: begin
+            case (inst_fe_dec[14:12])
+                3'b000: decoded_instr_dbg = ADDI;
+                3'b010: decoded_instr_dbg = SLTI;
+                3'b011: decoded_instr_dbg = SLTIU;
+                3'b100: decoded_instr_dbg = XORI;
+                3'b110: decoded_instr_dbg = ORI;
+                3'b111: decoded_instr_dbg = ANDI;
+                3'b001: decoded_instr_dbg = SLLI;
+                3'b101: decoded_instr_dbg = (inst_fe_dec[31:25] == 7'b0000000) ? SRLI :
+                                            (inst_fe_dec[31:25] == 7'b0100000) ? SRAI :
+                                            INVALID;
+                default: decoded_instr_dbg = INVALID;
+            endcase
+        end
+        7'b0110011: begin
+            case ({inst_fe_dec[31:25], inst_fe_dec[14:12]})
+                {7'b0000000, 3'b000}: decoded_instr_dbg = ADD;
+                {7'b0100000, 3'b000}: decoded_instr_dbg = SUB;
+                {7'b0000000, 3'b001}: decoded_instr_dbg = SLL;
+                {7'b0000000, 3'b010}: decoded_instr_dbg = SLT;
+                {7'b0000000, 3'b011}: decoded_instr_dbg = SLTU;
+                {7'b0000000, 3'b100}: decoded_instr_dbg = XOR;
+                {7'b0000000, 3'b101}: decoded_instr_dbg = SRL;
+                {7'b0100000, 3'b101}: decoded_instr_dbg = SRA;
+                {7'b0000000, 3'b110}: decoded_instr_dbg = OR;
+                {7'b0000000, 3'b111}: decoded_instr_dbg = AND;
+                default: decoded_instr_dbg = INVALID;
+            endcase
+        end
+        // Custom opcodes
+        7'b0001000: decoded_instr_dbg = RTI;
+        7'b0001001: decoded_instr_dbg = RSI;
+        7'b0001010: decoded_instr_dbg = RDI;
+        7'b0001011: decoded_instr_dbg = SND;
+        7'b0101000: decoded_instr_dbg = UGS;
+        7'b0101001: decoded_instr_dbg = SAC;
+        7'b0101010: decoded_instr_dbg = LDR;
+        7'b0101011: decoded_instr_dbg = UAD;
+        default: decoded_instr_dbg = INVALID;
+    endcase
+end
+
+//`endif  // SIMULATION
 
 
 
