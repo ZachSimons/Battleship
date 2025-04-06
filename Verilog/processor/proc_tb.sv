@@ -180,7 +180,7 @@ module proc_tb;
     },
     '{
       test_name      : "SW x11, 6(x2)",
-      instr_code     : 32'h00b12423,
+      instr_code     : 32'h00b12323,
       reg_to_check   : 5'd0,
       expected_val   : 32'h00000000 
     },

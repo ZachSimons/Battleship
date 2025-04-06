@@ -42,7 +42,7 @@ module execute(
 );
 
     logic [31:0] alu_inB_temp, alu_inB, alu_inA, branch_base, alu_result_exe, alu_output;
-    
+    logic [31:0] baseB, write_data;
 
     assign alu_inB_temp = data_sel_exe ? imm : reg2;
     assign branch_base = jalr_exe ? reg1 : next_pc_exe;
@@ -51,10 +51,13 @@ module execute(
     // Fowarding
     assign alu_inA = (forward_control1 == 2'b01) ? wbdata_wb_ex :
                      (forward_control1 == 2'b10) ? alu_result_mem : reg1;
-    assign alu_inB = (forward_control2 == 2'b01) ? wbdata_wb_ex :
+    assign baseB =   (forward_control2 == 2'b01) ? wbdata_wb_ex :
                      (forward_control2 == 2'b10) ? alu_result_mem : alu_inB_temp;
-    // assign alu_inA = reg1;
-    // assign alu_inB = alu_inB_temp;
+
+    assign write_data = (forward_control2 == 2'b01) ? wbdata_wb_ex :
+                        (forward_control2 == 2'b10) ? alu_result_mem : reg2;
+
+    assign alu_inB = mem_wrt_en_exe ? alu_inB_temp : baseB;
 
     assign alu_result_exe = lui_ex ? alu_inB : alu_output;
 
@@ -77,7 +80,7 @@ module execute(
             rdi_mem <= 0;
         end else if(~stall_mem) begin
             next_pc_mem <= next_pc_exe;
-            write_data_mem <= reg2;
+            write_data_mem <= write_data;
             alu_result_mem <= alu_result_exe;
             wb_sel_mem <= wb_sel_exe;
             read_width_mem <= read_width_exe;

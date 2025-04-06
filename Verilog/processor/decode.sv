@@ -49,7 +49,7 @@ logic [31:0] imm[4:0];
 logic random, lui, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi, auipc, imm_sel, fluhaz, ignore_fwd;
 logic [1:0] wb_sel, width, type_sel;
 logic [3:0] alu_op, bj_inst;
-logic [31:0] read_data2, imm_out;
+logic [31:0] read_data2, read_data1, imm_out;
 
 //sign extensions
 assign imm[0]= {{20{instruction[31]}},instruction[31:20]};

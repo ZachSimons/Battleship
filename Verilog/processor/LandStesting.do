@@ -1,6 +1,5 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /proc_tb/clk
 add wave -noupdate /proc_tb/dut/rst_n
 add wave -noupdate /proc_tb/dut/decoded_instr_dbg
 add wave -noupdate -radix decimal /proc_tb/dut/proc_fe/nxt_pc
@@ -16,6 +15,7 @@ add wave -noupdate /proc_tb/dut/stallmem
 add wave -noupdate /proc_tb/dut/hazard
 add wave -noupdate /proc_tb/dut/proc_de/REGFILE/regfile
 add wave -noupdate -divider Memory
+add wave -noupdate /proc_tb/clk
 add wave -noupdate /proc_tb/dut/proc_mem/mem_unsigned_mem
 add wave -noupdate /proc_tb/dut/proc_mem/mem_rd_en_mem
 add wave -noupdate /proc_tb/dut/proc_mem/mem_wrt_en_mem
@@ -23,16 +23,58 @@ add wave -noupdate /proc_tb/dut/proc_mem/width_mem
 add wave -noupdate /proc_tb/dut/proc_mem/reg2_data_mem
 add wave -noupdate /proc_tb/dut/proc_mem/alu_mem
 add wave -noupdate /proc_tb/dut/proc_mem/wrapper_rd_data
+add wave -noupdate /proc_tb/dut/proc_mem/mem_error
+add wave -noupdate /proc_tb/dut/proc_mem/wrt_reg_wb
+add wave -noupdate /proc_tb/dut/proc_mem/read_data_wb
+add wave -noupdate /proc_tb/dut/proc_mem/wb_sel_wb
+add wave -noupdate /proc_tb/dut/proc_mem/random_mem
+add wave -noupdate /proc_tb/dut/proc_mem/rdi_mem
+add wave -noupdate /proc_tb/dut/proc_mem/random_mux
+add wave -noupdate /proc_tb/dut/proc_mem/rdi_mux
+add wave -noupdate /proc_tb/dut/wbsel_mem_wb
+add wave -noupdate /proc_tb/dut/wrtreg_wb_dec
+add wave -noupdate /proc_tb/dut/wbdata_wb_dec
 add wave -noupdate -divider Decode
+add wave -noupdate /proc_tb/dut/proc_de/auipc
+add wave -noupdate /proc_tb/dut/proc_de/fluhaz
+add wave -noupdate /proc_tb/dut/proc_de/read_data1
 add wave -noupdate /proc_tb/dut/proc_de/read_data1_ex
 add wave -noupdate /proc_tb/dut/proc_de/read_data2_ex
+add wave -noupdate /proc_tb/dut/proc_de/imm_out_ex
+add wave -noupdate -expand /proc_tb/dut/proc_de/REGFILE/regfile
+add wave -noupdate /proc_tb/dut/proc_de/read_register1_ex
+add wave -noupdate /proc_tb/dut/proc_de/read_register2_ex
+add wave -noupdate /proc_tb/dut/proc_de/read_register1_if_id
+add wave -noupdate /proc_tb/dut/proc_de/read_register2_if_id
+add wave -noupdate /proc_tb/dut/proc_de/src_register_if_id
 add wave -noupdate -divider Execute
+add wave -noupdate /proc_tb/dut/proc_ex/lui_ex
+add wave -noupdate /proc_tb/dut/proc_ex/alu_inB
+add wave -noupdate /proc_tb/dut/proc_ex/alu_inA
 add wave -noupdate /proc_tb/dut/aluresult_ex_mem
 add wave -noupdate /proc_tb/dut/memwrtdata_ex_mem
+add wave -noupdate /proc_tb/dut/proc_ex/EXE_ALU/inA
+add wave -noupdate /proc_tb/dut/proc_ex/EXE_ALU/inB
+add wave -noupdate /proc_tb/dut/proc_ex/EXE_ALU/alu_op
+add wave -noupdate /proc_tb/dut/proc_ex/EXE_ALU/option_bit
+add wave -noupdate /proc_tb/dut/proc_ex/EXE_ALU/out
+add wave -noupdate /proc_tb/dut/proc_ex/forward_control1
+add wave -noupdate /proc_tb/dut/proc_ex/forward_control2
+add wave -noupdate /proc_tb/dut/proc_ex/reg2
+add wave -noupdate /proc_tb/dut/proc_ex/wbdata_wb_ex
+add wave -noupdate /proc_tb/dut/proc_ex/alu_result_mem
+add wave -noupdate /proc_tb/dut/proc_ex/alu_inB_temp
+add wave -noupdate -divider hazard
+add wave -noupdate /proc_tb/dut/proc_hazard/memread_id_ex
+add wave -noupdate /proc_tb/dut/proc_hazard/hazard
+add wave -noupdate /proc_tb/dut/proc_hazard/stall_mem
+add wave -noupdate /proc_tb/dut/proc_hazard/post_flush
+add wave -noupdate /proc_tb/dut/proc_hazard/stall_mem_latch
+add wave -noupdate /proc_tb/dut/proc_hazard/stall_mem_curr
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {308859 ps} 0}
+WaveRestoreCursors {{Cursor 1} {452174 ps} 0}
 quietly wave cursor active 1
-configure wave -namecolwidth 267
+configure wave -namecolwidth 314
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
@@ -46,4 +88,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {239363 ps} {366955 ps}
+WaveRestoreZoom {0 ps} {478800 ps}

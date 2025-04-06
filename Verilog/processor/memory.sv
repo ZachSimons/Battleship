@@ -46,7 +46,7 @@ data_memory_wrapper dmem (
 );
 
 /////////////////PIPELINE STAGE FF///////////////////
-always_ff @(posedge clk, negedge rst_n) begin
+always_ff @(posedge clk) begin
     if(!rst_n) begin
         reg_wrt_en_wb <= '0;
         wb_sel_wb <= '0;
@@ -70,11 +70,11 @@ end
 ////////////////COMBINATIONAL LOGIC//////////////////
 //Stage Muxes
 assign random_mux = random_mem ? lfsr : wrapper_rd_data;
-assign rdi_mux = rdi_mem ? random_mux : rdi_data; 
+assign rdi_mux = rdi_mem ? rdi_data : random_mux; 
 
 
 ////////////Linear Feedback Register/////////////////
-always_ff @(posedge clk, negedge rst_n) begin
+always_ff @(posedge clk) begin
     if(~rst_n) begin
         lfsr16 <= 16'hb8ab;
     end
