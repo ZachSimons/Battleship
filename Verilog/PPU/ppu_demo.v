@@ -27,6 +27,16 @@ module ppu_demo(
 
 wire rst_n;
 wire vga_clk;
+wire receive;
+reg key_3_prev;
+reg key_2_prev;
+reg press_count;
+wire [16:0] ppu_cmds [1:0];
+
+assign receive = key_3_prev & ~KEY[3];
+assign next_command = key_2_prev & ~KEY[2];
+assign ppu_cmds[0] = {1'b1, 7'h07, 2'b11, 2'b00, 3'b000, 1'b0, 1'b0};
+assign ppu_cmds[1] = {1'b1, 7'h08, 2'b11, 2'b00, 3'b001, 1'b0, 1'b0};
 
 vga_pll pll (.refclk(CLOCK_50), .rst(1'b0), .outclk_0(vga_clk));
 
@@ -40,7 +50,30 @@ PPU ppu_mod (
 		.VGA_BLANK_N(VGA_BLANK_N),
 		.VGA_HS(VGA_HS),
 		.VGA_SYNC_N(VGA_SYNC_N),
-		.VGA_VS(VGA_VS));
+		.VGA_VS(VGA_VS),
+		.receive(receive),
+		.board(ppu_cmds[press_count][16]),
+        .square_update(ppu_cmds[press_count][15:9]),
+		.square_state(ppu_cmds[press_count][8:7]),
+		.ship_type(ppu_cmds[press_count][6:5]),
+		.ship_section(ppu_cmds[press_count][4:2]),
+        .vert(ppu_cmds[press_count][1]),
+		.square_sel(ppu_cmds[press_count][0]));
+
+always @(posedge vga_clk, negedge rst_n) begin
+	if (!rst_n) begin
+		key_3_prev <= 1;
+		key_2_prev <= 1;
+		press_count <= 0;
+	end
+	else if (next_command) begin
+		press_count <= press_count + 1;
+	end
+	else begin
+		key_2_prev <= KEY[2];
+		key_3_prev <= KEY[3];
+	end
+end
 
 assign rst_n = KEY[0];
 
