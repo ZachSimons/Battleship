@@ -1,14 +1,14 @@
-Analysis & Synthesis Status : Successful - Sat Apr  5 23:21:15 2025
+Analysis & Synthesis Status : Successful - Sun Apr  6 18:48:23 2025
 Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 Revision Name : ppu_demo
 Top-level Entity Name : ppu_demo
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 103
+Total registers : 601
 Total pins : 37
 Total virtual pins : 0
-Total block memory bits : 243,920
-Total DSP Blocks : 0
+Total block memory bits : 279,688
+Total DSP Blocks : 4
 Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0
 Total HSSI TX PCSs : 0
