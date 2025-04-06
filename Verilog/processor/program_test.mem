@@ -21,7 +21,6 @@ abc0e313   // ORI x6, x1, 0xABC (x6 = 1 | 0xABC = 0xABC)
 0020E4B3   // OR x9, x1, x2      (x9 = 1 | 2 = 3)
 0020F533   // AND x10, x1, x2    (x10 = 1 & 2 = 0)
 deadc5b7   // LUI x11, DEADC
-00000013   // NOP
 eef58593   // ADDI x11, x11, EEF
 00b10123   // SB x11, 2(x2)          
 00b11223   // SH x11, 4(x2)

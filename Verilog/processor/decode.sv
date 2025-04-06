@@ -38,7 +38,6 @@ module decode(
     output logic [4:0] read_register2_ex,
     output logic [4:0] read_register1_if_id,
     output logic [4:0] read_register2_if_id,
-    output logic [4:0] src_register_if_id,
     output logic ignore_fwd_ex,
     output logic lui_ex
 );
@@ -46,6 +45,7 @@ module decode(
 
 logic [31:0] src_data1;
 logic [31:0] imm[4:0];
+logic [4:0] write_reg_dec; 
 logic random, lui, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi, auipc, imm_sel, fluhaz, ignore_fwd;
 logic [1:0] wb_sel, width, type_sel;
 logic [3:0] alu_op, bj_inst;
@@ -66,7 +66,7 @@ assign read_data1_dec = read_data1;
 
 assign read_register1_if_id = instruction[19:15];
 assign read_register2_if_id = instruction[24:20];
-assign src_register_if_id = instruction[11:7];
+assign write_reg_dec = instruction[11:7];
 
 assign fluhaz = hazard | flush;
 
@@ -102,7 +102,7 @@ always_ff @(posedge clk) begin
         read_data2_ex <= ~fluhaz ? read_data2 : 0;
         imm_out_ex <= ~fluhaz ? imm_out : 0;
         next_pc_ex <= ~fluhaz ? next_pc : 0;
-        write_reg_ex <= ~fluhaz ? src_register_if_id : 0;
+        write_reg_ex <= ~fluhaz ? write_reg_dec : 0;
         random_ex <= ~fluhaz ? random : 0;
         write_en_ex <= ~fluhaz ? write_en : 0;
         wb_sel_ex <= ~fluhaz ? wb_sel : 0;
@@ -121,7 +121,7 @@ always_ff @(posedge clk) begin
         read_register2_ex <= ~fluhaz ? read_register2_if_id  : 0;
         ignore_fwd_ex <= ~fluhaz ? ignore_fwd : 0;
         lui_ex <= ~fluhaz ? lui : 0;
-        instruction_ex <= ~fluhaz ? instruction : '0;
+        instruction_ex <= ~fluhaz ? instruction : 32'h00000013;
     end
 end
 

@@ -12,10 +12,12 @@ module fetch(
     output logic [31:0] pc_dec
 );
 //////////////NET INSTANTIATION/////////////////////
-logic warmup; //Doesn't have to be a latched signal 
+logic warmup, stall_mem1; //Doesn't have to be a latched signal 
 logic [31:0] i_reg, nxt_pc, pc_q, instruction_fe, imem_out;
 logic [31:0] branch_mux, rti_mux, pc_d;
 
+
+//Use 0x00100073 as halt
 
 //////////////MODULE INSTANTIATION///////////////////
 //Make byte addressable (not as complicated as d-memory)
@@ -26,7 +28,12 @@ placeholder_mem imem(
     .q(imem_out)
 );
 
-assign instruction_fe = (^imem_out === 1'bX) ? 32'h00000013 : imem_out;
+always_ff @(posedge clk) begin
+    stall_mem1 <= stall;
+end
+
+assign instruction_fe = (stall | stall_mem1) ? instruction_fe : 
+                        (^imem_out === 1'bX) ? 32'h00000013 : imem_out;
 
 
 //Flushing -> IFD needs to go to 0 and NOP. PC still needs to update to the correct value

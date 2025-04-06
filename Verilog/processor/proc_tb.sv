@@ -155,12 +155,6 @@ module proc_tb;
       expected_val   : 32'hDEADC000   
     },
     '{
-      test_name      : "NOP #2",
-      instr_code     : 32'h00000013,  // NOP (ADDI x0,x0,0)
-      reg_to_check   : 5'd0,
-      expected_val   : 32'h0         // x0 always 0
-    },
-    '{
       test_name      : "ADDI x11, x11, 0xEEF",
       instr_code     : 32'heef58593, 
       reg_to_check   : 5'd11,
@@ -248,8 +242,9 @@ module proc_tb;
     for (int i = 0; i < $size(test_list); i++) begin
       repeat (1) @(posedge clk);
 
-      if ((dut.instruction_ex_mem[6:0] == 7'b0100011) || (dut.instruction_ex_mem[6:0] == 7'b0000011)) @(posedge clk);
+      if ((dut.instruction_ex_mem[6:0] == 7'b0000011)) repeat(2) @(posedge clk);
 
+      if ((dut.instruction_ex_mem == 32'h00000013)) @(posedge clk);
       // Now check the register
       #1;
       check_register(
@@ -258,7 +253,7 @@ module proc_tb;
         test_list[i].test_name
       );
     end
-  
+    repeat(10) @(posedge clk);
     $display("Finished stepping through all instructions!");
     $stop;
   end

@@ -17,11 +17,13 @@ module proc(
 //Instantate all modules (DONE)
 //Connect all modules up (DONE)
 //Determine processor inputs (DONE)
-//Syntheise memory and fetch stages 
-//Implement stalling for D-mem & I-mem 
-//Implement hazards for pipeline
-//Test with basic instructions
-//Implement forwarding (once processor is working)
+//Syntheise memory and fetch stages (DONE)
+//Implement stalling for D-mem & I-mem (DONE)
+//Implement hazards for pipeline (DONE)
+//Test with basic instructions (DONE)
+//Implement forwarding (once processor is working) (DONE)
+
+//TESTING PROCESSOR!!!!
 
 //////////////NET INSTANTIATION/////////////////////
 //Signal naming convention signalname_comingfrom_goingto example: nxtpc_fe_dec
@@ -36,7 +38,7 @@ logic interrupt_latch, interrupt;
 
 //Flushing, stalling, and hazards
 logic flush, pfstall, stallmem, hazard, hazard_stall;
-logic [4:0] rdreg1_if_id, rdreg2_if_id, srcreg_if_id;
+logic [4:0] rdreg1_if_id, rdreg2_if_id;
 
 //Fetch
 logic rti_de_fe, rsi_de_fe, branch_ex_fe;
@@ -129,7 +131,6 @@ decode proc_de(
     .read_register2_ex(rdreg2_dec_ex),
     .read_register1_if_id(rdreg1_if_id),
     .read_register2_if_id(rdreg2_if_id),
-    .src_register_if_id(srcreg_if_id),
     .ignore_fwd_ex(ignore_fwd_ex),
     .lui_ex(lui_ex)
 );
@@ -227,7 +228,7 @@ hazard proc_hazard(
     .memwrite_ex_mem(memwrten_ex_mem),
     .src_reg1_if_id(rdreg1_if_id),
     .src_reg2_if_id(rdreg2_if_id),
-    .dst_reg_id_ex(srcreg_if_id),
+    .dst_reg_id_ex(wrtreg_dec_ex),
     .hazard(hazard),
     .stall_mem(hazard_stall)
 );
