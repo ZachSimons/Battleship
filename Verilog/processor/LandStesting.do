@@ -41,12 +41,11 @@ add wave -noupdate /proc_tb/dut/proc_de/read_data1
 add wave -noupdate /proc_tb/dut/proc_de/read_data1_ex
 add wave -noupdate /proc_tb/dut/proc_de/read_data2_ex
 add wave -noupdate /proc_tb/dut/proc_de/imm_out_ex
-add wave -noupdate -expand /proc_tb/dut/proc_de/REGFILE/regfile
+add wave -noupdate /proc_tb/dut/proc_de/REGFILE/regfile
 add wave -noupdate /proc_tb/dut/proc_de/read_register1_ex
 add wave -noupdate /proc_tb/dut/proc_de/read_register2_ex
 add wave -noupdate /proc_tb/dut/proc_de/read_register1_if_id
 add wave -noupdate /proc_tb/dut/proc_de/read_register2_if_id
-add wave -noupdate /proc_tb/dut/proc_de/src_register_if_id
 add wave -noupdate -divider Execute
 add wave -noupdate /proc_tb/dut/proc_ex/lui_ex
 add wave -noupdate /proc_tb/dut/proc_ex/alu_inB
@@ -71,8 +70,11 @@ add wave -noupdate /proc_tb/dut/proc_hazard/stall_mem
 add wave -noupdate /proc_tb/dut/proc_hazard/post_flush
 add wave -noupdate /proc_tb/dut/proc_hazard/stall_mem_latch
 add wave -noupdate /proc_tb/dut/proc_hazard/stall_mem_curr
+add wave -noupdate /proc_tb/dut/proc_hazard/src_reg1_if_id
+add wave -noupdate /proc_tb/dut/proc_hazard/src_reg2_if_id
+add wave -noupdate /proc_tb/dut/proc_hazard/dst_reg_id_ex
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {452174 ps} 0}
+WaveRestoreCursors {{Cursor 1} {13838 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 314
 configure wave -valuecolwidth 100
