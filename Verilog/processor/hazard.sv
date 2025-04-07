@@ -7,6 +7,7 @@ module hazard (
     input [4:0] src_reg1_if_id,
     input [4:0] src_reg2_if_id,
     input [4:0] dst_reg_id_ex,
+    input flush_stall,
     output hazard,
     output logic stall_mem
 );
@@ -37,7 +38,7 @@ always_ff @(posedge clk) begin
 end
 
 assign stall_mem = |stall_mem_curr;
-assign temp = (memread_id_ex); //load, write, interrupt, branch, rti return --- full pipeline stall ---
+assign temp = (memread_id_ex | flush_stall); //load, write, interrupt, branch, rti return --- full pipeline stall ---
 
 
 

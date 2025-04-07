@@ -21,7 +21,16 @@ module proc_tb;
     logic [31:0] expected_val;
   } test_info_t;
 
-  test_info_t test_list[] = '{
+  test_info_t test_list_jumps[] = '{
+
+
+
+
+
+  };
+
+
+  test_info_t test_list_basic_inst[] = '{
     '{
       test_name      : "ADDI x1, x1, 1",
       instr_code     : 32'h00100093,  // sets x1 = x1 + 1
@@ -236,7 +245,7 @@ module proc_tb;
 
     #20;
     rst_n = 1;
-    repeat (7) @(posedge clk);
+    repeat (8) @(posedge clk);
 
     // For each instruction in test_list:
     for (int i = 0; i < $size(test_list); i++) begin
