@@ -93,7 +93,7 @@ assign width = ((opcode==7'b0000011 && (sel==3'b000 || sel==3'b100)) || (opcode=
 
 //alu operation
 assign alu_op = (opcode == 7'b0110011) ? {instruction[30],instruction[14:12]} : 
-                (opcode == 7'b0000011 || opcode == 7'b0100011) ? '0  : {1'b0,instruction[14:12]};
+                (opcode == 7'b0000011 || opcode == 7'b0100011 || opcode == 7'b0010111) ? '0  : {1'b0,instruction[14:12]};
 
 //branch, jump or not
 assign bj_inst = (opcode==7'b1101111 || opcode==7'b1100111) ? 4'b1011 :
