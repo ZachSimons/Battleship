@@ -14,6 +14,7 @@ module decode(
     output logic [31:0] read_data2_ex,
     output logic [31:0] imm_out_ex,
     output logic [31:0] next_pc_ex,
+    output logic [31:0] curr_pc_ex,
     output logic [4:0] write_reg_ex,
     output logic [31:0] read_data1_dec,
     output logic [31:0] instruction_ex,
@@ -78,6 +79,7 @@ always_ff @(posedge clk) begin
         read_data2_ex <= 0;
         imm_out_ex <= 0;
         next_pc_ex <= 0;
+        curr_pc_ex <= 0;
         write_reg_ex <= 0;
         random_ex <= 0;
         write_en_ex <= 0;
@@ -103,6 +105,7 @@ always_ff @(posedge clk) begin
         read_data2_ex <= ~fluhaz ? read_data2 : 0;
         imm_out_ex <= ~fluhaz ? imm_out : 0;
         next_pc_ex <= ~fluhaz ? next_pc : 0;
+        curr_pc_ex <= ~fluhaz ? curr_pc : 0;
         write_reg_ex <= ~fluhaz ? write_reg_dec : 0;
         random_ex <= ~fluhaz ? random : 0;
         write_en_ex <= ~fluhaz ? write_en : 0;

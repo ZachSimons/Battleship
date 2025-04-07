@@ -51,7 +51,7 @@ logic random_dec_ex, regwrten_dec_ex, unsigned_dec_ex, memrden_dec_ex, jalr_dec_
 logic [1:0] wbsel_dec_ex, width_dec_ex;
 logic [3:0] aluop_dec_ex, bjinst_dec_ex;
 logic [4:0] wrtreg_dec_ex;
-logic [31:0] rd1_dec_ex, rd2_dec_ex, nxtpc_dec_ex, immout_dec_ex, instruction_dec_ex;
+logic [31:0] rd1_dec_ex, rd2_dec_ex, nxtpc_dec_ex, immout_dec_ex, instruction_dec_ex, currpc_dec_ex;
 
 
 //Execute
@@ -108,6 +108,7 @@ decode proc_de(
     .read_data2_ex(rd2_dec_ex),
     .imm_out_ex(immout_dec_ex),
     .next_pc_ex(nxtpc_dec_ex),
+    .curr_pc_ex(currpc_dec_ex),
     .write_reg_ex(wrtreg_dec_ex),
     .read_data1_dec(interface_data), //TODO to external Devices
     .instruction_ex(instruction_dec_ex),              //
@@ -141,6 +142,7 @@ execute proc_ex(
     .clk(clk),
     .rst_n(rst_n),
     .next_pc_exe(nxtpc_dec_ex),
+    .curr_pc_exe(currpc_dec_ex),
     .reg1(rd1_dec_ex),
     .reg2(rd2_dec_ex),
     .lui_ex(lui_ex),

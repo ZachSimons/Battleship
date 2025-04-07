@@ -2,6 +2,7 @@ module execute(
     input                   clk,
     input                   rst_n,
     input           [31:0]  next_pc_exe,
+    input           [31:0]  curr_pc_exe,
     input           [31:0]  reg1,
     input           [31:0]  reg2,
     input           [31:0]  imm,
@@ -45,7 +46,7 @@ module execute(
     logic [31:0] baseB, write_data;
 
     assign alu_inB_temp = data_sel_exe ? imm : reg2;
-    assign branch_base = jalr_exe ? reg1 : next_pc_exe;
+    assign branch_base = jalr_exe ? reg1 : curr_pc_exe;
     assign branch_pc = branch_base + imm;
 
     // Fowarding
