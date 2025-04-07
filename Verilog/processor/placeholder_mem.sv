@@ -11,7 +11,7 @@ logic [31:0] addr_q;
 logic read_en_ff;
 
 initial begin
-    $readmemh("program_test.mem", bram);
+    $readmemh("jump_test.hex", bram);
 end
 
 always_ff @(posedge clk) begin

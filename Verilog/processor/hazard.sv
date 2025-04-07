@@ -27,7 +27,7 @@ always_ff @(posedge clk) begin
         stall_mem_curr <= 0;
         stall_mem_latch <= 0;
     end 
-    else if(memread_id_ex & ~stall_mem_latch) begin
+    else if(temp & ~stall_mem_latch) begin
         stall_mem_curr <= 2;
         stall_mem_latch <= 1;
     end

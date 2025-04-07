@@ -82,12 +82,12 @@ always_ff @(posedge clk) begin
         pc_curr_dec <= 0;
     end
     else if (stall) begin
-        pc_next_dec_q0 <= 0;
-        pc_curr_dec_q0 <= 0;
-        pc_next_dec_q1 <= 0;
-        pc_curr_dec_q1 <= 0;
-        pc_next_dec <= pc_next_dec;
-        pc_curr_dec <= pc_curr_dec;
+        pc_next_dec_q0 <= nxt_pc;
+        pc_curr_dec_q0 <= pc_q;
+        pc_next_dec_q1 <= pc_next_dec_q0;
+        pc_curr_dec_q1 <= pc_curr_dec_q0;
+        pc_next_dec <= 0;
+        pc_curr_dec <= 0;
     end
     else begin
         pc_next_dec_q0 <= nxt_pc;
@@ -127,7 +127,7 @@ always_ff @(posedge clk) begin
     if(!rst_n) begin
         pc_q <= '0;
     end
-    else if (stall | flush | warmup/*& ~interrupt*/) begin
+    else if (stall | warmup/*& ~interrupt*/) begin
         pc_q <= pc_q;
     end
     else begin

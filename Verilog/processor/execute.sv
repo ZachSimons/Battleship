@@ -44,10 +44,12 @@ module execute(
 
     logic [31:0] alu_inB_temp, alu_inB, alu_inA, branch_base, alu_result_exe, alu_output;
     logic [31:0] baseB, write_data;
+    logic [31:0] immx2;
 
     assign alu_inB_temp = data_sel_exe ? imm : reg2;
     assign branch_base = jalr_exe ? reg1 : curr_pc_exe;
-    assign branch_pc = branch_base + imm;
+    assign immx2 = imm << 1;
+    assign branch_pc = branch_base + immx2;
 
     // Fowarding
     assign alu_inA = (forward_control1 == 2'b01) ? wbdata_wb_ex :

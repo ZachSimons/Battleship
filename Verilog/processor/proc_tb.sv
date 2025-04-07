@@ -12,7 +12,9 @@ module proc_tb;
   logic sac, snd, uad, ppu_send;
   logic [31:0] interface_data;
 
+
   int test_index;
+  
 
   typedef struct {
     string  test_name;
@@ -21,13 +23,80 @@ module proc_tb;
     logic [31:0] expected_val;
   } test_info_t;
 
-  // test_info_t test_list_jumps[] = '{
-
-
-
-
-
-  // };
+  test_info_t test_list_jumps[] = '{
+    '{
+      test_name      : "addi x1, x0, 100",
+      instr_code     : 32'h06400093,
+      reg_to_check   : 5'd1,
+      expected_val   : 32'd100  
+    },
+    '{
+      test_name      : "addi x2, x0, 100",
+      instr_code     : 32'h06400093,
+      reg_to_check   : 5'd2,
+      expected_val   : 32'd100  
+    },
+    '{
+      test_name      : "jal x30, 12",
+      instr_code     : 32'h00c00f6f,
+      reg_to_check   : 5'd30,
+      expected_val   : 32'd12  
+    },
+    '{
+      test_name      : "addi x1, x1, 100",
+      instr_code     : 32'h06408093,
+      reg_to_check   : 5'd1,
+      expected_val   : 32'd200 
+    },
+    '{
+      test_name      : "addi x2, x0, 50",
+      instr_code     : 32'h06408093,
+      reg_to_check   : 5'd2,
+      expected_val   : 32'd50 
+    },
+    '{
+      test_name      : "addi x2, x0, 50",
+      instr_code     : 32'h06408093,
+      reg_to_check   : 5'd2,
+      expected_val   : 32'd50 
+    },
+    '{
+      test_name      : "jalr x0, x30, 0",
+      instr_code     : 32'h000f0067,
+      reg_to_check   : 5'd0,
+      expected_val   : 32'd0 
+    },
+    '{
+      test_name      : "sub x1, x1, x2",
+      instr_code     : 32'h402080b3,
+      reg_to_check   : 5'd1,
+      expected_val   : 32'd150 
+    },
+    '{
+      test_name      : "jal x0 16",
+      instr_code     : 32'h0100006f,
+      reg_to_check   : 5'd0,
+      expected_val   : 32'd0
+    },
+    '{
+      test_name      : "ADDI x11, x11, 0xEF",
+      instr_code     : 32'h0ef58593,
+      reg_to_check   : 5'd11,
+      expected_val   : 32'h000000EF
+    },
+    '{
+      test_name      : "//SW  x11, 2(x3)",
+      instr_code     : 32'h00b1a123,
+      reg_to_check   : 5'd0,
+      expected_val   : 32'h0
+    },
+    '{
+      test_name      : "//LW x5, 2(x3)",
+      instr_code     : 32'h0021a283,
+      reg_to_check   : 5'd5,
+      expected_val   : 32'h000000EF
+    }
+  };
 
 
   test_info_t test_list[] = '{
@@ -255,12 +324,14 @@ module proc_tb;
     accelerator_data = 0;
     interrupt_source_data = 32'hDEADBEEF;
 
+    
+
     #20;
     rst_n = 1;
     repeat (7) @(posedge clk);
 
     // For each instruction in test_list:
-    for (int i = 0; i < $size(test_list); i++) begin
+    for (int i = 0; i < $size(test_list_jumps); i++) begin
       repeat (1) @(posedge clk);
 
       if ((dut.instruction_ex_mem[6:0] == 7'b0000011)) repeat(2) @(posedge clk);
@@ -269,9 +340,9 @@ module proc_tb;
       // Now check the register
       #1;
       check_register(
-        test_list[i].reg_to_check, 
-        test_list[i].expected_val, 
-        test_list[i].test_name
+        test_list_jumps[i].reg_to_check, 
+        test_list_jumps[i].expected_val, 
+        test_list_jumps[i].test_name
       );
     end
     repeat(10) @(posedge clk);
