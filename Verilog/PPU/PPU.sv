@@ -1,4 +1,5 @@
-module PPU (rst_n, 
+module PPU (rst_n,
+            sys_clk,
             vga_clk, 
             r, 
             g, 
@@ -17,7 +18,7 @@ module PPU (rst_n,
             vert,
             square_sel);
 
-input rst_n, vga_clk;
+input rst_n, sys_clk, vga_clk;
 input receive;
 input board;
 input [6:0] square_update;
@@ -68,7 +69,7 @@ logic in_game_bound;
 // updating info of each square
 // take in new info when receive is asserted
 logic [8:0] square_info [0:1][0:99];
-always_ff @(posedge vga_clk, negedge rst_n) begin
+always_ff @(posedge sys_clk, negedge rst_n) begin
     if (!rst_n) begin
         square_info <= '{default:9'b0};
     end

@@ -102,6 +102,7 @@ assign ppu_cmds[35] = {1'b0, 7'd76, 2'b10, 2'b11, 3'd3, 1'b1, 1'b0}; // deselect
 vga_pll pll (.refclk(CLOCK_50), .rst(1'b0), .outclk_0(vga_clk));
 
 PPU ppu_mod (
+		.sys_clk(CLOCK_50),
 		.vga_clk(vga_clk),
 		.VGA_CLK(VGA_CLK),
 		.rst_n(rst_n),
@@ -121,7 +122,7 @@ PPU ppu_mod (
         .vert(ppu_cmds[cmd_index][1]),
 		.square_sel(ppu_cmds[cmd_index][0]));
 
-always @(posedge vga_clk, negedge rst_n) begin
+always @(posedge CLOCK_50, negedge rst_n) begin
 	if (!rst_n) begin
 		cmd_index <= 0;
 	end
@@ -130,7 +131,7 @@ always @(posedge vga_clk, negedge rst_n) begin
 	end
 end
 
-always @(posedge vga_clk, negedge rst_n) begin
+always @(posedge CLOCK_50, negedge rst_n) begin
 	if (!rst_n) begin
 		key_3_prev_1 <= 1;
 		key_3_prev_2 <= 1;
