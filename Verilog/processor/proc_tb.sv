@@ -32,10 +32,16 @@ module proc_tb;
 
   test_info_t test_list[] = '{
     '{
-      test_name      : "AUIPC x25, 0x12345 (PC=2)",
-      instr_code     : 32'h12345c97, // AUIPC x5, 0x12345 (opcode=0x17)
+      test_name      : "ORI x24, x24, 0xF",
+      instr_code     : 32'h00fc6c13,
+      reg_to_check   : 5'd24,
+      expected_val   : 32'h0000000F  
+    },
+    '{
+      test_name      : "AUIPC x25, 0x12345 (PC=4)",
+      instr_code     : 32'h12345c97, // AUIPC x25, 0x12345 (opcode=0x17)
       reg_to_check   : 5'd25,
-      expected_val   : 32'h12345000  // Expected: 2 + (0x12345 << 12) = 0x12345002
+      expected_val   : 32'h12345004  // Expected: 4 + (0x12345 << 12) = 0x12345004
     },
     '{
       test_name      : "ADDI x1, x1, 1",

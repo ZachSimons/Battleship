@@ -13,9 +13,11 @@ module fetch(
     output logic [31:0] pc_curr_dec
 );
 //////////////NET INSTANTIATION/////////////////////
-logic warmup, stall_mem1; //Doesn't have to be a latched signal 
+logic stall_mem1; //Doesn't have to be a latched signal 
+logic [1:0] warmup;
 logic [31:0] i_reg, nxt_pc, pc_q, instruction_fe, imem_out;
 logic [31:0] branch_mux, rti_mux, pc_d;
+logic [31:0] pc_next_dec_q0, pc_next_dec_q1, pc_curr_dec_q0, pc_curr_dec_q1;
 
 
 //Use 0x00100073 as halt
@@ -25,6 +27,7 @@ logic [31:0] branch_mux, rti_mux, pc_d;
 placeholder_mem imem(
     .clk(clk),
     .rst_n(rst_n),
+    .read_en(~|warmup),
     .addr(pc_q),
     .q(imem_out)
 );
@@ -34,7 +37,7 @@ always_ff @(posedge clk) begin
 end
 
 assign instruction_fe = (stall | stall_mem1) ? instruction_fe : 
-                        (^imem_out === 1'bX) ? 32'h00000013 : imem_out;
+                        ((^imem_out === 1'bX) | (~|imem_out) | |warmup) ? 32'h00000013 : imem_out;
 
 
 //Flushing -> IFD needs to go to 0 and NOP. PC still needs to update to the correct value
@@ -49,26 +52,60 @@ assign instruction_fe = (stall | stall_mem1) ? instruction_fe :
 always_ff @(posedge clk) begin
     if(!rst_n) begin
         instruction_dec <= 32'h00000013; //Needs to be halt or NOP
-        pc_next_dec <= '0;
     end
     else if (flush) begin
-        pc_next_dec <= 0;
         instruction_dec <= 32'h00000013; //IDK if this needs to be combinational
     end
     else if (stall | warmup) begin
-        pc_next_dec <= pc_next_dec;
         instruction_dec <= instruction_dec;
     end
     else begin
         instruction_dec <= instruction_fe;
-        pc_next_dec <= nxt_pc;
+    end
+end
+
+always_ff @(posedge clk) begin
+    if(!rst_n) begin
+        pc_next_dec <= '0;
+        pc_curr_dec <= '0;
+        pc_next_dec_q0 <= '0;
+        pc_curr_dec_q0 <= '0;
+        pc_next_dec_q1 <= '0;
+        pc_curr_dec_q1 <= '0;
+    end
+    else if (flush) begin
+        pc_next_dec_q0 <= 0;
+        pc_curr_dec_q0 <= 0;
+        pc_next_dec_q1 <= 0;
+        pc_curr_dec_q1 <= 0;
+        pc_next_dec <= 0;
+        pc_curr_dec <= 0;
+    end
+    else if (stall) begin
+        pc_next_dec_q0 <= 0;
+        pc_curr_dec_q0 <= 0;
+        pc_next_dec_q1 <= 0;
+        pc_curr_dec_q1 <= 0;
+        pc_next_dec <= pc_next_dec;
+        pc_curr_dec <= pc_curr_dec;
+    end
+    else begin
+        pc_next_dec_q0 <= nxt_pc;
+        pc_curr_dec_q0 <= pc_q;
+        pc_next_dec_q1 <= pc_next_dec_q0;
+        pc_curr_dec_q1 <= pc_curr_dec_q0;
+        pc_next_dec <= pc_next_dec_q1;
+        pc_curr_dec <= pc_curr_dec_q1;
     end
 end
 
 //TODO fix later
 //rst_n warmup 
 always_ff @(posedge clk) begin //TODO fix bug regarding rst_n asserted between clock cycles
-    warmup <= !rst_n; 
+    if (!rst_n)
+        warmup <= 1;
+    else
+        warmup <= (warmup != 0) ? warmup - 1'b1 : warmup;
 end 
 
 
@@ -90,15 +127,13 @@ always_ff @(posedge clk) begin
     if(!rst_n) begin
         pc_q <= '0;
     end
-    else if (stall | flush | warmup /*& ~interrupt*/) begin
+    else if (stall | flush | warmup/*& ~interrupt*/) begin
         pc_q <= pc_q;
     end
     else begin
         pc_q <= pc_d;
     end
 end
-
-assign pc_curr_dec = pc_q;
 
 //Instruction register to hold nxt_pc
 always_ff @(posedge clk) begin
