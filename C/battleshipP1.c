@@ -88,13 +88,17 @@ void interrupt_handler(int rsi) {
     if(rsi > (100 << 1)) {
         // PS2
         if(rsi == 'w') {
-
+            if(guess > 9) {
+                guess -= 10;
+            }
         } else if(rsi == 'a') {
             if(guess % 10 != 0) {
                 guess -= 1;
             }
         } else if(rsi == 's') {
-
+            if(guess < 90) {
+                guess += 10;
+            }
         } else if(rsi == 'd') {
             if(guess % 10 != 9) {
                 guess += 1;
@@ -102,6 +106,8 @@ void interrupt_handler(int rsi) {
         } else {
             // snd guess
         }
+    } else {
+        // Ethernet
     }
 }
 
