@@ -9,7 +9,8 @@ module fetch(
     input stall,
     input [31:0] pc_ex,
     output logic [31:0] instruction_dec,
-    output logic [31:0] pc_dec
+    output logic [31:0] pc_next_dec,
+    output logic [31:0] pc_curr_dec
 );
 //////////////NET INSTANTIATION/////////////////////
 logic warmup, stall_mem1; //Doesn't have to be a latched signal 
@@ -45,22 +46,22 @@ assign instruction_fe = (stall | stall_mem1) ? instruction_fe :
 /////////////////PIPELINE STAGE FF///////////////////
 //NOP Is encoded as addi x0 x0 0 -> 32'h00000013;
 //TODO impliment stalling & nops at some pointr
-always_ff @(posedge clk, negedge rst_n) begin
+always_ff @(posedge clk) begin
     if(!rst_n) begin
         instruction_dec <= 32'h00000013; //Needs to be halt or NOP
-        pc_dec <= '0;
+        pc_next_dec <= '0;
     end
     else if (flush) begin
-        pc_dec <= 0;
+        pc_next_dec <= 0;
         instruction_dec <= 32'h00000013; //IDK if this needs to be combinational
     end
     else if (stall | warmup) begin
-        pc_dec <= pc_dec;
+        pc_next_dec <= pc_next_dec;
         instruction_dec <= instruction_dec;
     end
     else begin
         instruction_dec <= instruction_fe;
-        pc_dec <= nxt_pc;
+        pc_next_dec <= nxt_pc;
     end
 end
 
@@ -85,7 +86,7 @@ assign branch_mux = branch ? pc_ex : nxt_pc;
 assign nxt_pc = pc_q + 4;
 
 //PC register
-always_ff @(posedge clk, negedge rst_n) begin
+always_ff @(posedge clk) begin
     if(!rst_n) begin
         pc_q <= '0;
     end
@@ -97,8 +98,10 @@ always_ff @(posedge clk, negedge rst_n) begin
     end
 end
 
+assign pc_curr_dec = pc_q;
+
 //Instruction register to hold nxt_pc
-always_ff @(posedge clk, negedge rst_n) begin
+always_ff @(posedge clk) begin
     if(!rst_n) begin
         i_reg <= '0;
     end

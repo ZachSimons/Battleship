@@ -42,7 +42,7 @@ logic [4:0] rdreg1_if_id, rdreg2_if_id;
 
 //Fetch
 logic rti_de_fe, rsi_de_fe, branch_ex_fe;
-logic [31:0] inst_fe_dec, nxtpc_fe_dec;
+logic [31:0] inst_fe_dec, nxtpc_fe_dec, pc_fe_dec;
 
 
 //Decode
@@ -87,7 +87,8 @@ fetch proc_fe(
     .stall(hazard | stallmem),
     .pc_ex(branchpc_ex_fe),       
     .instruction_dec(inst_fe_dec),
-    .pc_dec(nxtpc_fe_dec)
+    .pc_next_dec(nxtpc_fe_dec),
+    .pc_curr_dec(pc_fe_dec)
 );
 
 
@@ -96,6 +97,7 @@ decode proc_de(
     .rst_n(rst_n),
     .instruction(inst_fe_dec),
     .next_pc(nxtpc_fe_dec),
+    .curr_pc(pc_fe_dec),
     .write_enable(regwrten_wb_dec), 
     .flush(flush), //TODO This controls flushing
     .hazard(hazard),

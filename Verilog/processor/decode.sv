@@ -6,6 +6,7 @@ module decode(
     input flush,
     input [31:0] instruction,
     input [31:0] next_pc,
+    input [31:0] curr_pc,
     input write_enable,
     input [4:0] write_reg,
     input [31:0] write_data,
@@ -60,7 +61,7 @@ assign imm[4]= {{13{instruction[31]}},instruction[19:12],instruction[20],instruc
 
 //muxs
 assign imm_out = imm_sel ? imm[type_sel+1] : imm[0];
-assign read_data1 = auipc ? src_data1 : next_pc;
+assign read_data1 = auipc ? src_data1 : curr_pc;
 
 assign read_data1_dec = read_data1;
 
