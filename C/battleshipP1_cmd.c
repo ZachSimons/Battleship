@@ -7,6 +7,10 @@
 #define MAX_SHIPS 5
 #define TOTAL_SHIP_POSITIONS 200
 
+#define EMPTY 0
+#define MISS  1
+#define HIT   2
+
 #define GET_BOARD_SEL(x) (x >> 31)
 #define GET_SHIP_POS(x) ((x & 0x7f000000) >> 24)
 #define GET_SEL_BIT(x) ((x & 0x00800000) >> 23)
@@ -26,6 +30,7 @@
 
 // Game data
 int my_board[NUM_SQUARES];
+char target_board[NUM_SQUARES];
 int enemy_board[NUM_SQUARES];
 char ship_sizes[MAX_SHIPS] = {2, 3, 3, 4, 5};
 char ship_letter[MAX_SHIPS] = {'d', 's', 'c', 'b', 'a'};
@@ -34,7 +39,7 @@ char ship_letter[MAX_SHIPS] = {'d', 's', 'c', 'b', 'a'};
 char possible_positions[MAX_SHIPS][TOTAL_SHIP_POSITIONS];
 char invalid_combos[MAX_SHIPS][TOTAL_SHIP_POSITIONS][MAX_SHIPS-1][TOTAL_SHIP_POSITIONS];
 int hit_counts[NUM_SQUARES];
-#define ACCELERATOR_COUNT 2000
+#define ACCELERATOR_COUNT 8000
 
 void clear_board(int board) {
     for(int i = 0; i < NUM_SQUARES; i++) {
@@ -182,7 +187,7 @@ void clear_accelerator_data() {
     clear_hit_counts();
 }
 
-int check_valid_position(int turn, int ship, int square, int v) {
+int check_valid_position(int ship, int square, int v) {
     int size = ship_sizes[ship];
     int inc = v ? 10 : 1;
     if(v) {
@@ -195,12 +200,30 @@ int check_valid_position(int turn, int ship, int square, int v) {
         }
     }
     for(int i = 0; i < size; i++) {
-        if(turn) {
-            if(GET_E_BIT(my_board[square + inc*i])) {
-                return 0;
+        if(target_board[square + inc*i] == MISS) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int square_in_configuration(unsigned char* configuration, int square) {
+    for(int i = 0; i < MAX_SHIPS; i++) {
+        int inc = configuration[i] >= 100 ? 10 : 1;
+        int start = configuration[i] % 100;
+        for(int j = 0; j < ship_sizes[i]; j++) {
+            if(start + inc*j == square) {
+                return 1;
             }
-        } else {
-            if(GET_E_BIT(enemy_board[square + inc*i])) {
+        }
+    }
+    return 0;
+}
+
+int check_valid_configuration(unsigned char* configuration) {
+    for(int i = 0; i < NUM_SQUARES; i++) {
+        if(target_board[i] == HIT) {
+            if(!square_in_configuration(configuration, i)) {
                 return 0;
             }
         }
@@ -223,13 +246,13 @@ int calculate_overlap(int lower, int lower_pos, int lower_v, int upper, int uppe
     return 1;
 }
 
-int run_accelerator(int turn) {
+int run_accelerator() {
     clear_accelerator_data();
     // Get all valid positions
     for(int ship = 0; ship < MAX_SHIPS; ship++) {
         for(int v = 0; v < 2; v++) {
             for(int square = 0; square < NUM_SQUARES; square++) {
-                if(check_valid_position(turn, ship, square, v)) {
+                if(check_valid_position(ship, square, v)) {
                     possible_positions[ship][v*100 + square] = 1;
                 }
             }
@@ -271,6 +294,9 @@ int run_accelerator(int turn) {
             }
         }
         // Check if configuration is legal (ACCELERATOR)
+        if(!check_valid_configuration(ship_configuration)) {
+            continue;
+        }
         // Mark positions
         for(int ship = 0; ship < MAX_SHIPS; ship++) {
             int size = ship_sizes[ship];
@@ -285,6 +311,8 @@ int run_accelerator(int turn) {
     int max = -1;
     int target = 0;
     for(int i = 0; i < NUM_SQUARES; i++) {
+        printf("|%03d|", hit_counts[i]);
+        if(i%10 == 9) printf("\n");
         if(hit_counts[i] > max) {
             max = hit_counts[i];
             target = i;
@@ -304,13 +332,18 @@ int main() {
     int target;
     int guess;
     while(1) {
-        target = run_accelerator(!turn);
+        target = run_accelerator();
         print_board(0, !turn, target);
         print_board(1, !turn, target);
         printf("AI guess: %d\n", target);
         scanf("%d", &guess);
         if(turn) {
             enemy_board[guess] |= SET_M_BIT(1);
+            if(GET_E_BIT(enemy_board[guess])) {
+                target_board[guess] = MISS;
+            } else {
+                target_board[guess] = HIT;
+            }
         } else {
             my_board[guess] |= SET_M_BIT(1);
         }
