@@ -131,8 +131,8 @@ def jTypeImm(value: int):
         return ((complement & (2**20))<<11) | ((complement % (2**11))<<20) | ((complement & (2**11))<<9) | (((complement%(2**20)) & ~(2**12-1)))
     
 def calculateOffset(current: int, target: int):
-    if target - current % 4:
-        print("ERROR: unaligned branch attempted " + str(current))
+    if (target - current) % 4:
+        print("ERROR: unaligned branch attempted " + str(target) + " <- " + str(current))
         sys.exit(1)
     return target - current
 
@@ -172,21 +172,21 @@ if __name__ == '__main__':
                     elif(instruction[0] == 'auipc'):
                         outputFile.write(struct.pack('I', AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1]))))
                     elif(instruction[0] == 'jal'):
-                        outputFile.write(struct.pack('I', JAL_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + jTypeImm(calculateOffset(currentAddress, int(parameters[1])))))
+                        outputFile.write(struct.pack('I', JAL_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + jTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]])))))
                     elif(instruction[0] == 'jalr'):
-                        outputFile.write(struct.pack('I', JALR_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + jTypeImm(calculateOffset(currentAddress, int(parameters[1])))))
+                        outputFile.write(struct.pack('I', JALR_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2]))))
                     elif(instruction[0] == 'beq'):
-                        outputFile.write(struct.pack('I', BRANCH_CODE + BEQ + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(parameters[2])))))
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BEQ + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]])))))
                     elif(instruction[0] == 'bne'):
-                        outputFile.write(struct.pack('I', BRANCH_CODE + BNE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(parameters[2])))))
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BNE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]])))))
                     elif(instruction[0] == 'blt'):
-                        outputFile.write(struct.pack('I', BRANCH_CODE + BLT + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(parameters[2])))))
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BLT + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]])))))
                     elif(instruction[0] == 'bge'):
-                        outputFile.write(struct.pack('I', BRANCH_CODE + BGE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(parameters[2])))))
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BGE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]])))))
                     elif(instruction[0] == 'bltu'):
-                        outputFile.write(struct.pack('I', BRANCH_CODE + BLTU + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(parameters[2])))))
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BLTU + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]])))))
                     elif(instruction[0] == 'bgeu'):
-                        outputFile.write(struct.pack('I', BRANCH_CODE + BGEU + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(parameters[2])))))
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BGEU + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]])))))
                     elif(instruction[0] == 'lb'):
                         addressCalc = parseAddress(parameters[1])
                         outputFile.write(struct.pack('I', LOAD_CODE + LB + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1])))
@@ -249,7 +249,82 @@ if __name__ == '__main__':
                         outputFile.write(struct.pack('I', OP_CODE + OR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]])))
                     elif(instruction[0] == 'and'):
                         outputFile.write(struct.pack('I', OP_CODE + AND + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]])))
+                    elif(instruction[0] == 'rti'):
+                        outputFile.write(struct.pack('I', RTI_CODE))
+                    elif(instruction[0] == 'rsi'):
+                        outputFile.write(struct.pack('I', RSI_CODE + rs1_reg(REGISTER_DICT[parameters[0]])))
+                    elif(instruction[0] == 'rdi'):
+                        outputFile.write(struct.pack('I', RDI_CODE + rd_reg(REGISTER_DICT[parameters[0]])))
+                    elif(instruction[0] == 'ldr'):
+                        outputFile.write(struct.pack('I', LDR_CODE + rd_reg(REGISTER_DICT[parameters[0]])))
+                    elif(instruction[0] == 'sac'):
+                        outputFile.write(struct.pack('I', SAC_CODE + rd_reg(REGISTER_DICT[parameters[0]])))
+                    elif(instruction[0] == 'ugs'):
+                        outputFile.write(struct.pack('I', UGS_CODE + rs1_reg(REGISTER_DICT[parameters[0]])))
+                    elif(instruction[0] == 'uad'):
+                        outputFile.write(struct.pack('I', UAD_CODE + rs1_reg(REGISTER_DICT[parameters[0]])))
+                    elif(instruction[0] == 'snd'):
+                        outputFile.write(struct.pack('I', SND_CODE + rs1_reg(REGISTER_DICT[parameters[0]])))
+                    elif(instruction[0] == 'la'):
+                        outputFile.write(struct.pack('I', AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(label_addresses[parameters[1]])))
+                        outputFile.write(struct.pack('I', OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(label_addresses[parameters[1]] % 2**12)))
+                    elif(instruction[0] == 'nop'):
+                        outputFile.write(struct.pack('I', OP_IMM_CODE + ADD + rd_reg(0) + rs1_reg(0) + iTypeImm(0)))
+                    elif(instruction[0] == 'li'):
+                        outputFile.write(struct.pack('I', LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1]))))
+                        outputFile.write(struct.pack('I', OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(int(parameters[1]) % 2**12)))
+                    elif(instruction[0] == 'mv'):
+                        outputFile.write(struct.pack('I', OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(0)))
+                    elif(instruction[0] == 'not'):
+                        outputFile.write(struct.pack('I', OP_IMM_CODE + XOR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(-1)))
+                    elif(instruction[0] == 'neg'):
+                        outputFile.write(struct.pack('I', OP_CODE + ADD + TOGGLE_BIT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[1]])))
+                    elif(instruction[0] == 'seqz'):
+                        outputFile.write(struct.pack('I', OP_IMM_CODE + SLTU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(1)))
+                    elif(instruction[0] == 'snez'):
+                        outputFile.write(struct.pack('I', OP_CODE + SLTU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[1]])))
+                    elif(instruction[0] == 'sltz'):
+                        outputFile.write(struct.pack('I', OP_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(0)))
+                    elif(instruction[0] == 'sgtz'):
+                        outputFile.write(struct.pack('I', OP_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[1]])))
+                    elif(instruction[0] == 'beqz'):
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BEQ + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]])))))
+                    elif(instruction[0] == 'bnez'):
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BNE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]])))))
+                    elif(instruction[0] == 'blez'):
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BGE + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]])))))
+                    elif(instruction[0] == 'bgez'):
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BGE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]])))))
+                    elif(instruction[0] == 'bltz'):
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BLT + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]])))))
+                    elif(instruction[0] == 'bgtz'):
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BLT + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]])))))
+                    elif(instruction[0] == 'bgt'):
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BLT + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]])))))
+                    elif(instruction[0] == 'ble'):
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BGE + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]])))))
+                    elif(instruction[0] == 'bgtu'):
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BLTU + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]])))))
+                    elif(instruction[0] == 'bleu'):
+                        outputFile.write(struct.pack('I', BRANCH_CODE + BGEU + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]])))))
+                    elif(instruction[0] == 'j'):
+                        outputFile.write(struct.pack('I', JAL_CODE + rd_reg(0) + jTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[0]])))))
+                    elif(instruction[0] == 'jr'):
+                        outputFile.write(struct.pack('I', JALR_CODE + rd_reg(0) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(0)))
+                    elif(instruction[0] == 'ret'):
+                        outputFile.write(struct.pack('I', JALR_CODE + rd_reg(0) + rs1_reg(1) + iTypeImm(0)))
+                    elif(instruction[0] == 'call'):
+                        outputFile.write(struct.pack('I', AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]])))
+                        outputFile.write(struct.pack('I', JALR_CODE + rd_reg(1) + rs1_reg(6) + iTypeImm(label_addresses[parameters[0]] % 2**12)))
+                    elif(instruction[0] == 'tail'):
+                        outputFile.write(struct.pack('I', AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]])))
+                        outputFile.write(struct.pack('I', JALR_CODE + rd_reg(0) + rs1_reg(6) + iTypeImm(label_addresses[parameters[0]] % 2**12)))
                     else:
                         print("ERROR: Unrecognized instruction " + str(instruction))
                         sys.exit(1)
+    # UNSUPPORTED COMMANDS
+    # l{b|h|w} rd, symbol
+    # s{b|h|w} rd, symbol, rt
+    # jal offset
+    # jalr rs
     sys.exit(0)
