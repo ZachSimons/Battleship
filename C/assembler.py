@@ -90,30 +90,30 @@ SND_CODE    = 0b0001011
 
 # funct3
 TOGGLE_BIT  = 2**30
-ADD         = 0b000
-SLL         = 0b001
-SLT         = 0b010
-SLTU        = 0b011
-XOR         = 0b100
-SRL         = 0b101
-OR          = 0b110
-AND         = 0b111
+ADD         = 0b000 << 12
+SLL         = 0b001 << 12
+SLT         = 0b010 << 12
+SLTU        = 0b011 << 12
+XOR         = 0b100 << 12
+SRL         = 0b101 << 12
+OR          = 0b110 << 12
+AND         = 0b111 << 12
 
-BEQ         = 0b000
-BNE         = 0b001
-BLT         = 0b100
-BGE         = 0b101
-BLTU        = 0b110
-BGEU        = 0b111
+BEQ         = 0b000 << 12
+BNE         = 0b001 << 12
+BLT         = 0b100 << 12
+BGE         = 0b101 << 12
+BLTU        = 0b110 << 12
+BGEU        = 0b111 << 12
 
-LB          = 0b000
-LH          = 0b001
-LW          = 0b010
-LBU         = 0b100
-LHU         = 0b101
-SB          = 0b000
-SH          = 0b001
-SW          = 0b010
+LB          = 0b000 << 12
+LH          = 0b001 << 12
+LW          = 0b010 << 12
+LBU         = 0b100 << 12
+LHU         = 0b101 << 12
+SB          = 0b000 << 12
+SH          = 0b001 << 12
+SW          = 0b010 << 12
 
 def negative(value: int):
     return (2**12-1)&(~(value*-1)) + 1
@@ -197,6 +197,7 @@ if __name__ == '__main__':
                     continue
                 else:
                     instruction = line.split()
+                    instruction[0] = instruction[0].lower()
                     if len(instruction) > 1:
                         parameters = instruction[1].split(',')
                     if(instruction[0] == 'lui'):
@@ -236,13 +237,13 @@ if __name__ == '__main__':
                         outputFile.write(format(LOAD_CODE + LHU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
                     elif(instruction[0] == 'sb'):
                         addressCalc = parseAddress(parameters[1])
-                        outputFile.write(format(STORE_CODE + SB + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
+                        outputFile.write(format(STORE_CODE + SB + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
                     elif(instruction[0] == 'sh'):
                         addressCalc = parseAddress(parameters[1])
-                        outputFile.write(format(STORE_CODE + SH + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
+                        outputFile.write(format(STORE_CODE + SH + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
                     elif(instruction[0] == 'sw'):
                         addressCalc = parseAddress(parameters[1])
-                        outputFile.write(format(STORE_CODE + SW + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
+                        outputFile.write(format(STORE_CODE + SW + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
                     elif(instruction[0] == 'addi'):
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
                     elif(instruction[0] == 'slti'):
@@ -356,6 +357,7 @@ if __name__ == '__main__':
                     else:
                         print("ERROR: Unrecognized instruction " + str(instruction))
                         sys.exit(1)
+                    currentAddress+= 4
     # UNSUPPORTED COMMANDS
     # l{b|h|w} rd, symbol
     # s{b|h|w} rd, symbol, rt
