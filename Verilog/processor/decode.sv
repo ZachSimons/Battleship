@@ -53,10 +53,13 @@ logic [1:0] wb_sel, width, type_sel;
 logic [3:0] alu_op, bj_inst;
 logic [31:0] read_data2, read_data1, imm_out;
 
+
+//Branching would be inst
+
 //sign extensions
-assign imm[0]= {{20{instruction[31]}},instruction[31:20]};
+assign imm[0]= {{20{instruction[31]}},instruction[31:20]}; 
 assign imm[1]= {{20{instruction[31]}},instruction[31:25],instruction[11:7]};
-assign imm[2]= {{21{instruction[31]}},instruction[7],instruction[30:27],instruction[11:6]};
+assign imm[2]= {{21{instruction[31]}},instruction[7],instruction[30:25],instruction[11:8]};
 assign imm[3]= instruction[31:12] << 12;
 assign imm[4]= {{13{instruction[31]}},instruction[19:12],instruction[20],instruction[30:21]};
 

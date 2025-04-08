@@ -42,7 +42,7 @@ assign ppu_send = (opcode==7'b0101000) ? 1'b1 : 1'b0;
 //if data is beig written to a register or not
 assign  write_en = ((opcode==7'b0010011) || (opcode==7'b0110011) || (opcode==7'b0010111) || 
                     (opcode==7'b0110111) || (opcode==7'b0000011) || (opcode==7'b1101111) || 
-                    (opcode==7'b0101001) || (opcode==7'b0001010) || (opcode==7'b0101010) || (opcode==7'b1100111)) ? 1'b1 : 1'b0;
+                    (opcode==7'b0101001) || (opcode==7'b0001010) || (opcode==7'b0101010) || (opcode==7'b1100111)) && (instruction[11:7] != 0) ? 1'b1 : 1'b0;
 
  //if memory out should be sign extended or not
 assign unsigned_sel = ((opcode==7'b000011)&&((sel==3'b000) || (sel==3'b001) || (sel==3'b010))) ? 1'b1 : 1'b0;

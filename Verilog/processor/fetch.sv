@@ -14,7 +14,8 @@ module fetch(
 );
 //////////////NET INSTANTIATION/////////////////////
 logic stall_mem1; //Doesn't have to be a latched signal 
-logic [1:0] warmup;
+logic warmup;
+logic [1:0] flushnop;
 logic [31:0] i_reg, nxt_pc, pc_q, instruction_fe, imem_out;
 logic [31:0] branch_mux, rti_mux, pc_d;
 logic [31:0] pc_next_dec_q0, pc_next_dec_q1, pc_curr_dec_q0, pc_curr_dec_q1;
@@ -37,7 +38,7 @@ always_ff @(posedge clk) begin
 end
 
 assign instruction_fe = (stall | stall_mem1) ? instruction_fe : 
-                        ((^imem_out === 1'bX) | (~|imem_out) | |warmup) ? 32'h00000013 : imem_out;
+                        ((^imem_out === 1'bX) | (~|imem_out) | |warmup | flush | |flushnop) ? 32'h00000013 : imem_out;
 
 
 //Flushing -> IFD needs to go to 0 and NOP. PC still needs to update to the correct value
@@ -56,7 +57,7 @@ always_ff @(posedge clk) begin
     else if (flush) begin
         instruction_dec <= 32'h00000013; //IDK if this needs to be combinational
     end
-    else if (stall | warmup) begin
+    else if (|flushnop | warmup | stall) begin
         instruction_dec <= instruction_dec;
     end
     else begin
@@ -64,6 +65,7 @@ always_ff @(posedge clk) begin
     end
 end
 
+//
 always_ff @(posedge clk) begin
     if(!rst_n) begin
         pc_next_dec <= '0;
@@ -81,7 +83,7 @@ always_ff @(posedge clk) begin
         pc_next_dec <= 0;
         pc_curr_dec <= 0;
     end
-    else if (stall) begin
+    else if (|flushnop | stall) begin
         pc_next_dec_q0 <= nxt_pc;
         pc_curr_dec_q0 <= pc_q;
         pc_next_dec_q1 <= pc_next_dec_q0;
@@ -107,6 +109,22 @@ always_ff @(posedge clk) begin //TODO fix bug regarding rst_n asserted between c
     else
         warmup <= (warmup != 0) ? warmup - 1'b1 : warmup;
 end 
+
+
+//After Flush is asserted keep pushing nops till instructions are ready (2 cycles)
+always_ff @(posedge clk) begin
+    if (!rst_n) begin
+        flushnop <= 0;
+    end
+    else if(flush) begin
+        flushnop <= 2;
+    end
+    else begin
+        flushnop <= (flushnop != 0) ? flushnop - 1'b1 : flushnop;
+    end
+end
+
+
 
 
 ////////////////////// LOGIC ////////////////////////

@@ -48,7 +48,7 @@ module execute(
 
     assign alu_inB_temp = data_sel_exe ? imm : reg2;
     assign branch_base = jalr_exe ? reg1 : curr_pc_exe;
-    assign immx2 = imm << 1;
+    assign immx2 = jalr_exe ? imm : imm << 1;
     assign branch_pc = branch_base + immx2;
 
     // Fowarding
@@ -65,7 +65,7 @@ module execute(
     assign alu_result_exe = lui_ex ? alu_inB : alu_output;
 
     alu EXE_ALU(.inA(alu_inA), .inB(alu_inB), .alu_op(alu_op_exe[2:0]), .option_bit(alu_op_exe[3]), .out(alu_output));
-    branch_ctrl EXE_BRANCH_CTRL(.bj_inst(bj_inst_exe), .inA(reg1), .inB(reg2), .branch(branch));
+    branch_ctrl EXE_BRANCH_CTRL(.bj_inst(bj_inst_exe), .inA(alu_inA), .inB(alu_inB), .branch(branch));
 
     always_ff @(posedge clk) begin
         if(!rst_n) begin

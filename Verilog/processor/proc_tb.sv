@@ -23,6 +23,12 @@ module proc_tb;
     logic [31:0] expected_val;
   } test_info_t;
 
+
+
+
+
+
+
   test_info_t test_list_jumps[] = '{
     '{
       test_name      : "addi x1, x0, 100",
@@ -345,7 +351,7 @@ module proc_tb;
         test_list_jumps[i].test_name
       );
     end
-    repeat(10) @(posedge clk);
+    repeat(200) @(posedge clk);
     $display("Finished stepping through all instructions!");
     $stop;
   end

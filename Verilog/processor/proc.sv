@@ -233,7 +233,6 @@ hazard proc_hazard(
     .src_reg1_if_id(rdreg1_if_id),
     .src_reg2_if_id(rdreg2_if_id),
     .dst_reg_id_ex(wrtreg_dec_ex),
-    .flush_stall(pfstall),
     .hazard(hazard),
     .stall_mem(hazard_stall)
 );
