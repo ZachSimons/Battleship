@@ -46,7 +46,7 @@ module execute(
     logic [31:0] baseB, write_data;
     logic [31:0] immx2;
 
-    assign alu_inB_temp = data_sel_exe ? imm : reg2;
+    //Branching stuff
     assign branch_base = jalr_exe ? reg1 : curr_pc_exe;
     assign immx2 = jalr_exe ? imm : imm << 1;
     assign branch_pc = branch_base + immx2;
@@ -55,14 +55,12 @@ module execute(
     assign alu_inA = (forward_control1 == 2'b01) ? wbdata_wb_ex :
                      (forward_control1 == 2'b10) ? alu_result_mem : reg1;
     assign baseB =   (forward_control2 == 2'b01) ? wbdata_wb_ex :
-                     (forward_control2 == 2'b10) ? alu_result_mem : alu_inB_temp;
+                     (forward_control2 == 2'b10) ? alu_result_mem : reg2;
+    assign write_data = baseB;
 
-    assign write_data = (forward_control2 == 2'b01) ? wbdata_wb_ex :
-                        (forward_control2 == 2'b10) ? alu_result_mem : reg2;
-
-    assign alu_inB = mem_wrt_en_exe ? alu_inB_temp : baseB;
-
-    assign alu_result_exe = lui_ex ? alu_inB : alu_output;
+    assign alu_inB = data_sel_exe ? imm : baseB;
+ 
+    assign alu_result_exe = lui_ex ? imm : alu_output;
 
     alu EXE_ALU(.inA(alu_inA), .inB(alu_inB), .alu_op(alu_op_exe[2:0]), .option_bit(alu_op_exe[3]), .out(alu_output));
     branch_ctrl EXE_BRANCH_CTRL(.bj_inst(bj_inst_exe), .inA(alu_inA), .inB(alu_inB), .branch(branch));

@@ -83,13 +83,21 @@ always_ff @(posedge clk) begin
         pc_next_dec <= 0;
         pc_curr_dec <= 0;
     end
-    else if (|flushnop | stall) begin
+    else if (|flushnop) begin
         pc_next_dec_q0 <= nxt_pc;
         pc_curr_dec_q0 <= pc_q;
         pc_next_dec_q1 <= pc_next_dec_q0;
         pc_curr_dec_q1 <= pc_curr_dec_q0;
         pc_next_dec <= 0;
         pc_curr_dec <= 0;
+    end
+    else if (stall) begin
+        pc_next_dec_q0 <= pc_next_dec_q0;
+        pc_curr_dec_q0 <= pc_curr_dec_q0;
+        pc_next_dec_q1 <= pc_next_dec_q1;
+        pc_curr_dec_q1 <= pc_curr_dec_q1;
+        pc_next_dec <= pc_next_dec;
+        pc_curr_dec <= pc_curr_dec;
     end
     else begin
         pc_next_dec_q0 <= nxt_pc;

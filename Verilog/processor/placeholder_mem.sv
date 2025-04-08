@@ -11,7 +11,7 @@ logic [31:0] addr_q;
 logic read_en_ff;
 
 initial begin
-    $readmemh("branch_test.hex", bram);
+    $readmemh("fib.hex", bram);
 end
 
 always_ff @(posedge clk) begin

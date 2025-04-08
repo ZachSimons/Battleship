@@ -219,6 +219,7 @@ forwarding proc_forward(
     .id_ex_reg_reg2(rdreg2_dec_ex),
     .mem_wb_reg(wrtreg_mem_wb),
     .ex_mem_reg(wrtreg_ex_mem),
+    .instruction_ex(instruction_dec_ex),
     .forward_control1(forward_control1),
     .forward_control2(forward_control2)
 );

@@ -337,7 +337,7 @@ module proc_tb;
     repeat (7) @(posedge clk);
 
     // For each instruction in test_list:
-    for (int i = 0; i < $size(test_list_jumps); i++) begin
+    for (int i = 0; i < $size(test_list); i++) begin
       repeat (1) @(posedge clk);
 
       if ((dut.instruction_ex_mem[6:0] == 7'b0000011)) repeat(2) @(posedge clk);
@@ -346,12 +346,12 @@ module proc_tb;
       // Now check the register
       #1;
       check_register(
-        test_list_jumps[i].reg_to_check, 
-        test_list_jumps[i].expected_val, 
-        test_list_jumps[i].test_name
+        test_list[i].reg_to_check, 
+        test_list[i].expected_val, 
+        test_list[i].test_name
       );
     end
-    repeat(200) @(posedge clk);
+    repeat(700) @(posedge clk);
     $display("Finished stepping through all instructions!");
     $stop;
   end
