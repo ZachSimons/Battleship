@@ -27,21 +27,21 @@ always @(posedge clk, negedge rst_n) begin
     //handle register operations
     else begin
         //write
-        if(write_reg) begin
+        if(write_reg & dst_reg != 0) begin
             regfile[dst_reg] <= dst_data;
         end
     end   
 end
 
 always @(*) begin
-    if(write_reg && dst_reg == src_reg1) begin //rf bypass
+    if(write_reg && dst_reg == src_reg1 & (dst_reg != 0)) begin //rf bypass
         data1 = dst_data;
     end
     else begin
         data1 = regfile[src_reg1];
     end
     
-    if(write_reg && dst_reg == src_reg2) begin //rf bypass
+    if(write_reg && dst_reg == src_reg2 & (dst_reg != 0)) begin //rf bypass
         data2 = dst_data;
     end
     else begin

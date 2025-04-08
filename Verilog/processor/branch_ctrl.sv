@@ -17,10 +17,10 @@ module branch_ctrl(
                 branch = 1'b1;
             end
             4'b1100: begin // BLT
-                branch = inA < inB;
+                branch = $signed(inA) < $signed(inB);
             end
             4'b1101: begin // BGE
-                branch = inA >= inB;
+                branch = $signed(inA) >= $signed(inB);
             end
             4'b1110: begin // BLTU
                 branch = {1'b0, inA} < {1'b0, inB};

@@ -1,18 +1,23 @@
 module decode(
     input clk,
     input rst_n,
+    input hazard,
+    input stall_mem,
+    input flush,
     input [31:0] instruction,
     input [31:0] next_pc,
+    input [31:0] curr_pc,
     input write_enable,
-    input branch,
     input [4:0] write_reg,
     input [31:0] write_data,
     output logic [31:0] read_data1_ex,
     output logic [31:0] read_data2_ex,
     output logic [31:0] imm_out_ex,
     output logic [31:0] next_pc_ex,
+    output logic [31:0] curr_pc_ex,
     output logic [4:0] write_reg_ex,
     output logic [31:0] read_data1_dec,
+    output logic [31:0] instruction_ex,
     output logic random_ex,
     output logic ppu_send,
     output logic write_en_ex,
@@ -30,37 +35,54 @@ module decode(
     output logic rsi_ex,
     output logic sac,
     output logic snd,
-    output logic uad
+    output logic uad,
+    output logic [4:0] read_register1_ex,
+    output logic [4:0] read_register2_ex,
+    output logic [4:0] read_register1_if_id,
+    output logic [4:0] read_register2_if_id,
+    output logic ignore_fwd_ex,
+    output logic lui_ex
 );
 
 
 logic [31:0] src_data1;
 logic [31:0] imm[4:0];
-logic random, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi, auipc, imm_sel;
+logic [4:0] write_reg_dec; 
+logic random, lui, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi, auipc, imm_sel, fluhaz, ignore_fwd;
 logic [1:0] wb_sel, width, type_sel;
 logic [3:0] alu_op, bj_inst;
-logic [31:0] read_data2, imm_out;
+logic [31:0] read_data2, read_data1, imm_out;
+
+
+//Branching would be inst
 
 //sign extensions
-assign imm[0]= {{20{instruction[31]}},instruction[31:20]};
+assign imm[0]= {{20{instruction[31]}},instruction[31:20]}; 
 assign imm[1]= {{20{instruction[31]}},instruction[31:25],instruction[11:7]};
-assign imm[2]= {{21{instruction[31]}},instruction[7],instruction[30:27],instruction[11:6]};
+assign imm[2]= {{21{instruction[31]}},instruction[7],instruction[30:25],instruction[11:8]};
 assign imm[3]= instruction[31:12] << 12;
 assign imm[4]= {{13{instruction[31]}},instruction[19:12],instruction[20],instruction[30:21]};
 
 //muxs
-assign imm_out = imm_sel ? imm[type_sel] : imm[0];
-assign read_data1 = auipc ? src_data1 : next_pc;
+assign imm_out = imm_sel ? imm[type_sel+1] : imm[0];
+assign read_data1 = auipc ? src_data1 : curr_pc;
 
 assign read_data1_dec = read_data1;
 
+assign read_register1_if_id = instruction[19:15];
+assign read_register2_if_id = instruction[24:20];
+assign write_reg_dec = instruction[11:7];
+
+assign fluhaz = hazard | flush;
+
 //pipeline
-always_ff @(posedge clk, negedge rst_n) begin
+always_ff @(posedge clk) begin
     if(~rst_n) begin
         read_data1_ex <= 0;
         read_data2_ex <= 0;
         imm_out_ex <= 0;
         next_pc_ex <= 0;
+        curr_pc_ex <= 0;
         write_reg_ex <= 0;
         random_ex <= 0;
         write_en_ex <= 0;
@@ -76,27 +98,37 @@ always_ff @(posedge clk, negedge rst_n) begin
         bj_inst_ex <= 0;
         rsi_ex <= 0;
         rdi_ex <= 0;
+        read_register1_ex <= 0;
+        read_register2_ex <= 0;
+        ignore_fwd_ex <= 0;
+        lui_ex <= 0;
     end
-    else begin
-        read_data1_ex <=read_data1;
-        read_data2_ex <= read_data2;
-        imm_out_ex <= imm_out;
-        next_pc_ex <= next_pc;
-        write_reg_ex <= write_reg;
-        random_ex <= random;
-        write_en_ex <= write_en;
-        wb_sel_ex <= wb_sel;
-        unsigned_sel_ex <= unsigned_sel;
-        rd_en_ex <= rd_en;
-        width_ex <= width;
-        jalr_ex <= jalr;
-        rti_ex <= rti;
-        data_sel_ex <= data_sel;
-        wrt_en_ex <= wrt_en;
-        alu_op_ex <= alu_op;
-        bj_inst_ex <= bj_inst;
-        rsi_ex <= rsi;
-        rdi_ex <= rdi;
+    else if(~stall_mem) begin
+        read_data1_ex <= ~fluhaz ? read_data1 : 0;
+        read_data2_ex <= ~fluhaz ? read_data2 : 0;
+        imm_out_ex <= ~fluhaz ? imm_out : 0;
+        next_pc_ex <= ~fluhaz ? next_pc : 0;
+        curr_pc_ex <= ~fluhaz ? curr_pc : 0;
+        write_reg_ex <= ~fluhaz ? write_reg_dec : 0;
+        random_ex <= ~fluhaz ? random : 0;
+        write_en_ex <= ~fluhaz ? write_en : 0;
+        wb_sel_ex <= ~fluhaz ? wb_sel : 0;
+        unsigned_sel_ex <= ~fluhaz ? unsigned_sel : 0;
+        rd_en_ex <= ~fluhaz ? rd_en : 0;
+        width_ex <= ~fluhaz ? width : 0;
+        jalr_ex <= ~fluhaz ? jalr : 0;
+        rti_ex <= ~fluhaz ? rti : 0;
+        data_sel_ex <= ~fluhaz ? data_sel : 0;
+        wrt_en_ex <= ~fluhaz ? wrt_en : 0;
+        alu_op_ex <= ~fluhaz ? alu_op : 0;
+        bj_inst_ex <= ~fluhaz ? bj_inst : 0;
+        rsi_ex <= ~fluhaz ? rsi : 0;
+        rdi_ex <= ~fluhaz ? rdi : 0;
+        read_register1_ex <= ~fluhaz ? read_register1_if_id  : 0;
+        read_register2_ex <= ~fluhaz ? read_register2_if_id  : 0;
+        ignore_fwd_ex <= ~fluhaz ? ignore_fwd : 0;
+        lui_ex <= ~fluhaz ? lui : 0;
+        instruction_ex <= ~fluhaz ? instruction : 32'h00000013;
     end
 end
 
@@ -136,7 +168,9 @@ instruction_decoder DECODE(
     .sac(sac),
     .snd(snd),
     .uad(uad),
-    .rdi(rdi)
+    .rdi(rdi),
+    .ignore_fwd(ignore_fwd),
+    .lui(lui)
 );
 
 
