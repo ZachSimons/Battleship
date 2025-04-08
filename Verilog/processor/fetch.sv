@@ -7,6 +7,7 @@ module fetch(
     input interrupt,
     input flush,
     input stall,
+    input halt,
     input [31:0] pc_ex,
     output logic [31:0] instruction_dec,
     output logic [31:0] pc_next_dec,
@@ -21,7 +22,7 @@ logic [31:0] branch_mux, rti_mux, pc_d;
 logic [31:0] pc_next_dec_q0, pc_next_dec_q1, pc_curr_dec_q0, pc_curr_dec_q1;
 
 
-//Use 0x00100073 as halt
+//Use 0x00000073 as halt
 
 //////////////MODULE INSTANTIATION///////////////////
 //Make byte addressable (not as complicated as d-memory)
@@ -91,7 +92,7 @@ always_ff @(posedge clk) begin
         pc_next_dec <= 0;
         pc_curr_dec <= 0;
     end
-    else if (stall) begin
+    else if (stall | halt) begin
         pc_next_dec_q0 <= pc_next_dec_q0;
         pc_curr_dec_q0 <= pc_curr_dec_q0;
         pc_next_dec_q1 <= pc_next_dec_q1;

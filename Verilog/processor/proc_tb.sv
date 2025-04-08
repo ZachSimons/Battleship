@@ -351,8 +351,20 @@ module proc_tb;
         test_list[i].test_name
       );
     end
-    repeat(700) @(posedge clk);
-    $display("Finished stepping through all instructions!");
+
+    fork 
+        begin : timeout1
+          repeat(1000) @(posedge clk);
+          $display("Timeout");
+        end
+        begin
+          @(posedge dut.halt_wb_fe);
+          disable timeout1;
+          $display("Halt Asserted. Program ended");
+          
+        end
+    join
+
     $stop;
   end
   

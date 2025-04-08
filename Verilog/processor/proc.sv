@@ -45,6 +45,7 @@ logic rti_de_fe, rsi_de_fe, branch_ex_fe;
 logic [31:0] inst_fe_dec, nxtpc_fe_dec, pc_fe_dec;
 
 
+
 //Decode
 logic random_dec_ex, regwrten_dec_ex, unsigned_dec_ex, memrden_dec_ex, jalr_dec_ex, datasel_dec_ex, 
         memwrten_dec_ex, lui_ex, rdi_dec_ex, ignore_fwd_ex;
@@ -67,9 +68,10 @@ logic [4:0] wrtreg_mem_wb;
 logic [31:0] readdata_mem_wb, nxtpc_mem_wb, alu_mem_wb, instruction_mem_wb;
 
 //Writeback
-logic regwrten_wb_dec;
+logic regwrten_wb_dec, halt_wb_fe;
 logic [4:0] wrtreg_wb_dec;
 logic [31:0] wbdata_wb_dec;
+
 
 //Forwarding
 logic [4:0] rdreg1_dec_ex, rdreg2_dec_ex;
@@ -85,6 +87,7 @@ fetch proc_fe(
     .interrupt(interrupt), 
     .flush(flush),
     .stall(hazard | stallmem),
+    .halt(halt_wb_fe),
     .pc_ex(branchpc_ex_fe),       
     .instruction_dec(inst_fe_dec),
     .pc_next_dec(nxtpc_fe_dec),
@@ -253,7 +256,14 @@ end
 assign regwrten_wb_dec = regwrten_mem_wb;
 assign wrtreg_wb_dec = wrtreg_mem_wb;
 
-
+always_ff @(posedge clk) begin
+    if (!rst_n) begin
+        halt_wb_fe <= 0;
+    end
+    else begin
+        halt_wb_fe <= (instruction_mem_wb == 32'h00000073) ? 1 : halt_wb_fe;
+    end
+end
 
 ///////////////////Flushing/Stalling logic/////////////////////
 always_ff @(posedge clk) begin
