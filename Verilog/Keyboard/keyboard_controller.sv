@@ -102,10 +102,12 @@ always @(posedge sys_clk, negedge rst_n) begin
         done_ff1 <= 0;
         done_ff2 <= 0;
         done_ff3 <= 0;
-    end
+    end 
+    else begin
     done_ff1 <= set_done;
     done_ff2 <= done_ff1;
     done_ff3 <= done_ff2;
+    end
 end
 
 assign done = done_ff2 & ~done_ff3;
