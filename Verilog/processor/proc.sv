@@ -344,7 +344,8 @@ typedef enum logic [7:0] {
     UGS,
     SAC,
     LDR,
-    UAD
+    UAD, 
+    NOP
 } instr_t;
 
 instr_t decoded_instr_dbg;
@@ -386,7 +387,7 @@ always_comb begin
         end
         7'b0010011: begin
             case (inst_fe_dec[14:12])
-                3'b000: decoded_instr_dbg = ADDI;
+                3'b000: decoded_instr_dbg = (inst_fe_dec == 32'h00000013) ? NOP : ADDI;
                 3'b010: decoded_instr_dbg = SLTI;
                 3'b011: decoded_instr_dbg = SLTIU;
                 3'b100: decoded_instr_dbg = XORI;

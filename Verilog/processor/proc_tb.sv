@@ -356,16 +356,16 @@ module proc_tb;
         begin : timeout1
           repeat(1000) @(posedge clk);
           $display("Timeout");
+          $stop;
         end
         begin
           @(posedge dut.halt_wb_fe);
           disable timeout1;
           $display("Halt Asserted. Program ended");
-          
+          $stop;
         end
     join
 
-    $stop;
   end
   
   task check_register(
