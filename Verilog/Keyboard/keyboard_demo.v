@@ -35,19 +35,73 @@ module keyboard_demo(
 );
 
 // default everything to 0 for now;
-assign VGA_BLANK_N = 0;
-assign VGA_B = 0;
-assign VGA_CLK = 0;
-assign VGA_G = 0;
-assign VGA_HS = 0;
-assign VGA_R = 0;
-assign VGA_SYNC_N = 0;
-assign VGA_VS = 0;
+assign LEDR = 0;
 
+wire rst_n;
 wire [1:0] dir;
 wire fire, done;
+wire vga_clk;
+reg receive;
+reg [3:0] x, y;
 
-keyboard ps2_driver (.sys_clk(CLOCK_50), .rst_n(KEY[0]), .ps_clk(PS2_CLK), .ps_data(PS2_DAT), .direction(dir), .fire(fire), .done(done));
+assign rst_n = KEY[0];
 
-assign LEDR = {dir, fire, done, 6'h00};
+// vga_clk @ 25 MHz
+vga_pll pll (.refclk(CLOCK_50), .rst(1'b0), .outclk_0(vga_clk));
+
+keyboard ps2_driver (.sys_clk(CLOCK_50), .rst_n(rst_n), .ps2_clk(PS2_CLK), .ps2_data(PS2_DAT), .direction(dir), .fire(fire), .done(done));
+
+PPU display_driver (
+		.sys_clk(CLOCK_50),
+		.vga_clk(vga_clk),
+		.VGA_CLK(VGA_CLK),
+		.rst_n(rst_n),
+		.r(VGA_R), 
+		.g(VGA_G), 
+		.b(VGA_B), 
+		.VGA_BLANK_N(VGA_BLANK_N),
+		.VGA_HS(VGA_HS),
+		.VGA_SYNC_N(VGA_SYNC_N),
+		.VGA_VS(VGA_VS),
+		.receive(done | receive),
+		.board(1'b0),
+        .square_update(y * 10 + x),
+		.square_state(2'b00),
+		.ship_type(2'b00),
+		.ship_section(3'b000),
+        .vert(1'b0),
+		.square_sel(done ? 1'b0 : 1'b1));
+
+always @(posedge CLOCK_50, negedge rst_n) begin
+	if (!rst_n) begin
+		receive <= 1;
+	end
+	else begin
+		receive <= done;
+	end
+end
+
+always @(posedge CLOCK_50, negedge rst_n) begin
+	if(!rst_n) begin
+		x <= 0;
+		y <= 0;
+	end
+	else if (done & ~fire) begin
+		case (dir)
+			2'b00 : if (y > 0) begin
+				y <= y - 1;
+			end
+			2'b01 : if (y < 9) begin
+				y <= y + 1;
+			end
+			2'b11 : if (x < 9) begin
+				x <= x + 1;
+			end
+			2'b10 : if (x > 0) begin
+				x <= x - 1;
+			end
+		endcase		
+	end
+end
+
 endmodule

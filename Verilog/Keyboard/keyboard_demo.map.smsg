@@ -1,1 +1,2 @@
-Info (10281): Verilog HDL Declaration information at keyboard_demo.v(15): object "KEY" differs only in case from object "key" in the same scope File: I:/ECE554/Battleship/Verilog/Keyboard/keyboard_demo.v Line: 15
+Info (10281): Verilog HDL Declaration information at PPU.sv(21): object "vga_clk" differs only in case from object "VGA_CLK" in the same scope File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 21
+Info (10281): Verilog HDL Declaration information at keyboard_demo.v(29): object "VGA_CLK" differs only in case from object "vga_clk" in the same scope File: I:/ECE554/Battleship/Verilog/Keyboard/keyboard_demo.v Line: 29

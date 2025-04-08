@@ -1,5 +1,5 @@
 Flow report for keyboard_demo
-Mon Apr  7 18:28:35 2025
+Tue Apr  8 16:38:48 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -41,24 +41,24 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +---------------------------------+------------------------------------------------+
-; Flow Status                     ; Successful - Mon Apr  7 18:28:24 2025          ;
+; Flow Status                     ; Successful - Tue Apr  8 16:38:29 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; keyboard_demo                                  ;
 ; Top-level Entity Name           ; keyboard_demo                                  ;
 ; Family                          ; Cyclone V                                      ;
 ; Device                          ; 5CSEMA5F31C6                                   ;
 ; Timing Models                   ; Final                                          ;
-; Logic utilization (in ALMs)     ; 166 / 32,070 ( < 1 % )                         ;
-; Total registers                 ; 282                                            ;
+; Logic utilization (in ALMs)     ; 386 / 32,070 ( 1 % )                           ;
+; Total registers                 ; 522                                            ;
 ; Total pins                      ; 51 / 457 ( 11 % )                              ;
 ; Total virtual pins              ; 0                                              ;
-; Total block memory bits         ; 0 / 4,065,280 ( 0 % )                          ;
+; Total block memory bits         ; 239,432 / 4,065,280 ( 6 % )                    ;
 ; Total DSP Blocks                ; 0 / 87 ( 0 % )                                 ;
 ; Total HSSI RX PCSs              ; 0                                              ;
 ; Total HSSI PMA RX Deserializers ; 0                                              ;
 ; Total HSSI TX PCSs              ; 0                                              ;
 ; Total HSSI PMA TX Serializers   ; 0                                              ;
-; Total PLLs                      ; 0 / 6 ( 0 % )                                  ;
+; Total PLLs                      ; 1 / 6 ( 17 % )                                 ;
 ; Total DLLs                      ; 0 / 4 ( 0 % )                                  ;
 +---------------------------------+------------------------------------------------+
 
@@ -68,7 +68,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/07/2025 18:26:10 ;
+; Start date & time ; 04/08/2025 16:35:52 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; keyboard_demo       ;
 +-------------------+---------------------+
@@ -79,10 +79,12 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+-----------------------------------------------+---------------+-------------+------------------+
 ; Assignment Name                     ; Value                                         ; Default Value ; Entity Name ; Section Id       ;
 +-------------------------------------+-----------------------------------------------+---------------+-------------+------------------+
-; COMPILER_SIGNATURE_ID               ; 91759833344.174406836915320                   ; --            ; --          ; --               ;
+; COMPILER_SIGNATURE_ID               ; 91759833344.174414815218140                   ; --            ; --          ; --               ;
 ; ENABLE_SIGNALTAP                    ; On                                            ; --            ; --          ; --               ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                            ; --            ; --          ; --               ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                             ; --            ; --          ; --               ;
+; MISC_FILE                           ; vga_pll.cmp                                   ; --            ; --          ; --               ;
+; MISC_FILE                           ; vga_pll_sim/vga_pll.vo                        ; --            ; --          ; --               ;
 ; PARTITION_COLOR                     ; -- (Not supported for targeted family)        ; --            ; --          ; Top              ;
 ; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family)        ; --            ; --          ; Top              ;
 ; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family)        ; --            ; --          ; Top              ;
@@ -116,6 +118,8 @@ https://fpgasoftware.intel.com/eula.
 ; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_INVERSION_MASK_LENGTH=18                  ; --            ; --          ; auto_signaltap_0 ;
 ; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_SEGMENT_SIZE=1                            ; --            ; --          ; auto_signaltap_0 ;
 ; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_SAMPLE_DEPTH=0                            ; --            ; --          ; auto_signaltap_0 ;
+; SPD_FILE                            ; vga_pll.spd                                   ; --            ; --          ; --               ;
+; SYNTHESIS_ONLY_QIP                  ; On                                            ; --            ; --          ; --               ;
 ; USE_SIGNALTAP_FILE                  ; stp1.stp                                      ; --            ; --          ; --               ;
 +-------------------------------------+-----------------------------------------------+---------------+-------------+------------------+
 
@@ -125,11 +129,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:22     ; 1.0                     ; 4906 MB             ; 00:00:28                           ;
-; Fitter               ; 00:01:36     ; 1.0                     ; 7512 MB             ; 00:06:01                           ;
-; Assembler            ; 00:00:06     ; 1.0                     ; 4878 MB             ; 00:00:04                           ;
-; Timing Analyzer      ; 00:00:09     ; 1.1                     ; 5274 MB             ; 00:00:06                           ;
-; Total                ; 00:02:13     ; --                      ; --                  ; 00:06:39                           ;
+; Analysis & Synthesis ; 00:00:48     ; 1.0                     ; 5001 MB             ; 00:00:31                           ;
+; Fitter               ; 00:01:26     ; 1.0                     ; 7806 MB             ; 00:07:44                           ;
+; Assembler            ; 00:00:09     ; 1.0                     ; 4885 MB             ; 00:00:05                           ;
+; Timing Analyzer      ; 00:00:17     ; 1.2                     ; 5454 MB             ; 00:00:08                           ;
+; Total                ; 00:02:40     ; --                      ; --                  ; 00:08:28                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
