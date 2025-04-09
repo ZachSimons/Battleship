@@ -115,8 +115,8 @@ SB          = 0b000 << 12
 SH          = 0b001 << 12
 SW          = 0b010 << 12
 
-def negative(value: int):
-    return (2**12-1)&(~(value*-1)) + 1
+def negative(value: int, size: int):
+    return (2**size-1)&(~(value*-1)) + 1
 
 def rd_reg(reg: int):
     return reg << 7
@@ -131,36 +131,36 @@ def iTypeImm(value: int):
     if value >= 0:
         return value << 20
     else:
-        complement = negative(value)
+        complement = negative(value, 12)
         return complement << 20
 
 def sTypeImm(value: int):
     if value >= 0:
         return ((value%32)<<7) | ((value-(value%32))<<20)
     else:
-        complement = negative(value)
+        complement = negative(value, 12)
         return ((complement%32)<<7) | ((complement-(complement%32))<<20)
 
 def bTypeImm(value: int):
     if value >= 0:
         return ((value&(2**12))<<19) | (((value%(2**11)) & ~(2**5-1))<<20) | ((value%(2**5))<<7) | ((value&(2**11))>>4)
     else:
-        complement = negative(value)
+        complement = negative(value, 13)
         return ((complement&(2**12))<<19) | (((complement%(2**11)) & ~(2**5-1))<<20) | ((complement%(2**5))<<7) | ((complement&(2**11))>>4)
 
 def uTypeImm(value: int):
     if value >= 0:
         return value & ~(2**12-1)
     else:
-        complement = negative(value)
+        complement = negative(value, 32)
         return complement & ~(2**12-1)
 
 def jTypeImm(value: int):
     if value >= 0:
-        return ((value & (2**20))<<11) | ((value % (2**11))<<20) | ((value & (2**11))<<9) | (((value%(2**20)) & ~(2**12-1)))
+        return ((value & (2**20))<<11) | ((value % (2**11))<<20) | ((value & (2**11))<<9) | (((value%(2**20)) & ((2**20-1) - (2**12-1))))
     else:
-        complement = negative(value)
-        return ((complement & (2**20))<<11) | ((complement % (2**11))<<20) | ((complement & (2**11))<<9) | (((complement%(2**20)) & ~(2**12-1)))
+        complement = negative(value, 21)
+        return ((complement & (2**20))<<11) | ((complement % (2**11))<<20) | ((complement & (2**11))<<9) | (((complement%(2**20)) & ((2**20-1) - (2**12-1))))
     
 def calculateOffset(current: int, target: int):
     if (target - current) % 4:
