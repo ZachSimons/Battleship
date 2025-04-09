@@ -51,7 +51,7 @@ assign unsigned_sel = ((opcode==7'b000011)&&((sel==3'b000) || (sel==3'b001) || (
 assign rd_en = (opcode==7'b0000011) ? 1'b1 : 1'b0; 
 
 //if jalr read from reg
-assign jalr = (opcode==7'b1100111) ? 1'b1 : 1'b0; 
+assign jalr = (opcode==7'b1100111) || (opcode==7'b0001001) ? 1'b1 : 1'b0; 
 
 //if return from interrupt
 assign rti = (opcode==7'b0001000) ? 1'b1 : 1'b0; 

@@ -352,13 +352,13 @@ module proc_tb;
       );
     end
 
-    #480
+    #540
     @(posedge clk);
     interrupt_key = 1;
     @(posedge clk);
     interrupt_key = 0;
     @(posedge clk);
-    #830
+    #840
     @(posedge clk);
     interrupt_key = 1;
     @(posedge clk);

@@ -7,7 +7,9 @@ module fetch(
     input interrupt,
     input flush,
     input stall,
+    input interrupt_branch_alert,
     input [31:0] pc_ex,
+    output logic stall_override,
     output logic [31:0] instruction_dec,
     output logic [31:0] pc_next_dec,
     output logic [31:0] pc_curr_dec
@@ -19,8 +21,8 @@ logic [1:0] flushnop;
 logic [31:0] i_reg, nxt_pc, pc_q, instruction_fe, imem_out;
 logic [31:0] branch_mux, rti_mux, pc_d;
 logic [31:0] pc_next_dec_q0, pc_next_dec_q1, pc_curr_dec_q0, pc_curr_dec_q1;
-
-
+logic branch_in_fetch, branch_mem;
+logic [1:0] interrupt_nop, interrupt_temp_enable;
 //Use 0x00100073 as halt
 
 //////////////MODULE INSTANTIATION///////////////////
@@ -38,7 +40,7 @@ always_ff @(posedge clk) begin
 end
 
 assign instruction_fe = (stall | stall_mem1) ? instruction_fe : 
-                        ((^imem_out === 1'bX) | (~|imem_out) | |warmup | flush | |flushnop) ? 32'h00000013 : imem_out;
+                        ((^imem_out === 1'bX) | (~|imem_out) | |warmup | (flush && ~inter_temp) | |flushnop | |interrupt_nop) ? 32'h00000013 : imem_out;
 
 
 //Flushing -> IFD needs to go to 0 and NOP. PC still needs to update to the correct value
@@ -54,7 +56,7 @@ always_ff @(posedge clk) begin
     if(!rst_n) begin
         instruction_dec <= 32'h00000013; //Needs to be halt or NOP
     end
-    else if (flush) begin
+    else if (flush && ~inter_temp) begin
         instruction_dec <= 32'h00000013; //IDK if this needs to be combinational
     end
     else if (|flushnop | warmup | stall) begin
@@ -75,7 +77,7 @@ always_ff @(posedge clk) begin
         pc_next_dec_q1 <= '0;
         pc_curr_dec_q1 <= '0;
     end
-    else if (flush) begin
+    else if (flush && ~inter_temp) begin //DONT KNWO IF THIS WORKS
         pc_next_dec_q0 <= 0;
         pc_curr_dec_q0 <= 0;
         pc_next_dec_q1 <= 0;
@@ -124,7 +126,7 @@ always_ff @(posedge clk) begin
     if (!rst_n) begin
         flushnop <= 0;
     end
-    else if(flush) begin
+    else if(flush && ~inter_temp) begin
         flushnop <= 2;
     end
     else begin
@@ -143,8 +145,9 @@ end
 //PC control Logic 
 assign pc_d =       interrupt ? 32'h00000004 :
                     rti       ? i_reg        : 
+                    rsi       ? pc_ex        : //PC FROM BRANCH WHEN RSI
                     inter_temp ? nxt_pc : branch_mux; // DONT KNWO IF THIS WOKRS
-assign branch_mux = (branch/* && ~inter_temp*/) ? pc_ex : nxt_pc; /////////////////DONT KNOW IF THIS WORKS
+assign branch_mux = interrupt ? pc_curr_dec_q0 : (branch /*&& inter_temp*/) ? pc_ex : nxt_pc; /////////////////DONT KNOW IF THIS WORKS
 
 //Need to not increase the pc when stalling/hazard
 assign nxt_pc = pc_q + 4;
@@ -154,7 +157,7 @@ always_ff @(posedge clk) begin
     if(!rst_n) begin
         pc_q <= '0;
     end
-    else if (stall | warmup/*& ~interrupt*/ | inter_stall) begin //DONT KNMOW IF THIS WORKS
+    else if (stall | warmup/*& ~interrupt*/) begin
         pc_q <= pc_q;
     end
     else begin
@@ -162,6 +165,8 @@ always_ff @(posedge clk) begin
     end
 end
 
+assign branch_in_fetch = ((instruction_fe[6:0] == 7'b1100011) || (instruction_fe[6:0] == 7'b1100111));
+assign stall_override = inter_stall;
 //Instruction register to hold nxt_pc
 always_ff @(posedge clk) begin
     if(!rst_n) begin
@@ -169,19 +174,21 @@ always_ff @(posedge clk) begin
         inter_temp <= 0;
         inter_stall <= 0;
     end
-    else if(rsi) begin
+    else if(rsi | rti) begin
         i_reg <= '0;
     end 
     else if (stall /*& ~interrupt*/) begin //TODO determine via testing if needed
         i_reg <= i_reg;
     end
     else if(interrupt) begin 
-        i_reg <= branch_mux;
+        i_reg <= (branch) ? pc_ex : 
+                 (branch_mem) ? pc_q :
+                 branch_mux;
         inter_temp <= 1;
-        inter_stall <= 1;
+        inter_stall <= 0;
     end
-    else if(inter_temp && branch) begin  //DONT KNWO IF THIS WORKS
-        i_reg <= branch_mux;
+    else if((|interrupt_temp_enable) && inter_temp && (branch || interrupt_branch_alert || branch_in_fetch)) begin  //DONT KNWO IF THIS WORKS
+        i_reg <= branch ? branch_mux : i_reg;
         inter_stall <= 0;
     end
     else begin
@@ -190,6 +197,30 @@ always_ff @(posedge clk) begin
     end
 end
 
+//interrupt nop gen
+always_ff @(posedge clk) begin
+    if(!rst_n) begin
+        interrupt_nop <= 0;
+        interrupt_temp_enable <= 0;
+    end
+    else if(interrupt) begin
+        interrupt_nop <= 2;
+        interrupt_temp_enable <= 3;
+    end
+    else begin
+        interrupt_nop <= (interrupt_nop != 0) ? interrupt_nop - 1'b1 : interrupt_nop;
+        interrupt_temp_enable <= (interrupt_temp_enable != 0) ? interrupt_temp_enable - 1'b1 : interrupt_temp_enable;
+    end
+end
+
+always_ff @(posedge clk) begin
+    if(!rst_n) begin
+        branch_mem <= 0;
+    end
+    else begin
+        branch_mem <= branch;
+    end
+end
 
 //for 2 cyles after a interrupt goes high while interrupt flag is low, redirect branch returns into i reg instead of pc
 //remove flushing the pipeline for a interrupt

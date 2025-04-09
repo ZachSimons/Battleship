@@ -41,13 +41,13 @@ logic flush, pfstall, stallmem, hazard, hazard_stall;
 logic [4:0] rdreg1_if_id, rdreg2_if_id;
 
 //Fetch
-logic rti_de_fe, rsi_de_fe, branch_ex_fe;
+logic stall_override, rti_de_fe, rsi_de_fe, branch_ex_fe;
 logic [31:0] inst_fe_dec, nxtpc_fe_dec, pc_fe_dec;
 
 
 //Decode
 logic random_dec_ex, regwrten_dec_ex, unsigned_dec_ex, memrden_dec_ex, jalr_dec_ex, datasel_dec_ex, 
-        memwrten_dec_ex, lui_ex, rdi_dec_ex, ignore_fwd_ex;
+        memwrten_dec_ex, lui_ex, rdi_dec_ex, ignore_fwd_ex, interrupt_branch_alert_de_fe;
 logic [1:0] wbsel_dec_ex, width_dec_ex;
 logic [3:0] aluop_dec_ex, bjinst_dec_ex;
 logic [4:0] wrtreg_dec_ex;
@@ -76,14 +76,16 @@ logic [4:0] rdreg1_dec_ex, rdreg2_dec_ex;
 logic [1:0] forward_control1, forward_control2;
 
 //////////////MODULE INSTANTIATION///////////////////
-fetch proc_fe(
+fetch proc_fe( 
     .clk(clk),
     .rst_n(rst_n),
     .branch(branch_ex_fe),                    
     .rti(rti_de_fe),              
     .rsi(rsi_de_fe),            
     .interrupt(interrupt), 
+    .interrupt_branch_alert(interrupt_branch_alert_de_fe),
     .flush(flush),
+    .stall_override(stall_override),
     .stall(hazard | stallmem),
     .pc_ex(branchpc_ex_fe),       
     .instruction_dec(inst_fe_dec),
@@ -101,6 +103,7 @@ decode proc_de(
     .write_enable(regwrten_wb_dec), 
     .flush(flush), //TODO This controls flushing
     .hazard(hazard),
+    .interrupt_branch_alert(interrupt_branch_alert_de_fe),
     .stall_mem(stallmem),           
     .write_reg(wrtreg_wb_dec),   
     .write_data(wbdata_wb_dec),   
@@ -263,8 +266,8 @@ end
 //TODO fix later
 //rst_n warmup 
 
-assign flush = branch_ex_fe /*| interrupt */| rti_de_fe;
-assign stallmem = hazard_stall; //To handle both Pc changing and 
+assign flush = branch_ex_fe /*| interrupt */| rti_de_fe | rsi_de_fe;
+assign stallmem = (hazard_stall && (~stall_override)); //To handle both Pc changing and 
 
 ////////////////Interrupt Logic///////////////////////
 
