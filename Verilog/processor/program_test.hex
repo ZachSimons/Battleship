@@ -21,7 +21,7 @@ abc0e313   // ORI x6, x1, 0xABC (x6 = 1 | 0xABC = 0xABC)
 4020D433   // SRA x8, x1, x2     (x8 = 1 >>s 2 = 0, sign-extended)
 0020E4B3   // OR x9, x1, x2      (x9 = 1 | 2 = 3)
 0020F533   // AND x10, x1, x2    (x10 = 1 & 2 = 0)
-deadc5b7   // LUI x11, DEADC
+deadc5b7   // LUI x11, DEADC     
 eef58593   // ADDI x11, x11, EEF
 00b10123   // SB x11, 2(x2)          
 00b11223   // SH x11, 4(x2)
@@ -30,13 +30,9 @@ eef58593   // ADDI x11, x11, EEF
 00411683   // LH x4, 4(x2)
 00612703   // LW x5, 6(x2)
 000707b3   // ADD x15, x14, x0
-deadc5b7   // LUI x11, DEADC
-eef58593   // ADDI x11, x11, EEF
-00209413    // SLLI x8, x1, 2 
-0010d493    // SRLI x9, x1, 1 
-4010d513    // SRAI x10, x1, 1
-deadc5b7   // LUI x11, DEADC
-eef58593   // ADDI x11, x11, EEF
-deadc5b7   // LUI x11, DEADC
-eef58593   // ADDI x11, x11, EEF
+deadc7b7   // LUI x15, DEADC
+eef00613   // ADDI x12, x0, EEF
+00279413   // SLLI x8, x15, 2 
+0017d493   // SRLI x9, x15, 1 
+40165513   // SRAI x10, x12, 1
 00000073
