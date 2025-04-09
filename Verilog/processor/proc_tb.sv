@@ -327,7 +327,7 @@ module proc_tb;
     rst_n = 0;
     interrupt_key = 0;
     interrupt_eth = 0;
-    accelerator_data = 0;
+    accelerator_data = 1;
     interrupt_source_data = 32'hDEADBEEF;
 
     
@@ -351,6 +351,19 @@ module proc_tb;
         test_list[i].test_name
       );
     end
+
+    #480
+    @(posedge clk);
+    interrupt_key = 1;
+    @(posedge clk);
+    interrupt_key = 0;
+    @(posedge clk);
+    #830
+    @(posedge clk);
+    interrupt_key = 1;
+    @(posedge clk);
+    interrupt_key = 0;
+
     repeat(700) @(posedge clk);
     $display("Finished stepping through all instructions!");
     $stop;

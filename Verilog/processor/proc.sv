@@ -110,10 +110,9 @@ decode proc_de(
     .next_pc_ex(nxtpc_dec_ex),
     .curr_pc_ex(currpc_dec_ex),
     .write_reg_ex(wrtreg_dec_ex),
-    .read_data1_dec(interface_data), //TODO to external Devices
     .instruction_ex(instruction_dec_ex),              //
     .random_ex(random_dec_ex), 
-    .ppu_send(ppu_send),            //TODO to external Device
+    .ppu_send_ex(ppu_send),            //TODO to external Device
     .write_en_ex(regwrten_dec_ex),   
     .wb_sel_ex(wbsel_dec_ex),
     .unsigned_sel_ex(unsigned_dec_ex),
@@ -128,8 +127,8 @@ decode proc_de(
     .bj_inst_ex(bjinst_dec_ex),
     .rsi_ex(rsi_de_fe), 
     .sac(sac),            //TODO to external device
-    .snd(snd),            //TODO to external device
-    .uad(uad),             //TODO to external device
+    .snd_ex(snd),            //TODO to external device
+    .uad_ex(uad),             //TODO to external device
     .read_register1_ex(rdreg1_dec_ex),
     .read_register2_ex(rdreg2_dec_ex),
     .read_register1_if_id(rdreg1_if_id),
@@ -166,6 +165,7 @@ execute proc_ex(
     .forward_control2(forward_control2),
     .wbdata_wb_ex(wbdata_wb_dec),
     .next_pc_mem(nxtpc_ex_mem),
+    .interface_data(interface_data),
     .write_data_mem(memwrtdata_ex_mem),
     .alu_result_mem(aluresult_ex_mem),
     .branch_pc(branchpc_ex_fe), 
@@ -263,7 +263,7 @@ end
 //TODO fix later
 //rst_n warmup 
 
-assign flush = branch_ex_fe | interrupt | rti_de_fe;
+assign flush = branch_ex_fe /*| interrupt */| rti_de_fe;
 assign stallmem = hazard_stall; //To handle both Pc changing and 
 
 ////////////////Interrupt Logic///////////////////////

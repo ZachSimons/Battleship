@@ -14,7 +14,7 @@ module fetch(
 );
 //////////////NET INSTANTIATION/////////////////////
 logic stall_mem1; //Doesn't have to be a latched signal 
-logic warmup;
+logic warmup, inter_temp, inter_stall;
 logic [1:0] flushnop;
 logic [31:0] i_reg, nxt_pc, pc_q, instruction_fe, imem_out;
 logic [31:0] branch_mux, rti_mux, pc_d;
@@ -142,8 +142,9 @@ end
 //Order of PC change interrupt -> RTI -> branch
 //PC control Logic 
 assign pc_d =       interrupt ? 32'h00000004 :
-                    rti       ? i_reg        : branch_mux; 
-assign branch_mux = branch ? pc_ex : nxt_pc;
+                    rti       ? i_reg        : 
+                    inter_temp ? nxt_pc : branch_mux; // DONT KNWO IF THIS WOKRS
+assign branch_mux = (branch/* && ~inter_temp*/) ? pc_ex : nxt_pc; /////////////////DONT KNOW IF THIS WORKS
 
 //Need to not increase the pc when stalling/hazard
 assign nxt_pc = pc_q + 4;
@@ -153,7 +154,7 @@ always_ff @(posedge clk) begin
     if(!rst_n) begin
         pc_q <= '0;
     end
-    else if (stall | warmup/*& ~interrupt*/) begin
+    else if (stall | warmup/*& ~interrupt*/ | inter_stall) begin //DONT KNMOW IF THIS WORKS
         pc_q <= pc_q;
     end
     else begin
@@ -165,6 +166,8 @@ end
 always_ff @(posedge clk) begin
     if(!rst_n) begin
         i_reg <= '0;
+        inter_temp <= 0;
+        inter_stall <= 0;
     end
     else if(rsi) begin
         i_reg <= '0;
@@ -174,7 +177,23 @@ always_ff @(posedge clk) begin
     end
     else if(interrupt) begin 
         i_reg <= branch_mux;
+        inter_temp <= 1;
+        inter_stall <= 1;
+    end
+    else if(inter_temp && branch) begin  //DONT KNWO IF THIS WORKS
+        i_reg <= branch_mux;
+        inter_stall <= 0;
+    end
+    else begin
+        inter_temp <= 0;
+        inter_stall <= 0;
     end
 end
+
+
+//for 2 cyles after a interrupt goes high while interrupt flag is low, redirect branch returns into i reg instead of pc
+//remove flushing the pipeline for a interrupt
+
+
 
 endmodule

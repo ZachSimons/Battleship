@@ -25,6 +25,7 @@ module execute(
     input           [1:0]   forward_control2,
     input           [31:0]  wbdata_wb_ex,
     input                   lui_ex,
+    output logic    [31:0]  interface_data,
     output logic    [31:0]  next_pc_mem,
     output logic    [31:0]  write_data_mem,
     output logic    [31:0]  alu_result_mem,
@@ -61,6 +62,8 @@ module execute(
     assign alu_inB = data_sel_exe ? imm : baseB;
  
     assign alu_result_exe = lui_ex ? imm : alu_output;
+
+    assign interface_data = alu_inA;
 
     alu EXE_ALU(.inA(alu_inA), .inB(alu_inB), .alu_op(alu_op_exe[2:0]), .option_bit(alu_op_exe[3]), .out(alu_output));
     branch_ctrl EXE_BRANCH_CTRL(.bj_inst(bj_inst_exe), .inA(alu_inA), .inB(alu_inB), .branch(branch));
