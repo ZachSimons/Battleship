@@ -251,7 +251,7 @@ if __name__ == '__main__':
                         addressCalc = parseAddress(parameters[1])
                         outputFile.write(format(STORE_CODE + SW + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
                     elif(instruction[0] == 'addi'):
-                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(checkHiLo(parameters[1]))), '08x') + '\n')
+                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(checkHiLo(parameters[2]))), '08x') + '\n')
                     elif(instruction[0] == 'slti'):
                         outputFile.write(format(OP_IMM_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
                     elif(instruction[0] == 'sltiu'):
