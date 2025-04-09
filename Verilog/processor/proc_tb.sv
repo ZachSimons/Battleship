@@ -339,9 +339,11 @@ module proc_tb;
     if (testname == "loadstore") begin
       fork 
         begin
-          while (dut.proc_de.curr_pc != 32'h5c) begin
+          while (dut.pc_fe_dec != 32'd220) begin
             @(posedge clk);
           end
+          @(posedge clk);
+          #1;
           check_basic_register(
             10, 
             32'h22222222, 
@@ -375,7 +377,7 @@ module proc_tb;
           disable timeout_ls;
         end
         begin : timeout_ls
-          repeat (100) @(posedge clk);
+          repeat (1000) @(posedge clk);
           $error("TEST FAILED: Timeout: Load/Store test did not complete.");
           $stop;
         end
