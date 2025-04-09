@@ -16,10 +16,9 @@ module decode(
     output logic [31:0] next_pc_ex,
     output logic [31:0] curr_pc_ex,
     output logic [4:0] write_reg_ex,
-    output logic [31:0] read_data1_dec,
     output logic [31:0] instruction_ex,
     output logic random_ex,
-    output logic ppu_send,
+    output logic ppu_send_ex,
     output logic write_en_ex,
     output logic [1:0] wb_sel_ex,
     output logic unsigned_sel_ex,
@@ -34,8 +33,8 @@ module decode(
     output logic [3:0] bj_inst_ex,
     output logic rsi_ex,
     output logic sac,
-    output logic snd,
-    output logic uad,
+    output logic snd_ex,
+    output logic uad_ex,
     output logic [4:0] read_register1_ex,
     output logic [4:0] read_register2_ex,
     output logic [4:0] read_register1_if_id,
@@ -49,7 +48,7 @@ module decode(
 logic [31:0] src_data1;
 logic [31:0] imm[4:0];
 logic [4:0] write_reg_dec; 
-logic random, lui, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi, auipc, imm_sel, fluhaz, ignore_fwd;
+logic ppu_send, uad, snd, random, lui, write_en, unsigned_sel, rd_en, jalr, rti, data_sel, wrt_en, rsi, rdi, auipc, imm_sel, fluhaz, ignore_fwd;
 logic [1:0] wb_sel, width, type_sel;
 logic [3:0] alu_op, bj_inst;
 logic [31:0] read_data2, read_data1, imm_out;
@@ -67,8 +66,6 @@ assign imm[4]= {{13{instruction[31]}},instruction[19:12],instruction[20],instruc
 //muxs
 assign imm_out = imm_sel ? imm[type_sel+1] : imm[0];
 assign read_data1 = auipc ? src_data1 : curr_pc;
-
-assign read_data1_dec = read_data1;
 
 assign read_register1_if_id = instruction[19:15];
 assign read_register2_if_id = instruction[24:20];
@@ -105,6 +102,9 @@ always_ff @(posedge clk) begin
         read_register2_ex <= 0;
         ignore_fwd_ex <= 0;
         lui_ex <= 0;
+        snd_ex <= 0;
+        uad_ex <= 0;
+        ppu_send_ex <= 0;
     end
     else if(~stall_mem) begin
         read_data1_ex <= ~fluhaz ? read_data1 : 0;
@@ -132,6 +132,9 @@ always_ff @(posedge clk) begin
         ignore_fwd_ex <= ~fluhaz ? ignore_fwd : 0;
         lui_ex <= ~fluhaz ? lui : 0;
         instruction_ex <= ~fluhaz ? instruction : 32'h00000013;
+        snd_ex <= ~fluhaz ? snd : 0;
+        uad_ex <= ~fluhaz ? uad : 0;
+        ppu_send_ex <= ~fluhaz ? ppu_send : 0;
     end
 end
 

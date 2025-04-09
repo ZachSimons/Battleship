@@ -77,7 +77,7 @@ assign snd = (opcode==7'b0001011) ? 1'b1 : 1'b0;
 //sets what to write back
 assign wb_sel = (opcode==7'b0101001) ? 0 : 
                 ((opcode==7'b1101111) || (opcode==7'b1100111)) ? 1 :
-                ((opcode==7'b0000011) || (opcode==7'b0101010) || (opcode==7'b0001010)) ? 2 : 3;
+                ((opcode==7'b0000011) || (opcode==7'b0001010)) ? 2 : 3;
 
 //sets what type of instruction it is for imm
 assign type_sel = ((opcode==7'b0110111) || (opcode==7'b0010111)) ? 2 :

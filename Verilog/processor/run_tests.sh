@@ -31,6 +31,8 @@ else
         jal_tests.hex
         loadstore.hex
         loadhaz.hex
+        branch_test.hex
+        custom_haz.hex
     )
     echo "▶️  Running full test suite"
 fi
@@ -60,7 +62,7 @@ for test in "${tests[@]}"; do
             -c -do "run -all; quit" | tee "$logfile"
 
         # Check if the log contains any error messages
-        if grep -q "** FAILED" "$logfile"; then
+        if grep -q " FAILED" "$logfile" || grep -q " Error loading design" "$logfile"; then
             echo "❌ Test FAILED: $testname"
             failed+=("$testname")
         else

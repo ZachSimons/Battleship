@@ -7,7 +7,6 @@ module memory(
     input logic         mem_rd_en_mem,
     input logic         mem_wrt_en_mem,
     input logic         reg_wrt_en_mem,
-    input logic         random_mem,
     input logic         rdi_mem,
     input logic         stallmem,
     input logic [1:0]   width_mem,
@@ -28,8 +27,8 @@ module memory(
     output logic [31:0] instruction_wb
 );
 //////////////NET INSTANTIATION/////////////////////
-logic [31:0] lfsr, wrapper_rd_data, random_mux, rdi_mux;
-logic [15:0] lfsr16;
+logic [31:0] wrapper_rd_data, rdi_mux;
+
 
 //////////////MODULE INSTANTIATION///////////////////
 data_memory_wrapper dmem (
@@ -69,21 +68,10 @@ end
 
 ////////////////COMBINATIONAL LOGIC//////////////////
 //Stage Muxes
-assign random_mux = random_mem ? lfsr : wrapper_rd_data;
-assign rdi_mux = rdi_mem ? rdi_data : random_mux; 
+assign rdi_mux = rdi_mem ? rdi_data : wrapper_rd_data; 
 
 
-////////////Linear Feedback Register/////////////////
-always_ff @(posedge clk) begin
-    if(~rst_n) begin
-        lfsr16 <= 16'hb8ab;
-    end
-    else begin //Determine Taps 16, 15, 13, 4
-        lfsr16 <= {lfsr16[14:0], (lfsr16[15] ^ lfsr16[14] ^ lfsr16[12] ^ lfsr16[3])};
-    end
-end
 
-assign lfsr = {{5'd16{lfsr16[15]}}, lfsr16};
 
 
 endmodule

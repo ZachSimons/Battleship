@@ -1,0 +1,17 @@
+112232b7 //lui x5 0x00011223  
+34428293 //addi x5, x5, 0x344
+00028028 //UGS x5 (custom instruction for sending to PPU using t0)
+55667337 //lui x6, 00055667
+78830313 //addi x6, x6, 788
+0003002B //UAD x6 (custom instruction for sending to accelerator)
+223343b7 //lui x7, 0x00022334
+45538393 //addi x7, x7, 455
+0003800b //snd x7 (custom instruction for sending to communication)
+0000052a //LDR x10 (LDR with dst of x10)
+00150513 //addi x10, x10, 1
+0000030A //RDI x12 (RDI to x12)
+00160613 //addi x12, x12, 1
+000006a9 //SAC x13 (SAC to x13)
+00168693 //addi x13, x13, 1
+0aa00f93 //addi x31, x0, 0xAA
+0000006f //Forever jump loop

@@ -2,6 +2,8 @@
 
 module proc_tb;
 
+  logic [31:0] ppu_sim, acc_sim, comm_sim;
+  logic [1:0] sac_sim; 
   logic clk;
   logic rst_n;
   logic interrupt_key;
@@ -220,7 +222,22 @@ module proc_tb;
     }
   };
   
-
+  //Simulating interfaces
+  always_ff @(posedge clk) begin
+    if(!rst_n) begin
+      ppu_sim <= 0;
+      acc_sim <= 0;
+      comm_sim <= 0;
+      sac_sim <= 0;
+    end
+    else begin
+      ppu_sim <= ppu_send ? interface_data : ppu_sim;
+      acc_sim <= uad ? interface_data : acc_sim;
+      comm_sim <= snd ? interface_data : comm_sim;
+      sac_sim <= (~sac_sim & sac) ? sac :  sac_sim;
+    end
+  end
+  
 
   // Instantiate DUT
   proc dut (
@@ -247,7 +264,7 @@ module proc_tb;
     rst_n = 0;
     interrupt_key = 0;
     interrupt_eth = 0;
-    accelerator_data = 0;
+    accelerator_data = 1;
     interrupt_source_data = 32'hDEADBEEF;
 
     if (!$value$plusargs("TEST=%s", testname)) begin
@@ -423,13 +440,89 @@ module proc_tb;
         end
         begin : timeout_lhaz
           repeat (200) @(posedge clk);
-          $error("TEST FAILED: Timeout: Load/Store test did not complete.");
+          $error("TEST FAILED: Timeout: Load hazard test did not complete.");
           $stop;
         end
       join_any
     end
 
-
+    /////////////////////////////////////////////////////////////////
+    // BRANCH TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "branch_test") begin
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[27] != 32'h1) begin
+            @(posedge clk);
+          end
+          check_basic_register(
+            28, 
+            32'h00000006, 
+            "Value of 6 indicates 6 passes"
+          );
+          check_basic_register(
+            29, 
+            32'h00000000, 
+            "Value of 0 indicates 0 fails"
+          );
+          disable timeout_br;
+        end
+        begin : timeout_br
+          repeat (200) @(posedge clk);
+          $error("TEST FAILED: Timeout: Branch test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+    /////////////////////////////////////////////////////////////////
+    // Custom Instructions with Hazards TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "custom_haz") begin
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[31] != 32'hAA) begin
+            @(posedge clk);
+          end
+          if(ppu_sim != 32'h11223344) begin
+            $error("INSTRUCTION FAILED: %s => PPU_sim mismatch: expected 32'h11223344, got %h",
+              testname, ppu_sim);
+          end
+          if(acc_sim != 32'h55667788) begin
+            $error("INSTRUCTION FAILED: %s => ACC_sim mismatch: expected 32'h55667788, got %h",
+              testname, acc_sim);
+          end
+          if(comm_sim != 32'h22334455) begin
+            $error("INSTRUCTION FAILED: %s => com_sim mismatch: expected 32'h22334455, got %h",
+              testname, comm_sim);
+          end
+          if(sac_sim != 1) begin
+            $error("INSTRUCTION FAILED: %s => com_sim mismatch: expected 32'h22334455, got %h",
+              testname, sac_sim);
+          end
+          check_basic_register(
+            10, 
+            32'h00000000, 
+            "LDR test"
+          );
+          check_basic_register(
+            12, 
+            32'hDEADBEF0, 
+            "RDI test"
+          );
+          check_basic_register(
+            13, 
+            32'h2, 
+            "SAC test"
+          );
+          disable timeout_cz;
+        end
+        begin : timeout_cz
+          repeat (200) @(posedge clk);
+          $error("TEST FAILED: Timeout: cus_haz test did not complete.");
+          $stop;
+        end
+      join_any
+    end
     repeat (10) @(posedge clk);
 
     $display("Finished stepping through all instructions!");
