@@ -2,6 +2,7 @@ module placeholder_mem(
     input clk,
     input rst_n,
     input read_en,
+    input hazard,
     input [31:0] addr,
     output logic [31:0] q
 ); 

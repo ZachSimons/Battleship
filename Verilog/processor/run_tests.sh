@@ -30,6 +30,7 @@ else
         sqrt.hex
         jal_tests.hex
         loadstore.hex
+        loadhaz.hex
     )
     echo "▶️  Running full test suite"
 fi

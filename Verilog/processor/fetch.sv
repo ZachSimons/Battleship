@@ -33,6 +33,7 @@ placeholder_mem imem(
     .clk(clk),
     .rst_n(rst_n),
     .read_en(~|warmup),
+    .hazard(hazard),
     .addr(pc_q),
     .q(imem_out)
 );
@@ -157,7 +158,10 @@ always_ff @(posedge clk) begin
     if(!rst_n) begin
         pc_q <= '0;
     end
-    else if (stall_pc | warmup | hazard1 /*& ~interrupt*/) begin
+    else if (hazard) begin
+        pc_q <= pc_curr_dec_q0;
+    end
+    else if (stall_pc | warmup | hazard1/*& ~interrupt*/) begin
         pc_q <= pc_q;
     end
     else begin

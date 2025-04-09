@@ -339,9 +339,12 @@ module proc_tb;
     if (testname == "loadstore") begin
       fork 
         begin
-          while (dut.proc_de.curr_pc != 32'h5c) begin
+          while (dut.proc_de.curr_pc != 220) begin
             @(posedge clk);
           end
+          @(posedge clk);
+          @(posedge clk);
+          #1;
           check_basic_register(
             10, 
             32'h22222222, 
@@ -375,7 +378,51 @@ module proc_tb;
           disable timeout_ls;
         end
         begin : timeout_ls
-          repeat (100) @(posedge clk);
+          repeat (300) @(posedge clk);
+          $error("TEST FAILED: Timeout: Load/Store test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+    /////////////////////////////////////////////////////////////////
+    // LOAD HAZARD TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "loadhaz") begin
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[31] != 32'hAA) begin
+            @(posedge clk);
+          end
+          check_basic_register(
+            13, 
+            32'h00000010, 
+            "	Loaded from Mem[0]"
+          );
+          check_basic_register(
+            14, 
+            32'h11223344, 
+            "	Loaded from Mem[0x100]"
+          );
+          check_basic_register(
+            15, 
+            32'h00000014, 
+            "	Undefined (Mem[0x300] not set)"
+          );
+          check_basic_register(
+            16, 
+            32'h55667788, 
+            "Copy of x11"
+          );
+          check_basic_register(
+            5, 
+            32'h00000000, 
+            "Should be 0, 'F indicates fail"
+          );
+          disable timeout_lhaz;
+        end
+        begin : timeout_lhaz
+          repeat (200) @(posedge clk);
           $error("TEST FAILED: Timeout: Load/Store test did not complete.");
           $stop;
         end
