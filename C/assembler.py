@@ -172,6 +172,12 @@ def parseAddress(address: str):
     result = address.split('(')
     return [result[1][:-1], int(result[0])]
 
+def checkHiLo(parameter: str):
+    if(parameter[0] == '%'):
+        return str(label_addresses[parameter.split('(')[1][:-1]])
+    else:
+        return parameter
+
 label_addresses = {}
 
 if __name__ == '__main__':
@@ -201,7 +207,7 @@ if __name__ == '__main__':
                     if len(instruction) > 1:
                         parameters = instruction[1].split(',')
                     if(instruction[0] == 'lui'):
-                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1])), '08x') + '\n')
+                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(checkHiLo(parameters[1]))), '08x') + '\n')
                     elif(instruction[0] == 'auipc'):
                         outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1])), '08x') + '\n')
                     elif(instruction[0] == 'jal'):
@@ -245,7 +251,7 @@ if __name__ == '__main__':
                         addressCalc = parseAddress(parameters[1])
                         outputFile.write(format(STORE_CODE + SW + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
                     elif(instruction[0] == 'addi'):
-                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(checkHiLo(parameters[1]))), '08x') + '\n')
                     elif(instruction[0] == 'slti'):
                         outputFile.write(format(OP_IMM_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
                     elif(instruction[0] == 'sltiu'):
