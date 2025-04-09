@@ -6,7 +6,9 @@ module fetch(
     input rsi, //Interrupt handled -> got to next instruction and clear I-Reg
     input interrupt,
     input flush,
-    input stall,
+    input stall_mem,
+    input stall_pc,
+    input hazard,
     input halt,
     input [31:0] pc_ex,
     output logic [31:0] instruction_dec,
@@ -14,6 +16,7 @@ module fetch(
     output logic [31:0] pc_curr_dec
 );
 //////////////NET INSTANTIATION/////////////////////
+logic hazard1;
 logic stall_mem1; //Doesn't have to be a latched signal 
 logic warmup;
 logic [1:0] flushnop;
@@ -35,10 +38,10 @@ placeholder_mem imem(
 );
 
 always_ff @(posedge clk) begin
-    stall_mem1 <= stall;
+    stall_mem1 <= stall_mem;
 end
 
-assign instruction_fe = (stall | stall_mem1) ? instruction_fe : 
+assign instruction_fe = (stall_mem | stall_mem1) ? instruction_fe : 
                         ((^imem_out === 1'bX) | (~|imem_out) | |warmup | flush | |flushnop) ? 32'h00000013 : imem_out;
 
 
@@ -58,7 +61,7 @@ always_ff @(posedge clk) begin
     else if (flush) begin
         instruction_dec <= 32'h00000013; //IDK if this needs to be combinational
     end
-    else if (|flushnop | warmup | stall) begin
+    else if (|flushnop | warmup | stall_mem) begin
         instruction_dec <= instruction_dec;
     end
     else begin
@@ -92,7 +95,7 @@ always_ff @(posedge clk) begin
         pc_next_dec <= 0;
         pc_curr_dec <= 0;
     end
-    else if (stall | halt) begin
+    else if (stall_mem | halt) begin
         pc_next_dec_q0 <= pc_next_dec_q0;
         pc_curr_dec_q0 <= pc_curr_dec_q0;
         pc_next_dec_q1 <= pc_next_dec_q1;
@@ -154,13 +157,19 @@ always_ff @(posedge clk) begin
     if(!rst_n) begin
         pc_q <= '0;
     end
-    else if (stall | warmup/*& ~interrupt*/) begin
+    else if (stall_pc | warmup | hazard1 /*& ~interrupt*/) begin
         pc_q <= pc_q;
     end
     else begin
         pc_q <= pc_d;
     end
 end
+
+
+always_ff @(posedge clk) begin
+    hazard1 <= hazard;
+end
+
 
 //Instruction register to hold nxt_pc
 always_ff @(posedge clk) begin
@@ -170,7 +179,7 @@ always_ff @(posedge clk) begin
     else if(rsi) begin
         i_reg <= '0;
     end 
-    else if (stall /*& ~interrupt*/) begin //TODO determine via testing if needed
+    else if (stall_mem /*& ~interrupt*/) begin //TODO determine via testing if needed
         i_reg <= i_reg;
     end
     else if(interrupt) begin 

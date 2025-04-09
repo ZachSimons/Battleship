@@ -37,7 +37,7 @@ logic memerror;
 logic interrupt_latch, interrupt;
 
 //Flushing, stalling, and hazards
-logic flush, pfstall, stallmem, hazard, hazard_stall;
+logic flush, pfstall, stallmem, hazard, hazard_stall, stallpc;
 logic [4:0] rdreg1_if_id, rdreg2_if_id;
 
 //Fetch
@@ -48,7 +48,7 @@ logic [31:0] inst_fe_dec, nxtpc_fe_dec, pc_fe_dec;
 
 //Decode
 logic random_dec_ex, regwrten_dec_ex, unsigned_dec_ex, memrden_dec_ex, jalr_dec_ex, datasel_dec_ex, 
-        memwrten_dec_ex, lui_ex, rdi_dec_ex, ignore_fwd_ex;
+        memwrten_dec_ex, lui_ex, rdi_dec_ex, ignore_fwd_ex, memrden_if_dec;
 logic [1:0] wbsel_dec_ex, width_dec_ex;
 logic [3:0] aluop_dec_ex, bjinst_dec_ex;
 logic [4:0] wrtreg_dec_ex;
@@ -86,7 +86,9 @@ fetch proc_fe(
     .rsi(rsi_de_fe),            
     .interrupt(interrupt), 
     .flush(flush),
-    .stall(hazard | stallmem),
+    .stall_mem(hazard | stallmem),
+    .stall_pc(stallpc | hazard),
+    .hazard(hazard),
     .halt(halt_wb_fe),
     .pc_ex(branchpc_ex_fe),       
     .instruction_dec(inst_fe_dec),
@@ -137,6 +139,7 @@ decode proc_de(
     .read_register2_ex(rdreg2_dec_ex),
     .read_register1_if_id(rdreg1_if_id),
     .read_register2_if_id(rdreg2_if_id),
+    .memread_if_id(memrden_if_dec),
     .ignore_fwd_ex(ignore_fwd_ex),
     .lui_ex(lui_ex)
 );
@@ -231,6 +234,7 @@ forwarding proc_forward(
 hazard proc_hazard(
     .clk(clk),
     .rst_n(rst_n),
+    .memread_if_id(memrden_if_dec),
     .memread_id_ex(memrden_dec_ex),
     .memread_ex_mem(memrden_ex_mem),
     .memwrite_ex_mem(memwrten_ex_mem),
@@ -238,6 +242,7 @@ hazard proc_hazard(
     .src_reg2_if_id(rdreg2_if_id),
     .dst_reg_id_ex(wrtreg_dec_ex),
     .hazard(hazard),
+    .stall_pc(stallpc),
     .stall_mem(hazard_stall)
 );
 
