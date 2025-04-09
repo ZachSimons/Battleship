@@ -423,7 +423,36 @@ module proc_tb;
         end
         begin : timeout_lhaz
           repeat (200) @(posedge clk);
-          $error("TEST FAILED: Timeout: Load/Store test did not complete.");
+          $error("TEST FAILED: Timeout: Load hazard test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+    /////////////////////////////////////////////////////////////////
+    // BRANCH TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "branch_test") begin
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[27] != 32'h1) begin
+            @(posedge clk);
+          end
+          check_basic_register(
+            28, 
+            32'h00000006, 
+            "Value of 6 indicates 6 passes"
+          );
+          check_basic_register(
+            29, 
+            32'h00000000, 
+            "Value of 0 indicates 0 fails"
+          );
+          disable timeout_br;
+        end
+        begin : timeout_br
+          repeat (200) @(posedge clk);
+          $error("TEST FAILED: Timeout: Branch test did not complete.");
           $stop;
         end
       join_any

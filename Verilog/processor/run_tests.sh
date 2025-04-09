@@ -31,6 +31,7 @@ else
         jal_tests.hex
         loadstore.hex
         loadhaz.hex
+        branch_test.hex
     )
     echo "▶️  Running full test suite"
 fi
