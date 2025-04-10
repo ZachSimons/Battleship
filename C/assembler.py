@@ -173,6 +173,8 @@ def parseAddress(address: str):
     return [result[1][:-1], int(result[0])]
 
 label_addresses = {}
+data_sizes = {}
+data_data = {}
 
 if __name__ == '__main__':
     if(len(sys.argv) != 2):
@@ -180,184 +182,205 @@ if __name__ == '__main__':
         sys.exit(1)
     with open(sys.argv[1], "r") as inputFile:
         with open("output.hex", "w") as outputFile:
-            currentAddress = 0
-            linesList = [line.split('#')[0].strip() for line in inputFile.readlines() if (not line.strip().startswith('#')) and line.strip()]
+            with open("outputData.hex", "w") as dataFile:
+                currentAddress = 0
+                last_global = ''
+                linesList = [line.split('#')[0].strip() for line in inputFile.readlines() if (not line.strip().startswith('#')) and line.strip()]
 
-            # Get all address labels
-            for line in linesList:
-                if line.endswith(':'):
-                    label_addresses[line[:-1]] = currentAddress
-                elif line[0] != '.':
-                    currentAddress += 4
+                # Get all address labels
+                for line in linesList:
+                    if line.find('.ascii') != -1:
+                        print(line)
+                        data_data[last_global] = line.split()[1]
+                    elif line.find('.zero') != -1:
+                        print(line)
+                        data_data[last_global] = int(line.split()[1])
+                    elif line.find('.globl') != -1:
+                        print(line)
+                        data_sizes[line.split()[1]] = 0
+                    elif line.find('.type') != -1 and line.find('@function') != -1:
+                        print(line)
+                        del data_sizes[line.split()[1][:-1]]
+                    elif line.find('.size') != -1 and not line.split()[1][:-1] in label_addresses.keys():
+                        data_sizes[line.split()[1][:-1]] = int(line.split()[2])
+                    elif line.endswith(':'):
+                        if line[:-1] in data_sizes.keys():
+                            last_global = line[:-1]
+                        else:
+                            label_addresses[line[:-1]] = currentAddress
+                    elif line[0] != '.':
+                        currentAddress += 4
+                print(data_sizes)
+                print(data_data)
 
-            # Convert assembly to binary
-            currentAddress = 0
-            for line in linesList:
-                if line.endswith(':') or line[0] == '.':
-                    continue
-                else:
-                    instruction = line.split()
-                    instruction[0] = instruction[0].lower()
-                    if len(instruction) > 1:
-                        parameters = instruction[1].split(',')
-                    if(instruction[0] == 'lui'):
-                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1])), '08x') + '\n')
-                    elif(instruction[0] == 'auipc'):
-                        outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1])), '08x') + '\n')
-                    elif(instruction[0] == 'jal'):
-                        outputFile.write(format(JAL_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + jTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
-                    elif(instruction[0] == 'jalr'):
-                        outputFile.write(format(JALR_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
-                    elif(instruction[0] == 'beq'):
-                        outputFile.write(format(BRANCH_CODE + BEQ + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
-                    elif(instruction[0] == 'bne'):
-                        outputFile.write(format(BRANCH_CODE + BNE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
-                    elif(instruction[0] == 'blt'):
-                        outputFile.write(format(BRANCH_CODE + BLT + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
-                    elif(instruction[0] == 'bge'):
-                        outputFile.write(format(BRANCH_CODE + BGE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
-                    elif(instruction[0] == 'bltu'):
-                        outputFile.write(format(BRANCH_CODE + BLTU + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
-                    elif(instruction[0] == 'bgeu'):
-                        outputFile.write(format(BRANCH_CODE + BGEU + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
-                    elif(instruction[0] == 'lb'):
-                        addressCalc = parseAddress(parameters[1])
-                        outputFile.write(format(LOAD_CODE + LB + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
-                    elif(instruction[0] == 'lh'):
-                        addressCalc = parseAddress(parameters[1])
-                        outputFile.write(format(LOAD_CODE + LH + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
-                    elif(instruction[0] == 'lw'):
-                        addressCalc = parseAddress(parameters[1])
-                        outputFile.write(format(LOAD_CODE + LW + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
-                    elif(instruction[0] == 'lbu'):
-                        addressCalc = parseAddress(parameters[1])
-                        outputFile.write(format(LOAD_CODE + LBU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
-                    elif(instruction[0] == 'lhu'):
-                        addressCalc = parseAddress(parameters[1])
-                        outputFile.write(format(LOAD_CODE + LHU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
-                    elif(instruction[0] == 'sb'):
-                        addressCalc = parseAddress(parameters[1])
-                        outputFile.write(format(STORE_CODE + SB + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
-                    elif(instruction[0] == 'sh'):
-                        addressCalc = parseAddress(parameters[1])
-                        outputFile.write(format(STORE_CODE + SH + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
-                    elif(instruction[0] == 'sw'):
-                        addressCalc = parseAddress(parameters[1])
-                        outputFile.write(format(STORE_CODE + SW + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
-                    elif(instruction[0] == 'addi'):
-                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
-                    elif(instruction[0] == 'slti'):
-                        outputFile.write(format(OP_IMM_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
-                    elif(instruction[0] == 'sltiu'):
-                        outputFile.write(format(OP_IMM_CODE + SLTU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
-                    elif(instruction[0] == 'xori'):
-                        outputFile.write(format(OP_IMM_CODE + XOR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
-                    elif(instruction[0] == 'ori'):
-                        outputFile.write(format(OP_IMM_CODE + OR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
-                    elif(instruction[0] == 'andi'):
-                        outputFile.write(format(OP_IMM_CODE + AND + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
-                    elif(instruction[0] == 'slli'):
-                        outputFile.write(format(OP_IMM_CODE + SLL + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
-                    elif(instruction[0] == 'srli'):
-                        outputFile.write(format(OP_IMM_CODE + SRL + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
-                    elif(instruction[0] == 'srai'):
-                        outputFile.write(format(OP_IMM_CODE + SRL + TOGGLE_BIT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
-                    elif(instruction[0] == 'add'):
-                        outputFile.write(format(OP_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
-                    elif(instruction[0] == 'sub'):
-                        outputFile.write(format(OP_CODE + ADD + TOGGLE_BIT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
-                    elif(instruction[0] == 'sll'):
-                        outputFile.write(format(OP_CODE + SLL + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
-                    elif(instruction[0] == 'slt'):
-                        outputFile.write(format(OP_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
-                    elif(instruction[0] == 'sltu'):
-                        outputFile.write(format(OP_CODE + SLTU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
-                    elif(instruction[0] == 'xor'):
-                        outputFile.write(format(OP_CODE + XOR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
-                    elif(instruction[0] == 'srl'):
-                        outputFile.write(format(OP_CODE + SRL + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
-                    elif(instruction[0] == 'sra'):
-                        outputFile.write(format(OP_CODE + SRL + TOGGLE_BIT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
-                    elif(instruction[0] == 'or'):
-                        outputFile.write(format(OP_CODE + OR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
-                    elif(instruction[0] == 'and'):
-                        outputFile.write(format(OP_CODE + AND + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
-                    elif(instruction[0] == 'rti'):
-                        outputFile.write(format(RTI_CODE, '08x') + '\n')
-                    elif(instruction[0] == 'rsi'):
-                        outputFile.write(format(RSI_CODE + rs1_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
-                    elif(instruction[0] == 'rdi'):
-                        outputFile.write(format(RDI_CODE + rd_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
-                    elif(instruction[0] == 'ldr'):
-                        outputFile.write(format(LDR_CODE + rd_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
-                    elif(instruction[0] == 'sac'):
-                        outputFile.write(format(SAC_CODE + rd_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
-                    elif(instruction[0] == 'ugs'):
-                        outputFile.write(format(UGS_CODE + rs1_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
-                    elif(instruction[0] == 'uad'):
-                        outputFile.write(format(UAD_CODE + rs1_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
-                    elif(instruction[0] == 'snd'):
-                        outputFile.write(format(SND_CODE + rs1_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
-                    elif(instruction[0] == 'la'):
-                        outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(label_addresses[parameters[1]]), '08x') + '\n')
-                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(label_addresses[parameters[1]] % 2**12), '08x') + '\n')
-                    elif(instruction[0] == 'nop'):
-                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(0) + rs1_reg(0) + iTypeImm(0), '08x') + '\n')
-                    elif(instruction[0] == 'li'):
-                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1])), '08x') + '\n')
-                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(int(parameters[1]) % 2**12), '08x') + '\n')
-                    elif(instruction[0] == 'mv'):
-                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(0), '08x') + '\n')
-                    elif(instruction[0] == 'not'):
-                        outputFile.write(format(OP_IMM_CODE + XOR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(-1), '08x') + '\n')
-                    elif(instruction[0] == 'neg'):
-                        outputFile.write(format(OP_CODE + ADD + TOGGLE_BIT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[1]]), '08x') + '\n')
-                    elif(instruction[0] == 'seqz'):
-                        outputFile.write(format(OP_IMM_CODE + SLTU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(1), '08x') + '\n')
-                    elif(instruction[0] == 'snez'):
-                        outputFile.write(format(OP_CODE + SLTU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[1]]), '08x') + '\n')
-                    elif(instruction[0] == 'sltz'):
-                        outputFile.write(format(OP_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(0), '08x') + '\n')
-                    elif(instruction[0] == 'sgtz'):
-                        outputFile.write(format(OP_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[1]]), '08x') + '\n')
-                    elif(instruction[0] == 'beqz'):
-                        outputFile.write(format(BRANCH_CODE + BEQ + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
-                    elif(instruction[0] == 'bnez'):
-                        outputFile.write(format(BRANCH_CODE + BNE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
-                    elif(instruction[0] == 'blez'):
-                        outputFile.write(format(BRANCH_CODE + BGE + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
-                    elif(instruction[0] == 'bgez'):
-                        outputFile.write(format(BRANCH_CODE + BGE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
-                    elif(instruction[0] == 'bltz'):
-                        outputFile.write(format(BRANCH_CODE + BLT + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
-                    elif(instruction[0] == 'bgtz'):
-                        outputFile.write(format(BRANCH_CODE + BLT + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
-                    elif(instruction[0] == 'bgt'):
-                        outputFile.write(format(BRANCH_CODE + BLT + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
-                    elif(instruction[0] == 'ble'):
-                        outputFile.write(format(BRANCH_CODE + BGE + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
-                    elif(instruction[0] == 'bgtu'):
-                        outputFile.write(format(BRANCH_CODE + BLTU + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
-                    elif(instruction[0] == 'bleu'):
-                        outputFile.write(format(BRANCH_CODE + BGEU + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
-                    elif(instruction[0] == 'j'):
-                        outputFile.write(format(JAL_CODE + rd_reg(0) + jTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[0]]))), '08x') + '\n')
-                    elif(instruction[0] == 'jr'):
-                        outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(0), '08x') + '\n')
-                    elif(instruction[0] == 'ret'):
-                        outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(1) + iTypeImm(0), '08x') + '\n')
-                    elif(instruction[0] == 'call'):
-                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]]), '08x') + '\n')
-                        outputFile.write(format(JALR_CODE + rd_reg(1) + rs1_reg(6) + iTypeImm(label_addresses[parameters[0]] % 2**12), '08x') + '\n')
-                    elif(instruction[0] == 'tail'):
-                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]]), '08x') + '\n')
-                        outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(6) + iTypeImm(label_addresses[parameters[0]] % 2**12), '08x') + '\n')
-                    elif(instruction[0] == 'ecall'):
-                        outputFile.write(format(0x73, '08x') + '\n')
+                # Convert assembly to binary
+                currentAddress = 0
+                for line in linesList:
+                    if line.endswith(':') or line[0] == '.':
+                        continue
                     else:
-                        print("ERROR: Unrecognized instruction " + str(instruction))
-                        sys.exit(1)
-                    currentAddress+= 4
+                        instruction = line.split()
+                        instruction[0] = instruction[0].lower()
+                        if len(instruction) > 1:
+                            parameters = instruction[1].split(',')
+                        if(instruction[0] == 'lui'):
+                            outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1])), '08x') + '\n')
+                        elif(instruction[0] == 'auipc'):
+                            outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1])), '08x') + '\n')
+                        elif(instruction[0] == 'jal'):
+                            outputFile.write(format(JAL_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + jTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
+                        elif(instruction[0] == 'jalr'):
+                            outputFile.write(format(JALR_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        elif(instruction[0] == 'beq'):
+                            outputFile.write(format(BRANCH_CODE + BEQ + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
+                        elif(instruction[0] == 'bne'):
+                            outputFile.write(format(BRANCH_CODE + BNE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
+                        elif(instruction[0] == 'blt'):
+                            outputFile.write(format(BRANCH_CODE + BLT + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
+                        elif(instruction[0] == 'bge'):
+                            outputFile.write(format(BRANCH_CODE + BGE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
+                        elif(instruction[0] == 'bltu'):
+                            outputFile.write(format(BRANCH_CODE + BLTU + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
+                        elif(instruction[0] == 'bgeu'):
+                            outputFile.write(format(BRANCH_CODE + BGEU + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
+                        elif(instruction[0] == 'lb'):
+                            addressCalc = parseAddress(parameters[1])
+                            outputFile.write(format(LOAD_CODE + LB + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
+                        elif(instruction[0] == 'lh'):
+                            addressCalc = parseAddress(parameters[1])
+                            outputFile.write(format(LOAD_CODE + LH + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
+                        elif(instruction[0] == 'lw'):
+                            addressCalc = parseAddress(parameters[1])
+                            outputFile.write(format(LOAD_CODE + LW + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
+                        elif(instruction[0] == 'lbu'):
+                            addressCalc = parseAddress(parameters[1])
+                            outputFile.write(format(LOAD_CODE + LBU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
+                        elif(instruction[0] == 'lhu'):
+                            addressCalc = parseAddress(parameters[1])
+                            outputFile.write(format(LOAD_CODE + LHU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
+                        elif(instruction[0] == 'sb'):
+                            addressCalc = parseAddress(parameters[1])
+                            outputFile.write(format(STORE_CODE + SB + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
+                        elif(instruction[0] == 'sh'):
+                            addressCalc = parseAddress(parameters[1])
+                            outputFile.write(format(STORE_CODE + SH + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
+                        elif(instruction[0] == 'sw'):
+                            addressCalc = parseAddress(parameters[1])
+                            outputFile.write(format(STORE_CODE + SW + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
+                        elif(instruction[0] == 'addi'):
+                            outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        elif(instruction[0] == 'slti'):
+                            outputFile.write(format(OP_IMM_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        elif(instruction[0] == 'sltiu'):
+                            outputFile.write(format(OP_IMM_CODE + SLTU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        elif(instruction[0] == 'xori'):
+                            outputFile.write(format(OP_IMM_CODE + XOR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        elif(instruction[0] == 'ori'):
+                            outputFile.write(format(OP_IMM_CODE + OR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        elif(instruction[0] == 'andi'):
+                            outputFile.write(format(OP_IMM_CODE + AND + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        elif(instruction[0] == 'slli'):
+                            outputFile.write(format(OP_IMM_CODE + SLL + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        elif(instruction[0] == 'srli'):
+                            outputFile.write(format(OP_IMM_CODE + SRL + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        elif(instruction[0] == 'srai'):
+                            outputFile.write(format(OP_IMM_CODE + SRL + TOGGLE_BIT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        elif(instruction[0] == 'add'):
+                            outputFile.write(format(OP_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
+                        elif(instruction[0] == 'sub'):
+                            outputFile.write(format(OP_CODE + ADD + TOGGLE_BIT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
+                        elif(instruction[0] == 'sll'):
+                            outputFile.write(format(OP_CODE + SLL + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
+                        elif(instruction[0] == 'slt'):
+                            outputFile.write(format(OP_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
+                        elif(instruction[0] == 'sltu'):
+                            outputFile.write(format(OP_CODE + SLTU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
+                        elif(instruction[0] == 'xor'):
+                            outputFile.write(format(OP_CODE + XOR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
+                        elif(instruction[0] == 'srl'):
+                            outputFile.write(format(OP_CODE + SRL + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
+                        elif(instruction[0] == 'sra'):
+                            outputFile.write(format(OP_CODE + SRL + TOGGLE_BIT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
+                        elif(instruction[0] == 'or'):
+                            outputFile.write(format(OP_CODE + OR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
+                        elif(instruction[0] == 'and'):
+                            outputFile.write(format(OP_CODE + AND + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[2]]), '08x') + '\n')
+                        elif(instruction[0] == 'rti'):
+                            outputFile.write(format(RTI_CODE, '08x') + '\n')
+                        elif(instruction[0] == 'rsi'):
+                            outputFile.write(format(RSI_CODE + rs1_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
+                        elif(instruction[0] == 'rdi'):
+                            outputFile.write(format(RDI_CODE + rd_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
+                        elif(instruction[0] == 'ldr'):
+                            outputFile.write(format(LDR_CODE + rd_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
+                        elif(instruction[0] == 'sac'):
+                            outputFile.write(format(SAC_CODE + rd_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
+                        elif(instruction[0] == 'ugs'):
+                            outputFile.write(format(UGS_CODE + rs1_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
+                        elif(instruction[0] == 'uad'):
+                            outputFile.write(format(UAD_CODE + rs1_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
+                        elif(instruction[0] == 'snd'):
+                            outputFile.write(format(SND_CODE + rs1_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
+                        elif(instruction[0] == 'la'):
+                            outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(label_addresses[parameters[1]]), '08x') + '\n')
+                            outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(label_addresses[parameters[1]] % 2**12), '08x') + '\n')
+                        elif(instruction[0] == 'nop'):
+                            outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(0) + rs1_reg(0) + iTypeImm(0), '08x') + '\n')
+                        elif(instruction[0] == 'li'):
+                            outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1])), '08x') + '\n')
+                            outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(int(parameters[1]) % 2**12), '08x') + '\n')
+                        elif(instruction[0] == 'mv'):
+                            outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(0), '08x') + '\n')
+                        elif(instruction[0] == 'not'):
+                            outputFile.write(format(OP_IMM_CODE + XOR + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(-1), '08x') + '\n')
+                        elif(instruction[0] == 'neg'):
+                            outputFile.write(format(OP_CODE + ADD + TOGGLE_BIT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[1]]), '08x') + '\n')
+                        elif(instruction[0] == 'seqz'):
+                            outputFile.write(format(OP_IMM_CODE + SLTU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(1), '08x') + '\n')
+                        elif(instruction[0] == 'snez'):
+                            outputFile.write(format(OP_CODE + SLTU + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[1]]), '08x') + '\n')
+                        elif(instruction[0] == 'sltz'):
+                            outputFile.write(format(OP_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(0), '08x') + '\n')
+                        elif(instruction[0] == 'sgtz'):
+                            outputFile.write(format(OP_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[1]]), '08x') + '\n')
+                        elif(instruction[0] == 'beqz'):
+                            outputFile.write(format(BRANCH_CODE + BEQ + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
+                        elif(instruction[0] == 'bnez'):
+                            outputFile.write(format(BRANCH_CODE + BNE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
+                        elif(instruction[0] == 'blez'):
+                            outputFile.write(format(BRANCH_CODE + BGE + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
+                        elif(instruction[0] == 'bgez'):
+                            outputFile.write(format(BRANCH_CODE + BGE + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
+                        elif(instruction[0] == 'bltz'):
+                            outputFile.write(format(BRANCH_CODE + BLT + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(0) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
+                        elif(instruction[0] == 'bgtz'):
+                            outputFile.write(format(BRANCH_CODE + BLT + rs1_reg(0) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
+                        elif(instruction[0] == 'bgt'):
+                            outputFile.write(format(BRANCH_CODE + BLT + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
+                        elif(instruction[0] == 'ble'):
+                            outputFile.write(format(BRANCH_CODE + BGE + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
+                        elif(instruction[0] == 'bgtu'):
+                            outputFile.write(format(BRANCH_CODE + BLTU + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
+                        elif(instruction[0] == 'bleu'):
+                            outputFile.write(format(BRANCH_CODE + BGEU + rs1_reg(REGISTER_DICT[parameters[1]]) + rs2_reg(REGISTER_DICT[parameters[0]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
+                        elif(instruction[0] == 'j'):
+                            outputFile.write(format(JAL_CODE + rd_reg(0) + jTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[0]]))), '08x') + '\n')
+                        elif(instruction[0] == 'jr'):
+                            outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(0), '08x') + '\n')
+                        elif(instruction[0] == 'ret'):
+                            outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(1) + iTypeImm(0), '08x') + '\n')
+                        elif(instruction[0] == 'call'):
+                            outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]]), '08x') + '\n')
+                            outputFile.write(format(JALR_CODE + rd_reg(1) + rs1_reg(6) + iTypeImm(label_addresses[parameters[0]] % 2**12), '08x') + '\n')
+                        elif(instruction[0] == 'tail'):
+                            outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]]), '08x') + '\n')
+                            outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(6) + iTypeImm(label_addresses[parameters[0]] % 2**12), '08x') + '\n')
+                        elif(instruction[0] == 'ecall'):
+                            outputFile.write(format(0x73, '08x') + '\n')
+                        else:
+                            print("ERROR: Unrecognized instruction " + str(instruction))
+                            sys.exit(1)
+                        currentAddress+= 4
     # UNSUPPORTED COMMANDS
     # l{b|h|w} rd, symbol
     # s{b|h|w} rd, symbol, rt
