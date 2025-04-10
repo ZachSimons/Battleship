@@ -2,6 +2,7 @@ module placeholder_mem(
     input clk,
     input rst_n,
     input read_en,
+    input hazard,
     input [31:0] addr,
     output logic [31:0] q
 ); 
@@ -10,9 +11,27 @@ logic [31:0] bram [0:255];
 logic [31:0] addr_q;
 logic read_en_ff;
 
-initial begin
-    $readmemh("custom.hex", bram);
-end
+
+`ifdef SYNTHESIS
+    // synthesis-only: bram initialized through toolchain
+    initial begin
+        $readmemh("sqrt.hex", bram);
+    end
+`else
+    initial begin
+        string testname;
+        string hexfile;
+        
+        if (!$value$plusargs("TEST=%s", testname)) begin
+            testname = "default";
+        end
+    
+        hexfile = {testname, ".hex"};
+        $display("Loading program from: %s", hexfile);
+        $readmemh(hexfile, bram);
+    end
+`endif
+
 
 always_ff @(posedge clk) begin
     if (!rst_n) begin

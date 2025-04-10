@@ -6,8 +6,11 @@ module fetch(
     input rsi, //Interrupt handled -> got to next instruction and clear I-Reg
     input interrupt,
     input flush,
-    input stall,
     input interrupt_branch_alert,
+    input stall_mem,
+    input stall_pc,
+    input hazard,
+    input halt,
     input [31:0] pc_ex,
     output logic stall_override,
     output logic [31:0] instruction_dec,
@@ -15,6 +18,7 @@ module fetch(
     output logic [31:0] pc_curr_dec
 );
 //////////////NET INSTANTIATION/////////////////////
+logic hazard1;
 logic stall_mem1; //Doesn't have to be a latched signal 
 logic warmup, inter_temp, inter_stall;
 logic [1:0] flushnop;
@@ -25,22 +29,25 @@ logic branch_in_fetch, branch_mem;
 logic [1:0] interrupt_nop, interrupt_temp_enable;
 //Use 0x00100073 as halt
 
+
 //////////////MODULE INSTANTIATION///////////////////
 //Make byte addressable (not as complicated as d-memory)
 placeholder_mem imem(
     .clk(clk),
     .rst_n(rst_n),
     .read_en(~|warmup),
+    .hazard(hazard),
     .addr(pc_q),
     .q(imem_out)
 );
 
 always_ff @(posedge clk) begin
-    stall_mem1 <= stall;
+    stall_mem1 <= stall_mem;
 end
 
-assign instruction_fe = (stall | stall_mem1) ? instruction_fe : 
+assign instruction_fe = (stall_mem | stall_mem1) ? instruction_fe : 
                         ((^imem_out === 1'bX) | (~|imem_out) | |warmup | (flush && ~inter_temp) | |flushnop | |interrupt_nop) ? 32'h00000013 : imem_out;
+
 
 
 //Flushing -> IFD needs to go to 0 and NOP. PC still needs to update to the correct value
@@ -59,7 +66,7 @@ always_ff @(posedge clk) begin
     else if (flush && ~inter_temp) begin
         instruction_dec <= 32'h00000013; //IDK if this needs to be combinational
     end
-    else if (|flushnop | warmup | stall) begin
+    else if (|flushnop | warmup | stall_mem) begin
         instruction_dec <= instruction_dec;
     end
     else begin
@@ -93,7 +100,7 @@ always_ff @(posedge clk) begin
         pc_next_dec <= 0;
         pc_curr_dec <= 0;
     end
-    else if (stall) begin
+    else if (stall_mem | halt) begin
         pc_next_dec_q0 <= pc_next_dec_q0;
         pc_curr_dec_q0 <= pc_curr_dec_q0;
         pc_next_dec_q1 <= pc_next_dec_q1;
@@ -157,7 +164,10 @@ always_ff @(posedge clk) begin
     if(!rst_n) begin
         pc_q <= '0;
     end
-    else if (stall | warmup/*& ~interrupt*/) begin
+    else if (hazard) begin
+        pc_q <= pc_curr_dec_q0;
+    end
+    else if (stall_pc | warmup | hazard1/*& ~interrupt*/) begin
         pc_q <= pc_q;
     end
     else begin
@@ -165,8 +175,17 @@ always_ff @(posedge clk) begin
     end
 end
 
+
 assign branch_in_fetch = ((instruction_fe[6:0] == 7'b1100011) || (instruction_fe[6:0] == 7'b1100111));
 assign stall_override = inter_stall;
+
+
+always_ff @(posedge clk) begin
+    hazard1 <= hazard;
+end
+
+
+
 //Instruction register to hold nxt_pc
 always_ff @(posedge clk) begin
     if(!rst_n) begin
@@ -177,7 +196,7 @@ always_ff @(posedge clk) begin
     else if(rsi | rti) begin
         i_reg <= '0;
     end 
-    else if (stall /*& ~interrupt*/) begin //TODO determine via testing if needed
+    else if (stall_mem /*& ~interrupt*/) begin //TODO determine via testing if needed
         i_reg <= i_reg;
     end
     else if(interrupt) begin 

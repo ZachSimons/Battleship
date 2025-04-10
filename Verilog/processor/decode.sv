@@ -40,6 +40,7 @@ module decode(
     output logic [4:0] read_register2_ex,
     output logic [4:0] read_register1_if_id,
     output logic [4:0] read_register2_if_id,
+    output logic memread_if_id,
     output logic ignore_fwd_ex,
     output logic lui_ex
 );
@@ -73,7 +74,11 @@ assign write_reg_dec = instruction[11:7];
 
 assign fluhaz = hazard | flush;
 
+
 assign interrupt_branch_alert = (instruction[6:0] == 7'b1100011) || (instruction[6:0] == 7'b1100111);
+
+assign memread_if_id = ~fluhaz & rd_en;
+
 
 //pipeline
 always_ff @(posedge clk) begin
