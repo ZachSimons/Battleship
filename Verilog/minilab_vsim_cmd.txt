@@ -1,1 +1,4 @@
-vsim work.testbench -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+vsim work.proc_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+
+// If on Moba/working remotely:
+vsim work.proc_tb -L /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf -voptargs="+acc"

@@ -1,0 +1,21 @@
+00008c63
+000e1663
+001e0e13
+00000008 //rti
+001e8e93
+00478089 //rsi
+00108093 //start test addi 1,1,1
+0000012a //ld random
+00a18193 //addi 3
+00018028 //ugs with reg 3
+0001802B //uac woith reg 3
+0001800B //snd with reg 3
+00000229 //sac
+00000263 
+00000797
+00128293
+fe000ce3
+
+
+//after rsi 1 cycle of wrong section of code happens when interrupt near branch
+//rti goes to wrong place

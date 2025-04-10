@@ -1,26 +1,28 @@
 module instruction_decoder(
     input [31:0] instruction,
-    output random,
-    output ppu_send,
-    output write_en,
-    output [1:0] wb_sel,
-    output unsigned_sel,
-    output rd_en,
-    output [1:0] width,
-    output jalr,
-    output rti,
-    output data_sel,
-    output wrt_en,
-    output [3:0] alu_op,
-    output [3:0] bj_inst,
-    output auipc,
-    output imm_sel,
-    output [1:0] type_sel,
-    output rsi,
-    output sac,
-    output snd,
-    output uad,
-    output rdi
+    output logic random,
+    output logic ppu_send,
+    output logic write_en,
+    output logic [1:0] wb_sel,
+    output logic unsigned_sel,
+    output logic rd_en,
+    output logic [1:0] width,
+    output logic jalr,
+    output logic rti,
+    output logic data_sel,
+    output logic wrt_en,
+    output logic [3:0] alu_op,
+    output logic [3:0] bj_inst,
+    output logic auipc,
+    output logic imm_sel,
+    output logic [1:0] type_sel,
+    output logic rsi,
+    output logic sac,
+    output logic snd,
+    output logic uad,
+    output logic rdi,
+    output logic ignore_fwd,
+    output logic lui
 );
 
 logic [6:0] opcode;
@@ -40,10 +42,10 @@ assign ppu_send = (opcode==7'b0101000) ? 1'b1 : 1'b0;
 //if data is beig written to a register or not
 assign  write_en = ((opcode==7'b0010011) || (opcode==7'b0110011) || (opcode==7'b0010111) || 
                     (opcode==7'b0110111) || (opcode==7'b0000011) || (opcode==7'b1101111) || 
-                    (opcode==7'b0101001) || (opcode==7'b0001010) || (opcode==7'b0101010) || (opcode==7'b1100111)) ? 1'b1 : 1'b0;
+                    (opcode==7'b0101001) || (opcode==7'b0001010) || (opcode==7'b0101010) || (opcode==7'b1100111)) && (instruction[11:7] != 0) ? 1'b1 : 1'b0;
 
  //if memory out should be sign extended or not
-assign unsigned_sel = ((opcode==7'b000011)&&((sel==3'b000) || (sel==3'b001) || (sel==3'b101))) ? 1'b1 : 1'b0;
+assign unsigned_sel = ((opcode==7'b000011)&&((sel==3'b000) || (sel==3'b001) || (sel==3'b010))) ? 1'b1 : 1'b0;
 
 //if memory is being read or not
 assign rd_en = (opcode==7'b0000011) ? 1'b1 : 1'b0; 
@@ -75,11 +77,11 @@ assign snd = (opcode==7'b0001011) ? 1'b1 : 1'b0;
 //sets what to write back
 assign wb_sel = (opcode==7'b0101001) ? 0 : 
                 ((opcode==7'b1101111) || (opcode==7'b1100111)) ? 1 :
-                ((opcode==7'b0000011) || (opcode==7'b0101010) || (opcode==7'b0001010)) ? 2 : 3;
+                ((opcode==7'b0000011)) ? 2 : 3;
 
 //sets what type of instruction it is for imm
 assign type_sel = ((opcode==7'b0110111) || (opcode==7'b0010111)) ? 2 :
-                  (opcode==7'b1101111) ? 3 :
+                  ((opcode==7'b1101111))? 3 :
                   (opcode==7'b1100011) ? 1 : 0;
 
 //if auipc needs to pass pc or not
@@ -90,7 +92,8 @@ assign width = ((opcode==7'b0000011 && (sel==3'b000 || sel==3'b100)) || (opcode=
                ((opcode==7'b0000011 && (sel==3'b001 || sel==3'b101)) || (opcode==7'b0100011 && sel==3'b001)) ? 2 : 0;
 
 //alu operation
-assign alu_op = {instruction[30],instruction[14:12]};
+assign alu_op = (opcode == 7'b0110011) ? {instruction[30],instruction[14:12]} : 
+                (opcode == 7'b0000011 || opcode == 7'b0100011 || opcode == 7'b0010111) ? '0  : {1'b0,instruction[14:12]};
 
 //branch, jump or not
 assign bj_inst = (opcode==7'b1101111 || opcode==7'b1100111) ? 4'b1011 :
@@ -101,5 +104,9 @@ assign uad = (opcode==7'b0101011) ? 1'b1 : 1'b0;
 
 //
 assign rdi = (opcode==7'b0001010) ? 1'b1 : 1'b0;
+
+assign ignore_fwd = (opcode == 7'b0110111) || (opcode == 7'b0010111);
+
+assign lui = (opcode == 7'b0110111);
 
 endmodule

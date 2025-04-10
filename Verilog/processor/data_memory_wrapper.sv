@@ -133,23 +133,23 @@ end
 assign rd_data_control = {mem_unsigned, width, wrt_addr[1:0]};
 always_comb begin
     case(rd_data_control) 
-        5'b00000: rd_data = {bank3_rd_data, bank2_rd_data, bank1_rd_data, bank0_rd_data}; //Load full 
+        5'b10000: rd_data = {bank3_rd_data, bank2_rd_data, bank1_rd_data, bank0_rd_data}; //Load full 
 
-        5'b00100: rd_data = {{5'd24{bank0_rd_data[7]}}, bank0_rd_data}; //Load byte signed b0
-        5'b00101: rd_data = {{5'd24{bank1_rd_data[7]}}, bank1_rd_data}; //Load byte signed b1
-        5'b00110: rd_data = {{5'd24{bank2_rd_data[7]}}, bank2_rd_data}; //Load byte signed b2
-        5'b00111: rd_data = {{5'd24{bank3_rd_data[7]}}, bank3_rd_data}; //Load byte signed b3
+        5'b10100: rd_data = {{5'd24{bank0_rd_data[7]}}, bank0_rd_data}; //Load byte signed b0
+        5'b10101: rd_data = {{5'd24{bank1_rd_data[7]}}, bank1_rd_data}; //Load byte signed b1
+        5'b10110: rd_data = {{5'd24{bank2_rd_data[7]}}, bank2_rd_data}; //Load byte signed b2
+        5'b10111: rd_data = {{5'd24{bank3_rd_data[7]}}, bank3_rd_data}; //Load byte signed b3
 
-        5'b01000: rd_data = {{5'd16{bank1_rd_data[7]}}, bank1_rd_data, bank0_rd_data}; //Load half signed b0 & b1
-        5'b01010: rd_data = {{5'd16{bank3_rd_data[7]}}, bank3_rd_data, bank2_rd_data}; //Load half signed b2 & b3
+        5'b11000: rd_data = {{5'd16{bank1_rd_data[7]}}, bank1_rd_data, bank0_rd_data}; //Load half signed b0 & b1
+        5'b11010: rd_data = {{5'd16{bank3_rd_data[7]}}, bank3_rd_data, bank2_rd_data}; //Load half signed b2 & b3
 
-        5'b10100: rd_data = {{5'd24{1'b0}}, bank0_rd_data}; //Load byte unsigned b0
-        5'b10101: rd_data = {{5'd24{1'b0}}, bank1_rd_data}; //Load byte unsigned b1
-        5'b10110: rd_data = {{5'd24{1'b0}}, bank2_rd_data}; //Load byte unsigned b2
-        5'b10111: rd_data = {{5'd24{1'b0}}, bank3_rd_data}; //Load byte unsigned b3
+        5'b00100: rd_data = {{5'd24{1'b0}}, bank0_rd_data}; //Load byte unsigned b0
+        5'b00101: rd_data = {{5'd24{1'b0}}, bank1_rd_data}; //Load byte unsigned b1
+        5'b00110: rd_data = {{5'd24{1'b0}}, bank2_rd_data}; //Load byte unsigned b2
+        5'b00111: rd_data = {{5'd24{1'b0}}, bank3_rd_data}; //Load byte unsigned b3
 
-        5'b11000: rd_data = {{5'd16{1'b0}}, bank1_rd_data, bank0_rd_data}; //Load half unsigned b0 & b1
-        5'b11010: rd_data = {{5'd16{1'b0}}, bank3_rd_data, bank2_rd_data}; //Load half unsigned b2 & b3
+        5'b01000: rd_data = {{5'd16{1'b0}}, bank1_rd_data, bank0_rd_data}; //Load half unsigned b0 & b1
+        5'b01010: rd_data = {{5'd16{1'b0}}, bank3_rd_data, bank2_rd_data}; //Load half unsigned b2 & b3
 
         default: rd_data = '0; //Default catch all
     endcase
