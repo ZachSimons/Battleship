@@ -523,6 +523,53 @@ module proc_tb;
         end
       join_any
     end
+
+    /////////////////////////////////////////////////////////////////
+    // FIB TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "fib") begin
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[31] != 32'h1) begin
+          @(posedge clk);
+          end
+          check_basic_register(
+            10, 
+            32'd701408733, 
+            "44th fib number"
+          );
+          check_basic_register(
+            11, 
+            32'd433494437, 
+            "43rd fib number"
+          );
+          check_basic_register(
+            12, 
+            32'd267914296, 
+            "42nd fib number"
+          );
+          check_basic_register(
+            13, 
+            32'd165580141, 
+            "41st fib number"
+          );
+          check_basic_register(
+            14, 
+            32'd102334155, 
+            "40th fib number"
+          );
+          disable timeout_fib;
+        end
+        begin : timeout_fib
+          repeat (1000) @(posedge clk);
+          $error("TEST FAILED: Timeout: Fib test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+
+
     repeat (10) @(posedge clk);
 
     $display("Finished stepping through all instructions!");
