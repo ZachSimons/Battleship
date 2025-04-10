@@ -169,8 +169,18 @@ def calculateOffset(current: int, target: int):
     return target - current
 
 def parseAddress(address: str):
-    result = address.split('(')
-    return [result[1][:-1], int(result[0])]
+    if address.find('%') != -1:
+        result = address.split('(')
+        return [result[2][:-1], label_addresses[result[1][:-1]]]
+    else:
+        result = address.split('(')
+        return [result[1][:-1], int(result[0])]
+
+def parseSingleHiLo(param: str):
+    if(param.find('%') == -1):
+        return param
+    else:
+        return str(label_addresses[param.split('(')[1][:-1]])
 
 label_addresses = {}
 data_sizes = {}
@@ -187,10 +197,8 @@ if __name__ == '__main__':
             # Get all address labels
             for line in linesList:
                 if line.find('.globl') != -1:
-                    print(line)
                     data_sizes[line.split()[1]] = 0
                 elif line.find('.type') != -1 and line.find('@function') != -1:
-                    print(line)
                     del data_sizes[line.split()[1][:-1]]
                 elif line.find('.size') != -1 and not line.split()[1][:-1] in label_addresses.keys():
                     data_sizes[line.split()[1][:-1]] = int(line.split()[2])
@@ -209,11 +217,6 @@ if __name__ == '__main__':
             error_cnt = 0
             currentAddress = 0
             for line in linesList:
-                if line.find('%') != -1:
-                    error_cnt += 1
-                    print(line)
-                    currentAddress += 4
-                    continue
                 if line.endswith(':') or line[0] == '.':
                     continue
                 else:
@@ -222,7 +225,7 @@ if __name__ == '__main__':
                     if len(instruction) > 1:
                         parameters = instruction[1].split(',')
                     if(instruction[0] == 'lui'):
-                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1])), '08x') + '\n')
+                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parseSingleHiLo(parameters[1]))), '08x') + '\n')
                     elif(instruction[0] == 'auipc'):
                         outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1])), '08x') + '\n')
                     elif(instruction[0] == 'jal'):
@@ -266,7 +269,7 @@ if __name__ == '__main__':
                         addressCalc = parseAddress(parameters[1])
                         outputFile.write(format(STORE_CODE + SW + rs2_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + sTypeImm(addressCalc[1]), '08x') + '\n')
                     elif(instruction[0] == 'addi'):
-                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parseSingleHiLo(parameters[2]))), '08x') + '\n')
                     elif(instruction[0] == 'slti'):
                         outputFile.write(format(OP_IMM_CODE + SLT + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
                     elif(instruction[0] == 'sltiu'):
