@@ -11,6 +11,7 @@ logic [31:0] bram [0:255];
 logic [31:0] addr_q;
 logic read_en_ff;
 
+
 `ifdef SYNTHESIS
     // synthesis-only: bram initialized through toolchain
     initial begin

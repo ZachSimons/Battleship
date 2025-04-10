@@ -1,20 +1,24 @@
-00008c63
-000e1663
-001e0e13
-00000008 //rti
-001e8e93
-00478089 //rsi
-00108093 //start test addi 1,1,1
-0000012a //ld random
-00a18193 //addi 3
-00018028 //ugs with reg 3
-0001802B //uac woith reg 3
-0001800B //snd with reg 3
-00000229 //sac
-00000263 
-00000797
-00128293
-fe000ce3
+00008c63 //beq first interrupt 0
+000e1663 //bne 4
+001e0e13 //addi 8
+00000008 //rti 12
+001e8e93 //addi second interrupt 16
+00478089 //rsi 20
+00108093 //start test addi 1,1,1 24
+0000012a //ld random 28
+00a18193 //addi 3 32
+00018028 //ugs with reg 3 36
+0001802B //uac woith reg 3 40
+0001800B //snd with reg 3 44
+00000229 //sac 48
+0000088A //rdi into 17 52
+00000263 //beq 56
+00000797 //auipc 60 
+00128293 //addi 64
+fe500ce3 //beq 68 (dont take)
+00128293 //add
+00128293 //add
+fe8006e3 //br to quipc
 
 
 //after rsi 1 cycle of wrong section of code happens when interrupt near branch

@@ -14,7 +14,9 @@ module forwarding(
 //Only use forward2 if r type or store
 logic r_type;
 
+
 assign r_type = (instruction_ex[6:0] == 7'b0110011) | (instruction_ex[6:0] == 7'b0100011) | (instruction_ex[6:0] == 7'b1100011);
+
 
 
 assign forward_control1 = (ignore_fwd_ex) ? 0 :
