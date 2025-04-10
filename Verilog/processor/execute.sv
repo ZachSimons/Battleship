@@ -24,6 +24,7 @@ module execute(
     input           [1:0]   forward_control1,
     input           [1:0]   forward_control2,
     input           [31:0]  wbdata_wb_ex,
+    input           [31:0]  rdi_data,  
     input                   lui_ex,
     output logic    [31:0]  interface_data,
     output logic    [31:0]  next_pc_mem,
@@ -38,15 +39,16 @@ module execute(
     output logic            reg_wrt_en_mem,
     output logic            read_unsigned_mem,
     output logic            rd_en_mem,
-    output logic            branch,
-    output logic            rdi_mem
+    output logic            branch
 );
 
     logic [31:0] alu_inB_temp, alu_inB, alu_inA, branch_base, alu_result_exe, alu_output;
     logic [31:0] baseB, write_data;
     logic [31:0] lfsr, random_mux;
     logic [31:0] immx2;
+    logic [31:0] rdi_mux;
     logic [15:0] lfsr16;
+
 
     //Branching stuff
     assign branch_base = jalr_exe ? reg1 : curr_pc_exe;
@@ -81,11 +83,10 @@ module execute(
             reg_wrt_en_mem <= 0;
             read_unsigned_mem <= 0;
             rd_en_mem <= 0;
-            rdi_mem <= 0;
         end else if(~stall_mem) begin
             next_pc_mem <= next_pc_exe;
             write_data_mem <= write_data;
-            alu_result_mem <= random_mux;
+            alu_result_mem <= rdi_mux;
             wb_sel_mem <= wb_sel_exe;
             read_width_mem <= read_width_exe;
             wrt_dst_mem <= wrt_dst_exe;
@@ -93,7 +94,6 @@ module execute(
             reg_wrt_en_mem <= reg_wrt_en_exe;
             read_unsigned_mem <= read_unsigned_exe;
             rd_en_mem <= rd_en_exe;
-            rdi_mem <= rdi_ex;
             instruction_mem <= instruction_ex;
         end
     end
@@ -112,13 +112,15 @@ module execute(
     
     assign random_mux = random_exe ? lfsr : alu_result_exe;
 
+
+    ////////////////RDI///////////////////////////////////
+    assign rdi_mux = rdi_ex ? rdi_data : random_mux; 
+
+
+
     //TODO
-    //literally move lfsr reg to execute DONE 
-    //move the mux with it too DONE 
-    //Mux that and the alu output DONE 
-    //assign then to alu_output_mem DONE 
-    //change instruction decoder so the wb_reg uses 3 instead of 2 (DONE)
-    //Remove random signals from mem
+    //Remove rdi_data from mem and move to execute
+    //Move rdi_mux from mem to execute
 
 
 

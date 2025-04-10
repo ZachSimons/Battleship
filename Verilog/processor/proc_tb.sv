@@ -501,7 +501,7 @@ module proc_tb;
           end
           check_basic_register(
             10, 
-            32'h00000000, 
+            32'hffffedf8, 
             "LDR test"
           );
           check_basic_register(

@@ -166,6 +166,7 @@ execute proc_ex(
     .jalr_exe(jalr_dec_ex),
     .data_sel_exe(datasel_dec_ex),
     .rdi_ex(rdi_dec_ex),
+    .rdi_data(interrupt_source_data),   //TODO from external device
     .stall_mem(stallmem),
     .forward_control1(forward_control1),
     .forward_control2(forward_control2),
@@ -183,8 +184,7 @@ execute proc_ex(
     .reg_wrt_en_mem(regwrten_ex_mem),
     .read_unsigned_mem(unsigned_ex_mem),
     .rd_en_mem(memrden_ex_mem),
-    .branch(branch_ex_fe),
-    .rdi_mem(rdi_ex_mem)                 
+    .branch(branch_ex_fe)         
 );
 
 memory proc_mem(
@@ -194,13 +194,11 @@ memory proc_mem(
     .mem_rd_en_mem(memrden_ex_mem),
     .mem_wrt_en_mem(memwrten_ex_mem),
     .reg_wrt_en_mem(regwrten_ex_mem),
-    .rdi_mem(rdi_ex_mem),
     .stallmem(stallmem),
     .width_mem(width_ex_mem),
     .wb_sel_mem(wbsel_ex_mem),
     .wrt_reg_mem(wrtreg_ex_mem),
     .pc_mem(nxtpc_ex_mem),
-    .rdi_data(interrupt_source_data),   //TODO from external device
     .reg2_data_mem(memwrtdata_ex_mem),
     .alu_mem(aluresult_ex_mem),
     .instruction_mem(instruction_ex_mem),
