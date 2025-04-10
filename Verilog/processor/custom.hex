@@ -15,7 +15,10 @@
 00000263 //beq 56
 00000797 //auipc 60 
 00128293 //addi 64
-fe000ce3 //beq 68
+fe500ce3 //beq 68 (dont take)
+00128293 //add
+00128293 //add
+fe8006e3 //br to quipc
 
 
 //after rsi 1 cycle of wrong section of code happens when interrupt near branch

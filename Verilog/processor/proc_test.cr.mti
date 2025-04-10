@@ -1,120 +1,113 @@
-/filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/dmembank.v {1 {vlog -work work -vopt -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/dmembank.v
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module dmembank
+I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/forwarding.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/forwarding.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module forwarding
 
 Top level modules:
-	dmembank
+	forwarding
 
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/registerfile.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/registerfile.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module registerfile
-
-Top level modules:
-	registerfile
-
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/instruction_decoder.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/instruction_decoder.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module instruction_decoder
-
-Top level modules:
-	instruction_decoder
-
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/hazard.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/hazard.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module hazard
-
-Top level modules:
-	hazard
-
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/data_memory_wrapper.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/data_memory_wrapper.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module data_memory_wrapper
-
-Top level modules:
-	data_memory_wrapper
-
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/alu.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/alu.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module alu
-
-Top level modules:
-	alu
-
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/execute.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/execute.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/execute.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/execute.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling module execute
 
 Top level modules:
 	execute
 
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module proc
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/registerfile.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/registerfile.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module registerfile
 
 Top level modules:
-	proc
+	registerfile
 
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/decode.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/decode.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module decode
-
-Top level modules:
-	decode
-
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/inst_memory_wrapper.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/inst_memory_wrapper.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/inst_memory_wrapper.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/inst_memory_wrapper.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling module inst_memory_wrapper
 
 Top level modules:
 	inst_memory_wrapper
 
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module proc_tb
-
-Top level modules:
-	proc_tb
-
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/placeholder_mem.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/placeholder_mem.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/placeholder_mem.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/placeholder_mem.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling module placeholder_mem
 
 Top level modules:
 	placeholder_mem
 
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/memory.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/memory.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module memory
-
-Top level modules:
-	memory
-
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/imembank.v {1 {vlog -work work -vopt -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/imembank.v
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/imembank.v {1 {vlog -work work -vopt -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/imembank.v
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling module imembank
 
 Top level modules:
 	imembank
 
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/fetch.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/fetch.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/hazard.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/hazard.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module hazard
+
+Top level modules:
+	hazard
+
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/fetch.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/fetch.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling module fetch
 
 Top level modules:
 	fetch
 
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/branch_ctrl.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/branch_ctrl.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/branch_ctrl.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/branch_ctrl.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
 -- Compiling module branch_ctrl
 
 Top level modules:
 	branch_ctrl
 
-} {} {}} /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/forwarding.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/z/ztsimons/Documents/ECE554/Capstone/Battleship/Verilog/processor/forwarding.sv
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module forwarding
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module proc
 
 Top level modules:
-	forwarding
+	proc
+
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/dmembank.v {1 {vlog -work work -vopt -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/dmembank.v
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module dmembank
+
+Top level modules:
+	dmembank
+
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/decode.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/decode.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module decode
+
+Top level modules:
+	decode
+
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/instruction_decoder.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/instruction_decoder.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module instruction_decoder
+
+Top level modules:
+	instruction_decoder
+
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/memory.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/memory.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module memory
+
+Top level modules:
+	memory
+
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/data_memory_wrapper.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/data_memory_wrapper.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module data_memory_wrapper
+
+Top level modules:
+	data_memory_wrapper
+
+} {} {}} I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/alu.sv {1 {vlog -work work -vopt -sv -stats=none I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/alu.sv
+Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+-- Compiling module alu
+
+Top level modules:
+	alu
 
 } {} {}}
