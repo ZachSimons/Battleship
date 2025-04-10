@@ -56,7 +56,6 @@ int enemy_result;
 
 // Accelerator data
 char possible_positions[MAX_SHIPS][TOTAL_SHIP_POSITIONS];
-char invalid_combos[MAX_SHIPS][TOTAL_SHIP_POSITIONS][MAX_SHIPS][TOTAL_SHIP_POSITIONS];
 int hit_counts[NUM_SQUARES];
 #define ACCELERATOR_COUNT 8000
 
@@ -190,22 +189,6 @@ void clear_possible_positions() {
     }
 }
 
-void clear_invalid_combos() {
-    for(int lower = 0; lower < MAX_SHIPS - 1; lower++) {
-        for(int lower_v = 0; lower_v < 2; lower_v++) {
-            for(int lower_pos = 0; lower_pos < NUM_SQUARES; lower_pos++) {
-                for(int upper = lower + 1; upper < MAX_SHIPS; upper++) {
-                    for(int upper_v = 0; upper_v < 2; upper_v++) {
-                        for(int upper_pos = 0; upper_pos < NUM_SQUARES; upper_pos++) {
-                            invalid_combos[lower][mult(lower_v,100) + lower_pos][upper][mult(upper_v,100) + upper_pos] = 0;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 void clear_hit_counts() {
     for(int i = 0; i < NUM_SQUARES; i++) {
         hit_counts[i] = 0;
@@ -214,7 +197,6 @@ void clear_hit_counts() {
 
 void clear_accelerator_data() {
     clear_possible_positions();
-    clear_invalid_combos();
     clear_hit_counts();
 }
 
@@ -251,6 +233,23 @@ int square_in_configuration(unsigned char* configuration, int square) {
     return 0;
 }
 
+int calculate_overlap(int lower, int lower_square, int upper, int upper_square) {
+    int lower_size = ship_sizes[lower];
+    int upper_size = ship_sizes[upper];
+    int inc_lower = (lower_square > 99) ? 10 : 1;
+    int inc_upper = (upper_square > 99) ? 10 : 1;
+    int lower_pos = mod(lower_square,100);
+    int upper_pos = mod(upper_square,100);
+    for(int i = 0; i < lower_size; i++) {
+        for(int j = 0; j < upper_size; j++) {
+            if(lower_pos + mult(i,inc_lower) == upper_pos + mult(j,inc_upper)) {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
 int check_valid_configuration(unsigned char* configuration) {
     for(int i = 0; i < NUM_SQUARES; i++) {
         if(target_board[i] == HIT) {
@@ -259,17 +258,9 @@ int check_valid_configuration(unsigned char* configuration) {
             }
         }
     }
-    return 1;
-}
-
-int calculate_overlap(int lower, int lower_pos, int lower_v, int upper, int upper_pos, int upper_v) {
-    int lower_size = ship_sizes[lower];
-    int upper_size = ship_sizes[upper];
-    int inc_lower = lower_v ? 10 : 1;
-    int inc_upper = upper_v ? 10 : 1;
-    for(int i = 0; i < lower_size; i++) {
-        for(int j = 0; j < upper_size; j++) {
-            if(lower_pos + mult(i,inc_lower) == upper_pos + mult(j,inc_upper)) {
+    for(int i = 0; i < MAX_SHIPS-1; i++) {
+        for(int j = i+1; j < MAX_SHIPS; j++) {
+            if(!calculate_overlap(i, configuration[i], j, configuration[j])) {
                 return 0;
             }
         }
@@ -293,37 +284,13 @@ int run_accelerator() {
             }
         }
     }
-    // Calculate invalid combos
-    for(int lower = 0; lower < MAX_SHIPS - 1; lower++) {
-        for(int lower_v = 0; lower_v < 2; lower_v++) {
-            for(int lower_pos = 0; lower_pos < NUM_SQUARES; lower_pos++) {
-                if(possible_positions[lower][mult(lower_v,100) + lower_pos]) {
-                    for(int upper = lower + 1; upper < MAX_SHIPS; upper++) {
-                        for(int upper_v = 0; upper_v < 2; upper_v++) {
-                            for(int upper_pos = 0; upper_pos < NUM_SQUARES; upper_pos++) {
-                                invalid_combos[lower][mult(lower_v,100) + lower_pos][upper][mult(upper_v,100) + upper_pos] = calculate_overlap(lower, lower_pos, lower_v, upper, upper_pos, upper_v);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
     // Evaluate configurations
     for(int accel_cnt = 0; accel_cnt < ACCELERATOR_COUNT; accel_cnt++) {
         unsigned char ship_configuration[5];
         // Generate configuration
         for(int ship = 0; ship < MAX_SHIPS; ship++) {
             ship_configuration[ship] = mod(rand(),200);
-            if(possible_positions[ship][ship_configuration[ship]]) {
-                int valid = 1;
-                for(int lower = 0; lower < ship; lower++) {
-                    if(!invalid_combos[lower][ship_configuration[lower]][ship][ship_configuration[ship]]) {
-                        ship = 0;
-                        break;
-                    }
-                }
-            } else {
+            if(!possible_positions[ship][ship_configuration[ship]]) {
                 ship--;
             }
         }
@@ -401,12 +368,12 @@ int main() {
             }
         }
         while(1) {
-            asm volatile ("PRE ACCELERATOR LABEL");
+            asm volatile ("PRE_ACCELERATOR_LABEL:");
             ai_target = run_accelerator();
             asm volatile ("ugs ai_target, AI");
-            asm volatile ("STALL LOOP LABEL");
+            asm volatile ("STALL_LOOP_LABEL:");
             while(1) {} // Stall for interrupt
-            asm volatile ("FIRE RESULT LABEL");
+            asm volatile ("FIRE_RESULT_LABEL:");
             if(enemy_result) {
                 target_board[active_square] = HIT;
             } else {
