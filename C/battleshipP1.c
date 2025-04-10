@@ -36,6 +36,12 @@
 #define SET_TYPE(x) ((x & 0x00000007) << 17)
 #define SET_SEG(x) ((x & 0x00000007) << 14)
 
+int mult(int, int);
+int mod(int, int);
+int rand();
+int check_sinks();
+int check_lose();
+
 // Game data
 int my_board[NUM_SQUARES];
 int my_positions[MAX_SHIPS];
@@ -54,23 +60,25 @@ char invalid_combos[MAX_SHIPS][TOTAL_SHIP_POSITIONS][MAX_SHIPS][TOTAL_SHIP_POSIT
 int hit_counts[NUM_SQUARES];
 #define ACCELERATOR_COUNT 8000
 
-asm volatile("j main");
-asm volatile("ldi a0");
-asm volatile("call exception_handler");
+void entry_point() {
+    asm volatile ("j main");
+    asm volatile ("ldi a0");
+    asm volatile ("call exception_handler");
+}
 
 void exception_handler(int num) {
     if(num < 100) {
         my_board[num] |= SET_M_BIT(1);
         if(check_lose()) {
-            asm volatile("snd lose");
+            asm volatile ("snd lose");
         } else if(GET_E_BIT(my_board[num])) {
             if(check_sinks()) {
                 int resp = SET_ACK_SINK_SHIP(GET_TYPE(my_board[num])) | my_positions[GET_TYPE(my_board[num])];
-                asm volatile("snd resp");
+                asm volatile ("snd resp");
             }
-            asm volatile("snd ACK_HIT");
+            asm volatile ("snd ACK_HIT");
         } else {
-            asm volatile("snd ACK_MISS");
+            asm volatile ("snd ACK_MISS");
         }
     } else if(num == ACK_MISS) {
         target_board[active_square] = MISS;
@@ -93,7 +101,7 @@ void exception_handler(int num) {
             active_square++;
         }
     } else if(num == PS2_ENTER) {
-        asm volatile("snd active_square");
+        asm volatile ("snd active_square");
     } else { // ACK_HIT + SINK
         int pos = ACK_SINK_BIT & num;
         int inc = pos > 99 ? 10 : 1;
@@ -104,6 +112,32 @@ void exception_handler(int num) {
         }
         enemy_sunk[ship] = pos;
     }
+}
+
+int mult(int a, int b) {
+    int result = 0;
+    for(int i = 0; i < b; i++) {
+        result += a;
+    }
+    return result;
+}
+
+int mod(int a, int b) {
+    if(a > 0) {
+        while(a > b) {
+            a -= b;
+        }
+    } else {
+        while(a < 0) {
+            a += b;
+        }
+    }
+}
+
+int rand() {
+    int a = 10;
+    asm volatile ("ldr into whatever is above!");
+    return a;
 }
 
 void clear_boards() {
@@ -342,32 +376,6 @@ int check_sinks() {
     return 0;
 }
 
-int mult(int a, int b) {
-    int result = 0;
-    for(int i = 0; i < b; i++) {
-        result += a;
-    }
-    return result;
-}
-
-int mod(int a, int b) {
-    if(a > 0) {
-        while(a > b) {
-            a -= b;
-        }
-    } else {
-        while(a < 0) {
-            a += b;
-        }
-    }
-}
-
-int rand() {
-    int a = 10;
-    asm volatile("ldr into whatever is above!");
-    return a;
-}
-
 int main() {
     while(1) {
         active_square = 55;
@@ -378,12 +386,12 @@ int main() {
             }
         }
         while(1) {
-            asm volatile("PRE ACCELERATOR LABEL");
+            asm volatile ("PRE ACCELERATOR LABEL");
             ai_target = run_accelerator();
-            asm volatile("ugs ai_target, AI");
-            asm volatile("STALL LOOP LABEL");
+            asm volatile ("ugs ai_target, AI");
+            asm volatile ("STALL LOOP LABEL");
             while(1) {} // Stall for interrupt
-            asm volatile("FIRE RESULT LABEL");
+            asm volatile ("FIRE RESULT LABEL");
             if(enemy_result) {
                 target_board[active_square] = HIT;
             } else {
