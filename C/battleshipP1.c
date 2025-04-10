@@ -46,9 +46,9 @@ int check_lose();
 int my_board[NUM_SQUARES];
 int my_positions[MAX_SHIPS];
 char target_board[NUM_SQUARES];
-char ship_sizes[MAX_SHIPS] = {2, 3, 3, 4, 5};
-int my_sunk[MAX_SHIPS] = {-1, -1, -1, -1, -1};
-int enemy_sunk[MAX_SHIPS] = {-1, -1, -1, -1, -1};
+char ship_sizes[MAX_SHIPS];
+int my_sunk[MAX_SHIPS];
+int enemy_sunk[MAX_SHIPS];
 
 int active_square;
 int ai_target;
@@ -378,6 +378,21 @@ int check_sinks() {
 
 int main() {
     while(1) {
+        ship_sizes[0] = 2;
+        ship_sizes[1] = 3;
+        ship_sizes[2] = 3;
+        ship_sizes[3] = 4;
+        ship_sizes[4] = 5;
+        my_sunk[0] = -1;
+        my_sunk[1] = -1;
+        my_sunk[2] = -1;
+        my_sunk[3] = -1;
+        my_sunk[4] = -1;
+        enemy_sunk[0] = -1;
+        enemy_sunk[1] = -1;
+        enemy_sunk[2] = -1;
+        enemy_sunk[3] = -1;
+        enemy_sunk[4] = -1;
         active_square = 55;
         clear_boards();
         for(int i = 0; i < 5; i++) {
