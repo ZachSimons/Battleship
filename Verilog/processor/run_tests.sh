@@ -33,6 +33,7 @@ else
         loadhaz.hex
         branch_test.hex
         custom_haz.hex
+        fib.hex
     )
     echo "▶️  Running full test suite"
 fi
