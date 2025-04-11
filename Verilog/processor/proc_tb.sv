@@ -570,6 +570,117 @@ module proc_tb;
 
 
 
+    /////////////////////////////////////////////////////////////////
+    // INTERRUPT TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "interrupt") begin 
+      
+      //#100 = 185 iterrupt goes high
+      
+      #160;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #330;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #330;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #330;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #350;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #310;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+    
+      #280;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #350;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #320;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #340;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #320;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #310;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #320;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[17] != 32'h1) begin
+          @(posedge clk);
+          end
+          check_basic_register(
+            29, 
+            32'd000000000, 
+            "did all rsi"
+          );
+          check_basic_register(
+            30, 
+            32'd000000000, 
+            "did all rti"
+          );
+          disable timeout_int;
+        end
+        begin : timeout_int
+          repeat (1000) @(posedge clk);
+          $error("TEST FAILED: Timeout: Interrupt test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
     repeat (10) @(posedge clk);
 
     $display("Finished stepping through all instructions!");

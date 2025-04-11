@@ -35,6 +35,7 @@ logic memerror;
 
 //Interrupt
 logic interrupt_latch, interrupt;
+logic pending_interrupt, memrden_if;
 
 //Flushing, stalling, and hazards
 logic flush, pfstall, stallmem, hazard, hazard_stall, stallpc;
@@ -96,7 +97,8 @@ fetch proc_fe(
     .pc_ex(branchpc_ex_fe),       
     .instruction_dec(inst_fe_dec),
     .pc_next_dec(nxtpc_fe_dec),
-    .pc_curr_dec(pc_fe_dec)
+    .pc_curr_dec(pc_fe_dec),
+    .memrden_if(memrden_if)
 );
 
 
@@ -288,17 +290,35 @@ assign stallmem = (hazard_stall && (~stall_override)); //To handle both Pc chang
 
 //TODO may need to debounce rti and rsi depending on if they are sync to the cpu pipeline
 //TODO debounce may need sync interrupt to the CPU pipeline
-//While interrupt being handled another interrupt must not be able to happen
-assign interrupt = (interrupt_key | interrupt_eth) & ~interrupt_latch;
+//While interrupt being handled another interrupt must not be able to 
 
-always_ff @(posedge clk, negedge rst_n) begin
+assign stall_interrupt = memrden_if || memrden_if_dec || memrden_dec_ex || memrden_ex_mem;
+
+//assign interrupt = stall_interrupt ? 0 : (interrupt_key | interrupt_eth) & ~interrupt_latch;
+
+always_ff @(posedge clk) begin
+    if(!rst_n) begin
+        interrupt <= 1'b0;
+    end
+    else if (~stall_interrupt)begin
+        interrupt <= ((interrupt_key | interrupt_eth) & ~interrupt_latch) | pending_interrupt;
+        pending_interrupt <= 1'b0;
+    end
+    else begin
+        interrupt <= 1'b0;
+        pending_interrupt <= pending_interrupt ? 1'b1 : ((interrupt_key | interrupt_eth) & ~interrupt_latch);
+    end
+end
+
+
+always_ff @(posedge clk) begin
     if(!rst_n) begin
         interrupt_latch <= 0;
     end
     else if(rti_de_fe | rsi_de_fe) begin
         interrupt_latch <= 0;
     end
-    else if(interrupt_key | interrupt_eth) begin
+    else if(/*interrupt_key | interrupt_eth*/interrupt) begin
         interrupt_latch <= 1;
     end
 end

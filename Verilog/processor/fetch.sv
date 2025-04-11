@@ -15,7 +15,8 @@ module fetch(
     output logic stall_override,
     output logic [31:0] instruction_dec,
     output logic [31:0] pc_next_dec,
-    output logic [31:0] pc_curr_dec
+    output logic [31:0] pc_curr_dec,
+    output logic memrden_if
 );
 //////////////NET INSTANTIATION/////////////////////
 logic hazard1;
@@ -49,7 +50,7 @@ assign instruction_fe = (stall_mem | stall_mem1) ? instruction_fe :
                         ((^imem_out === 1'bX) | (~|imem_out) | |warmup | (flush && ~inter_temp) | |flushnop | |interrupt_nop) ? 32'h00000013 : imem_out;
 
 
-
+assign memrden_if = (instruction_fe[6:0] == 7'b0000011);
 //Flushing -> IFD needs to go to 0 and NOP. PC still needs to update to the correct value
 //stall_mem -> IFD needs to stay same value. PC still needs to stay same value
 //stall_nop -> identical to stall_mem
