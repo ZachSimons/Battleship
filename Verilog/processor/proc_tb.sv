@@ -681,6 +681,47 @@ module proc_tb;
       join_any
     end
 
+        /////////////////////////////////////////////////////////////////
+    // INTERRUPT TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "interrupt_branch") begin 
+      
+      //#100 = 185 iterrupt goes high
+      
+      /*
+      #160;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+      */
+      //check the I-reg
+
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[7] != 32'h6) begin
+          @(posedge clk);
+          end
+          check_basic_register(
+            2, 
+            32'd3, 
+            "did all rsi"
+          );
+          check_basic_register(
+            3, 
+            32'd3, 
+            "did all rti"
+          );
+          disable timeout_int_b;
+        end
+        begin : timeout_int_b
+          repeat (500) @(posedge clk);
+          $error("TEST FAILED: Timeout: Interrupt_branch test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
     repeat (10) @(posedge clk);
 
     $display("Finished stepping through all instructions!");
