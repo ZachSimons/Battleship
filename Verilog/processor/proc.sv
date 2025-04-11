@@ -299,6 +299,7 @@ assign stall_interrupt = memrden_if || memrden_if_dec || memrden_dec_ex || memrd
 always_ff @(posedge clk) begin
     if(!rst_n) begin
         interrupt <= 1'b0;
+        pending_interrupt <= 0;
     end
     else if (~stall_interrupt)begin
         interrupt <= ((interrupt_key | interrupt_eth) & ~interrupt_latch) | pending_interrupt;

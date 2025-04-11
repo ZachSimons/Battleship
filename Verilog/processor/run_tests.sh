@@ -34,6 +34,7 @@ else
         branch_test.hex
         custom_haz.hex
         fib.hex
+        interrupt.hex
     )
     echo "▶️  Running full test suite"
 fi
