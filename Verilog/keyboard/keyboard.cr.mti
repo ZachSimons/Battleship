@@ -1,0 +1,15 @@
+/filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module keyboard_tb
+
+Top level modules:
+	keyboard_tb
+
+} {} {}} /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_controller.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_controller.sv
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module keyboard
+
+Top level modules:
+	keyboard
+
+} {} {}}
