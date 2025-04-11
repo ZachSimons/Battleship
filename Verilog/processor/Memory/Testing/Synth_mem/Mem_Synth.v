@@ -12,12 +12,12 @@ module Mem_Synth(
 	input 		          		CLOCK_50,
 
 	//////////// SEG7 //////////
-	output		     [6:0]		HEX0,
-	output		     [6:0]		HEX1,
-	output		     [6:0]		HEX2,
-	output		     [6:0]		HEX3,
-	output		     [6:0]		HEX4,
-	output		     [6:0]		HEX5,
+	output	reg	     [6:0]		HEX0,
+	output	reg	     [6:0]		HEX1,
+	output	reg	     [6:0]		HEX2,
+	output	reg	     [6:0]		HEX3,
+	output	reg	     [6:0]		HEX4,
+	output	reg	     [6:0]		HEX5,
 
 	//////////// KEY //////////
 	input 		     [3:0]		KEY,
@@ -30,11 +30,30 @@ module Mem_Synth(
 );
 
 
+parameter HEX_0 = 7'b1000000;		// zero
+parameter HEX_1 = 7'b1111001;		// one
+parameter HEX_2 = 7'b0100100;		// two
+parameter HEX_3 = 7'b0110000;		// three
+parameter HEX_4 = 7'b0011001;		// four
+parameter HEX_5 = 7'b0010010;		// five
+parameter HEX_6 = 7'b0000010;		// six
+parameter HEX_7 = 7'b1111000;		// seven
+parameter HEX_8 = 7'b0000000;		// eight
+parameter HEX_9 = 7'b0011000;		// nine
+parameter HEX_10 = 7'b0001000;	// ten
+parameter HEX_11 = 7'b0000011;	// eleven
+parameter HEX_12 = 7'b1000110;	// twelve
+parameter HEX_13 = 7'b0100001;	// thirteen
+parameter HEX_14 = 7'b0000110;	// fourteen
+parameter HEX_15 = 7'b0001110;	// fifteen
+parameter OFF   = 7'b1111111;		// all off
+
 
 //=======================================================
 //  REG/WIRE declarations
 //=======================================================
 wire rst_n, clk, start_addr, end_addr, rden;
+reg start_addr_reg, rden_reg, end_addr_reg;
 reg [1:0] key1debounce, start_count, end_count;
 reg [31:0] addr, count;
 reg [9:0] delay_count;
@@ -47,11 +66,11 @@ wire [31:0] data;
 //  Module Instantiation
 //=======================================================
 mem idut (
-	clk(CLOCK_50),
-    rst_n(rst_n),
-    read_en(rden),
-    addr(addr),
-    q(data)
+	.clk(CLOCK_50),
+    .rst_n(rst_n),
+    .read_en(rden),
+    .addr(addr),
+    .q(data)
 );
 
 //=======================================================
@@ -60,7 +79,23 @@ mem idut (
 assign clk = CLOCK_50;
 assign rst_n = KEY[0]; //already active low
 
+always @(posedge clk) begin
+	if(!rst_n) begin
+		start_addr_reg <= 1'b0;
+	end else if(key1debounce[1] & ~key1debounce[0]) begin
+		start_addr_reg <= 1'b1;
+		rden_reg <= 1'b1; //
+	end
+end
 
+always @(posedge clk) begin
+	if(!rst_n) begin
+		end_addr_reg <= 1'b0;
+	end else if((addr == 32'd8192)) begin
+		end_addr_reg <= 1'b1;
+		rden_reg <= 1'b0;
+	end
+end
 
 always @(posedge clk) begin
 	if(!rst_n) begin
@@ -72,9 +107,9 @@ always @(posedge clk) begin
 	end
 end 
 
-assign start_addr = (key1debounce[1] & ~key1debounce[0]);
-assign end_addr = (addr == 32'd8192);
-assign rden = |addr[12:2];
+assign start_addr = start_addr_reg;
+assign end_addr = end_addr_reg;
+assign rden = 1'b1;
 
 //Delay for mem
 always @(posedge clk) begin
@@ -97,8 +132,8 @@ always @(posedge clk) begin
 	else if(end_count[1]) begin
 		count <= count;
 	end
-	else if(start_count[1]) begin
-		count <= count + data;
+	else if(start_count[1] && (data != 32'b0)) begin
+		count <= (data == 32'hFFFFFFFF) ? count + 1 : count;
 	end
 	else begin
 		count <= count;
@@ -108,13 +143,16 @@ end
 //Address counter
 always @(posedge clk) begin
 	if(!rst_n) begin
-		addr <= '0;
+		addr <= 32'h0;
+		rden_reg <= 1'b0;
 	end
 	else if(end_count) begin
 		addr <= addr;
+		rden_reg <= 1'b0; 
 	end
 	else if(start_count) begin
 		addr <= addr + 4'h4;
+
 	end
 	else begin
 		addr <= addr;
@@ -124,9 +162,9 @@ end
 //Delay calculator
 always @(posedge clk) begin
 	if(!rst_n) begin
-		delay_count <= '0;
+		delay_count <= 10'h0;
 	end else if(rden & (data == 32'h0)) begin
-		delay_count <= delay_count + 1;
+		delay_count <= delay_count + 1'b1;
 	end
 end
 
