@@ -1,6 +1,7 @@
 module hazard (
     input clk,
     input rst_n,
+    input sac_id_ex,
     input memread_if_id,
     input memread_id_ex,
     input memread_ex_mem,
@@ -19,8 +20,11 @@ logic [1:0] stall_mem_curr;
 logic [1:0] stall_pc_curr;
 //logic tempmem, temppc; 
 
+logic load_haz, sac_haz, sac_haz_repeat;
 
-assign hazard = (memread_id_ex && ((dst_reg_id_ex == src_reg1_if_id) || (dst_reg_id_ex == src_reg2_if_id))); //load --- stall fetch/decode insert nop ---
+//load and sac --- stall fetch/decode insert nop ---
+assign hazard = ((memread_id_ex | sac_id_ex) && ((dst_reg_id_ex == src_reg1_if_id) || (dst_reg_id_ex == src_reg2_if_id))); 
+
 
 always_ff @(posedge clk) begin
     if (!rst_n) begin

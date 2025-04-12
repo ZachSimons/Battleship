@@ -42,7 +42,8 @@ module decode(
     output logic [4:0] read_register2_if_id,
     output logic memread_if_id,
     output logic ignore_fwd_ex,
-    output logic lui_ex
+    output logic lui_ex,
+    output logic sac_ex
 );
 
 
@@ -110,6 +111,7 @@ always_ff @(posedge clk) begin
         snd_ex <= 0;
         uad_ex <= 0;
         ppu_send_ex <= 0;
+        sac_ex <= 0;
     end
     else if(~stall_mem) begin
         read_data1_ex <= ~fluhaz ? read_data1 : 0;
@@ -140,6 +142,7 @@ always_ff @(posedge clk) begin
         snd_ex <= ~fluhaz ? snd : 0;
         uad_ex <= ~fluhaz ? uad : 0;
         ppu_send_ex <= ~fluhaz ? ppu_send : 0;
+        sac_ex <= ~fluhaz ? sac : 0; 
     end
 end
 
