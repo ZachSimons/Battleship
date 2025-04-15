@@ -1,0 +1,1118 @@
+# 0 compiles, 17 failed with no errors.
+# Compile of alu.sv was successful.
+# Compile of branch_ctrl.sv was successful.
+# Compile of data_memory_wrapper.sv was successful.
+# Compile of decode.sv was successful.
+# Compile of dmembank.v was successful.
+# Compile of execute.sv was successful.
+# Compile of fetch.sv was successful.
+# Compile of forwarding.sv was successful.
+# Compile of hazard.sv was successful.
+# Compile of imembank.v was successful.
+# Compile of inst_memory_wrapper.sv was successful.
+# Compile of instruction_decoder.sv was successful.
+# Compile of memory.sv was successful.
+# Compile of placeholder_mem.sv was successful.
+# Compile of proc.sv was successful.
+# Compile of proc_tb.sv was successful.
+# Compile of registerfile.sv was successful.
+# 17 compiles, 0 failed with no errors.
+vsim work.proc_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs="+acc"
+# vsim work.proc_tb -L C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf -voptargs=""+acc"" 
+# Start time: 16:06:52 on Apr 10,2025
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+
+do I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/LandStesting.do
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 376 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 416 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 496 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 516 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8935 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+do I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/wave.do
+do I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/btesting.do
+do I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/LandStesting.do
+add wave -position insertpoint  \
+sim:/proc_tb/dut/interrupt_latch \
+sim:/proc_tb/dut/interrupt \
+sim:/proc_tb/dut/flush
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 376 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 416 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 496 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 516 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8935 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 376 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 416 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 496 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 516 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8935 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 366 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 386 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 456 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 466 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8905 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+# Compile of proc_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 366 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 386 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 456 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 466 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8895 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 366 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 386 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 456 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 466 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8895 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+# Compile of proc_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 366 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 386 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 456 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 466 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8885 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 366 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 386 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 456 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 466 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8885 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+# Compile of proc_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 366 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 386 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 456 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 466 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8875 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+# Compile of proc_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 366 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 386 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 456 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 466 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8905 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+# Compile of proc_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 366 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 386 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 456 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 466 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8915 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+# Compile of proc_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 366 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 386 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 456 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 466 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8925 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369
+# Compile of proc_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.altsyncram_body(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading C:/intelFPGA_lite/23.1std/questa_fse/intel/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+run -all
+# ** Error: FAILED: ORI x24, x24, 0xF => Register x24 mismatch: expected 0000000f, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 136 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 156 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 176 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 0000000a
+#    Time: 186 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 196 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 216 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 236 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 256 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRLI x9, x1, 1 => Register x9 matched expected value 00000000
+# SUCCESS: SRAI x10, x1, 1 => Register x10 matched expected value 00000000
+# ** Error: FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 0000000a
+#    Time: 286 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SLT x4, x1, x2 => Register x4 matched expected value 00000001
+# SUCCESS: SLTU x5, x1, x2 => Register x5 matched expected value 00000001
+# ** Error: FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 336 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SRL x7, x1, x2 => Register x7 matched expected value 00000000
+# SUCCESS: SRA x8, x1, x2 => Register x8 matched expected value 00000000
+# ** Error: FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 366 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: AND x10, x1, x2 => Register x10 matched expected value 00000000
+# ** Error: FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 386 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# SUCCESS: SB x11, 2(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SH x11, 4(x2) => Register x0 matched expected value 00000000
+# SUCCESS: SW x11, 6(x2) => Register x0 matched expected value 00000000
+# ** Error: FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 456 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 466 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 476 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# ** Error: FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 0000003c
+#    Time: 486 ns  Scope: proc_tb.check_register File: I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv Line: 380
+# Finished stepping through all instructions!
+# ** Note: $stop    : I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv(369)
+#    Time: 8935 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv line 369

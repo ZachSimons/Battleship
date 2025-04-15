@@ -1,0 +1,130 @@
+m255
+K4
+z2
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+R0
+R1
+R0
+R1
+!s11f vlog 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dI:/Battleship/Verilog/Testing/ALU
+T_opt
+!s110 1742341985
+V<g5?SCeJdB9ZWO6?N[1<R3
+04 10 4 work Execute_tb fast 0
+=2-4cd7179439da-67da0760-36d-2678
+R1
+!s12b OEM100
+!s124 OEM10U4 
+o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
+valu
+2I:/Battleship/Verilog/processor/alu.sv
+Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+!s110 1742340155
+!i10b 1
+!s100 Lh_gBjSZ9EOA9332F;dW63
+IZYGaX[5gTRg8aV<z:U@_M1
+S1
+Z4 dI:/Battleship/Verilog/Testing/Execute
+w1742335032
+8I:/Battleship/Verilog/processor/alu.sv
+FI:/Battleship/Verilog/processor/alu.sv
+!i122 1
+L0 1 38
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+Z6 OL;L;2023.3;77
+r1
+!s85 0
+31
+!s108 1742340155.000000
+!s107 I:/Battleship/Verilog/processor/alu.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Battleship/Verilog/processor/alu.sv|
+!i113 0
+Z7 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vbranch_ctrl
+2I:/Battleship/Verilog/processor/branch_ctrl.sv
+R3
+!s110 1742340156
+!i10b 1
+!s100 fV85zH9nb@lUcS;:jH8b=1
+II`P5j28=2f:I[CNMS?3nQ1
+S1
+R4
+w1742336898
+8I:/Battleship/Verilog/processor/branch_ctrl.sv
+FI:/Battleship/Verilog/processor/branch_ctrl.sv
+!i122 2
+L0 1 36
+R5
+R6
+r1
+!s85 0
+31
+!s108 1742340156.000000
+!s107 I:/Battleship/Verilog/processor/branch_ctrl.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Battleship/Verilog/processor/branch_ctrl.sv|
+!i113 0
+R7
+R2
+vexecute
+2I:/Battleship/Verilog/processor/execute.sv
+R3
+!s110 1742340905
+!i10b 1
+!s100 d`JTVEGPjWTiooBN[=DS[1
+IjL[=[FgVoVT^>mCh6]ULn1
+S1
+R4
+w1742340902
+8I:/Battleship/Verilog/processor/execute.sv
+FI:/Battleship/Verilog/processor/execute.sv
+!i122 3
+L0 1 72
+R5
+R6
+r1
+!s85 0
+31
+!s108 1742340905.000000
+!s107 I:/Battleship/Verilog/processor/execute.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Battleship/Verilog/processor/execute.sv|
+!i113 0
+R7
+R2
+vExecute_tb
+2I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv
+R3
+!s110 1742341980
+!i10b 1
+!s100 O>aCXIdKan_eLAhd5:;j<0
+IWQUoh:5Tm=aJ=z6c2dKdA2
+S1
+R4
+w1742341953
+8I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv
+FI:/Battleship/Verilog/Testing/Execute/Execute_tb.sv
+!i122 6
+L0 1 130
+R5
+R6
+r1
+!s85 0
+31
+!s108 1742341979.000000
+!s107 I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Battleship/Verilog/Testing/Execute/Execute_tb.sv|
+!i113 0
+R7
+R2
+n@execute_tb

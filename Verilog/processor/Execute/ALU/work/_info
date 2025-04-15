@@ -1,0 +1,101 @@
+m255
+K4
+z2
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+!s12c _opt1
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+!s11f vlog 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z2 dC:/intelFPGA_lite/23.1std
+T_opt
+!s110 1742337565
+V`>j6^[iEJESP=1S]ke`FA0
+Z3 04 6 4 work ALU_tb fast 0
+=1-4cd7179439da-67d9f61c-3ae-5bb4
+R1
+Z4 !s12b OEM100
+Z5 !s124 OEM10U2 
+o-quiet -auto_acc_if_foreign -work work +acc
+Z6 tCvgOpt 0
+n@_opt
+Z7 OL;O;2023.3;77
+T_opt1
+!s110 1742337538
+Vo]6]1MJTJa?eSf8D]lb?C1
+R3
+=1-4cd7179439da-67d9f601-289-2a74
+R1
+R4
+R5
+o-quiet -auto_acc_if_foreign -work work
+R6
+n@_opt1
+R7
+R2
+valu
+2I:/Battleship/Verilog/processor/alu.sv
+Z8 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+!s110 1742335999
+!i10b 1
+!s100 Lh_gBjSZ9EOA9332F;dW63
+IZYGaX[5gTRg8aV<z:U@_M1
+S1
+Z9 dI:/Battleship/Verilog/Testing/ALU
+w1742335032
+8I:/Battleship/Verilog/processor/alu.sv
+FI:/Battleship/Verilog/processor/alu.sv
+!i122 4
+L0 1 38
+Z10 VDg1SIo80bB@j0V0VzS_@n1
+Z11 OL;L;2023.3;77
+r1
+!s85 0
+31
+!s108 1742335998.000000
+!s107 I:/Battleship/Verilog/processor/alu.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Battleship/Verilog/processor/alu.sv|
+!i113 0
+Z12 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R6
+vALU_tb
+2I:/Battleship/Verilog/Testing/ALU/ALU_tb.sv
+R8
+!s110 1742337504
+!i10b 1
+!s100 ]eM[ogTk9GfSli]:<=<dj2
+I=?5UQHMLOJ^2[j:iI=YZQ1
+S1
+R9
+w1742337349
+8I:/Battleship/Verilog/Testing/ALU/ALU_tb.sv
+FI:/Battleship/Verilog/Testing/ALU/ALU_tb.sv
+!i122 8
+L0 1 113
+R10
+R11
+r1
+!s85 0
+31
+!s108 1742337504.000000
+!s107 I:/Battleship/Verilog/Testing/ALU/ALU_tb.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Battleship/Verilog/Testing/ALU/ALU_tb.sv|
+!i113 0
+R12
+R6
+n@a@l@u_tb

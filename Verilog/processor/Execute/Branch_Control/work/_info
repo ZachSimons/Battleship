@@ -1,0 +1,78 @@
+m255
+K4
+z2
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+R0
+R1
+!s11f vlog 2023.3 2023.07, Jul 17 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dI:/Battleship/Verilog/Testing/ALU
+T_opt
+!s110 1742337358
+VE5IIY7Qn@^KUE:Hmd7_ib0
+04 17 4 work Branch_Control_tb fast 0
+=2-4cd7179439da-67d9f54d-98-5908
+R1
+!s12b OEM100
+!s124 OEM10U2 
+o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
+vBranch_Control_tb
+2I:/Battleship/Verilog/Testing/Branch_Control/Branch_Control_tb.sv
+Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+!s110 1742337353
+!i10b 1
+!s100 BV<aU?9YlkOYKO3@@1b=z0
+I41TCkZDzmj311FThmSK551
+S1
+Z4 dI:/Battleship/Verilog/Testing/Branch_Control
+w1742337341
+8I:/Battleship/Verilog/Testing/Branch_Control/Branch_Control_tb.sv
+FI:/Battleship/Verilog/Testing/Branch_Control/Branch_Control_tb.sv
+!i122 2
+L0 1 101
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+Z6 OL;L;2023.3;77
+r1
+!s85 0
+31
+!s108 1742337353.000000
+!s107 I:/Battleship/Verilog/Testing/Branch_Control/Branch_Control_tb.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Battleship/Verilog/Testing/Branch_Control/Branch_Control_tb.sv|
+!i113 0
+Z7 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+n@branch_@control_tb
+vbranch_ctrl
+2I:/Battleship/Verilog/processor/branch_ctrl.sv
+R3
+!s110 1742337253
+!i10b 1
+!s100 fV85zH9nb@lUcS;:jH8b=1
+II`P5j28=2f:I[CNMS?3nQ1
+S1
+R4
+w1742336898
+8I:/Battleship/Verilog/processor/branch_ctrl.sv
+FI:/Battleship/Verilog/processor/branch_ctrl.sv
+!i122 1
+L0 1 36
+R5
+R6
+r1
+!s85 0
+31
+!s108 1742337253.000000
+!s107 I:/Battleship/Verilog/processor/branch_ctrl.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Battleship/Verilog/processor/branch_ctrl.sv|
+!i113 0
+R7
+R2
