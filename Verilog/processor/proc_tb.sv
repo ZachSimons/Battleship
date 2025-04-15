@@ -2,19 +2,23 @@
 
 module proc_tb;
 
+  logic [31:0] ppu_sim, acc_sim, comm_sim;
+  logic [1:0] sac_sim; 
   logic clk;
   logic rst_n;
   logic interrupt_key;
   logic interrupt_eth;
   logic accelerator_data;
   logic [31:0] interrupt_source_data;
+  logic [31:0] expected_pc;
 
   logic sac, snd, uad, ppu_send;
   logic [31:0] interface_data;
 
+  integer basic_instr_err = 0;
+  string testname;
 
   int test_index;
-  
 
   typedef struct {
     string  test_name;
@@ -24,88 +28,7 @@ module proc_tb;
   } test_info_t;
 
 
-
-
-
-
-
-  test_info_t test_list_jumps[] = '{
-    '{
-      test_name      : "addi x1, x0, 100",
-      instr_code     : 32'h06400093,
-      reg_to_check   : 5'd1,
-      expected_val   : 32'd100  
-    },
-    '{
-      test_name      : "addi x2, x0, 100",
-      instr_code     : 32'h06400093,
-      reg_to_check   : 5'd2,
-      expected_val   : 32'd100  
-    },
-    '{
-      test_name      : "jal x30, 12",
-      instr_code     : 32'h00c00f6f,
-      reg_to_check   : 5'd30,
-      expected_val   : 32'd12  
-    },
-    '{
-      test_name      : "addi x1, x1, 100",
-      instr_code     : 32'h06408093,
-      reg_to_check   : 5'd1,
-      expected_val   : 32'd200 
-    },
-    '{
-      test_name      : "addi x2, x0, 50",
-      instr_code     : 32'h06408093,
-      reg_to_check   : 5'd2,
-      expected_val   : 32'd50 
-    },
-    '{
-      test_name      : "addi x2, x0, 50",
-      instr_code     : 32'h06408093,
-      reg_to_check   : 5'd2,
-      expected_val   : 32'd50 
-    },
-    '{
-      test_name      : "jalr x0, x30, 0",
-      instr_code     : 32'h000f0067,
-      reg_to_check   : 5'd0,
-      expected_val   : 32'd0 
-    },
-    '{
-      test_name      : "sub x1, x1, x2",
-      instr_code     : 32'h402080b3,
-      reg_to_check   : 5'd1,
-      expected_val   : 32'd150 
-    },
-    '{
-      test_name      : "jal x0 16",
-      instr_code     : 32'h0100006f,
-      reg_to_check   : 5'd0,
-      expected_val   : 32'd0
-    },
-    '{
-      test_name      : "ADDI x11, x11, 0xEF",
-      instr_code     : 32'h0ef58593,
-      reg_to_check   : 5'd11,
-      expected_val   : 32'h000000EF
-    },
-    '{
-      test_name      : "//SW  x11, 2(x3)",
-      instr_code     : 32'h00b1a123,
-      reg_to_check   : 5'd0,
-      expected_val   : 32'h0
-    },
-    '{
-      test_name      : "//LW x5, 2(x3)",
-      instr_code     : 32'h0021a283,
-      reg_to_check   : 5'd5,
-      expected_val   : 32'h000000EF
-    }
-  };
-
-
-  test_info_t test_list[] = '{
+  test_info_t basic_test_list[] = '{
     '{
       test_name      : "ORI x24, x24, 0xF",
       instr_code     : 32'h00fc6c13,
@@ -170,7 +93,7 @@ module proc_tb;
       test_name      : "ORI x6, x1, 0xABC",
       instr_code     : 32'hbcd0e313, // blank
       reg_to_check   : 5'd6,
-      expected_val   : 32'hFFFFFABD   // if x1=1 => 1 | 0xABCD => 0xABCD
+      expected_val   : 32'hfffffabd   // if x1=1 => 1 | 0xABCD => 0xABCD
     },
     '{
       test_name      : "ANDI x7, x1, 0xF",
@@ -254,7 +177,7 @@ module proc_tb;
       test_name      : "ADDI x11, x11, 0xEEF",
       instr_code     : 32'heef58593, 
       reg_to_check   : 5'd11,
-      expected_val   : 32'hDEADBEEF  
+      expected_val   : 32'hdeadbeef  
     },
     '{
       test_name      : "SB x11, 2(x2)",
@@ -300,7 +223,22 @@ module proc_tb;
     }
   };
   
-
+  //Simulating interfaces
+  always_ff @(posedge clk) begin
+    if(!rst_n) begin
+      ppu_sim <= 0;
+      acc_sim <= 0;
+      comm_sim <= 0;
+      sac_sim <= 0;
+    end
+    else begin
+      ppu_sim <= ppu_send ? interface_data : ppu_sim;
+      acc_sim <= uad ? interface_data : acc_sim;
+      comm_sim <= snd ? interface_data : comm_sim;
+      sac_sim <= (~sac_sim & sac) ? sac :  sac_sim;
+    end
+  end
+  
 
   // Instantiate DUT
   proc dut (
@@ -327,36 +265,581 @@ module proc_tb;
     rst_n = 0;
     interrupt_key = 0;
     interrupt_eth = 0;
-    accelerator_data = 0;
+    accelerator_data = 1;
+    expected_pc = 0; 
     interrupt_source_data = 32'hDEADBEEF;
 
-    
+    if (!$value$plusargs("TEST=%s", testname)) begin
+        testname = "default";
+    end
+    $display("Running test logic for: %s", testname);
 
     #20;
     rst_n = 1;
     repeat (7) @(posedge clk);
 
-    // For each instruction in test_list:
-    for (int i = 0; i < $size(test_list); i++) begin
-      repeat (1) @(posedge clk);
+    /////////////////////////////////////////////////////////////////
+    // BASIC INSTR TESTS
+    /////////////////////////////////////////////////////////////////
+    // For each instruction in basic_test_list:
+    if (testname == "basic_instr_tests") begin
+      for (int i = 0; i < $size(basic_test_list); i++) begin
+        repeat (1) @(posedge clk);
 
-      if ((dut.instruction_ex_mem[6:0] == 7'b0000011)) repeat(2) @(posedge clk);
+        if ((dut.instruction_ex_mem[6:0] == 7'b0000011)) repeat(2) @(posedge clk);
 
-      if ((dut.instruction_ex_mem == 32'h00000013)) @(posedge clk);
-      // Now check the register
-      #1;
-      check_register(
-        test_list[i].reg_to_check, 
-        test_list[i].expected_val, 
-        test_list[i].test_name
-      );
+        if ((dut.instruction_ex_mem == 32'h00000013)) @(posedge clk);
+        // Now check the register
+        #1;
+        check_basic_register(
+          basic_test_list[i].reg_to_check, 
+          basic_test_list[i].expected_val, 
+          basic_test_list[i].test_name
+        );
+      end
+      if (basic_instr_err == 0) begin
+        $display("TEST PASSED: Basic instruction tests");
+      end else begin
+        $display("TEST FAILED: %d basic instructions failed", basic_instr_err);
+      end
     end
-    repeat(700) @(posedge clk);
+
+    /////////////////////////////////////////////////////////////////
+    // JUMP TESTs
+    /////////////////////////////////////////////////////////////////
+    if (testname == "jal_tests") begin
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[1] != 32'hAA) begin
+            @(posedge clk);
+          end
+          check_test(
+            1, 
+            32'hAA, 
+            "Jump Test"
+          );
+          disable timeout_jump;
+        end
+        begin : timeout_jump
+          repeat (500) @(posedge clk);
+          $error("TEST FAILED: Timeout: Jump test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+    /////////////////////////////////////////////////////////////////
+    // SQUARE ROOT TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "sqrt") begin
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[29] != 1) begin
+            @(posedge clk);
+          end
+          check_test(
+            10, 
+            40, 
+            "Square root of 1600"
+          );
+          disable timeout_sqrt;
+        end
+        begin : timeout_sqrt
+          repeat (600000) @(posedge clk);
+          $error("TEST FAILED: Timeout: Square root test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+    /////////////////////////////////////////////////////////////////
+    // LOAD & STORE TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "loadstore") begin
+      fork 
+        begin
+          while (dut.proc_de.curr_pc != 220) begin
+            @(posedge clk);
+          end
+          @(posedge clk);
+          @(posedge clk);
+          #1;
+          check_basic_register(
+            10, 
+            32'h22222222, 
+            "array[0] after store"
+          );
+          check_basic_register(
+            11, 
+            32'h22222222, 
+            "array[1] original"
+          );
+          check_basic_register(
+            12, 
+            32'hFFFFFFCC, 
+            "array[2] after sw t4"
+          );
+          check_basic_register(
+            13, 
+            32'h000000CC, 
+            "array[3] after sw t6"
+          );
+          check_basic_register(
+            14, 
+            32'h22222222, 
+            "result[0] = copy of array[1]"
+          );
+          check_basic_register(
+            15, 
+            32'h000000CC, 
+            "result[1]"
+          );
+          disable timeout_ls;
+        end
+        begin : timeout_ls
+          repeat (300) @(posedge clk);
+          $error("TEST FAILED: Timeout: Load/Store test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+    /////////////////////////////////////////////////////////////////
+    // LOAD HAZARD TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "loadhaz") begin
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[31] != 32'hAA) begin
+            @(posedge clk);
+          end
+          check_basic_register(
+            13, 
+            32'h00000010, 
+            "	Loaded from Mem[0]"
+          );
+          check_basic_register(
+            14, 
+            32'h11223344, 
+            "	Loaded from Mem[0x100]"
+          );
+          check_basic_register(
+            15, 
+            32'h00000014, 
+            "	Undefined (Mem[0x300] not set)"
+          );
+          check_basic_register(
+            16, 
+            32'h55667788, 
+            "Copy of x11"
+          );
+          check_basic_register(
+            5, 
+            32'h00000000, 
+            "Should be 0, 'F indicates fail"
+          );
+          disable timeout_lhaz;
+        end
+        begin : timeout_lhaz
+          repeat (200) @(posedge clk);
+          $error("TEST FAILED: Timeout: Load hazard test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+    /////////////////////////////////////////////////////////////////
+    // BRANCH TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "branch_test") begin
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[27] != 32'h1) begin
+            @(posedge clk);
+          end
+          check_basic_register(
+            28, 
+            32'h00000006, 
+            "Value of 6 indicates 6 passes"
+          );
+          check_basic_register(
+            29, 
+            32'h00000000, 
+            "Value of 0 indicates 0 fails"
+          );
+          disable timeout_br;
+        end
+        begin : timeout_br
+          repeat (200) @(posedge clk);
+          $error("TEST FAILED: Timeout: Branch test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+    /////////////////////////////////////////////////////////////////
+    // Custom Instructions with Hazards TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "custom_haz") begin
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[31] != 32'hAA) begin
+            @(posedge clk);
+          end
+          if(ppu_sim != 32'h11223344) begin
+            $error("INSTRUCTION FAILED: %s => PPU_sim mismatch: expected 32'h11223344, got %h",
+              testname, ppu_sim);
+          end
+          if(acc_sim != 32'h55667788) begin
+            $error("INSTRUCTION FAILED: %s => ACC_sim mismatch: expected 32'h55667788, got %h",
+              testname, acc_sim);
+          end
+          if(comm_sim != 32'h22334455) begin
+            $error("INSTRUCTION FAILED: %s => com_sim mismatch: expected 32'h22334455, got %h",
+              testname, comm_sim);
+          end
+          if(sac_sim != 1) begin
+            $error("INSTRUCTION FAILED: %s => com_sim mismatch: expected 32'h22334455, got %h",
+              testname, sac_sim);
+          end
+          check_basic_register(
+            10, 
+            32'hffffedf8, 
+            "LDR test"
+          );
+          check_basic_register(
+            12, 
+            32'hDEADBEF0, 
+            "RDI test"
+          );
+          check_basic_register(
+            13, 
+            32'h2, 
+            "SAC test"
+          );
+          disable timeout_cz;
+        end
+        begin : timeout_cz
+          repeat (200) @(posedge clk);
+          $error("TEST FAILED: Timeout: cus_haz test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+    /////////////////////////////////////////////////////////////////
+    // FIB TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "fib") begin
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[31] != 32'h1) begin
+          @(posedge clk);
+          end
+          check_basic_register(
+            10, 
+            32'd701408733, 
+            "44th fib number"
+          );
+          check_basic_register(
+            11, 
+            32'd433494437, 
+            "43rd fib number"
+          );
+          check_basic_register(
+            12, 
+            32'd267914296, 
+            "42nd fib number"
+          );
+          check_basic_register(
+            13, 
+            32'd165580141, 
+            "41st fib number"
+          );
+          check_basic_register(
+            14, 
+            32'd102334155, 
+            "40th fib number"
+          );
+          disable timeout_fib;
+        end
+        begin : timeout_fib
+          repeat (1000) @(posedge clk);
+          $error("TEST FAILED: Timeout: Fib test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+
+
+    /////////////////////////////////////////////////////////////////
+    // INTERRUPT TEST
+    /////////////////////////////////////////////////////////////////
+    if (testname == "interrupt") begin 
+      
+      //#100 = 185 iterrupt goes high
+      
+      #160;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #330;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #330;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #330;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #350;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #310;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+    
+      #280;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #350;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #320;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #340;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #320;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #310;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+      #320;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+
+
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[17] != 32'h1) begin
+          @(posedge clk);
+          end
+          check_basic_register(
+            29, 
+            32'd000000000, 
+            "did all rsi"
+          );
+          check_basic_register(
+            30, 
+            32'd000000000, 
+            "did all rti"
+          );
+          disable timeout_int;
+        end
+        begin : timeout_int
+          repeat (1000) @(posedge clk);
+          $error("TEST FAILED: Timeout: Interrupt test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+    /////////////////////////////////////////////////////////////////
+    // INTERRUPT BRANCH
+    /////////////////////////////////////////////////////////////////
+    if (testname == "interrupt_branch") begin 
+      
+      //TODO
+      //Figure out when to assert interrupts
+      //Check to see if interrupt went back to 
+      //Check I-reg when interrupt happens
+      //Will have to check manually if rsi and rti are working correctly
+      
+      //-3 relative to branch
+      #255;
+      @(posedge clk);
+      interrupt_key = 1;
+      expected_pc = dut.proc_fe.pc_d;
+      @(posedge clk);
+      interrupt_key = 0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+      //-2 relative to branch
+      #325;
+      @(posedge clk);
+      interrupt_key = 1;
+      expected_pc = dut.proc_fe.pc_d;
+      @(posedge clk);
+      interrupt_key = 0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+      //-1 relative to branch
+      #335;
+      @(posedge clk);
+      interrupt_key = 1;
+      expected_pc = dut.proc_fe.pc_d;
+      @(posedge clk);
+      interrupt_key = 0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+      //Interrupt on branch
+      #345;
+      @(posedge clk);
+      interrupt_key = 1;
+      expected_pc = dut.proc_fe.pc_d;
+      @(posedge clk);
+      interrupt_key = 0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+      
+
+      //+1 relative to branch
+      #355;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+      #1
+      expected_pc = dut.branchpc_ex_fe;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+
+      //+2 relative to branch
+      #365;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+      #1
+      expected_pc = dut.proc_fe.pc_curr_dec_q0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+
+      //+3 relative to branch
+      #365;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+      #1
+      expected_pc = dut.proc_fe.pc_curr_dec_q0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+
+      //On an branch without branching
+      #385;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+      #1
+      expected_pc = dut.proc_fe.pc_curr_dec_q0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+
+      //interrupt on branch without a branch taken
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[7] != 32'h8) begin
+          @(posedge clk);
+          end
+          check_basic_register(
+            2, 
+            32'd4, 
+            "did all rsi" 
+          );
+          check_basic_register(
+            3, 
+            32'd4, 
+            "did all rti"
+          );
+          disable timeout_int_b;
+        end
+        begin : timeout_int_b
+          repeat (500) @(posedge clk);
+          $error("TEST FAILED: Timeout: Interrupt_branch test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+    repeat (10) @(posedge clk);
+
     $display("Finished stepping through all instructions!");
     $stop;
   end
   
-  task check_register(
+  task check_basic_register(
     input [4:0]  reg_num,
     input [31:0] expected_val,
     input string test_name
@@ -364,14 +847,28 @@ module proc_tb;
     begin
       automatic logic [31:0] actual_val = dut.proc_de.REGFILE.regfile[reg_num];
       if (actual_val !== expected_val) begin
-        $error("FAILED: %s => Register x%0d mismatch: expected %h, got %h",
+        $error("INSTRUCTION FAILED: %s => Register x%0d mismatch: expected %h, got %h",
+               test_name, reg_num, expected_val, actual_val);
+        basic_instr_err += 1;
+      end 
+    end
+  endtask
+
+  task check_test(
+    input [4:0]  reg_num,
+    input [31:0] expected_val,
+    input string test_name
+  );
+    begin
+      automatic logic [31:0] actual_val = dut.proc_de.REGFILE.regfile[reg_num];
+      if (actual_val !== expected_val) begin
+        $error("TEST FAILED: %s => Register x%0d mismatch: expected %h, got %h",
                test_name, reg_num, expected_val, actual_val);
       end else begin
-        $display("SUCCESS: %s => Register x%0d matched expected value %h",
+        $display("TEST PASSED: %s => Register x%0d matched expected value %h",
                  test_name, reg_num, actual_val);
       end
     end
   endtask
-
 
 endmodule

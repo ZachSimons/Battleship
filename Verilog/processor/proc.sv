@@ -35,19 +35,22 @@ logic memerror;
 
 //Interrupt
 logic interrupt_latch, interrupt;
+logic pending_interrupt, memrden_if;
 
 //Flushing, stalling, and hazards
-logic flush, pfstall, stallmem, hazard, hazard_stall;
+logic flush, pfstall, stallmem, hazard, hazard_stall, stallpc;
 logic [4:0] rdreg1_if_id, rdreg2_if_id;
 
 //Fetch
-logic rti_de_fe, rsi_de_fe, branch_ex_fe;
+logic stall_override, rti_de_fe, rsi_de_fe, branch_ex_fe;
 logic [31:0] inst_fe_dec, nxtpc_fe_dec, pc_fe_dec;
+
 
 
 //Decode
 logic random_dec_ex, regwrten_dec_ex, unsigned_dec_ex, memrden_dec_ex, jalr_dec_ex, datasel_dec_ex, 
-        memwrten_dec_ex, lui_ex, rdi_dec_ex, ignore_fwd_ex;
+        memwrten_dec_ex, lui_ex, rdi_dec_ex, ignore_fwd_ex, interrupt_branch_alert_de_fe, sac_id_ex;
+
 logic [1:0] wbsel_dec_ex, width_dec_ex;
 logic [3:0] aluop_dec_ex, bjinst_dec_ex;
 logic [4:0] wrtreg_dec_ex;
@@ -55,7 +58,7 @@ logic [31:0] rd1_dec_ex, rd2_dec_ex, nxtpc_dec_ex, immout_dec_ex, instruction_de
 
 
 //Execute
-logic random_ex_mem, memwrten_ex_mem, regwrten_ex_mem, unsigned_ex_mem, memrden_ex_mem, rdi_ex_mem;
+logic memwrten_ex_mem, regwrten_ex_mem, unsigned_ex_mem, memrden_ex_mem, rdi_ex_mem;
 logic [1:0] wbsel_ex_mem, width_ex_mem;
 logic [4:0] wrtreg_ex_mem;
 logic [31:0] nxtpc_ex_mem, aluresult_ex_mem, memwrtdata_ex_mem, branchpc_ex_fe, instruction_ex_mem;
@@ -67,28 +70,35 @@ logic [4:0] wrtreg_mem_wb;
 logic [31:0] readdata_mem_wb, nxtpc_mem_wb, alu_mem_wb, instruction_mem_wb;
 
 //Writeback
-logic regwrten_wb_dec;
+logic regwrten_wb_dec, halt_wb_fe;
 logic [4:0] wrtreg_wb_dec;
 logic [31:0] wbdata_wb_dec;
+
 
 //Forwarding
 logic [4:0] rdreg1_dec_ex, rdreg2_dec_ex;
 logic [1:0] forward_control1, forward_control2;
 
 //////////////MODULE INSTANTIATION///////////////////
-fetch proc_fe(
+fetch proc_fe( 
     .clk(clk),
     .rst_n(rst_n),
     .branch(branch_ex_fe),                    
     .rti(rti_de_fe),              
     .rsi(rsi_de_fe),            
     .interrupt(interrupt), 
+    .interrupt_branch_alert(interrupt_branch_alert_de_fe),
     .flush(flush),
-    .stall(hazard | stallmem),
+    .stall_override(stall_override),
+    .stall_mem(hazard | stallmem),
+    .stall_pc(stallpc | hazard),
+    .hazard(hazard),
+    .halt(halt_wb_fe),
     .pc_ex(branchpc_ex_fe),       
     .instruction_dec(inst_fe_dec),
     .pc_next_dec(nxtpc_fe_dec),
-    .pc_curr_dec(pc_fe_dec)
+    .pc_curr_dec(pc_fe_dec),
+    .memrden_if(memrden_if)
 );
 
 
@@ -101,6 +111,7 @@ decode proc_de(
     .write_enable(regwrten_wb_dec), 
     .flush(flush), //TODO This controls flushing
     .hazard(hazard),
+    .interrupt_branch_alert(interrupt_branch_alert_de_fe),
     .stall_mem(stallmem),           
     .write_reg(wrtreg_wb_dec),   
     .write_data(wbdata_wb_dec),   
@@ -110,10 +121,9 @@ decode proc_de(
     .next_pc_ex(nxtpc_dec_ex),
     .curr_pc_ex(currpc_dec_ex),
     .write_reg_ex(wrtreg_dec_ex),
-    .read_data1_dec(interface_data), //TODO to external Devices
     .instruction_ex(instruction_dec_ex),              //
     .random_ex(random_dec_ex), 
-    .ppu_send(ppu_send),            //TODO to external Device
+    .ppu_send_ex(ppu_send),            //TODO to external Device
     .write_en_ex(regwrten_dec_ex),   
     .wb_sel_ex(wbsel_dec_ex),
     .unsigned_sel_ex(unsigned_dec_ex),
@@ -128,14 +138,16 @@ decode proc_de(
     .bj_inst_ex(bjinst_dec_ex),
     .rsi_ex(rsi_de_fe), 
     .sac(sac),            //TODO to external device
-    .snd(snd),            //TODO to external device
-    .uad(uad),             //TODO to external device
+    .snd_ex(snd),            //TODO to external device
+    .uad_ex(uad),             //TODO to external device
     .read_register1_ex(rdreg1_dec_ex),
     .read_register2_ex(rdreg2_dec_ex),
     .read_register1_if_id(rdreg1_if_id),
     .read_register2_if_id(rdreg2_if_id),
+    .memread_if_id(memrden_if_dec),
     .ignore_fwd_ex(ignore_fwd_ex),
-    .lui_ex(lui_ex)
+    .lui_ex(lui_ex),
+    .sac_ex(sac_id_ex)
 );
 
 execute proc_ex(
@@ -161,11 +173,13 @@ execute proc_ex(
     .jalr_exe(jalr_dec_ex),
     .data_sel_exe(datasel_dec_ex),
     .rdi_ex(rdi_dec_ex),
+    .rdi_data(interrupt_source_data),   //TODO from external device
     .stall_mem(stallmem),
     .forward_control1(forward_control1),
     .forward_control2(forward_control2),
     .wbdata_wb_ex(wbdata_wb_dec),
     .next_pc_mem(nxtpc_ex_mem),
+    .interface_data(interface_data),
     .write_data_mem(memwrtdata_ex_mem),
     .alu_result_mem(aluresult_ex_mem),
     .branch_pc(branchpc_ex_fe), 
@@ -173,13 +187,11 @@ execute proc_ex(
     .wb_sel_mem(wbsel_ex_mem),
     .read_width_mem(width_ex_mem),
     .wrt_dst_mem(wrtreg_ex_mem),
-    .random_mem(random_ex_mem),
     .mem_wrt_en_mem(memwrten_ex_mem),
     .reg_wrt_en_mem(regwrten_ex_mem),
     .read_unsigned_mem(unsigned_ex_mem),
     .rd_en_mem(memrden_ex_mem),
-    .branch(branch_ex_fe),
-    .rdi_mem(rdi_ex_mem)                 
+    .branch(branch_ex_fe)         
 );
 
 memory proc_mem(
@@ -189,14 +201,11 @@ memory proc_mem(
     .mem_rd_en_mem(memrden_ex_mem),
     .mem_wrt_en_mem(memwrten_ex_mem),
     .reg_wrt_en_mem(regwrten_ex_mem),
-    .random_mem(random_ex_mem),
-    .rdi_mem(rdi_ex_mem),
     .stallmem(stallmem),
     .width_mem(width_ex_mem),
     .wb_sel_mem(wbsel_ex_mem),
     .wrt_reg_mem(wrtreg_ex_mem),
     .pc_mem(nxtpc_ex_mem),
-    .rdi_data(interrupt_source_data),   //TODO from external device
     .reg2_data_mem(memwrtdata_ex_mem),
     .alu_mem(aluresult_ex_mem),
     .instruction_mem(instruction_ex_mem),
@@ -228,6 +237,8 @@ forwarding proc_forward(
 hazard proc_hazard(
     .clk(clk),
     .rst_n(rst_n),
+    .sac_id_ex(sac_id_ex),
+    .memread_if_id(memrden_if_dec),
     .memread_id_ex(memrden_dec_ex),
     .memread_ex_mem(memrden_ex_mem),
     .memwrite_ex_mem(memwrten_ex_mem),
@@ -235,6 +246,7 @@ hazard proc_hazard(
     .src_reg2_if_id(rdreg2_if_id),
     .dst_reg_id_ex(wrtreg_dec_ex),
     .hazard(hazard),
+    .stall_pc(stallpc),
     .stall_mem(hazard_stall)
 );
 
@@ -253,7 +265,14 @@ end
 assign regwrten_wb_dec = regwrten_mem_wb;
 assign wrtreg_wb_dec = wrtreg_mem_wb;
 
-
+always_ff @(posedge clk) begin
+    if (!rst_n) begin
+        halt_wb_fe <= 0;
+    end
+    else begin
+        halt_wb_fe <= (instruction_mem_wb == 32'h00000073) ? 1 : halt_wb_fe;
+    end
+end
 
 ///////////////////Flushing/Stalling logic/////////////////////
 always_ff @(posedge clk) begin
@@ -263,24 +282,46 @@ end
 //TODO fix later
 //rst_n warmup 
 
-assign flush = branch_ex_fe | interrupt | rti_de_fe;
-assign stallmem = hazard_stall; //To handle both Pc changing and 
+
+assign flush = branch_ex_fe /*| interrupt */| rti_de_fe | rsi_de_fe;
+assign stallmem = (hazard_stall && (~stall_override)); //To handle both Pc changing and 
+
+
 
 ////////////////Interrupt Logic///////////////////////
 
 //TODO may need to debounce rti and rsi depending on if they are sync to the cpu pipeline
 //TODO debounce may need sync interrupt to the CPU pipeline
-//While interrupt being handled another interrupt must not be able to happen
-assign interrupt = (interrupt_key | interrupt_eth) & ~interrupt_latch;
+//While interrupt being handled another interrupt must not be able to 
 
-always_ff @(posedge clk, negedge rst_n) begin
+assign stall_interrupt = memrden_if || memrden_if_dec || memrden_dec_ex || memrden_ex_mem;
+
+//assign interrupt = stall_interrupt ? 0 : (interrupt_key | interrupt_eth) & ~interrupt_latch;
+
+always_ff @(posedge clk) begin
+    if(!rst_n) begin
+        interrupt <= 1'b0;
+        pending_interrupt <= 0;
+    end
+    else if (~stall_interrupt)begin
+        interrupt <= ((interrupt_key | interrupt_eth) & ~interrupt_latch) | pending_interrupt;
+        pending_interrupt <= 1'b0;
+    end
+    else begin
+        interrupt <= 1'b0;
+        pending_interrupt <= pending_interrupt ? 1'b1 : ((interrupt_key | interrupt_eth) & ~interrupt_latch);
+    end
+end
+
+
+always_ff @(posedge clk) begin
     if(!rst_n) begin
         interrupt_latch <= 0;
     end
     else if(rti_de_fe | rsi_de_fe) begin
         interrupt_latch <= 0;
     end
-    else if(interrupt_key | interrupt_eth) begin
+    else if(/*interrupt_key | interrupt_eth*/interrupt) begin
         interrupt_latch <= 1;
     end
 end
@@ -334,7 +375,8 @@ typedef enum logic [7:0] {
     UGS,
     SAC,
     LDR,
-    UAD
+    UAD, 
+    NOP
 } instr_t;
 
 instr_t decoded_instr_dbg;
@@ -376,7 +418,7 @@ always_comb begin
         end
         7'b0010011: begin
             case (inst_fe_dec[14:12])
-                3'b000: decoded_instr_dbg = ADDI;
+                3'b000: decoded_instr_dbg = (inst_fe_dec == 32'h00000013) ? NOP : ADDI;
                 3'b010: decoded_instr_dbg = SLTI;
                 3'b011: decoded_instr_dbg = SLTIU;
                 3'b100: decoded_instr_dbg = XORI;

@@ -1,0 +1,248 @@
+# //  Questa Sim
+# //  Version 2023.2_1 linux May 12 2023
+# //
+# //  Copyright 1991-2023 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading project keyboard
+# Compile of keyboard.v was successful.
+# Compile of keyboard_controller.sv was successful.
+# 2 compiles, 0 failed with no errors.
+# Compile of keyboard_tb.sv failed with 3 errors.
+# Compile of keyboard_tb.sv failed with 2 errors.
+# Compile of keyboard_tb.sv was successful.
+vsim -voptargs=+acc work.keyboard_tb
+# vsim -voptargs="+acc" work.keyboard_tb 
+# Start time: 00:57:30 on Apr 08,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+add wave -position insertpoint  \
+sim:/keyboard_tb/DUT/direction \
+sim:/keyboard_tb/DUT/fire \
+sim:/keyboard_tb/DUT/done
+add wave -position insertpoint  \
+sim:/keyboard_tb/sys_clk \
+sim:/keyboard_tb/rst_n \
+sim:/keyboard_tb/ps2_clk \
+sim:/keyboard_tb/ps2_data \
+sim:/keyboard_tb/data_reg \
+sim:/keyboard_tb/PS2_data
+# Compile of keyboard_tb.sv was successful.
+quit -sim
+# End time: 00:59:24 on Apr 08,2025, Elapsed time: 0:01:54
+# Errors: 0, Warnings: 12
+vsim -voptargs=+acc work.keyboard_tb
+# vsim -voptargs="+acc" work.keyboard_tb 
+# Start time: 00:59:31 on Apr 08,2025
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+add wave -position 1  sim:/keyboard_tb/sys_clk
+add wave -position 2  sim:/keyboard_tb/rst_n
+add wave -position 3  sim:/keyboard_tb/ps2_clk
+add wave -position 4  sim:/keyboard_tb/ps2_data
+add wave -position 5  sim:/keyboard_tb/data_reg
+add wave -position end  sim:/keyboard_tb/DUT/direction
+add wave -position end  sim:/keyboard_tb/DUT/fire
+add wave -position end  sim:/keyboard_tb/DUT/done
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 1200363 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+# Compile of keyboard_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 660057 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+quit -sim
+# End time: 01:07:20 on Apr 08,2025, Elapsed time: 0:07:49
+# Errors: 0, Warnings: 2
+vsim -voptargs=+acc work.keyboard_tb
+# vsim -voptargs="+acc" work.keyboard_tb 
+# Start time: 01:07:31 on Apr 08,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading sv_std.std
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+add wave -position insertpoint  \
+sim:/keyboard_tb/sys_clk \
+sim:/keyboard_tb/rst_n \
+sim:/keyboard_tb/ps2_clk \
+sim:/keyboard_tb/ps2_data \
+sim:/keyboard_tb/data_reg
+add wave -position insertpoint  \
+sim:/keyboard_tb/DUT/direction \
+sim:/keyboard_tb/DUT/fire \
+sim:/keyboard_tb/DUT/done
+add wave -position insertpoint  \
+sim:/keyboard_tb/DUT/done_ff1 \
+sim:/keyboard_tb/DUT/done_ff2 \
+sim:/keyboard_tb/DUT/done_ff3
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 660057 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+# Compile of keyboard_controller.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 660057 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+# Compile of keyboard_tb.sv was successful.
+add wave -position insertpoint  \
+sim:/keyboard_tb/DUT/count
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 660057 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+add wave -position insertpoint  \
+sim:/keyboard_tb/DUT/shift_reg
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 660057 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+# Compile of keyboard_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 660057 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+add wave -position end  sim:/keyboard_tb/DUT/bytes[0]
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 660057 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 660057 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+# Compile of keyboard_tb.sv failed with 1 errors.
+# Compile of keyboard_tb.sv failed with 1 errors.
+# Compile of keyboard_tb.sv failed with 1 errors.
+# Compile of keyboard_tb.sv failed with 1 errors.
+# Compile of keyboard_tb.sv failed with 1 errors.
+# Compile of keyboard_tb.sv failed with 1 errors.
+# Compile of keyboard_tb.sv was successful with warnings.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Warning: /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(43): (vopt-2697) MSB 33 of part-select into 'data_reg' is out of bounds.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=2.
+# Loading sv_std.std
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 660057 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+# Compile of keyboard_tb.sv was successful.
+add wave -position insertpoint  \
+sim:/keyboard_tb/sys_clk \
+sim:/keyboard_tb/rst_n \
+sim:/keyboard_tb/ps2_clk \
+sim:/keyboard_tb/ps2_data \
+sim:/keyboard_tb/data_reg
+add wave -position insertpoint  \
+sim:/keyboard_tb/DUT/direction \
+sim:/keyboard_tb/DUT/fire \
+sim:/keyboard_tb/DUT/done
+add wave -position insertpoint  \
+sim:/keyboard_tb/DUT/set_done \
+sim:/keyboard_tb/DUT/done_ff1 \
+sim:/keyboard_tb/DUT/done_ff2 \
+sim:/keyboard_tb/DUT/done_ff3
+add wave -position insertpoint  \
+{sim:/keyboard_tb/DUT/bytes[0]}
+add wave -position insertpoint  \
+{sim:/keyboard_tb/DUT/shift_reg[0]}
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 660057 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+# Compile of keyboard_tb.sv was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.keyboard_tb(fast)
+# Loading work.keyboard(fast)
+run -all
+# ** Note: $stop    : /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv(28)
+#    Time: 660057 ns  Iteration: 1  Instance: /keyboard_tb
+# Break in Module keyboard_tb at /filespace/j/jecampos3/ECE554/Battleship/Verilog/Keyboard/keyboard_tb.sv line 28
+# End time: 01:38:05 on Apr 08,2025, Elapsed time: 0:30:34
+# Errors: 0, Warnings: 2
