@@ -10,6 +10,7 @@ module proc_tb;
   logic interrupt_eth;
   logic accelerator_data;
   logic [31:0] interrupt_source_data;
+  logic [31:0] expected_pc;
 
   logic sac, snd, uad, ppu_send;
   logic [31:0] interface_data;
@@ -265,6 +266,7 @@ module proc_tb;
     interrupt_key = 0;
     interrupt_eth = 0;
     accelerator_data = 1;
+    expected_pc = 0; 
     interrupt_source_data = 32'hDEADBEEF;
 
     if (!$value$plusargs("TEST=%s", testname)) begin
@@ -676,6 +678,156 @@ module proc_tb;
         begin : timeout_int
           repeat (1000) @(posedge clk);
           $error("TEST FAILED: Timeout: Interrupt test did not complete.");
+          $stop;
+        end
+      join_any
+    end
+
+    /////////////////////////////////////////////////////////////////
+    // INTERRUPT BRANCH
+    /////////////////////////////////////////////////////////////////
+    if (testname == "interrupt_branch") begin 
+      
+      //TODO
+      //Figure out when to assert interrupts
+      //Check to see if interrupt went back to 
+      //Check I-reg when interrupt happens
+      //Will have to check manually if rsi and rti are working correctly
+      
+      //-3 relative to branch
+      #255;
+      @(posedge clk);
+      interrupt_key = 1;
+      expected_pc = dut.proc_fe.pc_d;
+      @(posedge clk);
+      interrupt_key = 0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+      //-2 relative to branch
+      #325;
+      @(posedge clk);
+      interrupt_key = 1;
+      expected_pc = dut.proc_fe.pc_d;
+      @(posedge clk);
+      interrupt_key = 0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+      //-1 relative to branch
+      #335;
+      @(posedge clk);
+      interrupt_key = 1;
+      expected_pc = dut.proc_fe.pc_d;
+      @(posedge clk);
+      interrupt_key = 0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+      //Interrupt on branch
+      #345;
+      @(posedge clk);
+      interrupt_key = 1;
+      expected_pc = dut.proc_fe.pc_d;
+      @(posedge clk);
+      interrupt_key = 0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+      
+
+      //+1 relative to branch
+      #355;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+      #1
+      expected_pc = dut.branchpc_ex_fe;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+
+      //+2 relative to branch
+      #365;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+      #1
+      expected_pc = dut.proc_fe.pc_curr_dec_q0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+
+      //+3 relative to branch
+      #365;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+      #1
+      expected_pc = dut.proc_fe.pc_curr_dec_q0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+
+      //On an branch without branching
+      #385;
+      @(posedge clk);
+      interrupt_key = 1;
+      @(posedge clk);
+      interrupt_key = 0;
+      #1
+      expected_pc = dut.proc_fe.pc_curr_dec_q0;
+      @(posedge clk);
+      #1;
+      if(dut.proc_fe.i_reg != expected_pc) begin
+        $error("INTERRUPT FAILED: %s => i_reg mismatch: %h, got %h", testname, expected_pc, dut.proc_fe.i_reg);
+      end
+
+
+      //interrupt on branch without a branch taken
+      fork 
+        begin
+          while (dut.proc_de.REGFILE.regfile[7] != 32'h8) begin
+          @(posedge clk);
+          end
+          check_basic_register(
+            2, 
+            32'd4, 
+            "did all rsi" 
+          );
+          check_basic_register(
+            3, 
+            32'd4, 
+            "did all rti"
+          );
+          disable timeout_int_b;
+        end
+        begin : timeout_int_b
+          repeat (500) @(posedge clk);
+          $error("TEST FAILED: Timeout: Interrupt_branch test did not complete.");
           $stop;
         end
       join_any

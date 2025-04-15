@@ -49,7 +49,7 @@ logic [31:0] inst_fe_dec, nxtpc_fe_dec, pc_fe_dec;
 
 //Decode
 logic random_dec_ex, regwrten_dec_ex, unsigned_dec_ex, memrden_dec_ex, jalr_dec_ex, datasel_dec_ex, 
-        memwrten_dec_ex, lui_ex, rdi_dec_ex, ignore_fwd_ex, interrupt_branch_alert_de_fe;
+        memwrten_dec_ex, lui_ex, rdi_dec_ex, ignore_fwd_ex, interrupt_branch_alert_de_fe, sac_id_ex;
 
 logic [1:0] wbsel_dec_ex, width_dec_ex;
 logic [3:0] aluop_dec_ex, bjinst_dec_ex;
@@ -146,7 +146,8 @@ decode proc_de(
     .read_register2_if_id(rdreg2_if_id),
     .memread_if_id(memrden_if_dec),
     .ignore_fwd_ex(ignore_fwd_ex),
-    .lui_ex(lui_ex)
+    .lui_ex(lui_ex),
+    .sac_ex(sac_id_ex)
 );
 
 execute proc_ex(
@@ -236,6 +237,7 @@ forwarding proc_forward(
 hazard proc_hazard(
     .clk(clk),
     .rst_n(rst_n),
+    .sac_id_ex(sac_id_ex),
     .memread_if_id(memrden_if_dec),
     .memread_id_ex(memrden_dec_ex),
     .memread_ex_mem(memrden_ex_mem),
@@ -299,6 +301,7 @@ assign stall_interrupt = memrden_if || memrden_if_dec || memrden_dec_ex || memrd
 always_ff @(posedge clk) begin
     if(!rst_n) begin
         interrupt <= 1'b0;
+        pending_interrupt <= 0;
     end
     else if (~stall_interrupt)begin
         interrupt <= ((interrupt_key | interrupt_eth) & ~interrupt_latch) | pending_interrupt;

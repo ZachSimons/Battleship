@@ -51,7 +51,7 @@ module execute(
 
 
     //Branching stuff
-    assign branch_base = jalr_exe ? reg1 : curr_pc_exe;
+    assign branch_base = jalr_exe ? alu_inA : curr_pc_exe;
     assign immx2 = jalr_exe ? imm : imm << 1;
     assign branch_pc = branch_base + immx2;
 
