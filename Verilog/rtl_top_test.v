@@ -11,6 +11,14 @@ module rtl_top_test(
 	input 		          		CLOCK4_50,
 	input 		          		CLOCK_50,
 
+	//////////// SEG7 //////////
+	output		     [6:0]		HEX0,
+	output		     [6:0]		HEX1,
+	output		     [6:0]		HEX2,
+	output		     [6:0]		HEX3,
+	output		     [6:0]		HEX4,
+	output		     [6:0]		HEX5,
+
 	//////////// KEY //////////
 	input 		     [3:0]		KEY,
 
@@ -34,10 +42,11 @@ module rtl_top_test(
 	output		          		VGA_HS,
 	output		     [7:0]		VGA_R,
 	output		          		VGA_SYNC_N,
-	output		          		VGA_VS
+	output		          		VGA_VS,
+
+	//////////// GPIO_1, GPIO_1 connect to GPIO Default //////////
+	inout 		    [35:0]		GPIO
 );
-
-
 
 //=======================================================
 //  REG/WIRE declarations
@@ -73,7 +82,5 @@ rtl_top u_rtl_top (
     .VGA_SYNC_N    (VGA_SYNC_N),
     .VGA_VS        (VGA_VS)
 );
-
-
 
 endmodule
