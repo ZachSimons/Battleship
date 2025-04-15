@@ -1,0 +1,53 @@
+Reading pref.tcl
+
+# 2023.2_1
+
+# vsim work.proc_tb -L /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf -voptargs="+acc" "+HEXFILE=sqrt.hex" "+TEST=sqrt" -c -do "run -all; quit" 
+# Start time: 16:48:38 on Apr 11,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# //  Questa Sim
+# //  Version 2023.2_1 linux May 12 2023
+# //
+# //  Copyright 1991-2023 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.altsyncram(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.altsyncram_body(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+# run -all
+# Loading program from: sqrt.hex
+# Running test logic for: sqrt
+# ** Error: TEST FAILED: Timeout: Square root test did not complete.
+#    Time: 6000085 ns  Scope: proc_tb.timeout_sqrt File: proc_tb.sv Line: 347
+# ** Note: $stop    : proc_tb.sv(348)
+#    Time: 6000085 ns  Iteration: 1  Instance: /proc_tb
+# Break in NamedBeginStat timeout_sqrt at proc_tb.sv line 348
+# Stopped at proc_tb.sv line 348
+#  quit
+# End time: 16:48:39 on Apr 11,2025, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
