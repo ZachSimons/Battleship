@@ -42,6 +42,7 @@ module rtl_top_test(
 //=======================================================
 //  REG/WIRE declarations
 //=======================================================
+wire sys_clk, rst_n;
 
 assign sys_clk = CLOCK_50;
 assign rst_n = KEY[0];
