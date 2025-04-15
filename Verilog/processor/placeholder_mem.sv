@@ -12,29 +12,29 @@ logic [31:0] addr_q;
 logic read_en_ff;
 
 
-`ifdef SYNTHESIS
-    // synthesis-only: bram initialized through toolchain
-    initial begin
-        $readmemh("sqrt.hex", bram);
-    end
-`else
-    initial begin
-        string testname;
-        string hexfile;
+// `ifdef SYNTHESIS
+//     // synthesis-only: bram initialized through toolchain
+//     initial begin
+//         $readmemh("sqrt.hex", bram);
+//     end
+// `else
+//     initial begin
+//         string testname;
+//         string hexfile;
      
-        if (!$value$plusargs("TEST=%s", testname)) begin
-            testname = "default";
-        end
+//         if (!$value$plusargs("TEST=%s", testname)) begin
+//             testname = "default";
+//         end
  
-        hexfile = {testname, ".hex"};
-        $display("Loading program from: %s", hexfile);
-        $readmemh(hexfile, bram);
-    end
-`endif
+//         hexfile = {testname, ".hex"};
+//         $display("Loading program from: %s", hexfile);
+//         $readmemh(hexfile, bram);
+//     end
+// `endif
 
-//initial begin
-//    $readmemh("proc_ppu_int.hex", bram);
-//end
+initial begin
+   $readmemh("proc_ppu_int.hex", bram);
+end
 
 
 always_ff @(posedge clk) begin

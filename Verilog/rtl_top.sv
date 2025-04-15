@@ -4,12 +4,13 @@ module rtl_top (
 
     input  logic [3:0]	KEY,
     input  logic [9:0]	SW,
+    output logic [9:0]	LEDR,
+    //////////// KEYBOARD ////////////
     inout  logic        PS2_CLK,
 	inout  logic        PS2_CLK2,
 	inout  logic        PS2_DAT,
 	inout  logic        PS2_DAT2,
-    output logic [9:0]	LEDR,
-	//////////// VGA //////////
+	//////////// VGA /////////////////
 	output logic        VGA_BLANK_N,
 	output logic [7:0]  VGA_B,
 	output logic        VGA_CLK,
@@ -20,9 +21,10 @@ module rtl_top (
 	output logic        VGA_VS
 );
 
-logic interrupt_eth, interrupt_key, accelerator_data, sac, snd, uad, ppu_send, sac_reg;
-logic [31:0] interrupt_source_data, interface_data;
+logic interrupt_board, interrupt_key_local, accelerator_data, sac, snd, uad, ppu_send, ppu_send_ff, sac_reg, fire, snd_ff;
+logic [31:0] interrupt_source_data, interface_data, spart_data;
 logic [31:0] ppu_reg, acc_reg, comm_reg;
+logic [1:0] direction;
 
 always_ff @(posedge sys_clk) begin
     if(!rst_n) begin
@@ -31,9 +33,11 @@ always_ff @(posedge sys_clk) begin
         comm_reg <= 0;
         sac_reg <= 0;
         ppu_send_ff <= 0;
+        snd_ff <= 0;
     end
     else begin
         ppu_send_ff <= ppu_send;
+        snd_ff <= snd;
         ppu_reg <= ppu_send ? interface_data : ppu_reg;
         acc_reg <= uad ? interface_data : acc_reg;
         comm_reg <= snd ? interface_data : comm_reg;
@@ -46,9 +50,9 @@ keyboard DUT (
     .rst_n (rst_n), 
     .ps2_clk(PS2_CLK), 
     .ps2_data(PS2_DAT), 
-    .direction(LEDR[2]), 
-    .fire(LEDR[1]), 
-    .done(LEDR[0])
+    .direction(direction), 
+    .fire(fire), 
+    .done(interrupt_key_local)
 );
 
 ppu_top ppu_top_i (
@@ -66,12 +70,15 @@ ppu_top ppu_top_i (
     .VGA_VS(VGA_VS)
 );
 
+assign interrupt_board = 0;
+assign spart_data = '0;
+
 proc processor_i (
     .clk(sys_clk),
     .rst_n(rst_n),
-    .interrupt_key(interrupt_key),
-    .interrupt_eth(interrupt_eth),
-    .interrupt_source_data(interrupt_source_data),
+    .interrupt_key(interrupt_key_local),
+    .interrupt_eth(interrupt_board),
+    .interrupt_source_data(interrupt_board ? spart_data : (interrupt_key_local) ? {29'b0, fire, direction} : '0),
     .accelerator_data(accelerator_data),
     .sac(sac),
     .snd(snd),
