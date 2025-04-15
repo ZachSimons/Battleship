@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at accelerator.sv(44): always construct contains both blocking and non-blocking assignments File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 44
