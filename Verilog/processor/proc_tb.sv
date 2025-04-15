@@ -513,7 +513,7 @@ module proc_tb;
           );
           check_basic_register(
             13, 
-            32'h2, 
+            32'h7, 
             "SAC test"
           );
           disable timeout_cz;
