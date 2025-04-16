@@ -256,7 +256,7 @@ hazard proc_hazard(
 //////////////////////WB STAGE//////////////////////
 always_comb begin
     case(wbsel_mem_wb) 
-        //2'b00: wbdata_wb_dec = {{31{1'b0}}, accelerator_data}; //TODO accelerator
+        2'b00: wbdata_wb_dec = '0;
         2'b01: wbdata_wb_dec = nxtpc_mem_wb;
         2'b10: wbdata_wb_dec = readdata_mem_wb;
         2'b11: wbdata_wb_dec = alu_mem_wb; 

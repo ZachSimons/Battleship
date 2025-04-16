@@ -80,7 +80,9 @@ rtl_top u_rtl_top (
     .VGA_HS        (VGA_HS),
     .VGA_R         (VGA_R),
     .VGA_SYNC_N    (VGA_SYNC_N),
-    .VGA_VS        (VGA_VS)
+    .VGA_VS        (VGA_VS),
+
+	.GPIO		   (GPIO)
 );
 
 endmodule
