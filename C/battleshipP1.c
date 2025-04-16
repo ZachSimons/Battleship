@@ -8,16 +8,25 @@
 #define HIT   2
 #define SUNK  3
 
-#define ACK_MISS 100
-#define ACK_HIT  101
-#define ACK_SINK_BIT 0x000fffff
+/* 
+ * Interrupt num values 
+ * 0-99 shooting at respective square
+ * 100 ACK_MISS (last shot was a miss)
+ * 101 ACK_HIT  (last shot was a hit)
+ * {102, 103, 104, 105, 106} = {PS2_LEFT, PS2_UP, PS2_DOWN, PS2_RIGHT, PS2_ENTER}
+ * > 106 = SHIP SUNK bit[15:8] = ship pos, bit[27:20] = ship type
+ */
 #define GET_ACK_SINK_SHIP(x) ((x & 0x0ff00000) >> 20)
 #define SET_ACK_SINK_SHIP(x) ((x & 0x000000ff) << 20)
-#define PS2_LEFT 1
-#define PS2_UP 1
-#define PS2_DOWN 1
-#define PS2_RIGHT 1
-#define PS2_ENTER 1
+#define GET_ACK_SINK_POS(x) ((x & 0x0000ff00) >> 8)
+#define SET_ACK_SINK_POS(x) ((x & 0x000000ff) << 8)
+#define ACK_MISS 100
+#define ACK_HIT  101
+#define PS2_LEFT 102
+#define PS2_UP 103
+#define PS2_DOWN 104
+#define PS2_RIGHT 105
+#define PS2_ENTER 106
 
 #define GET_BOARD_SEL(x) (x >> 31)
 #define GET_SHIP_POS(x) ((x & 0x7f000000) >> 24)
@@ -63,13 +72,15 @@ void entry_point() {
     asm volatile ("j main");
     asm volatile ("ldi a0");
     asm volatile ("call exception_handler");
+    asm volatile ("rti");
 }
 
-void exception_handler(int num) {
+void exception_handler(unsigned int num) {
     if(num < 100) {
         my_board[num] |= SET_M_BIT(1);
         if(check_lose()) {
             asm volatile ("snd lose");
+            asm volatile ("jmp EXIT");
         } else if(GET_E_BIT(my_board[num])) {
             if(check_sinks()) {
                 int resp = SET_ACK_SINK_SHIP(GET_TYPE(my_board[num])) | my_positions[GET_TYPE(my_board[num])];
@@ -102,7 +113,7 @@ void exception_handler(int num) {
     } else if(num == PS2_ENTER) {
         asm volatile ("snd active_square");
     } else { // ACK_HIT + SINK
-        int pos = ACK_SINK_BIT & num;
+        int pos = GET_ACK_SINK_POS(num);
         int inc = pos > 99 ? 10 : 1;
         int square = mod(pos, 100);
         int ship = GET_ACK_SINK_SHIP(num);

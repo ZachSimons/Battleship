@@ -11,7 +11,7 @@
 ROUTINE:
 		addi x1,x1,100
 		addi x2,x0,50
-		jalr x0,x30,0		#JALR with x0 is just jal. Return from function
+		jalr x0,0(x30)		#JALR with x0 is just jal. Return from function
 		
 SAVING:
 		addi x3,x0,2

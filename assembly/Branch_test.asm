@@ -40,12 +40,12 @@
 	
 PASS:
 		addi x28,x28,1
-		jalr x0,x31,12 
+		jalr x0,12(x31) 
 
 
 FAIL:
 		addi x29,x29,1
-		jalr x0,x31,12
+		jalr x0,12(x31)
 		
 DONE:
 		addi x27,x0,1

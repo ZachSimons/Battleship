@@ -150,10 +150,10 @@ def bTypeImm(value: int):
 
 def uTypeImm(value: int):
     if value >= 0:
-        return value & ~(2**12-1)
+        return (value & (2**20-1)) << 12
     else:
-        complement = negative(value, 32)
-        return complement & ~(2**12-1)
+        complement = negative(value, 20)
+        return (complement & (2**20-1)) << 12
 
 def jTypeImm(value: int):
     if value >= 0:
@@ -206,7 +206,16 @@ if __name__ == '__main__':
                     if not line[:-1] in data_sizes.keys():
                         label_addresses[line[:-1]] = currentAddress
                 elif line[0] != '.':
-                    currentAddress += 4
+                    if line.strip().split(' ')[0] == 'la':
+                        currentAddress += 8
+                    elif line.strip().split(' ')[0] == 'li':
+                        currentAddress += 8
+                    elif line.strip().split(' ')[0] == 'call':
+                        currentAddress += 8
+                    elif line.strip().split(' ')[0] == 'tail':
+                        currentAddress += 8
+                    else:
+                        currentAddress += 4
 
             data_address = 0
             for key, size in data_sizes.items():
@@ -231,7 +240,8 @@ if __name__ == '__main__':
                     elif(instruction[0] == 'jal'):
                         outputFile.write(format(JAL_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + jTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[1]]))), '08x') + '\n')
                     elif(instruction[0] == 'jalr'):
-                        outputFile.write(format(JALR_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(int(parameters[2])), '08x') + '\n')
+                        addressCalc = parseAddress(parameters[1])
+                        outputFile.write(format(JALR_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[addressCalc[0]]) + iTypeImm(addressCalc[1]), '08x') + '\n')
                     elif(instruction[0] == 'beq'):
                         outputFile.write(format(BRANCH_CODE + BEQ + rs1_reg(REGISTER_DICT[parameters[0]]) + rs2_reg(REGISTER_DICT[parameters[1]]) + bTypeImm(calculateOffset(currentAddress, int(label_addresses[parameters[2]]))), '08x') + '\n')
                     elif(instruction[0] == 'bne'):
@@ -323,12 +333,14 @@ if __name__ == '__main__':
                     elif(instruction[0] == 'snd'):
                         outputFile.write(format(SND_CODE + rs1_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
                     elif(instruction[0] == 'la'):
-                        outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(label_addresses[parameters[1]]), '08x') + '\n')
+                        currentAddress += 4
+                        outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(label_addresses[parameters[1]] >> 12), '08x') + '\n')
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(label_addresses[parameters[1]] % 2**12), '08x') + '\n')
                     elif(instruction[0] == 'nop'):
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(0) + rs1_reg(0) + iTypeImm(0), '08x') + '\n')
                     elif(instruction[0] == 'li'):
-                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1])), '08x') + '\n')
+                        currentAddress += 4
+                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1]) >> 12), '08x') + '\n')
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(int(parameters[1]) % 2**12), '08x') + '\n')
                     elif(instruction[0] == 'mv'):
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(0), '08x') + '\n')
@@ -371,10 +383,12 @@ if __name__ == '__main__':
                     elif(instruction[0] == 'ret'):
                         outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(1) + iTypeImm(0), '08x') + '\n')
                     elif(instruction[0] == 'call'):
-                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]]), '08x') + '\n')
+                        currentAddress += 4
+                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]] >> 12), '08x') + '\n')
                         outputFile.write(format(JALR_CODE + rd_reg(1) + rs1_reg(6) + iTypeImm(label_addresses[parameters[0]] % 2**12), '08x') + '\n')
                     elif(instruction[0] == 'tail'):
-                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]]), '08x') + '\n')
+                        currentAddress += 4
+                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]] >> 12), '08x') + '\n')
                         outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(6) + iTypeImm(label_addresses[parameters[0]] % 2**12), '08x') + '\n')
                     elif(instruction[0] == 'ecall'):
                         outputFile.write(format(0x73, '08x') + '\n')
@@ -382,7 +396,7 @@ if __name__ == '__main__':
                         print("ERROR: Unrecognized instruction " + str(instruction))
                         outputFile.write("error")
                         error_cnt += 1
-                    currentAddress+= 4
+                    currentAddress += 4
     print("ERROR COUNT: " + str(error_cnt))
     # UNSUPPORTED COMMANDS
     # l{b|h|w} rd, symbol
