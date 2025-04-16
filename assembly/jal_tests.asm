@@ -1,4 +1,4 @@
-		### Test jal ###
+### Test jal ###
 		addi x1, zero, 200	# load x1 with non-zero
 		jal x30, ROUTINE	# jump to a routine, will add 100
 		addi x1, x1, 50		# should return here with x1 = 300
@@ -44,3 +44,4 @@ PASS: 		addi ra, zero, 0xAA
 	.align		64	
 
 FAIL:		j FAIL
+

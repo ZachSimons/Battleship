@@ -13,5 +13,10 @@
 00160613 //addi x12, x12, 1
 000006a9 //SAC x13 (SAC to x13)
 00168693 //addi x13, x13, 1
+00168693 //addi x13, x13, 1
+00168693 //addi x13, x13, 1
+00168693 //addi x13, x13, 1
+00168693 //addi x13, x13, 1
+00168693 //addi x13, x13, 1
 0aa00f93 //addi x31, x0, 0xAA
 0000006f //Forever jump loop
