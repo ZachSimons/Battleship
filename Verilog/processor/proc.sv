@@ -121,9 +121,9 @@ decode proc_de(
     .next_pc_ex(nxtpc_dec_ex),
     .curr_pc_ex(currpc_dec_ex),
     .write_reg_ex(wrtreg_dec_ex),
-    .instruction_ex(instruction_dec_ex),              //
+    .instruction_ex(instruction_dec_ex),              
     .random_ex(random_dec_ex), 
-    .ppu_send_ex(ppu_send),            //TODO to external Device
+    .ppu_send_ex(ppu_send),            
     .write_en_ex(regwrten_dec_ex),   
     .wb_sel_ex(wbsel_dec_ex),
     .unsigned_sel_ex(unsigned_dec_ex),
@@ -136,10 +136,9 @@ decode proc_de(
     .rdi_ex(rdi_dec_ex),         
     .alu_op_ex(aluop_dec_ex),
     .bj_inst_ex(bjinst_dec_ex),
-    .rsi_ex(rsi_de_fe), 
-    .sac(sac),            //TODO to external device
-    .snd_ex(snd),            //TODO to external device
-    .uad_ex(uad),             //TODO to external device
+    .rsi_ex(rsi_de_fe),      
+    .snd_ex(snd),            
+    .uad_ex(uad),             
     .read_register1_ex(rdreg1_dec_ex),
     .read_register2_ex(rdreg2_dec_ex),
     .read_register1_if_id(rdreg1_if_id),
@@ -147,7 +146,7 @@ decode proc_de(
     .memread_if_id(memrden_if_dec),
     .ignore_fwd_ex(ignore_fwd_ex),
     .lui_ex(lui_ex),
-    .sac_ex(sac_id_ex)
+    .sac_ex(sac_id_ex) 
 );
 
 execute proc_ex(
@@ -158,6 +157,8 @@ execute proc_ex(
     .reg1(rd1_dec_ex),
     .reg2(rd2_dec_ex),
     .lui_ex(lui_ex),
+    .acc_data(accelerator_data),
+    .sac_ex(sac_id_ex),
     .imm(immout_dec_ex),
     .instruction_ex(instruction_dec_ex),
     .bj_inst_exe(bjinst_dec_ex),
@@ -237,7 +238,6 @@ forwarding proc_forward(
 hazard proc_hazard(
     .clk(clk),
     .rst_n(rst_n),
-    .sac_id_ex(sac_id_ex),
     .memread_if_id(memrden_if_dec),
     .memread_id_ex(memrden_dec_ex),
     .memread_ex_mem(memrden_ex_mem),
@@ -255,7 +255,7 @@ hazard proc_hazard(
 //////////////////////WB STAGE//////////////////////
 always_comb begin
     case(wbsel_mem_wb) 
-        2'b00: wbdata_wb_dec = {{31{1'b0}}, accelerator_data}; //TODO accelerator
+        //2'b00: wbdata_wb_dec = {{31{1'b0}}, accelerator_data}; //TODO accelerator
         2'b01: wbdata_wb_dec = nxtpc_mem_wb;
         2'b10: wbdata_wb_dec = readdata_mem_wb;
         2'b11: wbdata_wb_dec = alu_mem_wb; 
@@ -325,6 +325,10 @@ always_ff @(posedge clk) begin
         interrupt_latch <= 1;
     end
 end
+
+
+//Output data
+assign sac = sac_id_ex;
 
 
 //`ifdef SIMULATION  // Only included during simulation

@@ -26,6 +26,8 @@ module execute(
     input           [31:0]  wbdata_wb_ex,
     input           [31:0]  rdi_data,  
     input                   lui_ex,
+    input                   acc_data,
+    input                   sac_ex,
     output logic    [31:0]  interface_data,
     output logic    [31:0]  next_pc_mem,
     output logic    [31:0]  write_data_mem,
@@ -48,6 +50,9 @@ module execute(
     logic [31:0] immx2;
     logic [31:0] rdi_mux;
     logic [15:0] lfsr16;
+    logic [31:0] acc_mux;
+
+    
 
 
     //Branching stuff
@@ -86,7 +91,7 @@ module execute(
         end else if(~stall_mem) begin
             next_pc_mem <= next_pc_exe;
             write_data_mem <= write_data;
-            alu_result_mem <= rdi_mux;
+            alu_result_mem <= acc_mux;
             wb_sel_mem <= wb_sel_exe;
             read_width_mem <= read_width_exe;
             wrt_dst_mem <= wrt_dst_exe;
@@ -117,10 +122,17 @@ module execute(
     assign rdi_mux = rdi_ex ? rdi_data : random_mux; 
 
 
-
+    ////////////////ACCELERATOR DATA///////////////////////////////////
+    assign acc_mux = sac_ex ? {{31{1'b0}}, acc_data} : rdi_mux;
     //TODO
-    //Remove rdi_data from mem and move to execute
-    //Move rdi_mux from mem to execute
+
+    //remove from WB stage (DONE)
+    //add mux after rdi and before execute stage (DONE)
+    //Assign the correct value for sac (DONE)
+    //Remove mux selection from WB (DONE)
+    //add sac signal to execute (done)
+
+
 
 
 

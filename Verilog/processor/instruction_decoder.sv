@@ -75,7 +75,7 @@ assign sac = (opcode==7'b0101001) ? 1'b1 : 1'b0;
 assign snd = (opcode==7'b0001011) ? 1'b1 : 1'b0; 
 
 //sets what to write back
-assign wb_sel = (opcode==7'b0101001) ? 0 : 
+assign wb_sel = (1'b0) ? 0 : 
                 ((opcode==7'b1101111) || (opcode==7'b1100111)) ? 1 :
                 ((opcode==7'b0000011)) ? 2 : 3;
 
