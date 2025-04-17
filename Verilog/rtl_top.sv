@@ -92,11 +92,11 @@ end
 // );
 
 spart_top spart_top_i(   
-    .clk(clk),
+    .clk(sys_clk),
     .rst_n(rst_n),
     .send_tx(send_tx),
     .tx_data(tx_data),
-    .rx_data({8'b0, spart_data}),
+    .rx_data(spart_data),
     .interrupt_board(interrupt_board),
     .rxd(BOARD_NUM ? GPIO[3] : GPIO[5]),
     .txd(BOARD_NUM ? GPIO[5] : GPIO[3])
@@ -104,7 +104,7 @@ spart_top spart_top_i(
 
 logic key_ff, key_ff2, key_ff3;
 
-assign tx_data = {3{byte_tx}};
+assign tx_data = {byte_tx, byte_tx, byte_tx};
 assign byte_tx = SW[7:0];
 assign send_tx = ~key_ff2 & key_ff3;
 
@@ -148,6 +148,8 @@ always_comb begin
         4'd14: HEX0 = HEX_14;
         4'd15: HEX0 = HEX_15;
     endcase
+end
+always_comb begin
     case(interrupt_board_ff[7:4])
         4'd0: HEX1 = HEX_0;
         4'd1: HEX1 = HEX_1;
@@ -166,6 +168,8 @@ always_comb begin
         4'd14: HEX1 = HEX_14;
         4'd15: HEX1 = HEX_15;
     endcase
+end
+always_comb begin
     case(interrupt_board_ff[11:8])
         4'd0: HEX2 = HEX_0;
         4'd1: HEX2 = HEX_1;
@@ -184,6 +188,8 @@ always_comb begin
         4'd14: HEX2 = HEX_14;
         4'd15: HEX2 = HEX_15;
     endcase
+end
+always_comb begin
     case(interrupt_board_ff[15:12])
         4'd0: HEX3 = HEX_0;
         4'd1: HEX3 = HEX_1;
@@ -202,6 +208,8 @@ always_comb begin
         4'd14: HEX3 = HEX_14;
         4'd15: HEX3 = HEX_15;
     endcase
+end
+always_comb begin
     case(interrupt_board_ff[19:16])
         4'd0: HEX4 = HEX_0;
         4'd1: HEX4 = HEX_1;
@@ -220,6 +228,8 @@ always_comb begin
         4'd14: HEX4 = HEX_14;
         4'd15: HEX4 = HEX_15;
     endcase
+end
+always_comb begin
     case(interrupt_board_ff[23:20])
         4'd0: HEX5 = HEX_0;
         4'd1: HEX5 = HEX_1;

@@ -45,10 +45,10 @@ initial begin
     tx_send_tx = 1;
 
     @(negedge clk);
-    tx_send_tx = 0;
+    //tx_send_tx = 0;
 
-    repeat(100) @(posedge clk); //Waiting for spart
-
+    repeat(10000) @(posedge clk); //Waiting for spart
+    $stop;
 
 end
 

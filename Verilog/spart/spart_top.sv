@@ -39,7 +39,7 @@ assign rx_data = rx_shift_reg;
 always_ff @ (posedge clk) begin
     if (!rst_n) begin
         tx_shift_reg <= '0;
-        tx_byte_cnt <= 3;
+        tx_byte_cnt <= 0;
     end
     else if (~|tx_byte_cnt & send_tx) begin
         tx_shift_reg <= tx_data;
