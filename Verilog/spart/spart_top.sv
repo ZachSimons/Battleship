@@ -9,7 +9,7 @@ module spart_top (
     output logic [23:0] rx_data
 );
 
-logic [7:0][2:0] rx_shift_reg;
+logic [23:0] rx_shift_reg;
 logic [23:0] tx_shift_reg;
 logic [7:0] byte_rx, byte_tx;
 logic send_tx_byte, tbr, rda;
@@ -22,11 +22,11 @@ always_ff @ (posedge clk) begin
         rx_byte_cnt <= '0;
     end
     else if (&rx_byte_cnt) begin
-        rx_shift_reg <= '{default: '0};
+        rx_shift_reg <= '0;
         rx_byte_cnt <= 0;
     end
     else if (rda) begin
-        rx_shift_reg[rx_byte_cnt] <= byte_rx;
+        rx_shift_reg <= {byte_rx, rx_shift_reg[23:8]};
         rx_byte_cnt <= rx_byte_cnt + 1'b1;
     end
 end
@@ -45,7 +45,7 @@ always_ff @ (posedge clk) begin
         tx_shift_reg <= tx_data;
         tx_byte_cnt <= 2;
     end
-    else if (tbr) begin
+    else if (tbr & |tx_byte_cnt) begin
         tx_shift_reg <= tx_shift_reg >> 8;
         tx_byte_cnt <= tx_byte_cnt - 1'b1;
     end
