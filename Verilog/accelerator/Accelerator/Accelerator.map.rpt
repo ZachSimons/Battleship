@@ -1,0 +1,581 @@
+Analysis & Synthesis report for Accelerator
+Thu Apr  3 16:13:03 2025
+Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. User-Specified and Inferred Latches
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |Accelerator
+ 12. Post-Synthesis Netlist Statistics for Top Partition
+ 13. Elapsed Time Per Partition
+ 14. Analysis & Synthesis Messages
+ 15. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2023  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++---------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Thu Apr  3 16:13:03 2025          ;
+; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
+; Revision Name                   ; Accelerator                                    ;
+; Top-level Entity Name           ; Accelerator                                    ;
+; Family                          ; Cyclone V                                      ;
+; Logic utilization (in ALMs)     ; N/A                                            ;
+; Total registers                 ; 272                                            ;
+; Total pins                      ; 70                                             ;
+; Total virtual pins              ; 0                                              ;
+; Total block memory bits         ; 0                                              ;
+; Total DSP Blocks                ; 0                                              ;
+; Total HSSI RX PCSs              ; 0                                              ;
+; Total HSSI PMA RX Deserializers ; 0                                              ;
+; Total HSSI TX PCSs              ; 0                                              ;
+; Total HSSI PMA TX Serializers   ; 0                                              ;
+; Total PLLs                      ; 0                                              ;
+; Total DLLs                      ; 0                                              ;
++---------------------------------+------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                             ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
+; Top-level entity name                                                           ; Accelerator        ; Accelerator        ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; Use smart compilation                                                           ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Preserve fewer node names                                                       ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 20          ;
+; Maximum allowed            ; 14          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 14          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processor 7            ;   0.0%      ;
+;     Processor 8            ;   0.0%      ;
+;     Processors 9-14        ;   0.0%      ;
++----------------------------+-------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                      ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                  ; Library ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------+---------+
+; accelerator.sv                   ; yes             ; User SystemVerilog HDL File  ; I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv ;         ;
+; accelerator.v                    ; yes             ; Auto-Found Verilog HDL File  ; I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v  ;         ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------+---------+
+
+
++------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                ;
++---------------------------------------------+--------------+
+; Resource                                    ; Usage        ;
++---------------------------------------------+--------------+
+; Estimate of Logic utilization (ALMs needed) ; 2276         ;
+;                                             ;              ;
+; Combinational ALUT usage for logic          ; 3266         ;
+;     -- 7 input functions                    ; 4            ;
+;     -- 6 input functions                    ; 1219         ;
+;     -- 5 input functions                    ; 538          ;
+;     -- 4 input functions                    ; 491          ;
+;     -- <=3 input functions                  ; 1014         ;
+;                                             ;              ;
+; Dedicated logic registers                   ; 272          ;
+;                                             ;              ;
+; I/O pins                                    ; 70           ;
+;                                             ;              ;
+; Total DSP Blocks                            ; 0            ;
+;                                             ;              ;
+; Maximum fan-out node                        ; KEY[0]~input ;
+; Maximum fan-out                             ; 382          ;
+; Total fan-out                               ; 16082        ;
+; Average fan-out                             ; 4.37         ;
++---------------------------------------------+--------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                             ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name          ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------+-------------+--------------+
+; |Accelerator               ; 3266 (32)           ; 272 (32)                  ; 0                 ; 0          ; 70   ; 0            ; |Accelerator                 ; Accelerator ; work         ;
+;    |accelerator:ACC|       ; 3234 (3234)         ; 240 (240)                 ; 0                 ; 0          ; 0    ; 0            ; |Accelerator|accelerator:ACC ; accelerator ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------------+-------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++---------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                               ;
++----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal ; Free of Timing Hazards ;
++----------------------------------------------------+---------------------+------------------------+
+; accelerator:ACC|valid_temp[1]                      ; KEY[3]              ; yes                    ;
+; accelerator:ACC|valid_temp[2]                      ; KEY[3]              ; yes                    ;
+; accelerator:ACC|valid_temp[3]                      ; KEY[3]              ; yes                    ;
+; accelerator:ACC|valid_temp[4]                      ; KEY[3]              ; yes                    ;
+; accelerator:ACC|valid_temp[0]                      ; KEY[3]              ; yes                    ;
+; Number of user-specified and inferred latches = 5  ;                     ;                        ;
++----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 272   ;
+; Number of registers using Synchronous Clear  ; 272   ;
+; Number of registers using Synchronous Load   ; 40    ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 240   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[0][0]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[1][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[2][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[3][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[4][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[5][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[6][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[7][0]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[8][0]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[9][1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[10][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[11][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[12][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[13][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[14][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[15][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[16][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[17][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[18][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[19][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[20][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[21][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[22][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[23][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[24][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[25][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[26][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[27][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[28][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[29][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[30][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[31][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[32][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[33][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[34][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[35][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[36][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[37][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[38][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[39][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[40][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[41][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[42][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[43][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[44][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[45][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[46][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[47][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[48][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[49][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[50][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[51][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[52][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[53][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[54][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[55][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[56][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[57][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[58][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[59][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[60][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[61][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[62][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[63][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[64][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[65][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[66][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[67][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[68][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[69][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[70][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[71][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[72][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[73][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[74][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[75][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[76][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[77][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[78][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[79][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[80][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[81][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[82][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[83][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[84][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[85][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[86][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[87][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[88][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[89][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[90][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[91][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[92][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[93][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[94][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[95][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[96][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[97][0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[98][1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Accelerator|accelerator:ACC|game_state[99][0] ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[0][1]    ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_vert[4]      ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[2][2]    ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[1][1]    ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |Accelerator|accelerator:ACC|ship_pos[3][1]    ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux0              ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux17             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux18             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux8              ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux13             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux32             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux40             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux43             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux50             ;
+; 32:1               ; 2 bits    ; 42 LEs        ; 36 LEs               ; 6 LEs                  ; No         ; |Accelerator|accelerator:ACC|Mux29             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux22             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux5              ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux11             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux15             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux36             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux39             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux47             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux49             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux53             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux56             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux30             ;
+; 64:1               ; 2 bits    ; 84 LEs        ; 70 LEs               ; 14 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux26             ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux25             ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux20             ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux3              ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux6              ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux34             ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux44             ;
+; 128:1              ; 2 bits    ; 170 LEs       ; 136 LEs              ; 34 LEs                 ; No         ; |Accelerator|accelerator:ACC|Mux55             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
+
+
++-----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |Accelerator ;
++----------------+---------+--------------------------------------------------+
+; Parameter Name ; Value   ; Type                                             ;
++----------------+---------+--------------------------------------------------+
+; HEX_0          ; 1000000 ; Unsigned Binary                                  ;
+; HEX_1          ; 1111001 ; Unsigned Binary                                  ;
+; HEX_2          ; 0100100 ; Unsigned Binary                                  ;
+; HEX_3          ; 0110000 ; Unsigned Binary                                  ;
+; HEX_4          ; 0011001 ; Unsigned Binary                                  ;
+; HEX_5          ; 0010010 ; Unsigned Binary                                  ;
+; HEX_6          ; 0000010 ; Unsigned Binary                                  ;
+; HEX_7          ; 1111000 ; Unsigned Binary                                  ;
+; HEX_8          ; 0000000 ; Unsigned Binary                                  ;
+; HEX_9          ; 0011000 ; Unsigned Binary                                  ;
+; HEX_10         ; 0001000 ; Unsigned Binary                                  ;
+; HEX_11         ; 0000011 ; Unsigned Binary                                  ;
+; HEX_12         ; 1000110 ; Unsigned Binary                                  ;
+; HEX_13         ; 0100001 ; Unsigned Binary                                  ;
+; HEX_14         ; 0000110 ; Unsigned Binary                                  ;
+; HEX_15         ; 0001110 ; Unsigned Binary                                  ;
+; OFF            ; 1111111 ; Unsigned Binary                                  ;
++----------------+---------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 272                         ;
+;     ENA SCLR          ; 200                         ;
+;     ENA SCLR SLD      ; 40                          ;
+;     SCLR              ; 32                          ;
+; arriav_lcell_comb     ; 3267                        ;
+;     arith             ; 88                          ;
+;         0 data inputs ; 7                           ;
+;         1 data inputs ; 81                          ;
+;     extend            ; 4                           ;
+;         7 data inputs ; 4                           ;
+;     normal            ; 3175                        ;
+;         0 data inputs ; 1                           ;
+;         2 data inputs ; 60                          ;
+;         3 data inputs ; 866                         ;
+;         4 data inputs ; 491                         ;
+;         5 data inputs ; 538                         ;
+;         6 data inputs ; 1219                        ;
+; boundary_port         ; 70                          ;
+;                       ;                             ;
+; Max LUT depth         ; 9.00                        ;
+; Average LUT depth     ; 8.23                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:05     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+    Info: Processing started: Thu Apr  3 16:12:48 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Accelerator -c Accelerator
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file accelerator.sv
+    Info (12023): Found entity 1: accelerator File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 1
+Warning (12125): Using design file accelerator.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: Accelerator File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 6
+Warning (12300): Found the following files while searching for definition of entity "Accelerator", but did not use these files because already using a different file containing the entity definition
+    Warning (12126): File: accelerator.sv
+Info (12127): Elaborating entity "Accelerator" for the top level hierarchy
+Warning (10034): Output port "HEX0" at accelerator.v(15) has no driver File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 15
+Warning (10034): Output port "HEX1" at accelerator.v(16) has no driver File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 16
+Warning (10034): Output port "HEX2" at accelerator.v(17) has no driver File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 17
+Warning (10034): Output port "HEX3" at accelerator.v(18) has no driver File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 18
+Warning (10034): Output port "HEX4" at accelerator.v(19) has no driver File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 19
+Warning (10034): Output port "HEX5" at accelerator.v(20) has no driver File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 20
+Info (12128): Elaborating entity "accelerator" for hierarchy "accelerator:ACC" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 75
+Warning (10240): Verilog HDL Always Construct warning at accelerator.sv(54): inferring latch(es) for variable "valid_temp", which holds its previous value in one or more paths through the always construct File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 54
+Info (10041): Inferred latch for "valid_temp[0]" at accelerator.sv(57) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 57
+Info (10041): Inferred latch for "valid_temp[1]" at accelerator.sv(57) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 57
+Info (10041): Inferred latch for "valid_temp[2]" at accelerator.sv(57) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 57
+Info (10041): Inferred latch for "valid_temp[3]" at accelerator.sv(57) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 57
+Info (10041): Inferred latch for "valid_temp[4]" at accelerator.sv(57) File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.sv Line: 57
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "HEX0[0]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 15
+    Warning (13410): Pin "HEX0[1]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 15
+    Warning (13410): Pin "HEX0[2]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 15
+    Warning (13410): Pin "HEX0[3]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 15
+    Warning (13410): Pin "HEX0[4]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 15
+    Warning (13410): Pin "HEX0[5]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 15
+    Warning (13410): Pin "HEX0[6]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 15
+    Warning (13410): Pin "HEX1[0]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 16
+    Warning (13410): Pin "HEX1[1]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 16
+    Warning (13410): Pin "HEX1[2]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 16
+    Warning (13410): Pin "HEX1[3]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 16
+    Warning (13410): Pin "HEX1[4]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 16
+    Warning (13410): Pin "HEX1[5]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 16
+    Warning (13410): Pin "HEX1[6]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 16
+    Warning (13410): Pin "HEX2[0]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 17
+    Warning (13410): Pin "HEX2[1]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 17
+    Warning (13410): Pin "HEX2[2]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 17
+    Warning (13410): Pin "HEX2[3]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 17
+    Warning (13410): Pin "HEX2[4]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 17
+    Warning (13410): Pin "HEX2[5]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 17
+    Warning (13410): Pin "HEX2[6]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 17
+    Warning (13410): Pin "HEX3[0]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 18
+    Warning (13410): Pin "HEX3[1]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 18
+    Warning (13410): Pin "HEX3[2]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 18
+    Warning (13410): Pin "HEX3[3]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 18
+    Warning (13410): Pin "HEX3[4]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 18
+    Warning (13410): Pin "HEX3[5]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 18
+    Warning (13410): Pin "HEX3[6]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 18
+    Warning (13410): Pin "HEX4[0]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 19
+    Warning (13410): Pin "HEX4[1]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 19
+    Warning (13410): Pin "HEX4[2]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 19
+    Warning (13410): Pin "HEX4[3]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 19
+    Warning (13410): Pin "HEX4[4]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 19
+    Warning (13410): Pin "HEX4[5]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 19
+    Warning (13410): Pin "HEX4[6]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 19
+    Warning (13410): Pin "HEX5[0]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 20
+    Warning (13410): Pin "HEX5[1]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 20
+    Warning (13410): Pin "HEX5[2]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 20
+    Warning (13410): Pin "HEX5[3]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 20
+    Warning (13410): Pin "HEX5[4]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 20
+    Warning (13410): Pin "HEX5[5]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 20
+    Warning (13410): Pin "HEX5[6]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 20
+    Warning (13410): Pin "LEDR[0]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 26
+    Warning (13410): Pin "LEDR[2]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 26
+    Warning (13410): Pin "LEDR[3]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 26
+    Warning (13410): Pin "LEDR[4]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 26
+    Warning (13410): Pin "LEDR[5]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 26
+    Warning (13410): Pin "LEDR[6]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 26
+    Warning (13410): Pin "LEDR[7]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 26
+    Warning (13410): Pin "LEDR[8]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 26
+    Warning (13410): Pin "LEDR[9]" is stuck at GND File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 26
+Info (286030): Timing-Driven Synthesis is running
+Info (144001): Generated suppressed messages file I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/Accelerator.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 13 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "CLOCK2_50" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 9
+    Warning (15610): No output dependent on input pin "CLOCK3_50" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 10
+    Warning (15610): No output dependent on input pin "CLOCK4_50" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 11
+    Warning (15610): No output dependent on input pin "SW[0]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[1]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[2]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[3]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[4]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[5]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[6]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[7]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[8]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+    Warning (15610): No output dependent on input pin "SW[9]" File: I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/accelerator.v Line: 30
+Info (21057): Implemented 3576 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 18 input pins
+    Info (21059): Implemented 52 output pins
+    Info (21061): Implemented 3506 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 77 warnings
+    Info: Peak virtual memory: 4892 megabytes
+    Info: Processing ended: Thu Apr  3 16:13:03 2025
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:18
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in I:/Documents/ECE554/Battleship/Verilog/accelerator/Accelerator/Accelerator.map.smsg.
+
+

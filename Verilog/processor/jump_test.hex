@@ -1,12 +1,12 @@
-06400093 //addi x1, x0, 100 # load x1 with 100
-06400113 //addi x2, x0, 100 # load x2 with 100
-00c00f6f //jal x30, 12 -> 8 + 12 = 20 -> jump to line 6
-402080b3 //sub x1, x1, x2 # should return here with x1 = 200 and x2 = 50. If failed then x1 will be 0	
-0100006f //jal x0 16 -> j 16 -> 16 + 16 -> jump to line 8
-06408093 //FIRST JAL should go here addi x1, x1, 100
-03200113 //addi x2, x0, 50
-000f0067 //jalr x0, x30, 0 //Return to jal + 4 -> line 4
-00200193 // J 16 jumps here
-0ef58593 //ADDI x11, x11, 0xEF
-00b1a123 //SW  x11, 2(x3)
-0021a283 //LW x5, 2(x3)
+06400093
+06400113
+00c00f6f
+402080b3
+0100006f
+06408093
+03200113
+000f0067
+00200193
+0ef58593
+00b1a123
+0021a283

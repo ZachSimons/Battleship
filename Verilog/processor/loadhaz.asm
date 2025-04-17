@@ -13,22 +13,22 @@ _start:
     # Mem[0x14] = 0x55667788
     ####################################
 
-    li t1, 0x10         # first pointer
-    sw t1, 0(x0)        # Mem[0] = 0x10
+    li t1,16         # first pointer
+    sw t1,0(x0)        # Mem[0] = 0x10
 
-    li t2, 0x14         # second pointer
-    sw t2, 4(x0)        # Mem[4] = 0x14
+    li t2,20         # second pointer
+    sw t2,4(x0)        # Mem[4] = 0x14
 
-    li t3, 0x11223344   # value at 0x10
-    sw t3, 0x10(x0)
+    li t3,287454020   # value at 0x10
+    sw t3,16(x0)
 
-    li t4, 0x55667788   # value at 0x14
-    sw t4, 0x14(x0)
+    li t4,1432778632   # value at 0x14
+    sw t4,20(x0)
 
     j load
 
     done: 
-        addi x31, x0, AA
+        addi x31,x0,170
         j end
 
     ####################################
@@ -40,15 +40,15 @@ _start:
     ####################################
 
     load:
-        lw x13, 0(x0)        # x5 = 0x10
-        lw x14, 0(x13)        # x6 = Mem[0x10] = 0x11223344 (load-use hazard)
+        lw x13,0(x0)        # x5 = 0x10
+        lw x14,0(x13)        # x6 = Mem[0x10] = 0x11223344 (load-use hazard)
 
-        lw x15, 4(x0)        # x7 = 0x14
-        lw x16, 0(x15)        # x8 = Mem[0x14] = 0x55667788 (another hazard)
+        lw x15,4(x0)        # x7 = 0x14
+        lw x16,0(x15)        # x8 = Mem[0x14] = 0x55667788 (another hazard)
 
     j done
 
-    addi x5, x0, 0xFFF
+    addi x5,x0,4095
 
     ####################################
     # Final register values for testbench to check
