@@ -39,11 +39,11 @@ assign rx_data = rx_shift_reg;
 always_ff @ (posedge clk) begin
     if (!rst_n) begin
         tx_shift_reg <= '0;
-        tx_byte_cnt <= '0;
+        tx_byte_cnt <= 3;
     end
     else if (~|tx_byte_cnt & send_tx) begin
         tx_shift_reg <= tx_data;
-        tx_byte_cnt <= 2;
+        tx_byte_cnt <= 3;
     end
     else if (tbr & |tx_byte_cnt) begin
         tx_shift_reg <= tx_shift_reg >> 8;
@@ -52,7 +52,7 @@ always_ff @ (posedge clk) begin
 end
 
 assign byte_tx = tx_shift_reg[7:0];
-assign send_tx_byte = tbr & ~|tx_byte_cnt;
+assign send_tx_byte = tbr & |tx_byte_cnt;
 /////////////////////////////////////////////////////////////
 
 spart spart_i(   
