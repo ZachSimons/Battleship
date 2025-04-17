@@ -16,9 +16,9 @@
  * {102, 103, 104, 105, 106} = {PS2_LEFT, PS2_UP, PS2_DOWN, PS2_RIGHT, PS2_ENTER}
  * > 106 = SHIP SUNK bit[15:8] = ship pos, bit[27:20] = ship type
  */
-#define SINK_BIT 0x80000000
-#define GET_ACK_SINK_SHIP(x) ((x & 0x0ff00000) >> 20)
-#define SET_ACK_SINK_SHIP(x) ((x & 0x000000ff) << 20)
+#define SINK_BIT 0x00800000
+#define GET_ACK_SINK_SHIP(x) ((x & 0x00ff0000) >> 16)
+#define SET_ACK_SINK_SHIP(x) ((x & 0x000000ff) << 16)
 #define GET_ACK_SINK_POS(x) ((x & 0x0000ff00) >> 8)
 #define SET_ACK_SINK_POS(x) ((x & 0x000000ff) << 8)
 #define ACK_MISS 100
@@ -440,7 +440,7 @@ int main() {
         while(1) {
             asm volatile ("PRE_ACCELERATOR_LABEL:");
             ai_target = run_accelerator();
-            target_board
+            // TODO: UGS WITH AI RESULT
             asm volatile ("ugs ai_target, AI");
             asm volatile ("STALL_LOOP_LABEL:");
             while(1) {} // Stall for interrupt
