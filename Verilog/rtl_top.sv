@@ -61,34 +61,34 @@ logic send_tx, tx_latch;
 
 always_ff @(posedge sys_clk) begin
     if(!rst_n) begin
-        ppu_reg <= 0;
-        acc_reg <= 0;
-        comm_reg <= 0;
-        sac_reg <= 0;
-        ppu_send_ff <= 0;
-        snd_ff <= 0;
+        // ppu_reg <= 0;
+        // acc_reg <= 0;
+        // comm_reg <= 0;
+        // sac_reg <= 0;
+        // ppu_send_ff <= 0;
+        // snd_ff <= 0;
         interrupt_board_ff <= 0;
     end
     else begin
         interrupt_board_ff <= interrupt_board ? spart_data[7:0] : interrupt_board_ff;
-        ppu_send_ff <= ppu_send;
-        snd_ff <= snd;
-        ppu_reg <= ppu_send ? interface_data : ppu_reg;
-        acc_reg <= uad ? interface_data : acc_reg;
-        comm_reg <= snd ? interface_data : comm_reg;
-        sac_reg <= (~sac_reg & sac) ? sac :  sac_reg;
+        // ppu_send_ff <= ppu_send;
+        // snd_ff <= snd;
+        // ppu_reg <= ppu_send ? interface_data : ppu_reg;
+        // acc_reg <= uad ? interface_data : acc_reg;
+        // comm_reg <= snd ? interface_data : comm_reg;
+        // sac_reg <= (~sac_reg & sac) ? sac :  sac_reg;
     end
 end
 
-keyboard DUT (
-    .sys_clk(sys_clk), 
-    .rst_n (rst_n), 
-    .ps2_clk(PS2_CLK), 
-    .ps2_data(PS2_DAT), 
-    .direction(direction), 
-    .fire(fire), 
-    .done(interrupt_key_local)
-);
+// keyboard DUT (
+//     .sys_clk(sys_clk), 
+//     .rst_n (rst_n), 
+//     .ps2_clk(PS2_CLK), 
+//     .ps2_data(PS2_DAT), 
+//     .direction(direction), 
+//     .fire(fire), 
+//     .done(interrupt_key_local)
+// );
 
 spart spart_i(   
     .clk(sys_clk),
@@ -170,34 +170,34 @@ always_comb begin
     endcase
 end
 
-ppu_top ppu_top_i (
-    .sys_clk(sys_clk),
-    .rst_n(rst_n),
-    .receive(ppu_send_ff),
-    .ppu_data(ppu_reg),
-    .VGA_BLANK_N(VGA_BLANK_N),
-    .VGA_B(VGA_B),
-    .VGA_CLK(VGA_CLK),
-    .VGA_G(VGA_G),
-    .VGA_HS(VGA_HS),
-    .VGA_R(VGA_R),
-    .VGA_SYNC_N(VGA_SYNC_N),
-    .VGA_VS(VGA_VS)
-);
+// ppu_top ppu_top_i (
+//     .sys_clk(sys_clk),
+//     .rst_n(rst_n),
+//     .receive(ppu_send_ff),
+//     .ppu_data(ppu_reg),
+//     .VGA_BLANK_N(VGA_BLANK_N),
+//     .VGA_B(VGA_B),
+//     .VGA_CLK(VGA_CLK),
+//     .VGA_G(VGA_G),
+//     .VGA_HS(VGA_HS),
+//     .VGA_R(VGA_R),
+//     .VGA_SYNC_N(VGA_SYNC_N),
+//     .VGA_VS(VGA_VS)
+// );
 
-proc processor_i (
-    .clk(sys_clk),
-    .rst_n(rst_n),
-    .interrupt_key(interrupt_key_local),
-    .interrupt_eth(interrupt_board),
-    .interrupt_source_data(interrupt_board ? spart_data : (interrupt_key_local) ? {29'b0, fire, direction} : '0),
-    .accelerator_data(accelerator_data),
-    .sac(sac),
-    .snd(snd),
-    .uad(uad),
-    .ppu_send(ppu_send),
-    .interface_data(interface_data)
-);
+// proc processor_i (
+//     .clk(sys_clk),
+//     .rst_n(rst_n),
+//     .interrupt_key(interrupt_key_local),
+//     .interrupt_eth(interrupt_board),
+//     .interrupt_source_data(interrupt_board ? spart_data : (interrupt_key_local) ? {29'b0, fire, direction} : '0),
+//     .accelerator_data(accelerator_data),
+//     .sac(sac),
+//     .snd(snd),
+//     .uad(uad),
+//     .ppu_send(ppu_send),
+//     .interface_data(interface_data)
+// );
 
 
 endmodule

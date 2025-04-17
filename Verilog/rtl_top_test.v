@@ -61,7 +61,7 @@ assign rst_n = KEY[0];
 //  Structural coding
 //=======================================================
 rtl_top #(
-	.BOARD_NUM	   (0)
+	.BOARD_NUM	   (1)
 ) u_rtl_top (
     .sys_clk       (sys_clk),
     .rst_n         (rst_n),
@@ -84,7 +84,14 @@ rtl_top #(
     .VGA_SYNC_N    (VGA_SYNC_N),
     .VGA_VS        (VGA_VS),
 
-	.GPIO		   (GPIO)
+	.GPIO		   (GPIO),
+
+	.HEX0		   (HEX0),
+	.HEX1		   (HEX1),
+	.HEX2		   (HEX2),
+	.HEX3		   (HEX3),
+	.HEX4		   (HEX4),
+	.HEX5		   (HEX5)
 );
 
 endmodule
