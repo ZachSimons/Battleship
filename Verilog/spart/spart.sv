@@ -20,12 +20,13 @@
 module spart(
     input clk,
     input rst_n,
-    input txsend,
-    input [7:0] txdata,
-    output logic [7:0] rxdata,
+    input send_tx,
+    input [7:0] tx_data,
+    output logic [7:0] rx_data,
     output logic rda,
     output logic txd,
-    input rxd
+    input rxd,
+    output logic tbr
 );
 
  logic en;
@@ -37,10 +38,9 @@ module spart(
  logic r_start;
  logic [7:0] tx_data_reg;
  logic [15:0] count;
- logic tbr;
 
  assign txd = transmit[0];
- assign rxdata = recieve[7:0];
+ assign rx_data = recieve[7:0];
 
  always_ff@(posedge clk) begin
     if (!rst_n) begin
@@ -50,10 +50,10 @@ module spart(
         tx_data_reg <= 0;
         t_start <= 0;
     end
-    else if(txsend & tbr) begin
+    else if(send_tx & tbr) begin
         t_cnt <= 0;
         tbr <= 0;
-        tx_data_reg <= txdata;
+        tx_data_reg <= tx_data;
         t_start <= 1;
     end
     else if(en && t_start) begin

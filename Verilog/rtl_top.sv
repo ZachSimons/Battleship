@@ -55,9 +55,10 @@ logic [31:0] interrupt_source_data, interface_data, spart_data;
 logic [31:0] ppu_reg, acc_reg, comm_reg;
 logic [1:0] direction;
 
-logic [7:0] interrupt_board_ff;
+logic [23:0] interrupt_board_ff;
 logic [7:0] byte_tx;
 logic send_tx, tx_latch;
+logic [23:0] tx_data;
 
 always_ff @(posedge sys_clk) begin
     if(!rst_n) begin
@@ -70,7 +71,7 @@ always_ff @(posedge sys_clk) begin
         interrupt_board_ff <= 0;
     end
     else begin
-        interrupt_board_ff <= interrupt_board ? spart_data[7:0] : interrupt_board_ff;
+        interrupt_board_ff <= interrupt_board ? spart_data[23:0] : interrupt_board_ff;
         // ppu_send_ff <= ppu_send;
         // snd_ff <= snd;
         // ppu_reg <= ppu_send ? interface_data : ppu_reg;
@@ -90,19 +91,20 @@ end
 //     .done(interrupt_key_local)
 // );
 
-spart spart_i(   
-    .clk(sys_clk),
+spart_top spart_top_i(   
+    .clk(clk),
     .rst_n(rst_n),
-    .txsend(send_tx),
-    .txdata(byte_tx),
-    .rxdata(spart_data),
-    .rda(interrupt_board),
+    .send_tx(send_tx),
+    .tx_data(tx_data),
+    .rx_data({8'b0, spart_data}),
+    .interrupt_board(interrupt_board),
     .rxd(BOARD_NUM ? GPIO[3] : GPIO[5]),
     .txd(BOARD_NUM ? GPIO[5] : GPIO[3])
 );
 
 logic key_ff, key_ff2, key_ff3;
 
+assign tx_data = {3{byte_tx}};
 assign byte_tx = SW[7:0];
 assign send_tx = ~key_ff2 & key_ff3;
 
@@ -122,11 +124,10 @@ end
 assign LEDR[0] = BOARD_NUM == 0;
 assign LEDR[1] = BOARD_NUM == 1;
 
-
-assign HEX2 = OFF;
-assign HEX3 = OFF;
-assign HEX4 = OFF;
-assign HEX5 = OFF;
+// assign HEX2 = OFF;
+// assign HEX3 = OFF;
+// assign HEX4 = OFF;
+// assign HEX5 = OFF;
 
 always_comb begin
     case(interrupt_board_ff[3:0])
@@ -147,9 +148,6 @@ always_comb begin
         4'd14: HEX0 = HEX_14;
         4'd15: HEX0 = HEX_15;
     endcase
-end
-
-always_comb begin
     case(interrupt_board_ff[7:4])
         4'd0: HEX1 = HEX_0;
         4'd1: HEX1 = HEX_1;
@@ -167,6 +165,78 @@ always_comb begin
         4'd13: HEX1 = HEX_13;
         4'd14: HEX1 = HEX_14;
         4'd15: HEX1 = HEX_15;
+    endcase
+    case(interrupt_board_ff[11:8])
+        4'd0: HEX2 = HEX_0;
+        4'd1: HEX2 = HEX_1;
+        4'd2: HEX2 = HEX_2;
+        4'd3: HEX2 = HEX_3;
+        4'd4: HEX2 = HEX_4;
+        4'd5: HEX2 = HEX_5;
+        4'd6: HEX2 = HEX_6;
+        4'd7: HEX2 = HEX_7;
+        4'd8: HEX2 = HEX_8;
+        4'd9: HEX2 = HEX_9;
+        4'd10: HEX2 = HEX_10;
+        4'd11: HEX2 = HEX_11;
+        4'd12: HEX2 = HEX_12;
+        4'd13: HEX2 = HEX_13;
+        4'd14: HEX2 = HEX_14;
+        4'd15: HEX2 = HEX_15;
+    endcase
+    case(interrupt_board_ff[15:12])
+        4'd0: HEX3 = HEX_0;
+        4'd1: HEX3 = HEX_1;
+        4'd2: HEX3 = HEX_2;
+        4'd3: HEX3 = HEX_3;
+        4'd4: HEX3 = HEX_4;
+        4'd5: HEX3 = HEX_5;
+        4'd6: HEX3 = HEX_6;
+        4'd7: HEX3 = HEX_7;
+        4'd8: HEX3 = HEX_8;
+        4'd9: HEX3 = HEX_9;
+        4'd10: HEX3 = HEX_10;
+        4'd11: HEX3 = HEX_11;
+        4'd12: HEX3 = HEX_12;
+        4'd13: HEX3 = HEX_13;
+        4'd14: HEX3 = HEX_14;
+        4'd15: HEX3 = HEX_15;
+    endcase
+    case(interrupt_board_ff[19:16])
+        4'd0: HEX4 = HEX_0;
+        4'd1: HEX4 = HEX_1;
+        4'd2: HEX4 = HEX_2;
+        4'd3: HEX4 = HEX_3;
+        4'd4: HEX4 = HEX_4;
+        4'd5: HEX4 = HEX_5;
+        4'd6: HEX4 = HEX_6;
+        4'd7: HEX4 = HEX_7;
+        4'd8: HEX4 = HEX_8;
+        4'd9: HEX4 = HEX_9;
+        4'd10: HEX4 = HEX_10;
+        4'd11: HEX4 = HEX_11;
+        4'd12: HEX4 = HEX_12;
+        4'd13: HEX4 = HEX_13;
+        4'd14: HEX4 = HEX_14;
+        4'd15: HEX4 = HEX_15;
+    endcase
+    case(interrupt_board_ff[23:20])
+        4'd0: HEX5 = HEX_0;
+        4'd1: HEX5 = HEX_1;
+        4'd2: HEX5 = HEX_2;
+        4'd3: HEX5 = HEX_3;
+        4'd4: HEX5 = HEX_4;
+        4'd5: HEX5 = HEX_5;
+        4'd6: HEX5 = HEX_6;
+        4'd7: HEX5 = HEX_7;
+        4'd8: HEX5 = HEX_8;
+        4'd9: HEX5 = HEX_9;
+        4'd10: HEX5 = HEX_10;
+        4'd11: HEX5 = HEX_11;
+        4'd12: HEX5 = HEX_12;
+        4'd13: HEX5 = HEX_13;
+        4'd14: HEX5 = HEX_14;
+        4'd15: HEX5 = HEX_15;
     endcase
 end
 
@@ -198,6 +268,17 @@ end
 //     .ppu_send(ppu_send),
 //     .interface_data(interface_data)
 // );
+
+// accelerator ACC(
+//     .data(data),
+//     .clk(sys_clk),
+//     .rst_n(rst_n),
+//     .update_ship(update_ship),
+//     .start(start),
+//     .update_board(update_board),
+//     .valid_out(accelerator_data)
+// );
+
 
 
 endmodule
