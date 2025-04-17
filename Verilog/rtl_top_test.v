@@ -60,7 +60,9 @@ assign rst_n = KEY[0];
 //=======================================================
 //  Structural coding
 //=======================================================
-rtl_top u_rtl_top (
+rtl_top #(
+	.BOARD_NUM	   (0)
+) u_rtl_top (
     .sys_clk       (sys_clk),
     .rst_n         (rst_n),
 

@@ -57,10 +57,6 @@ always_ff @(posedge clk) begin
 	end
 end
 
-// assign databus = (state == BAUD_LOW) ?      baudrate[7:0] :
-//                  (state == BAUD_HIGH) ?    baudrate[15:8] :
-//                                                       8'bz; 
-
 // next state transistion logic
 always_comb begin
     iocs = 0;
@@ -70,18 +66,6 @@ always_comb begin
     next_state = state;
 
     case(state)
-        // BAUD_LOW : begin
-        //     databus = baudrate[7:0];
-        //     ioaddr = 2'b10;
-        //     next_state = BAUD_HIGH;
-        // end
-
-        // BAUD_HIGH : begin
-        //     databus = baudrate[15:8];
-        //     ioaddr = 2'b11;
-        //     next_state = IDLE;
-        // end
-
         IDLE : begin
             if (snd & tbr) begin
                 iocs = 1;

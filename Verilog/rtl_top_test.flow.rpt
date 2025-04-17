@@ -1,5 +1,5 @@
 Flow report for rtl_top_test
-Tue Apr 15 18:35:26 2025
+Tue Apr 15 22:29:28 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -41,24 +41,24 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +---------------------------------+------------------------------------------------+
-; Flow Status                     ; Successful - Tue Apr 15 18:35:09 2025          ;
+; Flow Status                     ; Successful - Tue Apr 15 22:29:14 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; rtl_top_test                                   ;
 ; Top-level Entity Name           ; rtl_top_test                                   ;
 ; Family                          ; Cyclone V                                      ;
 ; Device                          ; 5CSEMA5F31C6                                   ;
 ; Timing Models                   ; Final                                          ;
-; Logic utilization (in ALMs)     ; 1,711 / 32,070 ( 5 % )                         ;
-; Total registers                 ; 2697                                           ;
+; Logic utilization (in ALMs)     ; 43 / 32,070 ( < 1 % )                          ;
+; Total registers                 ; 62                                             ;
 ; Total pins                      ; 139 / 457 ( 30 % )                             ;
 ; Total virtual pins              ; 0                                              ;
-; Total block memory bits         ; 541,832 / 4,065,280 ( 13 % )                   ;
-; Total DSP Blocks                ; 4 / 87 ( 5 % )                                 ;
+; Total block memory bits         ; 0 / 4,065,280 ( 0 % )                          ;
+; Total DSP Blocks                ; 0 / 87 ( 0 % )                                 ;
 ; Total HSSI RX PCSs              ; 0                                              ;
 ; Total HSSI PMA RX Deserializers ; 0                                              ;
 ; Total HSSI TX PCSs              ; 0                                              ;
 ; Total HSSI PMA TX Serializers   ; 0                                              ;
-; Total PLLs                      ; 1 / 6 ( 17 % )                                 ;
+; Total PLLs                      ; 0 / 6 ( 0 % )                                  ;
 ; Total DLLs                      ; 0 / 4 ( 0 % )                                  ;
 +---------------------------------+------------------------------------------------+
 
@@ -68,7 +68,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/15/2025 18:31:00 ;
+; Start date & time ; 04/15/2025 22:28:03 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; rtl_top_test        ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 84486697309043.174475986007964         ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 84486697309043.174477408322808         ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
 ; MISC_FILE                           ; ppu/vga_pll.cmp                        ; --            ; --          ; --         ;
@@ -97,11 +97,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:33     ; 1.0                     ; 4959 MB             ; 00:00:22                           ;
-; Fitter               ; 00:03:13     ; 1.1                     ; 7823 MB             ; 00:21:02                           ;
-; Assembler            ; 00:00:07     ; 1.0                     ; 4902 MB             ; 00:00:04                           ;
-; Timing Analyzer      ; 00:00:14     ; 1.8                     ; 5497 MB             ; 00:00:16                           ;
-; Total                ; 00:04:07     ; --                      ; --                  ; 00:21:44                           ;
+; Analysis & Synthesis ; 00:00:24     ; 1.0                     ; 4875 MB             ; 00:00:16                           ;
+; Fitter               ; 00:00:36     ; 1.0                     ; 7648 MB             ; 00:02:51                           ;
+; Assembler            ; 00:00:07     ; 1.0                     ; 4872 MB             ; 00:00:04                           ;
+; Timing Analyzer      ; 00:00:13     ; 1.1                     ; 5249 MB             ; 00:00:05                           ;
+; Total                ; 00:01:20     ; --                      ; --                  ; 00:03:16                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

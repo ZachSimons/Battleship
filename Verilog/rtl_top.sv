@@ -1,4 +1,6 @@
-module rtl_top (
+module rtl_top #(
+    parameter bit BOARD_NUM = 0
+)(
     input  logic        sys_clk,
     input  logic        rst_n,
 
@@ -20,8 +22,33 @@ module rtl_top (
 	output logic        VGA_SYNC_N,
 	output logic        VGA_VS,
     //////////// GPIO_1, GPIO_1 connect to GPIO Default //////////
-	inout 		 [35:0]	GPIO
+	inout 		 [35:0]	GPIO,
+    //////////// SEG7 //////////
+    output logic [6:0]	HEX0,
+	output logic [6:0]	HEX1,
+	output logic [6:0]	HEX2,
+	output logic [6:0]	HEX3,
+	output logic [6:0]	HEX4,
+	output logic [6:0]	HEX5
 );
+
+parameter HEX_0 = 7'b1000000;		// zero
+parameter HEX_1 = 7'b1111001;		// one
+parameter HEX_2 = 7'b0100100;		// two
+parameter HEX_3 = 7'b0110000;		// three
+parameter HEX_4 = 7'b0011001;		// four
+parameter HEX_5 = 7'b0010010;		// five
+parameter HEX_6 = 7'b0000010;		// six
+parameter HEX_7 = 7'b1111000;		// seven
+parameter HEX_8 = 7'b0000000;		// eight
+parameter HEX_9 = 7'b0011000;		// nine
+parameter HEX_10 = 7'b0001000;	// ten
+parameter HEX_11 = 7'b0000011;	// eleven
+parameter HEX_12 = 7'b1000110;	// twelve
+parameter HEX_13 = 7'b0100001;	// thirteen
+parameter HEX_14 = 7'b0000110;	// fourteen
+parameter HEX_15 = 7'b0001110;	// fifteen
+parameter OFF   = 7'b1111111;		// all off
 
 logic interrupt_board, interrupt_key_local, accelerator_data, sac, snd, uad, ppu_send, ppu_send_ff, sac_reg, fire, snd_ff;
 logic [31:0] interrupt_source_data, interface_data, spart_data;
@@ -63,22 +90,22 @@ keyboard DUT (
     .done(interrupt_key_local)
 );
 
-spart_top spart_top_i (
-    .clk(sys_clk), 
-    .rst_n (rst_n),
-    .snd(send_tx),
-    .tx_data(byte_tx),
-    .rxd(GPIO[5]),
-    .txd(GPIO[3]),
-    .interrupt_board(interrupt_board),
-    .rx_data(spart_data)
+spart spart_i(   
+    .clk(sys_clk),
+    .rst_n(rst_n),
+    .txsend(send_tx),
+    .txdata(byte_tx),
+    .rxdata(spart_data),
+    .rda(interrupt_board),
+    .rxd(BOARD_NUM ? GPIO[3] : GPIO[5]),
+    .txd(BOARD_NUM ? GPIO[5] : GPIO[3])
 );
 
+logic key_ff, key_ff2, key_ff3;
 
 assign byte_tx = SW[7:0];
 assign send_tx = ~key_ff2 & key_ff3;
 
-logic key_ff, key_ff2, key_ff3;
 always_ff @ (posedge sys_clk) begin
     if (!rst_n) begin
         key_ff <= 1;
@@ -92,7 +119,56 @@ always_ff @ (posedge sys_clk) begin
     end
 end
 
-assign LEDR = {2'b0, interrupt_board_ff};
+assign LEDR[0] = BOARD_NUM == 0;
+assign LEDR[1] = BOARD_NUM == 1;
+
+
+assign HEX2 = OFF;
+assign HEX3 = OFF;
+assign HEX4 = OFF;
+assign HEX5 = OFF;
+
+always_comb begin
+    case(interrupt_board_ff[3:0])
+        4'd0: HEX0 = HEX_0;
+        4'd1: HEX0 = HEX_1;
+        4'd2: HEX0 = HEX_2;
+        4'd3: HEX0 = HEX_3;
+        4'd4: HEX0 = HEX_4;
+        4'd5: HEX0 = HEX_5;
+        4'd6: HEX0 = HEX_6;
+        4'd7: HEX0 = HEX_7;
+        4'd8: HEX0 = HEX_8;
+        4'd9: HEX0 = HEX_9;
+        4'd10: HEX0 = HEX_10;
+        4'd11: HEX0 = HEX_11;
+        4'd12: HEX0 = HEX_12;
+        4'd13: HEX0 = HEX_13;
+        4'd14: HEX0 = HEX_14;
+        4'd15: HEX0 = HEX_15;
+    endcase
+end
+
+always_comb begin
+    case(interrupt_board_ff[7:4])
+        4'd0: HEX1 = HEX_0;
+        4'd1: HEX1 = HEX_1;
+        4'd2: HEX1 = HEX_2;
+        4'd3: HEX1 = HEX_3;
+        4'd4: HEX1 = HEX_4;
+        4'd5: HEX1 = HEX_5;
+        4'd6: HEX1 = HEX_6;
+        4'd7: HEX1 = HEX_7;
+        4'd8: HEX1 = HEX_8;
+        4'd9: HEX1 = HEX_9;
+        4'd10: HEX1 = HEX_10;
+        4'd11: HEX1 = HEX_11;
+        4'd12: HEX1 = HEX_12;
+        4'd13: HEX1 = HEX_13;
+        4'd14: HEX1 = HEX_14;
+        4'd15: HEX1 = HEX_15;
+    endcase
+end
 
 ppu_top ppu_top_i (
     .sys_clk(sys_clk),

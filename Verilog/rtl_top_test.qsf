@@ -5,7 +5,7 @@
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSEMA5F31C6
 set_global_assignment -name TOP_LEVEL_ENTITY "rtl_top_test"
-set_global_assignment -name ORIGINAL_QUARTUS_VERSION "15.1.0"
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 15.1.0
 set_global_assignment -name LAST_QUARTUS_VERSION "23.1std.0 Lite Edition"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "18:26:35 APRIL 15,2025"
 set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
@@ -334,6 +334,10 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name SYSTEMVERILOG_FILE spart/spart_top.sv
+set_global_assignment -name SYSTEMVERILOG_FILE spart/spart.sv
+set_global_assignment -name SYSTEMVERILOG_FILE spart/driver.sv
+set_global_assignment -name SYSTEMVERILOG_FILE spart/baud_rate.sv
 set_global_assignment -name SYSTEMVERILOG_FILE keyboard/keyboard_controller.sv
 set_global_assignment -name VERILOG_FILE ppu/vga_pll.v -library vga_pll
 set_global_assignment -name QIP_FILE ppu/vga_pll.qip

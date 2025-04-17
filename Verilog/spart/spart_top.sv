@@ -15,20 +15,18 @@ wire [7:0] databus;
 
 assign interrupt_board = rda;
 
-assign rx_data = rda ? {24'b0, databus} : '0;
-
 // Instantiate your spart here
-spart spart0(   .clk(clk),
-                .rst_n(rst_n),
-                .iocs(iocs),
-                .iorw(iorw),
-                .rda(rda),
-                .tbr(tbr),
-                .ioaddr(ioaddr),
-                .databus(databus),
-                .txd(txd),
-                .rxd(rxd)
-            );
+spart spart_i(   
+    .clk(clk),
+    .rst_n(rst_n),
+    .txsend(snd),
+    .txdata()
+    .rda(rda),
+    .tbr(tbr),
+    .rxdata(rx_data),
+    .txd(txd),
+    .rxd(rxd)
+);
 
 // Instantiate your driver here
 driver driver0( .clk(clk),

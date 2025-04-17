@@ -20,13 +20,11 @@
 module spart(
     input clk,
     input rst_n,
-    input iocs,
-    input iorw,
+    input txsend,
+    input [7:0] txdata,
+    output logic [7:0] rxdata,
     output logic rda,
-    output logic tbr,
-    input [1:0] ioaddr,
-    inout [7:0] databus,
-    output txd,
+    output logic txd,
     input rxd
 );
 
@@ -38,9 +36,11 @@ module spart(
  logic t_start;
  logic r_start;
  logic [7:0] tx_data_reg;
+ logic [15:0] count;
+ logic tbr;
 
  assign txd = transmit[0];
- assign databus = ((~|ioaddr) && iorw && rda) ? recieve[7:0] : 8'bz;
+ assign rxdata = recieve[7:0];
 
  always_ff@(posedge clk) begin
     if (!rst_n) begin
@@ -50,10 +50,10 @@ module spart(
         tx_data_reg <= 0;
         t_start <= 0;
     end
-    else if(iocs && (!iorw) && (~|ioaddr)) begin
+    else if(txsend & tbr) begin
         t_cnt <= 0;
         tbr <= 0;
-        tx_data_reg <= 8'b0110_0001;
+        tx_data_reg <= txdata;
         t_start <= 1;
     end
     else if(en && t_start) begin
@@ -97,6 +97,19 @@ always_ff@(posedge clk) begin
         rda <= 0;
 end
 
-baud_rate baud0(.clk(clk), .rst_n(rst_n), .ioaddr(ioaddr), .databus(databus), .enable(en));
+always_ff@(posedge clk) begin
+    if(!rst_n) begin
+        count <= 16'd10416;
+        en <= 0;
+    end
+    else if(count == 0) begin
+        en <= 1;
+        count <= 16'd10416;
+    end
+    else begin
+        en <= 0;
+        count <= count - 1;
+    end
+end
 
 endmodule
