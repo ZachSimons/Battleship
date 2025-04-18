@@ -425,6 +425,8 @@ int check_sinks() {
 }
 
 int main() {
+    asm volatile ("lui sp,1048575");
+    asm volatile ("addi sp,sp,4095");
     while(1) {
         ship_sizes[0] = 2;
         ship_sizes[1] = 3;
