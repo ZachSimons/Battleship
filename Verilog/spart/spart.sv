@@ -30,6 +30,7 @@ module spart(
 );
 
  logic en;
+ logic [1:0] meta_rxd;
  logic [8:0] transmit;
  logic [8:0] recieve;
  logic [4:0] t_cnt;
@@ -80,8 +81,8 @@ always_ff@(posedge clk) begin
         r_start <= 0;
     end 
     else if (en) begin
-        recieve <= {rxd, recieve[8:1]};
-        if (!r_start && !rxd) begin
+        recieve <= {meta_rxd[1], recieve[8:1]};
+        if (!r_start && !meta_rxd[1]) begin
             rda <= 0;
             r_cnt <= 1;
             r_start <= 1;
@@ -97,14 +98,24 @@ always_ff@(posedge clk) begin
         rda <= 0;
 end
 
+always_ff @(posedge clk) begin
+    if(!rst_n) begin
+        meta_rxd <= '0;
+    end
+    else begin
+        meta_rxd[0] <= rxd;
+        meta_rxd[1] <= meta_rxd[0];
+    end
+end
+
 always_ff@(posedge clk) begin
     if(!rst_n) begin
-        count <= 16'd10416;
+        count <= 16'd1302;
         en <= 0;
     end
     else if(count == 0) begin
         en <= 1;
-        count <= 16'd10416;
+        count <= 16'd1302;
     end
     else begin
         en <= 0;
