@@ -1,7 +1,44 @@
 int toSnd;
+int activeSquare;
+int board[100];
+
+int generate_encoding(int, int, int, int, int, int, int);
+void send_value(int);
 
 void entry_point() {
     asm volatile ("j main");
+    asm volatile ("rdi a0");
+    asm volatile ("call exception_handler");
+}
+
+void exception_handler(int num) {
+    if(num == 102) { // LEFT
+        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 0);
+        send_value(board[activeSquare]);
+        activeSquare--;
+        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 1);
+        send_value(board[activeSquare]);
+    } else if(num == 103) { // UP
+        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 0);
+        send_value(board[activeSquare]);
+        activeSquare += 10;
+        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 1);
+        send_value(board[activeSquare]);
+    } else if(num == 104) { // DOWN
+        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 0);
+        send_value(board[activeSquare]);
+        activeSquare -= 10;
+        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 1);
+        send_value(board[activeSquare]);
+    } else if(num == 105) { // RIGHT
+        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 0);
+        send_value(board[activeSquare]);
+        activeSquare++;
+        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 1);
+        send_value(board[activeSquare]);
+    } else if(num == 106) { // FIRE
+        
+    }
 }
 
 int mult(int a, int b) {
@@ -19,10 +56,10 @@ void send_value(int value) {
     asm volatile ("ugs a0");
 }
 
-int generate_encoding(int size, int pos, int seg, int v, int sel) {
-    int result = 0x80000000;
+int generate_encoding(int board, int size, int state, int pos, int seg, int v, int sel) {
+    int result = board << 31;
     result |= pos << 24;
-    result |= 0x00c00000;
+    result |= state << 22;
     if(size == 2) {
         result |= 0x00000000;
     } else if(size == 3) {
@@ -41,7 +78,7 @@ int generate_encoding(int size, int pos, int seg, int v, int sel) {
 void place_ship(int pos, int size, int v) {
     int inc = v ? 10 : 1;
     for(int i = 0; i < size; i++) {
-        send_value(generate_encoding(size, pos + mult(i,inc), i, v, 0));
+        send_value(generate_encoding(1, size, 3, pos + mult(i,inc), i, v, 0));
     }
 }
 
@@ -51,4 +88,7 @@ int main() {
     place_ship(28, 3, 1);
     place_ship(83, 4, 0);
     place_ship(51, 5, 1);
+    activeSquare = 55;
+    board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 1);
+    send_value(board[activeSquare]);
 }
