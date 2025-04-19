@@ -42,9 +42,15 @@ void place_ship(int pos, int size, int v) {
 }
 
 int main() {
+    /*
     place_ship(22, 2, 0);
     place_ship(65, 3, 1);
     place_ship(28, 3, 1);
     place_ship(83, 4, 0);
     place_ship(51, 5, 1);
+    */
+   send_value(0x99c00000);
+   send_value(0x9ac20000);
+   send_value(0x9bc10000);
+   send_value(0xa5c30000);
 }
