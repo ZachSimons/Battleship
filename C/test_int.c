@@ -5,9 +5,11 @@ int board[100];
 int mult(int, int);
 int mod(int, int);
 
-asm volatile ("j main");
-asm volatile ("rdi a0");
-asm volatile ("call interrupt_handler");
+void entry_point() {
+    asm volatile ("j main");
+    asm volatile ("rdi a0");
+    asm volatile ("call interrupt_handler");
+}
 
 void interrupt_handler(int num) {
     if(num == 102) { // LEFT
