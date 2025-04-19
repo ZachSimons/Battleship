@@ -1,5 +1,9 @@
 int toSnd;
 
+void entry_point() {
+    asm volatile ("j main");
+}
+
 int mult(int a, int b) {
     int result = 0;
     for(int i = 0; i < b; i++) {
@@ -16,8 +20,8 @@ void send_value(int value) {
 }
 
 int generate_encoding(int size, int pos, int seg, int v, int sel) {
-    int result = 0;
-    result |= size << 24;
+    int result = 0x80000000;
+    result |= pos << 24;
     result |= 0x00c00000;
     if(size == 2) {
         result |= 0x00000000;
@@ -49,8 +53,8 @@ int main() {
     place_ship(83, 4, 0);
     place_ship(51, 5, 1);
     */
-   send_value(0x99c00000);
-   send_value(0x9ac20000);
-   send_value(0x9bc10000);
-   send_value(0xa5c30000);
+   send_value(generate_encoding(2, 25, 0, 0, 0));
+   send_value(generate_encoding(2, 26, 1, 0, 0));
+   send_value(generate_encoding(2, 27, 0, 1, 0));
+   send_value(generate_encoding(2, 37, 1, 1, 0));
 }
