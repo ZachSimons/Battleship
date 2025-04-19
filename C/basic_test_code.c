@@ -55,6 +55,16 @@ int main() {
     */
    send_value(generate_encoding(2, 25, 0, 0, 0));
    send_value(generate_encoding(2, 26, 1, 0, 0));
-   send_value(generate_encoding(2, 27, 0, 1, 0));
-   send_value(generate_encoding(2, 37, 1, 1, 0));
+   send_value(generate_encoding(3, 27, 0, 1, 0));
+   send_value(generate_encoding(3, 37, 1, 1, 0));
+   send_value(generate_encoding(3, 47, 2, 1, 0));
+   send_value(generate_encoding(4, 65, 0, 0, 0));
+   send_value(generate_encoding(4, 66, 1, 0, 0));
+   send_value(generate_encoding(4, 67, 2, 0, 0));
+   send_value(generate_encoding(4, 68, 3, 0, 0));
+   send_value(generate_encoding(5, 51, 0, 1, 0));
+   send_value(generate_encoding(5, 61, 1, 1, 0));
+   send_value(generate_encoding(5, 71, 2, 1, 0));
+   send_value(generate_encoding(5, 81, 3, 1, 0));
+   send_value(generate_encoding(5, 91, 4, 1, 0));
 }
