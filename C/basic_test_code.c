@@ -46,25 +46,9 @@ void place_ship(int pos, int size, int v) {
 }
 
 int main() {
-    /*
     place_ship(22, 2, 0);
     place_ship(65, 3, 1);
     place_ship(28, 3, 1);
     place_ship(83, 4, 0);
     place_ship(51, 5, 1);
-    */
-   send_value(generate_encoding(2, 25, 0, 0, 0));
-   send_value(generate_encoding(2, 26, 1, 0, 0));
-   send_value(generate_encoding(3, 27, 0, 1, 0));
-   send_value(generate_encoding(3, 37, 1, 1, 0));
-   send_value(generate_encoding(3, 47, 2, 1, 0));
-   send_value(generate_encoding(4, 65, 0, 0, 0));
-   send_value(generate_encoding(4, 66, 1, 0, 0));
-   send_value(generate_encoding(4, 67, 2, 0, 0));
-   send_value(generate_encoding(4, 68, 3, 0, 0));
-   send_value(generate_encoding(5, 51, 0, 1, 0));
-   send_value(generate_encoding(5, 61, 1, 1, 0));
-   send_value(generate_encoding(5, 71, 2, 1, 0));
-   send_value(generate_encoding(5, 81, 3, 1, 0));
-   send_value(generate_encoding(5, 91, 4, 1, 0));
 }
