@@ -180,7 +180,10 @@ def parseSingleHiLo(param: str):
     if(param.find('%') == -1):
         return param
     else:
-        return str(label_addresses[param.split('(')[1][:-1]])
+        if param.find('%hi'):
+            return str(label_addresses[param.split('(')[1][:-1]] & ~(2**12-1))
+        else:
+            return str(label_addresses[param.split('(')[1][:-1]] % 2**12)
 
 label_addresses = {}
 data_sizes = {}
@@ -383,13 +386,15 @@ if __name__ == '__main__':
                     elif(instruction[0] == 'ret'):
                         outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(1) + iTypeImm(0), '08x') + '\n')
                     elif(instruction[0] == 'call'):
+                        offset = calculateOffset(currentAddress, label_addresses[parameters[0]])
                         currentAddress += 4
-                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]] >> 12), '08x') + '\n')
-                        outputFile.write(format(JALR_CODE + rd_reg(1) + rs1_reg(6) + iTypeImm(label_addresses[parameters[0]] % 2**12), '08x') + '\n')
+                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(0 if offset < 0 else offset >> 12), '08x') + '\n')
+                        outputFile.write(format(JALR_CODE + rd_reg(1) + rs1_reg(6) + iTypeImm(offset % 2**12), '08x') + '\n')
                     elif(instruction[0] == 'tail'):
+                        offset = calculateOffset(currentAddress, label_addresses[parameters[0]])
                         currentAddress += 4
-                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(label_addresses[parameters[0]] >> 12), '08x') + '\n')
-                        outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(6) + iTypeImm(label_addresses[parameters[0]] % 2**12), '08x') + '\n')
+                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(0 if offset < 0 else offset >> 12 >> 12), '08x') + '\n')
+                        outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(6) + iTypeImm(offset % 2**12), '08x') + '\n')
                     elif(instruction[0] == 'ecall'):
                         outputFile.write(format(0x73, '08x') + '\n')
                     else:

@@ -7,7 +7,7 @@ module placeholder_mem(
     output logic [31:0] q
 ); 
 
-logic [31:0] bram [0:255];
+logic [31:0] bram [0:2047];
 logic [31:0] addr_q;
 logic read_en_ff;
 
@@ -15,7 +15,7 @@ logic read_en_ff;
 // `ifdef SYNTHESIS
 //     // synthesis-only: bram initialized through toolchain
 //     initial begin
-//         $readmemh("sqrt.hex", bram);
+//         $readmemh("test.hex", bram);
 //     end
 // `else
 //     initial begin
@@ -33,7 +33,7 @@ logic read_en_ff;
 // `endif
 
 initial begin
-   $readmemh("keyboard.hex", bram);
+   $readmemh("loadstore.hex", bram);
 end
 
 
@@ -44,7 +44,7 @@ always_ff @(posedge clk) begin
     end
     else begin
         read_en_ff <= read_en;
-        addr_q <= addr[9:2];
+        addr_q <= addr[12:2];
     end
 end 
 

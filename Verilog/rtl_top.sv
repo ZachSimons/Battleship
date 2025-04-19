@@ -73,6 +73,23 @@ ppu_top ppu_top_i (
 assign interrupt_board = 0;
 assign spart_data = '0;
 
+logic [31:0] interrupt_data;
+
+always begin
+    case({fire, direction})
+        3'b000:
+            interrupt_data = 32'd103;
+        3'b001:
+            interrupt_data = 32'd104;
+        3'b010:
+            interrupt_data = 32'd102;
+        3'b011:
+            interrupt_data = 32'd105;
+        default:
+            interrupt_data = 32'd106;
+    endcase
+end
+
 proc processor_i (
     .clk(sys_clk),
     .rst_n(rst_n),
