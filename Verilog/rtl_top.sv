@@ -62,34 +62,34 @@ logic [23:0] tx_data;
 
 always_ff @(posedge sys_clk) begin
     if(!rst_n) begin
-        // ppu_reg <= 0;
-        // acc_reg <= 0;
-        // comm_reg <= 0;
-        // sac_reg <= 0;
-        // ppu_send_ff <= 0;
-        // snd_ff <= 0;
+        ppu_reg <= 0;
+        acc_reg <= 0;
+        comm_reg <= 0;
+        sac_reg <= 0;
+        ppu_send_ff <= 0;
+        snd_ff <= 0;
         interrupt_board_ff <= 0;
     end
     else begin
         interrupt_board_ff <= interrupt_board ? spart_data[23:0] : interrupt_board_ff;
-        // ppu_send_ff <= ppu_send;
-        // snd_ff <= snd;
-        // ppu_reg <= ppu_send ? interface_data : ppu_reg;
-        // acc_reg <= uad ? interface_data : acc_reg;
-        // comm_reg <= snd ? interface_data : comm_reg;
-        // sac_reg <= (~sac_reg & sac) ? sac :  sac_reg;
+        ppu_send_ff <= ppu_send;
+        snd_ff <= snd;
+        ppu_reg <= ppu_send ? interface_data : ppu_reg;
+        acc_reg <= uad ? interface_data : acc_reg;
+        comm_reg <= snd ? interface_data : comm_reg;
+        sac_reg <= (~sac_reg & sac) ? sac :  sac_reg;
     end
 end
 
-// keyboard DUT (
-//     .sys_clk(sys_clk), 
-//     .rst_n (rst_n), 
-//     .ps2_clk(PS2_CLK), 
-//     .ps2_data(PS2_DAT), 
-//     .direction(direction), 
-//     .fire(fire), 
-//     .done(interrupt_key_local)
-// );
+keyboard DUT (
+    .sys_clk(sys_clk), 
+    .rst_n (rst_n), 
+    .ps2_clk(PS2_CLK), 
+    .ps2_data(PS2_DAT), 
+    .direction(direction), 
+    .fire(fire), 
+    .done(interrupt_key_local)
+);
 
 ppu_top ppu_top_i (
     .sys_clk(sys_clk),

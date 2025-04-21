@@ -397,7 +397,7 @@ module proc_tb;
           disable timeout_ls;
         end
         begin : timeout_ls
-          repeat (3000000) @(posedge clk);
+          repeat (300) @(posedge clk);
           $error("TEST FAILED: Timeout: Load/Store test did not complete.");
           $stop;
         end
@@ -833,7 +833,7 @@ module proc_tb;
       join_any
     end
 
-    repeat (1000000) @(posedge clk);
+    repeat (10) @(posedge clk);
 
     $display("Finished stepping through all instructions!");
     $stop;
