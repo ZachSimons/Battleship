@@ -1,8 +1,24 @@
 m255
 K4
 z2
-Z0 !s12c _opt2
+Z0 !s12c _opt
 Z1 !s99 nomlopt
+Z2 !s12c _opt2
+R1
+R2
+R1
+R2
+R1
+R2
+R1
+R2
+R1
+R2
+R1
+R2
+R1
+R2
+R1
 R0
 R1
 R0
@@ -17,148 +33,134 @@ R0
 R1
 R0
 R1
-Z2 !s12c _opt
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
+R0
 R1
-R2
-R1
-R2
-R1
-R2
-R1
-R2
-R1
-R2
-R1
-R2
-R1
-R2
-R1
-R2
+R0
 R1
 !s11f MIXED_VERSIONS
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
-R0
+R2
 R1
 Z3 !s12c _opt1
 R1
@@ -168,7 +170,7 @@ R3
 R1
 R3
 R1
-R2
+R0
 R1
 13
 !s112 1.1
@@ -178,10 +180,10 @@ R1
 cModel Technology
 Z4 dI:/ece554/Battleship/Verilog/processor
 T_opt
-!s110 1744239666
-VamJP7lk;iBU1;:kibY;L41
+!s110 1744327303
+V1B^;]e^P>HWemeiYhZb^81
 Z5 04 7 4 work proc_tb fast 0
-=77-000ae431a4f1-67f6fc31-c0b45-db41e
+=1-000ae431a4f1-67f85286-b36a0-2ef8d2
 R1
 Z6 !s12b OEM100
 !s124 OEM100
@@ -189,7 +191,6 @@ o-quiet -auto_acc_if_foreign -work work -L /cae/apps/data/quartus-20/modelsim_as
 Z7 tCvgOpt 0
 n@_opt
 OE;O;2023.2_1;77
-R4
 T_opt1
 !s110 1743721325
 V^hco?00<]>O;LAgnDJkXh0
@@ -215,105 +216,106 @@ R8
 R7
 n@_opt2
 R9
+R4
 valu
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/alu.sv
-Z10 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-!s110 1744319003
+Z10 2alu.sv|branch_ctrl.sv|data_memory_wrapper.sv|decode.sv|execute.sv|fetch.sv|forwarding.sv|hazard.sv|inst_memory_wrapper.sv|instruction_decoder.sv|memory.sv|placeholder_mem.sv|proc.sv|proc_tb.sv|registerfile.sv
+Z11 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z12 !s110 1744327301
 !i10b 1
 !s100 Lh_gBjSZ9EOA9332F;dW63
-I[`K]ZaOZJPlU?DVb4cHIF1
+I7AjE@1?b_JF6H?YSSnYcz1
 S1
-Z11 dI:/Documents/ECE554/Capstone/Battleship/Verilog/processor
-Z12 w1744145786
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/alu.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/alu.sv
-!i122 261
+Z13 d/filespace/j/jredmundson/ece554/Battleship/Verilog/processor
+Z14 w1744326049
+8alu.sv
+Falu.sv
+!i122 285
 L0 1 38
-Z13 VDg1SIo80bB@j0V0VzS_@n1
-Z14 OL;L;2023.3;77
+Z15 VDg1SIo80bB@j0V0VzS_@n1
+Z16 OE;L;2023.2_1;77
 r1
 !s85 0
 31
-!s108 1744319003.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/alu.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/alu.sv|
+Z17 !s108 1744327301.000000
+Z18 !s107 registerfile.sv|proc_tb.sv|proc.sv|placeholder_mem.sv|memory.sv|instruction_decoder.sv|inst_memory_wrapper.sv|hazard.sv|forwarding.sv|fetch.sv|execute.sv|decode.sv|data_memory_wrapper.sv|branch_ctrl.sv|alu.sv|
+Z19 !s90 alu.sv|branch_ctrl.sv|data_memory_wrapper.sv|decode.sv|execute.sv|fetch.sv|forwarding.sv|hazard.sv|inst_memory_wrapper.sv|instruction_decoder.sv|memory.sv|placeholder_mem.sv|proc.sv|proc_tb.sv|registerfile.sv|
 !i113 0
-Z15 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z20 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R7
 vbranch_ctrl
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/branch_ctrl.sv
 R10
-!s110 1744319004
+R11
+R12
 !i10b 1
 !s100 6:K]4AL@b:LL5[4hW=[G32
-IfYMV@3Y^]Mj26QGUCVTDh3
+IJ17mkZ7QSR;Vjbnah66<80
 S1
-R11
-R12
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/branch_ctrl.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/branch_ctrl.sv
-!i122 262
-L0 1 36
 R13
 R14
+8branch_ctrl.sv
+Fbranch_ctrl.sv
+!i122 285
+L0 1 36
+R15
+R16
 r1
 !s85 0
 31
-!s108 1744319004.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/branch_ctrl.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/branch_ctrl.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vdata_memory_wrapper
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/data_memory_wrapper.sv
 R10
-!s110 1744319005
-!i10b 1
-!s100 HN@Q635Kl<f@a>RGhF>On0
-IEPI:6;SPY=JLe^^aHo;EI3
-S1
 R11
 R12
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/data_memory_wrapper.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/data_memory_wrapper.sv
-!i122 263
-L0 1 158
+!i10b 1
+!s100 HN@Q635Kl<f@a>RGhF>On0
+IlT>45h0U8HKXCjFQ[S?bT2
+S1
 R13
 R14
+8data_memory_wrapper.sv
+Fdata_memory_wrapper.sv
+!i122 285
+L0 1 158
+R15
+R16
 r1
 !s85 0
 31
-!s108 1744319005.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/data_memory_wrapper.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/data_memory_wrapper.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vdecode
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/decode.sv
 R10
-!s110 1744319006
-!i10b 1
-!s100 ;YU@SITM=zJCl3iS4b5722
-INX?lEO?Z7HW`P^8^1Wc;X3
-S1
 R11
-w1744224982
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/decode.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/decode.sv
-!i122 264
-L0 1 183
+R12
+!i10b 1
+!s100 E4CKb;<>SM6Z1hkHMP6^I1
+ITD12kCW?g`Z`jC1Q@TAN;3
+S1
 R13
 R14
+8decode.sv
+Fdecode.sv
+!i122 285
+L0 1 188
+R15
+R16
 r1
 !s85 0
 31
-!s108 1744319006.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/decode.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/decode.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vdmembank
 2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/dmembank.v
@@ -321,122 +323,122 @@ vdmembank
 !i10b 1
 !s100 5``R]<N^kGQo:M8E2;9ie3
 IWjkCc?zHaI:MS<g^d3NE63
-R11
-R12
+Z21 dI:/Documents/ECE554/Capstone/Battleship/Verilog/processor
+w1744145786
 8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/dmembank.v
 FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/dmembank.v
 !i122 265
 L0 40 71
-R13
-R14
+R15
+Z22 OL;L;2023.3;77
 r1
 !s85 0
 31
-Z16 !s108 1744319007.000000
+!s108 1744319007.000000
 !s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/dmembank.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/dmembank.v|
 !i113 0
-Z17 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z23 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R7
 vexecute
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/execute.sv
 R10
-!s110 1744319008
-!i10b 1
-!s100 nU4eMX`EeRi3g02`=9A5S1
-IoHznJXNQ43KmlH1LVSNC22
-S1
 R11
-w1744217824
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/execute.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/execute.sv
-!i122 266
-L0 1 102
+R12
+!i10b 1
+!s100 [>9^4;<IbXf]WOYezOeKU1
+INHB>`c5Y^3oglEVR`jS`j0
+S1
 R13
 R14
+8execute.sv
+Fexecute.sv
+!i122 285
+L0 1 128
+R15
+R16
 r1
 !s85 0
 31
-R16
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/execute.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/execute.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vfetch
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/fetch.sv
 R10
-!s110 1744319009
-!i10b 1
-!s100 02jR=JYZ^9U^V^2DDf91P0
-IQAnTLSY>BTVkc@>B0Tj4T1
-S1
 R11
-w1744238300
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/fetch.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/fetch.sv
-!i122 267
-L0 1 230
+R12
+!i10b 1
+!s100 _8ZjN0d:_`Klgf:4h[T6G1
+I_6nYfkFeaieBFm7:kJVek1
+S1
 R13
 R14
+8fetch.sv
+Ffetch.sv
+!i122 285
+L0 1 249
+R15
+R16
 r1
 !s85 0
 31
-!s108 1744319008.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/fetch.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/fetch.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vforwarding
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/forwarding.sv
 R10
-!s110 1744319010
-!i10b 1
-!s100 5goV3FdQi`K?c?0I^J]N]0
-IIA0Bkbz]UdQE^1VNB65Kh0
-S1
 R11
-Z18 w1744145788
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/forwarding.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/forwarding.sv
-!i122 268
-L0 1 28
+Z24 !s110 1744327302
+!i10b 1
+!s100 Gz`=RIASaIkCT:]7mSNci1
+IEo:A:>>>`jzmeaAm]1D?[2
+S1
 R13
-R14
+Z25 w1744326050
+8forwarding.sv
+Fforwarding.sv
+!i122 285
+L0 1 30
+R15
+R16
 r1
 !s85 0
 31
-!s108 1744319009.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/forwarding.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/forwarding.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vhazard
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/hazard.sv
 R10
-!s110 1744319011
-!i10b 1
-!s100 cm1b1A6_B716mQad0A^Pd2
-I9W`EYfU1g7Fm2L723EIT^0
-S1
 R11
-R18
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/hazard.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/hazard.sv
-!i122 269
-L0 1 48
+R24
+!i10b 1
+!s100 0OGZX6j?]X?004KT=dK]W0
+IUTI5CQo;En9JKalHQ_B1T3
+S1
 R13
-R14
+R25
+8hazard.sv
+Fhazard.sv
+!i122 285
+L0 1 62
+R15
+R16
 r1
 !s85 0
 31
-!s108 1744319011.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/hazard.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/hazard.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vimembank
 2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/imembank.v
@@ -444,76 +446,76 @@ vimembank
 !i10b 1
 !s100 dMX;NBbHY9I5ihGl:B4Jj2
 I5M=]13=4S8SL[;PJl;MJi3
-R11
-R18
+R21
+w1744145788
 8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/imembank.v
 FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/imembank.v
 !i122 270
 L0 40 68
-R13
-R14
+R15
+R22
 r1
 !s85 0
 31
-Z19 !s108 1744319012.000000
+!s108 1744319012.000000
 !s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/imembank.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/imembank.v|
 !i113 0
-R17
+R23
 R7
 vinst_memory_wrapper
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/inst_memory_wrapper.sv
 R10
-!s110 1744319013
+R11
+R24
 !i10b 1
 !s100 B5m?zXE_]7LjEKdaNbkRh2
-IPgm2LWQVGc_ZTLI_0@7<80
+I3l]G6adzBMi=f6HAHc=BE0
 S1
-R11
-R18
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/inst_memory_wrapper.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/inst_memory_wrapper.sv
-!i122 271
-L0 1 66
 R13
-R14
+R25
+8inst_memory_wrapper.sv
+Finst_memory_wrapper.sv
+!i122 285
+L0 1 66
+R15
+R16
 r1
 !s85 0
 31
+R17
+R18
 R19
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/inst_memory_wrapper.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/inst_memory_wrapper.sv|
 !i113 0
-R15
+R20
 R7
 vinstruction_decoder
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/instruction_decoder.sv
 R10
-Z20 !s110 1744319014
-!i10b 1
-!s100 LNcbE`BnG:ZJ9]QJ_Wh^l1
-IlTQ;hKbnC1iUTl4VJoH1N2
-S1
 R11
-w1744219357
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/instruction_decoder.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/instruction_decoder.sv
-!i122 272
-L0 1 112
+R24
+!i10b 1
+!s100 g]31b]A=D=6NFZeDD]bz>1
+IdINKV1:1a6ED>zbK1S3HB1
+S1
 R13
-R14
+R25
+8instruction_decoder.sv
+Finstruction_decoder.sv
+!i122 285
+L0 1 112
+R15
+R16
 r1
 !s85 0
 31
-!s108 1744319013.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/instruction_decoder.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/instruction_decoder.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vinstruction_decoder_tb
 2I:/ece554/Battleship/Verilog/processor/decode/instruction_decoder_tb.sv
-R10
+R11
 !s110 1743720226
 !i10b 1
 !s100 g:D5h0zLS;ZRd`B6;D0A=2
@@ -525,8 +527,8 @@ w1743715510
 FI:/ece554/Battleship/Verilog/processor/decode/instruction_decoder_tb.sv
 !i122 16
 L0 1 156
-R13
-R14
+R15
+R22
 r1
 !s85 0
 31
@@ -534,130 +536,130 @@ r1
 !s107 I:/ece554/Battleship/Verilog/processor/decode/instruction_decoder_tb.sv|
 !s90 -reportprogress|300|-work|work|I:/ece554/Battleship/Verilog/processor/decode/instruction_decoder_tb.sv|
 !i113 0
-R17
+R23
 R7
 vmemory
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/memory.sv
 R10
-R20
-!i10b 1
-!s100 SH>=2n]k5_]IN=57zeDZ01
-I;nLSSIRJ=R=2;ihQ>La<Z1
-S1
 R11
-R18
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/memory.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/memory.sv
-!i122 273
-L0 3 87
+R24
+!i10b 1
+!s100 _:Y=f^OfgZB5_fKWIag?l0
+IOZzRgkm4UG;G>`dS_7Kk=2
+S1
 R13
-R14
+R25
+8memory.sv
+Fmemory.sv
+!i122 285
+L0 3 73
+R15
+R16
 r1
 !s85 0
 31
-!s108 1744319014.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/memory.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/memory.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vplaceholder_mem
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/placeholder_mem.sv
 R10
-!s110 1744319015
-!i10b 1
-!s100 ?jEBF<9@?]NER;9COc<gC0
-IK7U[?[4LXJV5WnYJ]=U731
-S1
 R11
-w1744151579
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/placeholder_mem.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/placeholder_mem.sv
-!i122 274
-L0 1 40
+R24
+!i10b 1
+!s100 S21GJ6>e9Kd?g1ZkcC17z2
+IO[2[0>O_6E@8AI9mnH`Sz1
+S1
 R13
-R14
+R25
+8placeholder_mem.sv
+Fplaceholder_mem.sv
+!i122 285
+L0 1 59
+R15
+R16
 r1
 !s85 0
 31
-Z21 !s108 1744319015.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/placeholder_mem.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/placeholder_mem.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vproc
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc.sv
 R10
-!s110 1744319016
-!i10b 1
-!s100 AamT0PQARkR3?V;SLQ>4:2
-I<MYUN@Vc8mKJGca:SH7^d3
-S1
 R11
-w1744229151
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc.sv
-!i122 275
-L0 1 429
+R24
+!i10b 1
+!s100 nhF@0modezhn60;g2[N;D3
+I[m@G_LZSIaHKeI=1<``IX2
+S1
 R13
-R14
+R25
+8proc.sv
+Fproc.sv
+!i122 285
+L0 1 445
+R15
+R16
 r1
 !s85 0
 31
-R21
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vproc_tb
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv
 R10
-!s110 1744321151
-!i10b 1
-!s100 9h[Ihi[l==3Xb2VoDTE0L2
-ITY_0lPYP@8;08Z_1UD[i>3
-S1
 R11
-w1744321143
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv
-!i122 284
-L0 3 388
+R24
+!i10b 1
+!s100 0MkWCEXNzERAbZKVDU=5a3
+I6H];cDkl=aNB<3BA3ILB73
+S1
 R13
-R14
+R25
+8proc_tb.sv
+Fproc_tb.sv
+!i122 285
+L0 3 609
+R15
+R16
 r1
 !s85 0
 31
-!s108 1744321150.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/proc_tb.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7
 vregisterfile
-2I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/registerfile.sv
 R10
-!s110 1744319017
+R11
+R24
 !i10b 1
 !s100 2U9`hV0<Nz@@OBIV?z5cF1
-IVWdJkMkS69Wd^XB@SW3393
+IG?5@JhEJa2SVT:d;HGA`G2
 S1
-R11
-R18
-8I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/registerfile.sv
-FI:/Documents/ECE554/Capstone/Battleship/Verilog/processor/registerfile.sv
-!i122 277
-L0 1 52
 R13
-R14
+R25
+8registerfile.sv
+Fregisterfile.sv
+!i122 285
+L0 1 52
+R15
+R16
 r1
 !s85 0
 31
-!s108 1744319017.000000
-!s107 I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/registerfile.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|I:/Documents/ECE554/Capstone/Battleship/Verilog/processor/registerfile.sv|
+R17
+R18
+R19
 !i113 0
-R15
+R20
 R7

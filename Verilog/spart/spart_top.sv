@@ -1,39 +1,70 @@
 module spart_top (
     input clk,
     input rst_n,
-    input snd,
-    input [31:0] tx_data,
+    input send_tx,
+    input [23:0] tx_data,
+    input rxd,
+    output logic txd,
     output logic interrupt_board,
-    output logic [31:0] rx_data
+    output logic [23:0] rx_data
 );
 
-assign interrupt_board = rda & ~tbr;
+logic [23:0] rx_shift_reg;
+logic [23:0] tx_shift_reg;
+logic [7:0] byte_rx, byte_tx;
+logic send_tx_byte, tbr, rda;
+logic [1:0] rx_byte_cnt, tx_byte_cnt;
 
-assign rx_data = rda ? databus : '0;
+/////////////////// Pack RX data ///////////////////
+always_ff @ (posedge clk) begin
+    if (!rst_n) begin
+        rx_shift_reg <= '0;
+        rx_byte_cnt <= '0;
+    end
+    else if (&rx_byte_cnt) begin
+        rx_shift_reg <= '0;
+        rx_byte_cnt <= 0;
+    end
+    else if (rda) begin
+        rx_shift_reg <= {byte_rx, rx_shift_reg[23:8]};
+        rx_byte_cnt <= rx_byte_cnt + 1'b1;
+    end
+end
 
-// Instantiate your spart here
-spart spart0(   .clk(clk),
-                .rst_n(rst_n),
-                .iocs(iocs),
-                .iorw(iorw),
-                .rda(rda),
-                .tbr(tbr),
-                .ioaddr(ioaddr),
-                .databus(databus),
-                .txd(txd),
-                .rxd(rxd)
-            );
+assign interrupt_board = &rx_byte_cnt;
+assign rx_data = rx_shift_reg;
+///////////////////////////////////////////////////
 
-// Instantiate your driver here
-driver driver0( .clk(clk),
-                .rst_n(rst_n),
-                .br_cfg(2'b11),
-                .iocs(iocs),
-                .iorw(iorw),
-                .rda(rda),
-                .tbr(tbr),
-                .ioaddr(ioaddr),
-                .databus(databus)
-            );
+/////////////////// Unpack TX data to send ///////////////////
+always_ff @ (posedge clk) begin
+    if (!rst_n) begin
+        tx_shift_reg <= '0;
+        tx_byte_cnt <= 0;
+    end
+    else if (~|tx_byte_cnt & send_tx) begin
+        tx_shift_reg <= tx_data;
+        tx_byte_cnt <= 3;
+    end
+    else if (tbr & |tx_byte_cnt) begin
+        tx_shift_reg <= tx_shift_reg >> 8;
+        tx_byte_cnt <= tx_byte_cnt - 1'b1;
+    end
+end
+
+assign byte_tx = tx_shift_reg[7:0];
+assign send_tx_byte = tbr & |tx_byte_cnt;
+/////////////////////////////////////////////////////////////
+
+spart spart_i(   
+    .clk(clk),
+    .rst_n(rst_n),
+    .send_tx(send_tx_byte),
+    .tx_data(byte_tx),
+    .rx_data(byte_rx),
+    .rda(rda),
+    .tbr(tbr),
+    .rxd(rxd),
+    .txd(txd)
+);
 
 endmodule
