@@ -106,9 +106,6 @@ ppu_top ppu_top_i (
     .VGA_VS(VGA_VS)
 );
 
-assign interrupt_board = 0;
-assign spart_data = '0;
-
 logic [31:0] interrupt_data;
 
 always begin
