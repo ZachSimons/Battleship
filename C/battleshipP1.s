@@ -92,10 +92,6 @@ hit_counts:
         .globl  entry_point
         .type   entry_point, @function
 entry_point:
-        addi    sp,sp,-16
-        sw      ra,12(sp)
-        sw      s0,8(sp)
-        addi    s0,sp,16
  #APP
 # 76 "battleshipP1.c" 1
         j main
@@ -957,7 +953,8 @@ place_ship:
         sw      a4,%lo(toSnd)(a5)
  #APP
 # 235 "battleshipP1.c" 1
-        lw a0,%lo(toSnd)(x0)
+        lui     a0,%hi(toSnd)
+        lw      a0,%lo(toSnd)(a0)
 # 0 "" 2
 # 236 "battleshipP1.c" 1
         ugs a0
@@ -1885,6 +1882,8 @@ check_sinks:
         .globl  main
         .type   main, @function
 main:
+        lui     sp,1048575
+        addi    sp,sp,4095
         addi    sp,sp,-32
         sw      ra,28(sp)
         sw      s0,24(sp)
