@@ -32,6 +32,7 @@ entry_point:
         j main
         rdi a0
         call exception_handler
+        rti
         .globl  exception_handler
         .type   exception_handler, @function
 exception_handler:
@@ -134,7 +135,7 @@ exception_handler:
         call    send_value
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
-        addi    a4,a5,10
+        addi    a4,a5,-10
         lui     a5,%hi(activeSquare)
         sw      a4,%lo(activeSquare)(a5)
         lui     a5,%hi(activeSquare)
@@ -196,7 +197,7 @@ exception_handler:
         call    send_value
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
-        addi    a4,a5,-10
+        addi    a4,a5,10
         lui     a5,%hi(activeSquare)
         sw      a4,%lo(activeSquare)(a5)
         lui     a5,%hi(activeSquare)
@@ -499,7 +500,7 @@ main:
         call    place_ship
         li      a2,1
         li      a1,3
-        li      a0,65
+        li      a0,45
         call    place_ship
         li      a2,1
         li      a1,3
@@ -542,13 +543,12 @@ main:
         lw      a5,0(a5)
         mv      a0,a5
         call    send_value
-        li      a5,0
-        mv      a0,a5
-        lw      ra,12(sp)
-        lw      s0,8(sp)
-        lw      s1,4(sp)
-        addi    sp,sp,16
-        jr      ra
+stall_for_interrupt:
+        j stall_for_interrupt
+        nop
+        nop
+        nop
+        nop
         .size   main, .-main
         .ident  "GCC: (g04696df09) 14.2.0"
         .section        .note.GNU-stack,"",@progbits

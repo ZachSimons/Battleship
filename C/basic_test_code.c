@@ -1,3 +1,5 @@
+#define SELECT_BIT 0x0000800
+
 int toSnd;
 int activeSquare;
 int board[100];
@@ -9,36 +11,25 @@ void entry_point() {
     asm volatile ("j main");
     asm volatile ("rdi a0");
     asm volatile ("call exception_handler");
+    asm volatile ("rti");
 }
 
 void exception_handler(int num) {
+    board[activeSquare] &= ~SELECT_BIT;
+    send_value(board[activeSquare]);
     if(num == 102) { // LEFT
-        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 0);
-        send_value(board[activeSquare]);
-        activeSquare--;
-        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 1);
-        send_value(board[activeSquare]);
+        activeSquare -= 1;
     } else if(num == 103) { // UP
-        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 0);
-        send_value(board[activeSquare]);
-        activeSquare += 10;
-        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 1);
-        send_value(board[activeSquare]);
-    } else if(num == 104) { // DOWN
-        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 0);
-        send_value(board[activeSquare]);
         activeSquare -= 10;
-        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 1);
-        send_value(board[activeSquare]);
+    } else if(num == 104) { // DOWN
+        activeSquare += 10;
     } else if(num == 105) { // RIGHT
-        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 0);
-        send_value(board[activeSquare]);
-        activeSquare++;
-        board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 1);
-        send_value(board[activeSquare]);
+        activeSquare += 1;
     } else if(num == 106) { // FIRE
         
     }
+    board[activeSquare] |= SELECT_BIT;
+    send_value(board[activeSquare]);
 }
 
 int mult(int a, int b) {
@@ -84,11 +75,14 @@ void place_ship(int pos, int size, int v) {
 
 int main() {
     place_ship(22, 2, 0);
-    place_ship(65, 3, 1);
+    place_ship(45, 3, 1);
     place_ship(28, 3, 1);
     place_ship(83, 4, 0);
     place_ship(51, 5, 1);
     activeSquare = 55;
     board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 1);
     send_value(board[activeSquare]);
+    while(1) {
+        // do nothing
+    }
 }

@@ -173,7 +173,7 @@ always_ff @(posedge clk) begin
     else if (hazard) begin
         pc_q <= pc_curr_dec_q0;
     end
-    else if (stall_pc | stall_mem1 | stall_mem | warmup | hazard1/*& ~interrupt*/) begin
+    else if (stall_pc | warmup | hazard1/*& ~interrupt*/) begin
         pc_q <= pc_q;
     end
     else begin
