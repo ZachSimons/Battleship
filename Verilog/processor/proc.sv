@@ -34,15 +34,16 @@ logic memerror;
 
 
 //Interrupt
-logic interrupt_latch, interrupt;
-logic pending_interrupt, memrden_if;
+logic interrupt_latch, interrupt, stall_interrupt;
+logic pending_interrupt, memrden_if, interrupt_data_set;
+logic [31:0] interrupt_data;
 
 //Flushing, stalling, and hazards
 logic flush, pfstall, stallmem, hazard, hazard_stall, stallpc;
 logic [4:0] rdreg1_if_id, rdreg2_if_id;
 
 //Fetch
-logic stall_override, rti_de_fe, rsi_de_fe, branch_ex_fe;
+logic stall_override, rti_de_fe, rsi_de_fe, branch_ex_fe, memrden_if_dec;
 logic [31:0] inst_fe_dec, nxtpc_fe_dec, pc_fe_dec;
 
 
@@ -174,7 +175,7 @@ execute proc_ex(
     .jalr_exe(jalr_dec_ex),
     .data_sel_exe(datasel_dec_ex),
     .rdi_ex(rdi_dec_ex),
-    .rdi_data(interrupt_source_data),   //TODO from external device
+    .rdi_data(interrupt_data),   //TODO from external device
     .stall_mem(stallmem),
     .forward_control1(forward_control1),
     .forward_control2(forward_control2),
@@ -255,7 +256,7 @@ hazard proc_hazard(
 //////////////////////WB STAGE//////////////////////
 always_comb begin
     case(wbsel_mem_wb) 
-        //2'b00: wbdata_wb_dec = {{31{1'b0}}, accelerator_data}; //TODO accelerator
+        2'b00: wbdata_wb_dec = '0;
         2'b01: wbdata_wb_dec = nxtpc_mem_wb;
         2'b10: wbdata_wb_dec = readdata_mem_wb;
         2'b11: wbdata_wb_dec = alu_mem_wb; 
@@ -301,15 +302,27 @@ assign stall_interrupt = memrden_if || memrden_if_dec || memrden_dec_ex || memrd
 always_ff @(posedge clk) begin
     if(!rst_n) begin
         interrupt <= 1'b0;
+        interrupt_data <= '0;
         pending_interrupt <= 0;
+        interrupt_data_set <= 1'b0;
     end
     else if (~stall_interrupt)begin
         interrupt <= ((interrupt_key | interrupt_eth) & ~interrupt_latch) | pending_interrupt;
+        interrupt_data <= (((interrupt_key | interrupt_eth) & ~interrupt_latch) | pending_interrupt) ? interrupt_source_data : interrupt_data;
         pending_interrupt <= 1'b0;
+        interrupt_data_set <= 1'b0;
     end
     else begin
         interrupt <= 1'b0;
         pending_interrupt <= pending_interrupt ? 1'b1 : ((interrupt_key | interrupt_eth) & ~interrupt_latch);
+        if (~interrupt_data_set) begin
+            interrupt_data <= interrupt_source_data;
+            interrupt_data_set <= 1'b1;                 // might need a conditional to set this
+        end
+        else begin
+            interrupt_data <= interrupt_data;
+            interrupt_data_set <= interrupt_data_set;
+        end
     end
 end
 
@@ -321,7 +334,7 @@ always_ff @(posedge clk) begin
     else if(rti_de_fe | rsi_de_fe) begin
         interrupt_latch <= 0;
     end
-    else if(/*interrupt_key | interrupt_eth*/interrupt) begin
+    else if(interrupt) begin
         interrupt_latch <= 1;
     end
 end

@@ -1,3 +1,4 @@
+Info (10281): Verilog HDL Declaration information at ppu_demo.v(20): object "VGA_CLK" differs only in case from object "vga_clk" in the same scope File: I:/ece554/Battleship/Verilog/ppu/ppu_demo.v Line: 20
 Info (10281): Verilog HDL Declaration information at ppu.sv(21): object "vga_clk" differs only in case from object "VGA_CLK" in the same scope File: I:/ece554/Battleship/Verilog/ppu/ppu.sv Line: 21
 Info (10281): Verilog HDL Declaration information at proc.sv(10): object "snd" differs only in case from object "SND" in the same scope File: I:/ece554/Battleship/Verilog/processor/proc.sv Line: 10
 Info (10281): Verilog HDL Declaration information at proc.sv(9): object "sac" differs only in case from object "SAC" in the same scope File: I:/ece554/Battleship/Verilog/processor/proc.sv Line: 9

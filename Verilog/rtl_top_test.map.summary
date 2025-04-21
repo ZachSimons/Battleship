@@ -1,17 +1,17 @@
-Analysis & Synthesis Status : Successful - Thu Apr 10 19:48:44 2025
+Analysis & Synthesis Status : Successful - Thu Apr 17 16:39:12 2025
 Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 Revision Name : rtl_top_test
 Top-level Entity Name : rtl_top_test
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 1605
-Total pins : 61
+Total registers : 0
+Total pins : 139
 Total virtual pins : 0
-Total block memory bits : 541,832
-Total DSP Blocks : 4
+Total block memory bits : 0
+Total DSP Blocks : 0
 Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0
 Total HSSI TX PCSs : 0
 Total HSSI PMA TX Serializers : 0
-Total PLLs : 1
+Total PLLs : 0
 Total DLLs : 0

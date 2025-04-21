@@ -21,10 +21,13 @@ module ppu_top (
     output logic        VGA_VS
 );
 
+/*
 logic [9:0] cmd_index;
 logic [16:0] ppu_cmds [0:35];
 
 assign cmd_index = ppu_data;
+
+
 
 assign ppu_cmds[0] = {1'b1, 7'd25, 2'b11, 2'b00, 3'd0, 1'b0, 1'b0};
 assign ppu_cmds[1] = {1'b1, 7'd26, 2'b11, 2'b00, 3'd1, 1'b0, 1'b0};
@@ -86,6 +89,7 @@ assign ppu_cmds[33] = {1'b0, 7'd74, 2'b01, 2'b11, 3'd3, 1'b1, 1'b1};
 // select with hit
 assign ppu_cmds[34] = {1'b0, 7'd76, 2'b10, 2'b11, 3'd3, 1'b1, 1'b1};
 assign ppu_cmds[35] = {1'b0, 7'd76, 2'b10, 2'b11, 3'd3, 1'b1, 1'b0}; // deselect
+*/
 
 // vga_clk @ 25 MHz
 vga_pll pll (.refclk(sys_clk), .rst(1'b0), .outclk_0(vga_clk));
@@ -104,13 +108,36 @@ PPU ppu_i (
     .VGA_SYNC_N(VGA_SYNC_N),
     .VGA_VS(VGA_VS),
     .receive(receive),
-    .board(ppu_cmds[cmd_index][16]),
-    .square_update(ppu_cmds[cmd_index][15:9]),
-    .square_state(ppu_cmds[cmd_index][8:7]),
-    .ship_type(ppu_cmds[cmd_index][6:5]),
-    .ship_section(ppu_cmds[cmd_index][4:2]),
-    .vert(ppu_cmds[cmd_index][1]),
-    .square_sel(ppu_cmds[cmd_index][0])
+    .board(ppu_data[16]),
+    .square_update(ppu_data[15:9]),
+    .square_state(ppu_data[8:7]),
+    .ship_type(ppu_data[6:5]),
+    .ship_section(ppu_data[4:2]),
+    .vert(ppu_data[1]),
+    .square_sel(ppu_data[0])
 );
+
+
+// PPU ppu_i (
+//     .sys_clk(sys_clk),
+//     .vga_clk(vga_clk),
+//     .VGA_CLK(),
+//     .rst_n(rst_n),
+//     .r(VGA_R), 
+//     .g(VGA_G), 
+//     .b(VGA_B), 
+//     .VGA_BLANK_N(VGA_BLANK_N),
+//     .VGA_HS(VGA_HS),
+//     .VGA_SYNC_N(VGA_SYNC_N),
+//     .VGA_VS(VGA_VS),
+//     .receive(receive),
+//     .board(ppu_cmds[cmd_index][16]),
+//     .square_update(ppu_cmds[cmd_index][15:9]),
+//     .square_state(ppu_cmds[cmd_index][8:7]),
+//     .ship_type(ppu_cmds[cmd_index][6:5]),
+//     .ship_section(ppu_cmds[cmd_index][4:2]),
+//     .vert(ppu_cmds[cmd_index][1]),
+//     .square_sel(ppu_cmds[cmd_index][0])
+// );
 
 endmodule
