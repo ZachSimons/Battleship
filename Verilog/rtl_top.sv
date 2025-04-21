@@ -95,7 +95,7 @@ proc processor_i (
     .rst_n(rst_n),
     .interrupt_key(interrupt_key_local),
     .interrupt_eth(interrupt_board),
-    .interrupt_source_data(interrupt_board ? spart_data : (interrupt_key_local) ? {29'b0, fire, direction} : '0),
+    .interrupt_source_data(interrupt_board ? spart_data : (interrupt_key_local) ? interrupt_data : '0),
     .accelerator_data(accelerator_data),
     .sac(sac),
     .snd(snd),

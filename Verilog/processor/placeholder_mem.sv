@@ -21,11 +21,11 @@ logic read_en_ff;
 //     initial begin
 //         string testname;
 //         string hexfile;
-     
+//   
 //         if (!$value$plusargs("TEST=%s", testname)) begin
 //             testname = "default";
 //         end
- 
+// 
 //         hexfile = {testname, ".hex"};
 //         $display("Loading program from: %s", hexfile);
 //         $readmemh(hexfile, bram);
@@ -33,7 +33,7 @@ logic read_en_ff;
 // `endif
 
 initial begin
-   $readmemh("loadstore.hex", bram);
+   $readmemh("basic_test_code.hex", bram);
 end
 
 

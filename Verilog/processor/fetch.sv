@@ -46,7 +46,12 @@ always_ff @(posedge clk) begin
     stall_mem1 <= stall_mem;
 end
 
-assign instruction_fe = (stall_mem | stall_mem1) ? instruction_fe : 
+logic [31:0] instruction_fe_q;
+always_ff @(posedge clk) begin
+    instruction_fe_q <= instruction_fe;
+end
+
+assign instruction_fe = (stall_mem1) ? instruction_fe_q : 
                         ((^imem_out === 1'bX) | (~|imem_out) | |warmup | (flush && ~inter_temp) | |flushnop | |interrupt_nop) ? 32'h00000013 : imem_out;
 
 
@@ -168,7 +173,7 @@ always_ff @(posedge clk) begin
     else if (hazard) begin
         pc_q <= pc_curr_dec_q0;
     end
-    else if (stall_pc | warmup | hazard1/*& ~interrupt*/) begin
+    else if (stall_pc | stall_mem1 | stall_mem | warmup | hazard1/*& ~interrupt*/) begin
         pc_q <= pc_q;
     end
     else begin
