@@ -343,7 +343,7 @@ if __name__ == '__main__':
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(0) + rs1_reg(0) + iTypeImm(0), '08x') + '\n')
                     elif(instruction[0] == 'li'):
                         currentAddress += 4
-                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(int(parameters[1]) >> 12), '08x') + '\n')
+                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(0 if int(parameters[1]) < 0 and int(parameters[1]) & 2**11 == 1 else int(parameters[1]) >> 12), '08x') + '\n')
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(int(parameters[1]) % 2**12), '08x') + '\n')
                     elif(instruction[0] == 'mv'):
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(0), '08x') + '\n')
@@ -393,7 +393,7 @@ if __name__ == '__main__':
                     elif(instruction[0] == 'tail'):
                         offset = calculateOffset(currentAddress, label_addresses[parameters[0]])
                         currentAddress += 4
-                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(0 if offset < 0 else offset >> 12 >> 12), '08x') + '\n')
+                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(0 if offset < 0 else offset >> 12), '08x') + '\n')
                         outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(6) + iTypeImm(offset % 2**12), '08x') + '\n')
                     elif(instruction[0] == 'ecall'):
                         outputFile.write(format(0x73, '08x') + '\n')
