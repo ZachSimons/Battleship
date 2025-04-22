@@ -74,6 +74,9 @@ void place_ship(int pos, int size, int v) {
 }
 
 int main() {
+    for(int i = 0; i < 100; i++) {
+        board[i] = i << 24;
+    }
     place_ship(22, 2, 0);
     place_ship(45, 3, 1);
     place_ship(28, 3, 1);
