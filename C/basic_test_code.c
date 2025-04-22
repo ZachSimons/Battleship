@@ -1,4 +1,4 @@
-#define SELECT_BIT 0x0000800
+#define SELECT_BIT 0x00008000
 
 int toSnd;
 int activeSquare;
@@ -74,13 +74,16 @@ void place_ship(int pos, int size, int v) {
 }
 
 int main() {
+    for(int i = 0; i < 100; i++) {
+        board[i] = i << 24;
+    }
     place_ship(22, 2, 0);
     place_ship(45, 3, 1);
     place_ship(28, 3, 1);
     place_ship(83, 4, 0);
     place_ship(51, 5, 1);
     activeSquare = 55;
-    board[activeSquare] = generate_encoding(0, 0, 0, activeSquare, 0, 0, 1);
+    board[activeSquare] |= SELECT_BIT;
     send_value(board[activeSquare]);
     while(1) {
         // do nothing
