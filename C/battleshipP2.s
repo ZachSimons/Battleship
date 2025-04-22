@@ -1839,7 +1839,7 @@ main:
         li      a4,55
         sw      a4,%lo(active_square)(a5)
         lui     a5,%hi(myTurn)
-        li      a4,1
+        li      a4,0
         sw      a4,%lo(myTurn)(a5)
         call    clear_boards
         sw      zero,-20(s0)

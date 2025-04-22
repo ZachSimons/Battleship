@@ -80,12 +80,10 @@ int hit_counts[NUM_SQUARES];
 #define ACCELERATOR_COUNT 8000
 
 void entry_point() {
-    asm volatile (
-        "j main"
-        "ldi a0"
-        "call exception_handler"
-        "rti"
-    );
+    asm volatile ("j main");
+    asm volatile ("ldi a0");
+    asm volatile ("call exception_handler");
+    asm volatile ("rti");
 }
 
 void exception_handler(unsigned int num) {
@@ -184,19 +182,15 @@ int convert_encoding(int value) {
 }
 
 void reset_program() {
-    asm volatile (
-        "addi sp,zero,0"
-        "la a0,main"
-        "rsi a0"
-    );
+    asm volatile ("addi sp,zero,0");
+    asm volatile ("la a0,main");
+    asm volatile ("rsi a0");
 }
 
 void rsi_inst() {
     // TODO SP RESET
-    asm volatile (
-        "la a0,PRE_ACCELERATOR_LABEL"
-        "rsi a0"
-    );
+    asm volatile ("la a0,PRE_ACCELERATOR_LABEL");
+    asm volatile ("rsi a0");
 }
 
 int mult(int a, int b) {
