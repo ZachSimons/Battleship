@@ -46,7 +46,12 @@ always_ff @(posedge clk) begin
     stall_mem1 <= stall_mem;
 end
 
-assign instruction_fe = (stall_mem | stall_mem1) ? instruction_fe : 
+logic [31:0] instruction_fe_q;
+always_ff @(posedge clk) begin
+    instruction_fe_q <= instruction_fe;
+end
+
+assign instruction_fe = (stall_mem1) ? instruction_fe_q : 
                         ((^imem_out === 1'bX) | (~|imem_out) | |warmup | (flush && ~inter_temp) | |flushnop | |interrupt_nop) ? 32'h00000013 : imem_out;
 
 
@@ -177,7 +182,7 @@ always_ff @(posedge clk) begin
 end
 
 
-assign branch_in_fetch = ((instruction_fe[6:0] == 7'b1100011) || (instruction_fe[6:0] == 7'b1100111));
+assign branch_in_fetch = ((instruction_fe[6:0] == 7'b1100011) || (instruction_fe[6:0] == 7'b1100111) || (instruction_fe[6:0] == 7'b1101111));
 assign stall_override = inter_stall;
 
 

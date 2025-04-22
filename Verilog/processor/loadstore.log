@@ -1,0 +1,64 @@
+Reading pref.tcl
+
+# 2023.2_1
+
+# vsim work.proc_tb -L /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf -voptargs="+acc" "+HEXFILE=loadstore.hex" "+TEST=loadstore" -c -do "run -all; quit" 
+# Start time: 16:48:41 on Apr 11,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# //  Questa Sim
+# //  Version 2023.2_1 linux May 12 2023
+# //
+# //  Copyright 1991-2023 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.altsyncram(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.altsyncram_body(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+# run -all
+# Loading program from: loadstore.hex
+# Running test logic for: loadstore
+# ** Error: INSTRUCTION FAILED: array[0] after store => Register x10 mismatch: expected 22222222, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: array[1] original => Register x11 mismatch: expected 22222222, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: array[2] after sw t4 => Register x12 mismatch: expected ffffffcc, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: array[3] after sw t6 => Register x13 mismatch: expected 000000cc, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: result[0] = copy of array[1] => Register x14 mismatch: expected 22222222, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: result[1] => Register x15 mismatch: expected 000000cc, got 00000000
+#    Time: 106 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# Finished stepping through all instructions!
+# ** Note: $stop    : proc_tb.sv(687)
+#    Time: 205 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at proc_tb.sv line 687
+# Stopped at proc_tb.sv line 687
+#  quit
+# End time: 16:48:41 on Apr 11,2025, Elapsed time: 0:00:00
+# Errors: 6, Warnings: 0

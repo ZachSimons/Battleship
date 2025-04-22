@@ -45,7 +45,7 @@ always_ff @(posedge clk) begin
         stall_pc_curr <= 0;
         //stall_pc_latch <= 0;
     end 
-    else if(memread_if_id & ~|stall_pc_curr) begin
+    else if((memread_if_id | memread_id_ex) & ~|stall_pc_curr) begin
         stall_pc_curr <= 2;
         //stall_pc_latch <= 1;
     end

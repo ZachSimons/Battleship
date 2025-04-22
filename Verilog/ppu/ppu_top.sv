@@ -108,13 +108,13 @@ PPU ppu_i (
     .VGA_SYNC_N(VGA_SYNC_N),
     .VGA_VS(VGA_VS),
     .receive(receive),
-    .board(ppu_data[16]),
-    .square_update(ppu_data[15:9]),
-    .square_state(ppu_data[8:7]),
-    .ship_type(ppu_data[6:5]),
-    .ship_section(ppu_data[4:2]),
-    .vert(ppu_data[1]),
-    .square_sel(ppu_data[0])
+    .board(ppu_data[31]),
+    .square_update(ppu_data[30:24]),
+    .square_state(ppu_data[23:22]),
+    .ship_type(ppu_data[21:20]),
+    .ship_section(ppu_data[19:17]),
+    .vert(ppu_data[16]),
+    .square_sel(ppu_data[15])
 );
 
 

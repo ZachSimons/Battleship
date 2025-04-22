@@ -1,0 +1,99 @@
+Reading pref.tcl
+
+# 2023.2_1
+
+# vsim work.proc_tb -L /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf -voptargs="+acc" "+HEXFILE=basic_instr_tests.hex" "+TEST=basic_instr_tests" -c -do "run -all; quit" 
+# Start time: 16:48:37 on Apr 11,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# //  Questa Sim
+# //  Version 2023.2_1 linux May 12 2023
+# //
+# //  Copyright 1991-2023 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.proc_tb(fast)
+# Loading work.proc(fast)
+# Loading work.fetch(fast)
+# Loading work.placeholder_mem(fast)
+# Loading work.decode(fast)
+# Loading work.registerfile(fast)
+# Loading work.instruction_decoder(fast)
+# Loading work.execute(fast)
+# Loading work.alu(fast)
+# Loading work.branch_ctrl(fast)
+# Loading work.memory(fast)
+# Loading work.data_memory_wrapper(fast)
+# Loading work.dmembank(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.altsyncram(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.altsyncram_body(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.ALTERA_DEVICE_FAMILIES(fast)
+# Loading /cae/apps/data/quartus-20/modelsim_ase/altera/verilog/altera_mf.ALTERA_MF_MEMORY_INITIALIZATION(fast)
+# Loading work.forwarding(fast)
+# Loading work.hazard(fast)
+# run -all
+# Loading program from: basic_instr_tests.hex
+# Running test logic for: basic_instr_tests
+# ** Error: INSTRUCTION FAILED: AUIPC x25, 0x12345 (PC=4) => Register x25 mismatch: expected 12345004, got 00000000
+#    Time: 126 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: ADDI x1, x1, 1 => Register x1 mismatch: expected 00000001, got 00000000
+#    Time: 146 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: ADDI x2, x2, 2 => Register x2 mismatch: expected 00000002, got 00000000
+#    Time: 166 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: ADD x3, x1, x2 => Register x3 mismatch: expected 00000003, got 00000000
+#    Time: 186 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: SUB x4, x1, x2 => Register x4 mismatch: expected ffffffff, got 00000000
+#    Time: 206 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: OR x5, x1, x2 => Register x5 mismatch: expected 00000003, got 00000000
+#    Time: 226 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: SLTI x3, x1, 10 => Register x3 mismatch: expected 00000001, got 00000000
+#    Time: 246 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: SLTIU x4, x1, 10 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 266 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: XORI x5, x1, 0xFF => Register x5 mismatch: expected 000000fe, got 00000000
+#    Time: 286 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: ORI x6, x1, 0xABC => Register x6 mismatch: expected fffffabd, got 00000000
+#    Time: 306 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: ANDI x7, x1, 0xF => Register x7 mismatch: expected 00000001, got 00000000
+#    Time: 326 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: SLLI x8, x1, 2 => Register x8 mismatch: expected 00000004, got 00000000
+#    Time: 346 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: SLL x3, x1, x2 => Register x3 mismatch: expected 00000004, got 00000000
+#    Time: 406 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: SLT x4, x1, x2 => Register x4 mismatch: expected 00000001, got 00000000
+#    Time: 426 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: SLTU x5, x1, x2 => Register x5 mismatch: expected 00000001, got 00000000
+#    Time: 446 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: XOR x6, x1, x2 => Register x6 mismatch: expected 00000003, got 00000000
+#    Time: 466 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: OR x9, x1, x2 => Register x9 mismatch: expected 00000003, got 00000000
+#    Time: 526 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: LUI x11, 0xDEADC => Register x11 mismatch: expected deadc000, got 00000000
+#    Time: 566 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: ADDI x11, x11, 0xEEF => Register x11 mismatch: expected deadbeef, got 00000000
+#    Time: 586 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: LB x12, 2(x2) => Register x12 mismatch: expected ffffffef, got 00000000
+#    Time: 666 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: LH x13, 4(x2) => Register x13 mismatch: expected ffffbeef, got 00000000
+#    Time: 686 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: LW x14, 6(x2) => Register x14 mismatch: expected deadbeef, got 00000000
+#    Time: 706 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# ** Error: INSTRUCTION FAILED: ADD x15, x14, x0 => Register x15 mismatch: expected deadbeef, got 00000000
+#    Time: 726 ns  Scope: proc_tb.check_basic_register File: proc_tb.sv Line: 698
+# TEST FAILED:          23 basic instructions failed
+# Finished stepping through all instructions!
+# ** Note: $stop    : proc_tb.sv(687)
+#    Time: 825 ns  Iteration: 1  Instance: /proc_tb
+# Break in Module proc_tb at proc_tb.sv line 687
+# Stopped at proc_tb.sv line 687
+#  quit
+# End time: 16:48:38 on Apr 11,2025, Elapsed time: 0:00:01
+# Errors: 23, Warnings: 0

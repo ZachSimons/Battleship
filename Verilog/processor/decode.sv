@@ -76,7 +76,7 @@ assign write_reg_dec = instruction[11:7];
 assign fluhaz = hazard | flush;
 
 
-assign interrupt_branch_alert = (instruction[6:0] == 7'b1100011) || (instruction[6:0] == 7'b1100111);
+assign interrupt_branch_alert = (instruction[6:0] == 7'b1100011) || (instruction[6:0] == 7'b1100111) || (instruction[6:0] == 7'b1101111);
 
 assign memread_if_id = ~fluhaz & rd_en;
 
