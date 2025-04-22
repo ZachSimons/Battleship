@@ -28,7 +28,9 @@
 #define PS2_DOWN 104
 #define PS2_RIGHT 105
 #define PS2_ENTER 106
-#define ACH_LOSE 107
+#define ACK_LOSE 107
+
+#define SELECT_BIT 0x00008000
 
 #define GET_BOARD_SEL(x) (x >> 31)
 #define GET_SHIP_POS(x) ((x & 0x7f000000) >> 24)
@@ -50,6 +52,11 @@
 int mult(int, int);
 int mod(int, int);
 int rand();
+void send_ppu_value(int);
+void send_board_value(int);
+int convert_encoding(int);
+void reset_program();
+void rsi_inst();
 int check_sinks();
 int check_lose();
 
@@ -73,107 +80,56 @@ int hit_counts[NUM_SQUARES];
 #define ACCELERATOR_COUNT 8000
 
 void entry_point() {
-    asm volatile ("j main");
-    asm volatile ("ldi a0");
-    asm volatile ("call exception_handler");
-    asm volatile ("rti");
+    asm volatile (
+        "j main"
+        "ldi a0"
+        "call exception_handler"
+        "rti"
+    );
 }
 
 void exception_handler(unsigned int num) {
     if(num < 100) {
         my_board[num] |= SET_M_BIT(1);
-        toSnd = my_board[num];
-        asm volatile ("lw a1,0(toSnd)");
-        asm volatile ("snd a1");
-        if(check_lose()) {
-            asm volatile ("addi a0,zero,107");
-            asm volatile ("snd a0");
-            asm volatile ("jmp EXIT");
-        } else if(GET_E_BIT(my_board[num])) {
+        if(GET_E_BIT(my_board[num])) {
             if(check_sinks()) {
-                toSnd = SINK_BIT | SET_ACK_SINK_SHIP(GET_TYPE(my_board[num])) | my_positions[GET_TYPE(my_board[num])];
-                asm volatile ("lui a0,%hi(toSnd)");
-                asm volatile ("lw a0,%lo(toSnd)(a0)");
-                asm volatile ("snd a0");
+                if(check_lose()) {
+                    send_board_value(ACK_LOSE);
+                    reset_program();
+                } else {
+                    send_board_value(SINK_BIT | SET_ACK_SINK_SHIP(GET_TYPE(my_board[num])) | my_positions[GET_TYPE(my_board[num])]);
+                }
             } else {
-                asm volatile ("addi a0,zero,101");
-                asm volatile ("snd a0");
+                send_board_value(ACK_HIT);
             }
         } else {
-            asm volatile ("addi a0,zero,100");
-            asm volatile ("snd a0");
+            send_board_value(ACK_MISS);
         }
         myTurn = 1;
+    } else if(num == ACK_LOSE) {
+        reset_program();
     } else if(num == ACK_MISS) {
         target_board[active_square] = MISS;
-        asm volatile ("la a0,PRE_ACCELERATOR_LABEL");
-        asm volatile ("rsi a0");
+        rsi_inst();
     } else if(num == ACK_HIT) {
         target_board[active_square] = HIT;
-        asm volatile ("la a0,PRE_ACCELERATOR_LABEL");
-        asm volatile ("rsi a0");
-    } else if(num == PS2_LEFT) {
-        if(mod(active_square, 10)) {
-            my_board[active_square] &= ~SET_SEL_BIT(1);
-            toSnd = my_board[active_square];
-            asm volatile ("lui a0,%hi(toSnd)");
-            asm volatile ("lw a0,%lo(toSnd)(a0)");
-            asm volatile ("ugs a0");
-            active_square--;
-            my_board[active_square] |= SET_SEL_BIT(1);
-            toSnd = my_board[active_square];
-            asm volatile ("lui a0,%hi(toSnd)");
-            asm volatile ("lw a0,%lo(toSnd)(a0)");
-            asm volatile ("ugs a0");
-        }
-    } else if(num == PS2_UP) {
-        if(active_square > 9) {
-            my_board[active_square] &= ~SET_SEL_BIT(1);
-            toSnd = my_board[active_square];
-            asm volatile ("lui a0,%hi(toSnd)");
-            asm volatile ("lw a0,%lo(toSnd)(a0)");
-            asm volatile ("ugs a0");
-            active_square -= 10;
-            my_board[active_square] |= SET_SEL_BIT(1);
-            toSnd = my_board[active_square];
-            asm volatile ("lui a0,%hi(toSnd)");
-            asm volatile ("lw a0,%lo(toSnd)(a0)");
-            asm volatile ("ugs a0");
-        }
-    } else if(num == PS2_DOWN) {
-        if(active_square , 90) {
-            my_board[active_square] &= ~SET_SEL_BIT(1);
-            toSnd = my_board[active_square];
-            asm volatile ("lui a0,%hi(toSnd)");
-            asm volatile ("lw a0,%lo(toSnd)(a0)");
-            asm volatile ("ugs a0");
-            active_square += 10;
-            my_board[active_square] |= SET_SEL_BIT(1);
-            toSnd = my_board[active_square];
-            asm volatile ("lui a0,%hi(toSnd)");
-            asm volatile ("lw a0,%lo(toSnd)(a0)");
-            asm volatile ("ugs a0");
-        }
-    } else if(num == PS2_RIGHT) {
-        if(mod(active_square, 10) != 9) {
-            my_board[active_square] &= ~SET_SEL_BIT(1);
-            toSnd = my_board[active_square];
-            asm volatile ("lui a0,%hi(toSnd)");
-            asm volatile ("lw a0,%lo(toSnd)(a0)");
-            asm volatile ("ugs a0");
-            active_square++;
-            my_board[active_square] |= SET_SEL_BIT(1);
-            toSnd = my_board[active_square];
-            asm volatile ("lui a0,%hi(toSnd)");
-            asm volatile ("lw a0,%lo(toSnd)(a0)");
-            asm volatile ("ugs a0");
-        }
-    } else if(num == PS2_ENTER) {
-        if(myTurn) {
-            asm volatile ("lui a0,%hi(toSnd)");
-            asm volatile ("lw a0,%lo(toSnd)(a0)");
-            asm volatile ("snd a0");
+        rsi_inst();
+    } else if(num < 107) {
+        if(num == PS2_ENTER) {
+            send_board_value(active_square);
             myTurn = 0;
+        } else {
+            send_ppu_value(SET_SHIP_POS(active_square));
+            if(num == PS2_LEFT && mod(active_square, 10)) {
+                active_square -= 1;
+            } else if(num == PS2_UP && active_square > 9) {
+                active_square -= 10;
+            } else if(num == PS2_DOWN && active_square < 90) {
+                active_square += 10;
+            } else if(num == PS2_RIGHT && mod(active_square, 10) < 9) {
+                active_square += 1;
+            }
+            send_ppu_value(SET_SHIP_POS(active_square) | SELECT_BIT);
         }
     } else { // ACK_HIT + SINK
         int pos = GET_ACK_SINK_POS(num);
@@ -184,9 +140,63 @@ void exception_handler(unsigned int num) {
             target_board[pos + mult(inc, i)] = SUNK;
         }
         enemy_sunk[ship] = pos;
-        asm volatile ("la a0,PRE_ACCELERATOR_LABEL");
-        asm volatile ("rsi a0");
+        rsi_inst();
     }
+}
+
+void send_ppu_value(int value) {
+    toSnd = value;
+    asm volatile ("lui a0,%hi(toSnd)");
+    asm volatile ("lw a0,%lo(toSnd)(a0)");
+    asm volatile ("ugs a0");
+}
+
+void send_board_value(int value) {
+    toSnd = value;
+    asm volatile ("lui a0,%hi(toSnd)");
+    asm volatile ("lw a0,%lo(toSnd)(a0)");
+    asm volatile ("snd a0");
+}
+
+int convert_encoding(int value) {
+    int state = (GET_E_BIT(value) << 1) | GET_M_BIT(value);
+    if(state == 2) {
+        state = 3;
+    } else if(state == 3) {
+        state = 2;
+    }
+    int size = ship_sizes[GET_TYPE(value)];
+    int result = 0x80000000;
+    result |= GET_SHIP_POS(value) << 24;
+    result |= state << 22;
+    if(size == 2) {
+        result |= 0x00000000;
+    } else if(size == 3) {
+        result |= 0x00100000;
+    } else if(size == 4) {
+        result |= 0x00200000;
+    } else {
+        result |= 0x00300000;
+    }
+    result |= GET_SEG(value) << 17;
+    result |= GET_V_BIT(value) << 16;
+    return result;
+}
+
+void reset_program() {
+    asm volatile (
+        "addi sp,zero,0"
+        "la a0,main"
+        "rsi a0"
+    );
+}
+
+void rsi_inst() {
+    // TODO SP RESET
+    asm volatile (
+        "la a0,PRE_ACCELERATOR_LABEL"
+        "rsi a0"
+    );
 }
 
 int mult(int a, int b) {
@@ -241,11 +251,8 @@ int place_ship(int square, int v, int type) {
     }
     for(int i = 0; i < size; i++) {
         int pos = square + mult(inc,i);
-        my_board[pos] = SET_SHIP_POS(pos) | SET_TYPE(type) | SET_E_BIT(1) | SET_V_BIT(v) | SET_SEG(i);
-        toSnd = my_board[pos];
-        asm volatile ("lui a0,%hi(toSnd)");
-        asm volatile ("lw a0,%lo(toSnd)(a0)");
-        asm volatile ("ugs a0");
+        my_board[pos] = SET_BOARD_SEL(1) | SET_SHIP_POS(pos) | SET_TYPE(type) | SET_E_BIT(1) | SET_V_BIT(v) | SET_SEG(i);
+        send_ppu_value(convert_encoding(my_board[pos]));
     }
     my_positions[type] = square + mult(100,v);
     return 1;
@@ -264,7 +271,7 @@ void clear_possible_positions() {
     for(int ship = 0; ship < MAX_SHIPS; ship++) {
         for(int v = 0; v < 2; v++) {
             for(int square = 0; square < NUM_SQUARES; square++) {
-                possible_positions[ship][mult(v,100) + square] = 0;
+                possible_positions[ship][mult(100,v) + square] = 0;
             }
         }
     }
@@ -323,7 +330,7 @@ int calculate_overlap(int lower, int lower_square, int upper, int upper_square) 
     int upper_pos = mod(upper_square,100);
     for(int i = 0; i < lower_size; i++) {
         for(int j = 0; j < upper_size; j++) {
-            if(lower_pos + mult(i,inc_lower) == upper_pos + mult(j,inc_upper)) {
+            if(lower_pos + mult(inc_lower,i) == upper_pos + mult(inc_upper,j)) {
                 return 0;
             }
         }
@@ -359,7 +366,7 @@ int run_accelerator() {
             for(int v = 0; v < 2; v++) {
                 for(int square = 0; square < NUM_SQUARES; square++) {
                     if(check_valid_position(ship, square, v)) {
-                        possible_positions[ship][mult(v,100) + square] = 1;
+                        possible_positions[ship][mult(100,v) + square] = 1;
                     }
                 }
             }
@@ -425,8 +432,6 @@ int check_sinks() {
 }
 
 int main() {
-    asm volatile ("lui sp,1048575");
-    asm volatile ("addi sp,sp,4095");
     while(1) {
         ship_sizes[0] = 2;
         ship_sizes[1] = 3;
@@ -455,15 +460,7 @@ int main() {
             asm volatile ("PRE_ACCELERATOR_LABEL:");
             ai_target = run_accelerator();
             // TODO: UGS WITH AI RESULT
-            asm volatile ("ugs ai_target, AI");
-            asm volatile ("STALL_LOOP_LABEL:");
             while(1) {} // Stall for interrupt
-            asm volatile ("FIRE_RESULT_LABEL:");
-            if(enemy_result) {
-                target_board[active_square] = HIT;
-            } else {
-                target_board[active_square] = MISS;
-            }
         }
     }
 }

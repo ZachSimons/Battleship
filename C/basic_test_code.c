@@ -54,7 +54,7 @@ void send_ppu_value(int value) {
     asm volatile ("ugs a0");
 }
 
-void send_ppu_value(int value) {
+void send_board_value(int value) {
     toSnd = value;
     asm volatile ("lui a0,%hi(toSnd)");
     asm volatile ("lw a0,%lo(toSnd)(a0)");
