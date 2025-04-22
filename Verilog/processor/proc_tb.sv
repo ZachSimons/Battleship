@@ -358,11 +358,9 @@ module proc_tb;
     if (testname == "loadstore") begin
       fork 
         begin
-          while (dut.proc_de.curr_pc != 220) begin
+          while (dut.proc_de.REGFILE.regfile[20] != 32'hAA) begin
             @(posedge clk);
           end
-          @(posedge clk);
-          @(posedge clk);
           #1;
           check_basic_register(
             10, 
