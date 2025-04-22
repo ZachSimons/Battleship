@@ -337,7 +337,7 @@ if __name__ == '__main__':
                         outputFile.write(format(SND_CODE + rs1_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
                     elif(instruction[0] == 'la'):
                         currentAddress += 4
-                        outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(label_addresses[parameters[1]] >> 12), '08x') + '\n')
+                        outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(0 if label_addresses[parameters[1]] < 0 and label_addresses[parameters[1]] & 2**11 == 1 else label_addresses[parameters[1]] >> 12), '08x') + '\n')
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(label_addresses[parameters[1]] % 2**12), '08x') + '\n')
                     elif(instruction[0] == 'nop'):
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(0) + rs1_reg(0) + iTypeImm(0), '08x') + '\n')

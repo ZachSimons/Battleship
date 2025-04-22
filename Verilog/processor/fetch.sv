@@ -182,7 +182,7 @@ always_ff @(posedge clk) begin
 end
 
 
-assign branch_in_fetch = ((instruction_fe[6:0] == 7'b1100011) || (instruction_fe[6:0] == 7'b1100111));
+assign branch_in_fetch = ((instruction_fe[6:0] == 7'b1100011) || (instruction_fe[6:0] == 7'b1100111) || (instruction_fe[6:0] == 7'b1101111));
 assign stall_override = inter_stall;
 
 

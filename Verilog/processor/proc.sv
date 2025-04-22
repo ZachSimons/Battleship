@@ -92,7 +92,7 @@ fetch proc_fe(
     .flush(flush),
     .stall_override(stall_override),
     .stall_mem(hazard | stallmem),
-    .stall_pc(stallpc | hazard),
+    .stall_pc((stallpc & ~stall_override) | hazard),
     .hazard(hazard),
     .halt(halt_wb_fe),
     .pc_ex(branchpc_ex_fe),       

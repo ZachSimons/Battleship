@@ -30,38 +30,45 @@ board:
         .type   entry_point, @function
 entry_point:
         j main
+        addi    sp,sp,-16
+        sw      ra,12(sp)
+        sw      s0,8(sp)
+        sw      a0,4(sp)
+        addi    s0,sp,16
         rdi a0
         call exception_handler
+        lw      ra,12(sp)
+        lw      s0,8(sp)
+        lw      a0,4(sp)
+        addi    sp,sp,16
         rti
+        .size   entry_point, .-entry_point
+        .align  2
         .globl  exception_handler
         .type   exception_handler, @function
 exception_handler:
         addi    sp,sp,-32
         sw      ra,28(sp)
         sw      s0,24(sp)
-        sw      s1,20(sp)
         addi    s0,sp,32
         sw      a0,-20(s0)
-        lw      a4,-20(s0)
-        li      a5,102
-        bne     a4,a5,.L3
         lui     a5,%hi(activeSquare)
-        lw      a3,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      s1,%lo(activeSquare)(a5)
-        li      a6,0
-        li      a5,0
-        li      a4,0
-        li      a2,0
-        li      a1,0
-        li      a0,0
-        call    generate_encoding
-        mv      a3,a0
-        lui     a5,%hi(board)
-        addi    a4,a5,%lo(board)
-        slli    a5,s1,2
+        lw      a5,%lo(activeSquare)(a5)
+        lui     a4,%hi(board)
+        addi    a4,a4,%lo(board)
+        slli    a5,a5,2
         add     a5,a4,a5
-        sw      a3,0(a5)
+        lw      a3,0(a5)
+        lui     a5,%hi(activeSquare)
+        lw      a5,%lo(activeSquare)(a5)
+        li      a4,-32768
+        addi    a4,a4,-1
+        and     a4,a3,a4
+        lui     a3,%hi(board)
+        addi    a3,a3,%lo(board)
+        slli    a5,a5,2
+        add     a5,a3,a5
+        sw      a4,0(a5)
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         lui     a4,%hi(board)
@@ -71,214 +78,61 @@ exception_handler:
         lw      a5,0(a5)
         mv      a0,a5
         call    send_value
+        lw      a4,-20(s0)
+        li      a5,102
+        bne     a4,a5,.L3
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         addi    a4,a5,-1
         lui     a5,%hi(activeSquare)
         sw      a4,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      a3,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      s1,%lo(activeSquare)(a5)
-        li      a6,1
-        li      a5,0
-        li      a4,0
-        li      a2,0
-        li      a1,0
-        li      a0,0
-        call    generate_encoding
-        mv      a3,a0
-        lui     a5,%hi(board)
-        addi    a4,a5,%lo(board)
-        slli    a5,s1,2
-        add     a5,a4,a5
-        sw      a3,0(a5)
-        lui     a5,%hi(activeSquare)
-        lw      a5,%lo(activeSquare)(a5)
-        lui     a4,%hi(board)
-        addi    a4,a4,%lo(board)
-        slli    a5,a5,2
-        add     a5,a4,a5
-        lw      a5,0(a5)
-        mv      a0,a5
-        call    send_value
-        j       .L7
+        j       .L4
 .L3:
         lw      a4,-20(s0)
         li      a5,103
         bne     a4,a5,.L5
         lui     a5,%hi(activeSquare)
-        lw      a3,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      s1,%lo(activeSquare)(a5)
-        li      a6,0
-        li      a5,0
-        li      a4,0
-        li      a2,0
-        li      a1,0
-        li      a0,0
-        call    generate_encoding
-        mv      a3,a0
-        lui     a5,%hi(board)
-        addi    a4,a5,%lo(board)
-        slli    a5,s1,2
-        add     a5,a4,a5
-        sw      a3,0(a5)
-        lui     a5,%hi(activeSquare)
-        lw      a5,%lo(activeSquare)(a5)
-        lui     a4,%hi(board)
-        addi    a4,a4,%lo(board)
-        slli    a5,a5,2
-        add     a5,a4,a5
-        lw      a5,0(a5)
-        mv      a0,a5
-        call    send_value
-        lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         addi    a4,a5,-10
         lui     a5,%hi(activeSquare)
         sw      a4,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      a3,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      s1,%lo(activeSquare)(a5)
-        li      a6,1
-        li      a5,0
-        li      a4,0
-        li      a2,0
-        li      a1,0
-        li      a0,0
-        call    generate_encoding
-        mv      a3,a0
-        lui     a5,%hi(board)
-        addi    a4,a5,%lo(board)
-        slli    a5,s1,2
-        add     a5,a4,a5
-        sw      a3,0(a5)
-        lui     a5,%hi(activeSquare)
-        lw      a5,%lo(activeSquare)(a5)
-        lui     a4,%hi(board)
-        addi    a4,a4,%lo(board)
-        slli    a5,a5,2
-        add     a5,a4,a5
-        lw      a5,0(a5)
-        mv      a0,a5
-        call    send_value
-        j       .L7
+        j       .L4
 .L5:
         lw      a4,-20(s0)
         li      a5,104
         bne     a4,a5,.L6
         lui     a5,%hi(activeSquare)
-        lw      a3,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      s1,%lo(activeSquare)(a5)
-        li      a6,0
-        li      a5,0
-        li      a4,0
-        li      a2,0
-        li      a1,0
-        li      a0,0
-        call    generate_encoding
-        mv      a3,a0
-        lui     a5,%hi(board)
-        addi    a4,a5,%lo(board)
-        slli    a5,s1,2
-        add     a5,a4,a5
-        sw      a3,0(a5)
-        lui     a5,%hi(activeSquare)
-        lw      a5,%lo(activeSquare)(a5)
-        lui     a4,%hi(board)
-        addi    a4,a4,%lo(board)
-        slli    a5,a5,2
-        add     a5,a4,a5
-        lw      a5,0(a5)
-        mv      a0,a5
-        call    send_value
-        lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         addi    a4,a5,10
         lui     a5,%hi(activeSquare)
         sw      a4,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      a3,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      s1,%lo(activeSquare)(a5)
-        li      a6,1
-        li      a5,0
-        li      a4,0
-        li      a2,0
-        li      a1,0
-        li      a0,0
-        call    generate_encoding
-        mv      a3,a0
-        lui     a5,%hi(board)
-        addi    a4,a5,%lo(board)
-        slli    a5,s1,2
-        add     a5,a4,a5
-        sw      a3,0(a5)
-        lui     a5,%hi(activeSquare)
-        lw      a5,%lo(activeSquare)(a5)
-        lui     a4,%hi(board)
-        addi    a4,a4,%lo(board)
-        slli    a5,a5,2
-        add     a5,a4,a5
-        lw      a5,0(a5)
-        mv      a0,a5
-        call    send_value
-        j       .L7
+        j       .L4
 .L6:
         lw      a4,-20(s0)
         li      a5,105
-        bne     a4,a5,.L7
-        lui     a5,%hi(activeSquare)
-        lw      a3,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      s1,%lo(activeSquare)(a5)
-        li      a6,0
-        li      a5,0
-        li      a4,0
-        li      a2,0
-        li      a1,0
-        li      a0,0
-        call    generate_encoding
-        mv      a3,a0
-        lui     a5,%hi(board)
-        addi    a4,a5,%lo(board)
-        slli    a5,s1,2
-        add     a5,a4,a5
-        sw      a3,0(a5)
-        lui     a5,%hi(activeSquare)
-        lw      a5,%lo(activeSquare)(a5)
-        lui     a4,%hi(board)
-        addi    a4,a4,%lo(board)
-        slli    a5,a5,2
-        add     a5,a4,a5
-        lw      a5,0(a5)
-        mv      a0,a5
-        call    send_value
+        bne     a4,a5,.L4
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         addi    a4,a5,1
         lui     a5,%hi(activeSquare)
         sw      a4,%lo(activeSquare)(a5)
+.L4:
         lui     a5,%hi(activeSquare)
-        lw      a3,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      s1,%lo(activeSquare)(a5)
-        li      a6,1
-        li      a5,0
-        li      a4,0
-        li      a2,0
-        li      a1,0
-        li      a0,0
-        call    generate_encoding
-        mv      a3,a0
-        lui     a5,%hi(board)
-        addi    a4,a5,%lo(board)
-        slli    a5,s1,2
+        lw      a5,%lo(activeSquare)(a5)
+        lui     a4,%hi(board)
+        addi    a4,a4,%lo(board)
+        slli    a5,a5,2
         add     a5,a4,a5
-        sw      a3,0(a5)
+        lw      a3,0(a5)
+        lui     a5,%hi(activeSquare)
+        lw      a5,%lo(activeSquare)(a5)
+        li      a4,32768
+        or      a4,a3,a4
+        lui     a3,%hi(board)
+        addi    a3,a3,%lo(board)
+        slli    a5,a5,2
+        add     a5,a3,a5
+        sw      a4,0(a5)
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         lui     a4,%hi(board)
@@ -288,11 +142,9 @@ exception_handler:
         lw      a5,0(a5)
         mv      a0,a5
         call    send_value
-.L7:
         nop
         lw      ra,28(sp)
         lw      s0,24(sp)
-        lw      s1,20(sp)
         addi    sp,sp,32
         jr      ra
         .size   exception_handler, .-exception_handler
@@ -308,8 +160,8 @@ mult:
         sw      a1,-40(s0)
         sw      zero,-20(s0)
         sw      zero,-24(s0)
-        j       .L9
-.L10:
+        j       .L8
+.L9:
         lw      a4,-20(s0)
         lw      a5,-36(s0)
         add     a5,a4,a5
@@ -317,10 +169,10 @@ mult:
         lw      a5,-24(s0)
         addi    a5,a5,1
         sw      a5,-24(s0)
-.L9:
+.L8:
         lw      a4,-24(s0)
         lw      a5,-40(s0)
-        blt     a4,a5,.L10
+        blt     a4,a5,.L9
         lw      a5,-20(s0)
         mv      a0,a5
         lw      ra,44(sp)
@@ -341,13 +193,13 @@ send_value:
         lw      a4,-20(s0)
         sw      a4,%lo(toSnd)(a5)
  #APP
-# 54 "basic_test_code.c" 1
+# 45 "basic_test_code.c" 1
         lui a0,%hi(toSnd)
 # 0 "" 2
-# 55 "basic_test_code.c" 1
+# 46 "basic_test_code.c" 1
         lw a0,%lo(toSnd)(a0)
 # 0 "" 2
-# 56 "basic_test_code.c" 1
+# 47 "basic_test_code.c" 1
         ugs a0
 # 0 "" 2
  #NO_APP
@@ -387,30 +239,30 @@ generate_encoding:
         sw      a5,-20(s0)
         lw      a4,-40(s0)
         li      a5,2
-        beq     a4,a5,.L15
+        beq     a4,a5,.L14
         lw      a4,-40(s0)
         li      a5,3
-        bne     a4,a5,.L16
+        bne     a4,a5,.L15
         lw      a4,-20(s0)
         li      a5,1048576
         or      a5,a4,a5
         sw      a5,-20(s0)
-        j       .L15
-.L16:
+        j       .L14
+.L15:
         lw      a4,-40(s0)
         li      a5,4
-        bne     a4,a5,.L17
+        bne     a4,a5,.L16
         lw      a4,-20(s0)
         li      a5,2097152
         or      a5,a4,a5
         sw      a5,-20(s0)
-        j       .L15
-.L17:
+        j       .L14
+.L16:
         lw      a4,-20(s0)
         li      a5,3145728
         or      a5,a4,a5
         sw      a5,-20(s0)
-.L15:
+.L14:
         lw      a5,-52(s0)
         slli    a5,a5,17
         lw      a4,-20(s0)
@@ -445,16 +297,16 @@ place_ship:
         sw      a1,-40(s0)
         sw      a2,-44(s0)
         lw      a5,-44(s0)
-        beq     a5,zero,.L20
+        beq     a5,zero,.L19
         li      a5,10
-        j       .L21
-.L20:
+        j       .L20
+.L19:
         li      a5,1
-.L21:
+.L20:
         sw      a5,-24(s0)
         sw      zero,-20(s0)
-        j       .L22
-.L23:
+        j       .L21
+.L22:
         lw      a1,-24(s0)
         lw      a0,-20(s0)
         call    mult
@@ -474,10 +326,10 @@ place_ship:
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L22:
+.L21:
         lw      a4,-20(s0)
         lw      a5,-40(s0)
-        blt     a4,a5,.L23
+        blt     a4,a5,.L22
         nop
         nop
         lw      ra,44(sp)
@@ -489,11 +341,28 @@ place_ship:
         .globl  main
         .type   main, @function
 main:
-        addi    sp,sp,-16
-        sw      ra,12(sp)
-        sw      s0,8(sp)
-        sw      s1,4(sp)
-        addi    s0,sp,16
+        addi    sp,sp,-32
+        sw      ra,28(sp)
+        sw      s0,24(sp)
+        addi    s0,sp,32
+        sw      zero,-20(s0)
+        j       .L24
+.L25:
+        lw      a5,-20(s0)
+        slli    a4,a5,24
+        lui     a5,%hi(board)
+        addi    a3,a5,%lo(board)
+        lw      a5,-20(s0)
+        slli    a5,a5,2
+        add     a5,a3,a5
+        sw      a4,0(a5)
+        lw      a5,-20(s0)
+        addi    a5,a5,1
+        sw      a5,-20(s0)
+.L24:
+        lw      a4,-20(s0)
+        li      a5,99
+        ble     a4,a5,.L25
         li      a2,0
         li      a1,2
         li      a0,22
@@ -518,22 +387,21 @@ main:
         li      a4,55
         sw      a4,%lo(activeSquare)(a5)
         lui     a5,%hi(activeSquare)
-        lw      a3,%lo(activeSquare)(a5)
-        lui     a5,%hi(activeSquare)
-        lw      s1,%lo(activeSquare)(a5)
-        li      a6,1
-        li      a5,0
-        li      a4,0
-        li      a2,0
-        li      a1,0
-        li      a0,0
-        call    generate_encoding
-        mv      a3,a0
-        lui     a5,%hi(board)
-        addi    a4,a5,%lo(board)
-        slli    a5,s1,2
+        lw      a5,%lo(activeSquare)(a5)
+        lui     a4,%hi(board)
+        addi    a4,a4,%lo(board)
+        slli    a5,a5,2
         add     a5,a4,a5
-        sw      a3,0(a5)
+        lw      a3,0(a5)
+        lui     a5,%hi(activeSquare)
+        lw      a5,%lo(activeSquare)(a5)
+        li      a4,32768
+        or      a4,a3,a4
+        lui     a3,%hi(board)
+        addi    a3,a3,%lo(board)
+        slli    a5,a5,2
+        add     a5,a3,a5
+        sw      a4,0(a5)
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         lui     a4,%hi(board)
@@ -543,9 +411,8 @@ main:
         lw      a5,0(a5)
         mv      a0,a5
         call    send_value
-stall_for_interrupt:
-        j stall_for_interrupt
-        nop
+.L26:
+        j       .L26
         nop
         nop
         nop
