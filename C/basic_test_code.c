@@ -23,7 +23,7 @@ void exception_handler(int num) {
             send_ppu_value(my_board[num]);
             send_board_value(101);
         } else {
-            my_board[num] = my_board[num] | 0xff7fffff;
+            my_board[num] = my_board[num] | 0x00400000;
             send_ppu_value(my_board[num]);
             send_board_value(100);
         }
