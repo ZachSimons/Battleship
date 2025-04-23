@@ -33,7 +33,7 @@ void exception_handler(int num) {
         } else if(num == 105) { // RIGHT
             activeSquare += 1;
         } else if(num == 106) { // FIRE
-            
+            send_board_value(activeSquare);
         }
         board[activeSquare] |= SELECT_BIT;
         send_ppu_value(board[activeSquare]);
