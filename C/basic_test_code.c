@@ -16,21 +16,28 @@ void entry_point() {
 }
 
 void exception_handler(int num) {
-    board[activeSquare] &= ~SELECT_BIT;
-    send_ppu_value(board[activeSquare]);
-    if(num == 102) { // LEFT
-        activeSquare -= 1;
-    } else if(num == 103) { // UP
-        activeSquare -= 10;
-    } else if(num == 104) { // DOWN
-        activeSquare += 10;
-    } else if(num == 105) { // RIGHT
-        activeSquare += 1;
-    } else if(num == 106) { // FIRE
-        
+    if(num < 100) {
+        send_board_value(100);
+    } else if(num == 100) {
+        board[activeSquare] |= 2 << 22;
+        send_ppu_value(board[activeSquare]);
+    } else {
+        board[activeSquare] &= ~SELECT_BIT;
+        send_ppu_value(board[activeSquare]);
+        if(num == 102) { // LEFT
+            activeSquare -= 1;
+        } else if(num == 103) { // UP
+            activeSquare -= 10;
+        } else if(num == 104) { // DOWN
+            activeSquare += 10;
+        } else if(num == 105) { // RIGHT
+            activeSquare += 1;
+        } else if(num == 106) { // FIRE
+            
+        }
+        board[activeSquare] |= SELECT_BIT;
+        send_ppu_value(board[activeSquare]);
     }
-    board[activeSquare] |= SELECT_BIT;
-    send_ppu_value(board[activeSquare]);
 }
 
 int mod(int a, int b) {
