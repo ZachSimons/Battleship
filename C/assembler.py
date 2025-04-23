@@ -180,8 +180,8 @@ def parseSingleHiLo(param: str):
     if(param.find('%') == -1):
         return param
     else:
-        if param.find('%hi'):
-            return str(label_addresses[param.split('(')[1][:-1]] & ~(2**12-1))
+        if param.find('%hi') != -1:
+            return str(label_addresses[param.split('(')[1][:-1]] >> 12)
         else:
             return str(label_addresses[param.split('(')[1][:-1]] % 2**12)
 

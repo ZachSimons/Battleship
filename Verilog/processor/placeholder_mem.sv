@@ -33,7 +33,7 @@ logic read_en_ff;
 // `endif
 
 initial begin
-   $readmemh("battleshipP2.hex", bram);
+   $readmemh("sending_demo.hex", bram);
 end
 
 

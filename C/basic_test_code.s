@@ -24,34 +24,41 @@ activeSquare:
         .size   board, 400
 board:
         .zero   400
+        .globl  my_board
+        .align  2
+        .type   my_board, @object
+        .size   my_board, 400
+my_board:
+        .zero   400
         .text
         .align  2
         .globl  entry_point
         .type   entry_point, @function
 entry_point:
+        j main
         addi    sp,sp,-16
         sw      ra,12(sp)
         sw      s0,8(sp)
+        sw      a0,4(sp)
         addi    s0,sp,16
  #APP
-# 12 "basic_test_code.c" 1
-        j main
-# 0 "" 2
 # 13 "basic_test_code.c" 1
-        rdi a0
 # 0 "" 2
 # 14 "basic_test_code.c" 1
-        call exception_handler
+        rdi a0
 # 0 "" 2
 # 15 "basic_test_code.c" 1
-        rti
+        call exception_handler
+# 0 "" 2
+# 16 "basic_test_code.c" 1
 # 0 "" 2
  #NO_APP
         nop
         lw      ra,12(sp)
         lw      s0,8(sp)
+        lw      a0,4(sp)
         addi    sp,sp,16
-        jr      ra
+        rti
         .size   entry_point, .-entry_point
         .align  2
         .globl  exception_handler
@@ -63,12 +70,85 @@ exception_handler:
         addi    s0,sp,32
         sw      a0,-20(s0)
         lw      a4,-20(s0)
-        li      a5,106
-        ble     a4,a5,.L3
-        lw      a0,-20(s0)
-        call    send_ppu_value
-        j       .L9
+        li      a5,99
+        bgt     a4,a5,.L3
+        lui     a5,%hi(my_board)
+        addi    a4,a5,%lo(my_board)
+        lw      a5,-20(s0)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        lw      a4,0(a5)
+        li      a5,12582912
+        and     a5,a4,a5
+        beq     a5,zero,.L4
+        li      a0,101
+        call    send_board_value
+        j       .L13
+.L4:
+        li      a0,100
+        call    send_board_value
+        j       .L13
 .L3:
+        lw      a4,-20(s0)
+        li      a5,100
+        bne     a4,a5,.L6
+        lui     a5,%hi(activeSquare)
+        lw      a5,%lo(activeSquare)(a5)
+        lui     a4,%hi(board)
+        addi    a4,a4,%lo(board)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        lw      a3,0(a5)
+        lui     a5,%hi(activeSquare)
+        lw      a5,%lo(activeSquare)(a5)
+        li      a4,4194304
+        or      a4,a3,a4
+        lui     a3,%hi(board)
+        addi    a3,a3,%lo(board)
+        slli    a5,a5,2
+        add     a5,a3,a5
+        sw      a4,0(a5)
+        lui     a5,%hi(activeSquare)
+        lw      a5,%lo(activeSquare)(a5)
+        lui     a4,%hi(board)
+        addi    a4,a4,%lo(board)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        lw      a5,0(a5)
+        mv      a0,a5
+        call    send_ppu_value
+        j       .L13
+.L6:
+        lw      a4,-20(s0)
+        li      a5,101
+        bne     a4,a5,.L7
+        lui     a5,%hi(activeSquare)
+        lw      a5,%lo(activeSquare)(a5)
+        lui     a4,%hi(board)
+        addi    a4,a4,%lo(board)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        lw      a3,0(a5)
+        lui     a5,%hi(activeSquare)
+        lw      a5,%lo(activeSquare)(a5)
+        li      a4,8388608
+        or      a4,a3,a4
+        lui     a3,%hi(board)
+        addi    a3,a3,%lo(board)
+        slli    a5,a5,2
+        add     a5,a3,a5
+        sw      a4,0(a5)
+        lui     a5,%hi(activeSquare)
+        lw      a5,%lo(activeSquare)(a5)
+        lui     a4,%hi(board)
+        addi    a4,a4,%lo(board)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        lw      a5,0(a5)
+        mv      a0,a5
+        call    send_ppu_value
+        j       .L13
+.L7:
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         lui     a4,%hi(board)
@@ -95,54 +175,54 @@ exception_handler:
         lw      a5,0(a5)
         mv      a0,a5
         call    send_ppu_value
-        lui     a5,%hi(activeSquare)
-        lw      a5,%lo(activeSquare)(a5)
-        lui     a4,%hi(board)
-        addi    a4,a4,%lo(board)
-        slli    a5,a5,2
-        add     a5,a4,a5
-        lw      a5,0(a5)
-        mv      a0,a5
-        call    send_board_value
         lw      a4,-20(s0)
         li      a5,102
-        bne     a4,a5,.L5
+        bne     a4,a5,.L8
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         addi    a4,a5,-1
         lui     a5,%hi(activeSquare)
         sw      a4,%lo(activeSquare)(a5)
-        j       .L6
-.L5:
+        j       .L9
+.L8:
         lw      a4,-20(s0)
         li      a5,103
-        bne     a4,a5,.L7
+        bne     a4,a5,.L10
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         addi    a4,a5,-10
         lui     a5,%hi(activeSquare)
         sw      a4,%lo(activeSquare)(a5)
-        j       .L6
-.L7:
+        j       .L9
+.L10:
         lw      a4,-20(s0)
         li      a5,104
-        bne     a4,a5,.L8
+        bne     a4,a5,.L11
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         addi    a4,a5,10
         lui     a5,%hi(activeSquare)
         sw      a4,%lo(activeSquare)(a5)
-        j       .L6
-.L8:
+        j       .L9
+.L11:
         lw      a4,-20(s0)
         li      a5,105
-        bne     a4,a5,.L6
+        bne     a4,a5,.L12
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         addi    a4,a5,1
         lui     a5,%hi(activeSquare)
         sw      a4,%lo(activeSquare)(a5)
-.L6:
+        j       .L9
+.L12:
+        lw      a4,-20(s0)
+        li      a5,106
+        bne     a4,a5,.L9
+        lui     a5,%hi(activeSquare)
+        lw      a5,%lo(activeSquare)(a5)
+        mv      a0,a5
+        call    send_board_value
+.L9:
         lui     a5,%hi(activeSquare)
         lw      a5,%lo(activeSquare)(a5)
         lui     a4,%hi(board)
@@ -168,22 +248,70 @@ exception_handler:
         lw      a5,0(a5)
         mv      a0,a5
         call    send_ppu_value
-        lui     a5,%hi(activeSquare)
-        lw      a5,%lo(activeSquare)(a5)
-        lui     a4,%hi(board)
-        addi    a4,a4,%lo(board)
-        slli    a5,a5,2
-        add     a5,a4,a5
-        lw      a5,0(a5)
-        mv      a0,a5
-        call    send_board_value
-.L9:
+.L13:
         nop
         lw      ra,28(sp)
         lw      s0,24(sp)
         addi    sp,sp,32
         jr      ra
         .size   exception_handler, .-exception_handler
+        .align  2
+        .globl  mod
+        .type   mod, @function
+mod:
+        addi    sp,sp,-32
+        sw      ra,28(sp)
+        sw      s0,24(sp)
+        addi    s0,sp,32
+        sw      a0,-20(s0)
+        sw      a1,-24(s0)
+        lw      a5,-20(s0)
+        ble     a5,zero,.L19
+        j       .L16
+.L17:
+        lw      a4,-20(s0)
+        lw      a5,-24(s0)
+        sub     a5,a4,a5
+        sw      a5,-20(s0)
+.L16:
+        lw      a4,-20(s0)
+        lw      a5,-24(s0)
+        bgt     a4,a5,.L17
+        j       .L18
+.L20:
+        lw      a4,-20(s0)
+        lw      a5,-24(s0)
+        add     a5,a4,a5
+        sw      a5,-20(s0)
+.L19:
+        lw      a5,-20(s0)
+        blt     a5,zero,.L20
+.L18:
+        lw      a5,-20(s0)
+        mv      a0,a5
+        lw      ra,28(sp)
+        lw      s0,24(sp)
+        addi    sp,sp,32
+        jr      ra
+        .size   mod, .-mod
+        .align  2
+        .globl  rand
+        .type   rand, @function
+rand:
+        addi    sp,sp,-32
+        sw      ra,28(sp)
+        sw      s0,24(sp)
+        addi    s0,sp,32
+ #APP
+# 66 "basic_test_code.c" 1
+        ldr a0
+# 0 "" 2
+ #NO_APP
+        lw      ra,28(sp)
+        lw      s0,24(sp)
+        addi    sp,sp,32
+        jr      ra
+        .size   rand, .-rand
         .align  2
         .globl  mult
         .type   mult, @function
@@ -196,8 +324,8 @@ mult:
         sw      a1,-40(s0)
         sw      zero,-20(s0)
         sw      zero,-24(s0)
-        j       .L11
-.L12:
+        j       .L25
+.L26:
         lw      a4,-20(s0)
         lw      a5,-36(s0)
         add     a5,a4,a5
@@ -205,10 +333,10 @@ mult:
         lw      a5,-24(s0)
         addi    a5,a5,1
         sw      a5,-24(s0)
-.L11:
+.L25:
         lw      a4,-24(s0)
         lw      a5,-40(s0)
-        blt     a4,a5,.L12
+        blt     a4,a5,.L26
         lw      a5,-20(s0)
         mv      a0,a5
         lw      ra,44(sp)
@@ -229,13 +357,13 @@ send_ppu_value:
         lw      a4,-20(s0)
         sw      a4,%lo(toSnd)(a5)
  #APP
-# 52 "basic_test_code.c" 1
+# 80 "basic_test_code.c" 1
         lui a0,%hi(toSnd)
 # 0 "" 2
-# 53 "basic_test_code.c" 1
+# 81 "basic_test_code.c" 1
         lw a0,%lo(toSnd)(a0)
 # 0 "" 2
-# 54 "basic_test_code.c" 1
+# 82 "basic_test_code.c" 1
         ugs a0
 # 0 "" 2
  #NO_APP
@@ -258,13 +386,13 @@ send_board_value:
         lw      a4,-20(s0)
         sw      a4,%lo(toSnd)(a5)
  #APP
-# 59 "basic_test_code.c" 1
+# 87 "basic_test_code.c" 1
         lui a0,%hi(toSnd)
 # 0 "" 2
-# 60 "basic_test_code.c" 1
+# 88 "basic_test_code.c" 1
         lw a0,%lo(toSnd)(a0)
 # 0 "" 2
-# 61 "basic_test_code.c" 1
+# 89 "basic_test_code.c" 1
         snd a0
 # 0 "" 2
  #NO_APP
@@ -304,30 +432,30 @@ generate_encoding:
         sw      a5,-20(s0)
         lw      a4,-40(s0)
         li      a5,2
-        beq     a4,a5,.L18
+        beq     a4,a5,.L32
         lw      a4,-40(s0)
         li      a5,3
-        bne     a4,a5,.L19
+        bne     a4,a5,.L33
         lw      a4,-20(s0)
         li      a5,1048576
         or      a5,a4,a5
         sw      a5,-20(s0)
-        j       .L18
-.L19:
+        j       .L32
+.L33:
         lw      a4,-40(s0)
         li      a5,4
-        bne     a4,a5,.L20
+        bne     a4,a5,.L34
         lw      a4,-20(s0)
         li      a5,2097152
         or      a5,a4,a5
         sw      a5,-20(s0)
-        j       .L18
-.L20:
+        j       .L32
+.L34:
         lw      a4,-20(s0)
         li      a5,3145728
         or      a5,a4,a5
         sw      a5,-20(s0)
-.L18:
+.L32:
         lw      a5,-52(s0)
         slli    a5,a5,17
         lw      a4,-20(s0)
@@ -362,16 +490,23 @@ place_ship:
         sw      a1,-40(s0)
         sw      a2,-44(s0)
         lw      a5,-44(s0)
-        beq     a5,zero,.L23
+        beq     a5,zero,.L37
         li      a5,10
-        j       .L24
-.L23:
+        j       .L38
+.L37:
         li      a5,1
-.L24:
+.L38:
         sw      a5,-24(s0)
         sw      zero,-20(s0)
-        j       .L25
-.L26:
+        j       .L39
+.L40:
+        lw      a1,-20(s0)
+        lw      a0,-24(s0)
+        call    mult
+        mv      a4,a0
+        lw      a5,-36(s0)
+        add     a5,a5,a4
+        sw      a5,-28(s0)
         lw      a1,-24(s0)
         lw      a0,-20(s0)
         call    mult
@@ -385,16 +520,28 @@ place_ship:
         lw      a1,-40(s0)
         li      a0,1
         call    generate_encoding
-        mv      a5,a0
+        mv      a3,a0
+        lui     a5,%hi(my_board)
+        addi    a4,a5,%lo(my_board)
+        lw      a5,-28(s0)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        sw      a3,0(a5)
+        lui     a5,%hi(my_board)
+        addi    a4,a5,%lo(my_board)
+        lw      a5,-28(s0)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        lw      a5,0(a5)
         mv      a0,a5
         call    send_ppu_value
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L25:
+.L39:
         lw      a4,-20(s0)
         lw      a5,-40(s0)
-        blt     a4,a5,.L26
+        blt     a4,a5,.L40
         nop
         nop
         lw      ra,44(sp)
@@ -411,8 +558,8 @@ main:
         sw      s0,24(sp)
         addi    s0,sp,32
         sw      zero,-20(s0)
-        j       .L28
-.L29:
+        j       .L42
+.L43:
         lw      a5,-20(s0)
         slli    a4,a5,24
         lui     a5,%hi(board)
@@ -424,29 +571,59 @@ main:
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L28:
+.L42:
         lw      a4,-20(s0)
         li      a5,99
-        ble     a4,a5,.L29
+        ble     a4,a5,.L43
+        call    rand
+        mv      a5,a0
+        li      a1,100
+        mv      a0,a5
+        call    mod
+        mv      a5,a0
         li      a2,0
         li      a1,2
-        li      a0,22
+        mv      a0,a5
         call    place_ship
+        call    rand
+        mv      a5,a0
+        li      a1,100
+        mv      a0,a5
+        call    mod
+        mv      a5,a0
         li      a2,1
         li      a1,3
-        li      a0,45
+        mv      a0,a5
         call    place_ship
+        call    rand
+        mv      a5,a0
+        li      a1,100
+        mv      a0,a5
+        call    mod
+        mv      a5,a0
         li      a2,1
         li      a1,3
-        li      a0,28
+        mv      a0,a5
         call    place_ship
+        call    rand
+        mv      a5,a0
+        li      a1,100
+        mv      a0,a5
+        call    mod
+        mv      a5,a0
         li      a2,0
         li      a1,4
-        li      a0,83
+        mv      a0,a5
         call    place_ship
-        li      a2,1
+        call    rand
+        mv      a5,a0
+        li      a1,100
+        mv      a0,a5
+        call    mod
+        mv      a5,a0
+        li      a2,0
         li      a1,5
-        li      a0,51
+        mv      a0,a5
         call    place_ship
         lui     a5,%hi(activeSquare)
         li      a4,55
@@ -476,8 +653,8 @@ main:
         lw      a5,0(a5)
         mv      a0,a5
         call    send_ppu_value
-.L30:
-        j       .L30
+.L44:
+        j       .L44
         .size   main, .-main
         .ident  "GCC: (g04696df09) 14.2.0"
         .section        .note.GNU-stack,"",@progbits
