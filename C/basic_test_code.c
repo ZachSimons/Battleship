@@ -2,6 +2,7 @@
 
 int toSnd;
 int activeSquare;
+int myTurn;
 int board[100];
 int my_board[100];
 
@@ -27,6 +28,7 @@ void exception_handler(int num) {
             send_ppu_value(my_board[num]);
             send_board_value(100);
         }
+        myTurn = 1;
     } else if(num == 100) {
         board[activeSquare] |= 1 << 22;
         send_ppu_value(board[activeSquare]);
@@ -45,7 +47,10 @@ void exception_handler(int num) {
         } else if(num == 105) { // RIGHT
             activeSquare += 1;
         } else if(num == 106) { // FIRE
-            send_board_value(activeSquare);
+            if(myTurn) {
+                myTurn = 0;
+                send_board_value(activeSquare);
+            }
         }
         board[activeSquare] |= SELECT_BIT;
         send_ppu_value(board[activeSquare]);
@@ -129,6 +134,7 @@ void initialize_boards() {
 }
 
 int main() {
+    myTurn = 1;
     initialize_boards();
     place_ship(mod(rand(), 100), 2, 0);
     place_ship(mod(rand(), 100), 3, 1);

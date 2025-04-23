@@ -28,6 +28,7 @@ module execute(
     input                   lui_ex,
     input                   acc_data,
     input                   sac_ex,
+    input           [9:0]   seed,
     output logic    [31:0]  interface_data,
     output logic    [31:0]  next_pc_mem,
     output logic    [31:0]  write_data_mem,
@@ -106,14 +107,14 @@ module execute(
     ////////////Linear Feedback Register/////////////////
     always_ff @(posedge clk) begin
         if(~rst_n) begin
-            lfsr16 <= 16'hb8ab;
+            lfsr16 <= {seed, 6'h2a};
         end
         else begin //Determine Taps 16, 15, 13, 4
             lfsr16 <= {lfsr16[14:0], (lfsr16[15] ^ lfsr16[14] ^ lfsr16[12] ^ lfsr16[3])};
         end
     end
 
-    assign lfsr = {{5'd16{lfsr16[15]}}, lfsr16};
+    assign lfsr = {{16{lfsr16[15]}}, lfsr16};
     
     assign random_mux = random_exe ? lfsr : alu_result_exe;
 

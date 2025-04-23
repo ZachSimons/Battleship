@@ -79,12 +79,58 @@ exception_handler:
         add     a5,a4,a5
         lw      a4,0(a5)
         li      a5,12582912
-        and     a5,a4,a5
-        beq     a5,zero,.L4
+        and     a4,a4,a5
+        li      a5,12582912
+        bne     a4,a5,.L4
+        lui     a5,%hi(my_board)
+        addi    a4,a5,%lo(my_board)
+        lw      a5,-20(s0)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        lw      a4,0(a5)
+        li      a5,-4194304
+        addi    a5,a5,-1
+        and     a4,a4,a5
+        lui     a5,%hi(my_board)
+        addi    a3,a5,%lo(my_board)
+        lw      a5,-20(s0)
+        slli    a5,a5,2
+        add     a5,a3,a5
+        sw      a4,0(a5)
+        lui     a5,%hi(my_board)
+        addi    a4,a5,%lo(my_board)
+        lw      a5,-20(s0)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        lw      a5,0(a5)
+        mv      a0,a5
+        call    send_ppu_value
         li      a0,101
         call    send_board_value
         j       .L13
 .L4:
+        lui     a5,%hi(my_board)
+        addi    a4,a5,%lo(my_board)
+        lw      a5,-20(s0)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        lw      a4,0(a5)
+        li      a5,4194304
+        or      a4,a4,a5
+        lui     a5,%hi(my_board)
+        addi    a3,a5,%lo(my_board)
+        lw      a5,-20(s0)
+        slli    a5,a5,2
+        add     a5,a3,a5
+        sw      a4,0(a5)
+        lui     a5,%hi(my_board)
+        addi    a4,a5,%lo(my_board)
+        lw      a5,-20(s0)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        lw      a5,0(a5)
+        mv      a0,a5
+        call    send_ppu_value
         li      a0,100
         call    send_board_value
         j       .L13
@@ -303,7 +349,7 @@ rand:
         sw      s0,24(sp)
         addi    s0,sp,32
  #APP
-# 66 "basic_test_code.c" 1
+# 70 "basic_test_code.c" 1
         ldr a0
 # 0 "" 2
  #NO_APP
@@ -357,13 +403,13 @@ send_ppu_value:
         lw      a4,-20(s0)
         sw      a4,%lo(toSnd)(a5)
  #APP
-# 80 "basic_test_code.c" 1
+# 84 "basic_test_code.c" 1
         lui a0,%hi(toSnd)
 # 0 "" 2
-# 81 "basic_test_code.c" 1
+# 85 "basic_test_code.c" 1
         lw a0,%lo(toSnd)(a0)
 # 0 "" 2
-# 82 "basic_test_code.c" 1
+# 86 "basic_test_code.c" 1
         ugs a0
 # 0 "" 2
  #NO_APP
@@ -386,13 +432,13 @@ send_board_value:
         lw      a4,-20(s0)
         sw      a4,%lo(toSnd)(a5)
  #APP
-# 87 "basic_test_code.c" 1
+# 91 "basic_test_code.c" 1
         lui a0,%hi(toSnd)
 # 0 "" 2
-# 88 "basic_test_code.c" 1
+# 92 "basic_test_code.c" 1
         lw a0,%lo(toSnd)(a0)
 # 0 "" 2
-# 89 "basic_test_code.c" 1
+# 93 "basic_test_code.c" 1
         snd a0
 # 0 "" 2
  #NO_APP
@@ -550,9 +596,9 @@ place_ship:
         jr      ra
         .size   place_ship, .-place_ship
         .align  2
-        .globl  main
-        .type   main, @function
-main:
+        .globl  initialize_boards
+        .type   initialize_boards, @function
+initialize_boards:
         addi    sp,sp,-32
         sw      ra,28(sp)
         sw      s0,24(sp)
@@ -569,12 +615,39 @@ main:
         add     a5,a3,a5
         sw      a4,0(a5)
         lw      a5,-20(s0)
+        slli    a4,a5,24
+        li      a5,-2147483648
+        or      a5,a4,a5
+        mv      a3,a5
+        lui     a5,%hi(my_board)
+        addi    a4,a5,%lo(my_board)
+        lw      a5,-20(s0)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        sw      a3,0(a5)
+        lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
 .L42:
         lw      a4,-20(s0)
         li      a5,99
         ble     a4,a5,.L43
+        nop
+        nop
+        lw      ra,28(sp)
+        lw      s0,24(sp)
+        addi    sp,sp,32
+        jr      ra
+        .size   initialize_boards, .-initialize_boards
+        .align  2
+        .globl  main
+        .type   main, @function
+main:
+        addi    sp,sp,-16
+        sw      ra,12(sp)
+        sw      s0,8(sp)
+        addi    s0,sp,16
+        call    initialize_boards
         call    rand
         mv      a5,a0
         li      a1,100
@@ -653,8 +726,8 @@ main:
         lw      a5,0(a5)
         mv      a0,a5
         call    send_ppu_value
-.L44:
-        j       .L44
+.L45:
+        j       .L45
         .size   main, .-main
         .ident  "GCC: (g04696df09) 14.2.0"
         .section        .note.GNU-stack,"",@progbits

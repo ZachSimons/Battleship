@@ -134,7 +134,8 @@ proc processor_i (
     .snd(snd),
     .uad(uad),
     .ppu_send(ppu_send),
-    .interface_data(interface_data)
+    .interface_data(interface_data),
+    .seed(SW)
 );
 
 assign spart_data[31:24] = 8'h00;

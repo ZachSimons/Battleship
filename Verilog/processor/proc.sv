@@ -5,6 +5,7 @@ module proc(
     input interrupt_eth,
     input [31:0] interrupt_source_data,
     input accelerator_data,
+    input [9:0] seed,
     //TODO add processor inputs
     output sac,
     output snd,
@@ -193,7 +194,8 @@ execute proc_ex(
     .reg_wrt_en_mem(regwrten_ex_mem),
     .read_unsigned_mem(unsigned_ex_mem),
     .rd_en_mem(memrden_ex_mem),
-    .branch(branch_ex_fe)         
+    .branch(branch_ex_fe),
+    .seed(seed)
 );
 
 memory proc_mem(
