@@ -5,26 +5,28 @@ logic clk, rst_n, tx_rx, rx_tx, tx_send_tx, rx_send_tx, tx_interrupt_board, rx_i
 logic [23:0] tx_tx_data, tx_rx_data, rx_rx_data, rx_tx_data;
 
 
-spart_top spart_tx_dut(
+test_spart spart_tx_dut(
     .clk(clk),
     .rst_n(rst_n),
-    .send_tx(tx_send_tx),
-    .tx_data(tx_tx_data),
+    .start_transmission(tx_send_tx),
+    .tdata(tx_tx_data),
     .rxd(rx_tx),
     .txd(tx_rx),
-    .interrupt_board(tx_interrupt_board),
-    .rx_data(tx_rx_data)
+    .rx_done(tx_interrupt_board),
+    .rdata(tx_rx_data),
+    .baud(16'd100)
 );
 
-spart_top spart_rx_dut(
+test_spart spart_rx_dut(
     .clk(clk),
     .rst_n(rst_n),
-    .send_tx(rx_send_tx),
-    .tx_data(rx_tx_data),
+    .start_transmission(rx_send_tx),
+    .tdata(rx_tx_data),
     .rxd(tx_rx),
     .txd(rx_tx),
-    .interrupt_board(rx_interrupt_board),
-    .rx_data(rx_rx_data)
+    .rx_done(rx_interrupt_board),
+    .rdata(rx_rx_data),
+    .baud(16'd100)
 );
 
 initial begin
@@ -47,7 +49,7 @@ initial begin
     @(negedge clk);
     //tx_send_tx = 0;
 
-    repeat(10000) @(posedge clk); //Waiting for spart
+    repeat(1000000) @(posedge clk); //Waiting for spart
     $stop;
 
 end

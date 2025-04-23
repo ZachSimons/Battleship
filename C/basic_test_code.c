@@ -16,27 +16,39 @@ void entry_point() {
 }
 
 void exception_handler(int num) {
-    if(num > 106) {
-        send_ppu_value(num);
-    } else {
-        board[activeSquare] &= ~SELECT_BIT;
-        send_ppu_value(board[activeSquare]);
-        send_board_value(board[activeSquare]);
-        if(num == 102) { // LEFT
-            activeSquare -= 1;
-        } else if(num == 103) { // UP
-            activeSquare -= 10;
-        } else if(num == 104) { // DOWN
-            activeSquare += 10;
-        } else if(num == 105) { // RIGHT
-            activeSquare += 1;
-        } else if(num == 106) { // FIRE
-            
-        }
-        board[activeSquare] |= SELECT_BIT;
-        send_ppu_value(board[activeSquare]);
-        send_board_value(board[activeSquare]);
+    board[activeSquare] &= ~SELECT_BIT;
+    send_ppu_value(board[activeSquare]);
+    if(num == 102) { // LEFT
+        activeSquare -= 1;
+    } else if(num == 103) { // UP
+        activeSquare -= 10;
+    } else if(num == 104) { // DOWN
+        activeSquare += 10;
+    } else if(num == 105) { // RIGHT
+        activeSquare += 1;
+    } else if(num == 106) { // FIRE
+        
     }
+    board[activeSquare] |= SELECT_BIT;
+    send_ppu_value(board[activeSquare]);
+}
+
+int mod(int a, int b) {
+    if(a > 0) {
+        while(a > b) {
+            a -= b;
+        }
+    } else {
+        while(a < 0) {
+            a += b;
+        }
+    }
+}
+
+int rand() {
+    int a = 10;
+    asm volatile ("ldr a0");
+    return a;
 }
 
 int mult(int a, int b) {
@@ -91,11 +103,11 @@ int main() {
     for(int i = 0; i < 100; i++) {
         board[i] = i << 24;
     }
-    place_ship(22, 2, 0);
-    place_ship(45, 3, 1);
-    place_ship(28, 3, 1);
-    place_ship(83, 4, 0);
-    place_ship(51, 5, 1);
+    place_ship(mod(rand(), 100), 2, 0);
+    place_ship(mod(rand(), 100), 3, 1);
+    place_ship(mod(rand(), 100), 3, 1);
+    place_ship(mod(rand(), 100), 4, 0);
+    place_ship(mod(rand(), 100), 5, 0);
     activeSquare = 55;
     board[activeSquare] |= SELECT_BIT;
     send_ppu_value(board[activeSquare]);

@@ -1,4 +1,4 @@
-module rtl_top #(
+module uart_top_test #(
     parameter bit BOARD_NUM = 0
 )(
     input  logic        sys_clk,
@@ -62,102 +62,114 @@ logic [23:0] tx_data;
 
 always_ff @(posedge sys_clk) begin
     if(!rst_n) begin
-        ppu_reg <= 0;
-        acc_reg <= 0;
-        comm_reg <= 0;
-        sac_reg <= 0;
-        ppu_send_ff <= 0;
-        snd_ff <= 0;
+        // ppu_reg <= 0;
+        // acc_reg <= 0;
+        // comm_reg <= 0;
+        // sac_reg <= 0;
+        // ppu_send_ff <= 0;
+        // snd_ff <= 0;
         interrupt_board_ff <= 0;
     end
     else begin
         interrupt_board_ff <= interrupt_board ? spart_data[23:0] : interrupt_board_ff;
-        ppu_send_ff <= ppu_send;
-        snd_ff <= snd;
-        ppu_reg <= ppu_send ? interface_data : ppu_reg;
-        acc_reg <= uad ? interface_data : acc_reg;
-        comm_reg <= snd ? interface_data : comm_reg;
-        sac_reg <= (~sac_reg & sac) ? sac :  sac_reg;
+        // ppu_send_ff <= ppu_send;
+        // snd_ff <= snd;
+        // ppu_reg <= ppu_send ? interface_data : ppu_reg;
+        // acc_reg <= uad ? interface_data : acc_reg;
+        // comm_reg <= snd ? interface_data : comm_reg;
+        // sac_reg <= (~sac_reg & sac) ? sac :  sac_reg;
     end
 end
 
-keyboard DUT (
-    .sys_clk(sys_clk), 
-    .rst_n (rst_n), 
-    .ps2_clk(PS2_CLK), 
-    .ps2_data(PS2_DAT), 
-    .direction(direction), 
-    .fire(fire), 
-    .done(interrupt_key_local)
-);
-
-ppu_top ppu_top_i (
-    .sys_clk(sys_clk),
-    .rst_n(rst_n),
-    .receive(ppu_send_ff),
-    .ppu_data(ppu_reg),
-    .VGA_BLANK_N(VGA_BLANK_N),
-    .VGA_B(VGA_B),
-    .VGA_CLK(VGA_CLK),
-    .VGA_G(VGA_G),
-    .VGA_HS(VGA_HS),
-    .VGA_R(VGA_R),
-    .VGA_SYNC_N(VGA_SYNC_N),
-    .VGA_VS(VGA_VS)
-);
-
-logic [31:0] interrupt_data;
-
-always begin
-    case({fire, direction})
-        3'b000:
-            interrupt_data = 32'd103;
-        3'b001:
-            interrupt_data = 32'd104;
-        3'b010:
-            interrupt_data = 32'd102;
-        3'b011:
-            interrupt_data = 32'd105;
-        default:
-            interrupt_data = 32'd106;
-    endcase
-end
-
-proc processor_i (
-    .clk(sys_clk),
-    .rst_n(rst_n),
-    .interrupt_key(interrupt_key_local),
-    .interrupt_eth(interrupt_board),
-    .interrupt_source_data(interrupt_board ? spart_data : (interrupt_key_local) ? interrupt_data : '0),
-    .accelerator_data(accelerator_data),
-    .sac(sac),
-    .snd(snd),
-    .uad(uad),
-    .ppu_send(ppu_send),
-    .interface_data(interface_data)
-);
-
-assign spart_data[31:24] = 8'h00;
+// keyboard DUT (
+//     .sys_clk(sys_clk), 
+//     .rst_n (rst_n), 
+//     .ps2_clk(PS2_CLK), 
+//     .ps2_data(PS2_DAT), 
+//     .direction(direction), 
+//     .fire(fire), 
+//     .done(interrupt_key_local)
+// );
+// 
+// ppu_top ppu_top_i (
+//     .sys_clk(sys_clk),
+//     .rst_n(rst_n),
+//     .receive(ppu_send_ff),
+//     .ppu_data(ppu_reg),
+//     .VGA_BLANK_N(VGA_BLANK_N),
+//     .VGA_B(VGA_B),
+//     .VGA_CLK(VGA_CLK),
+//     .VGA_G(VGA_G),
+//     .VGA_HS(VGA_HS),
+//     .VGA_R(VGA_R),
+//     .VGA_SYNC_N(VGA_SYNC_N),
+//     .VGA_VS(VGA_VS)
+// );
+// 
+// logic [31:0] interrupt_data;
+// 
+// always begin
+//     case({fire, direction})
+//         3'b000:
+//             interrupt_data = 32'd103;
+//         3'b001:
+//             interrupt_data = 32'd104;
+//         3'b010:
+//             interrupt_data = 32'd102;
+//         3'b011:
+//             interrupt_data = 32'd105;
+//         default:
+//             interrupt_data = 32'd106;
+//     endcase
+// end
+// 
+// proc processor_i (
+//     .clk(sys_clk),
+//     .rst_n(rst_n),
+//     .interrupt_key(interrupt_key_local),
+//     .interrupt_eth(interrupt_board),
+//     .interrupt_source_data(interrupt_board ? spart_data : (interrupt_key_local) ? interrupt_data : '0),
+//     .accelerator_data(accelerator_data),
+//     .sac(sac),
+//     .snd(snd),
+//     .uad(uad),
+//     .ppu_send(ppu_send),
+//     .interface_data(interface_data)
+// );
 
 test_spart spart_top_i(   
     .clk(sys_clk),
     .rst_n(rst_n),
-    .start_transmission(snd_ff),
-    .tdata(comm_reg),
-    .rdata(spart_data[23:0]),
+    .start_transmission(send_tx),
+    .tdata(tx_data),
+    .rdata(spart_data),
     .rx_done(interrupt_board),
     .rxd(BOARD_NUM ? GPIO[1] : GPIO[35]),
     .txd(BOARD_NUM ? GPIO[35] : GPIO[1]),
     .baud(16'd100)
 );
 
+logic key_ff, key_ff2, key_ff3;
+
+assign tx_data = {byte_tx, byte_tx, byte_tx};
+assign byte_tx = SW[7:0];
+assign send_tx = ~key_ff2 & key_ff3;
+
+always_ff @ (posedge sys_clk) begin
+    if (!rst_n) begin
+        key_ff <= 1;
+        key_ff2 <= 1;
+        key_ff3 <= 1;
+    end
+    else begin
+        key_ff <= KEY[1];
+        key_ff2 <= key_ff;
+        key_ff3 <= key_ff2;
+    end
+end
+
 assign LEDR[0] = BOARD_NUM == 0;
 assign LEDR[1] = BOARD_NUM == 1;
-
-// assign HEX2 = OFF;
-// assign HEX3 = OFF;
-// assign HEX4 = OFF;
-// assign HEX5 = OFF;
 
 always_comb begin
     case(interrupt_board_ff[3:0])
@@ -279,46 +291,5 @@ always_comb begin
         4'd15: HEX5 = HEX_15;
     endcase
 end
-
-// ppu_top ppu_top_i (
-//     .sys_clk(sys_clk),
-//     .rst_n(rst_n),
-//     .receive(ppu_send_ff),
-//     .ppu_data(ppu_reg),
-//     .VGA_BLANK_N(VGA_BLANK_N),
-//     .VGA_B(VGA_B),
-//     .VGA_CLK(VGA_CLK),
-//     .VGA_G(VGA_G),
-//     .VGA_HS(VGA_HS),
-//     .VGA_R(VGA_R),
-//     .VGA_SYNC_N(VGA_SYNC_N),
-//     .VGA_VS(VGA_VS)
-// );
-
-// proc processor_i (
-//     .clk(sys_clk),
-//     .rst_n(rst_n),
-//     .interrupt_key(interrupt_key_local),
-//     .interrupt_eth(interrupt_board),
-//     .interrupt_source_data(interrupt_board ? spart_data : (interrupt_key_local) ? {29'b0, fire, direction} : '0),
-//     .accelerator_data(accelerator_data),
-//     .sac(sac),
-//     .snd(snd),
-//     .uad(uad),
-//     .ppu_send(ppu_send),
-//     .interface_data(interface_data)
-// );
-
-// accelerator ACC(
-//     .data(data),
-//     .clk(sys_clk),
-//     .rst_n(rst_n),
-//     .update_ship(update_ship),
-//     .start(start),
-//     .update_board(update_board),
-//     .valid_out(accelerator_data)
-// );
-
-
 
 endmodule
