@@ -18,9 +18,13 @@ void entry_point() {
 
 void exception_handler(int num) {
     if(num < 100) {
-        if((my_board[num] >> 22) & 3) {
+        if(((my_board[num] >> 22) & 3) == 3) {
+            my_board[num] = my_board[num] & 0xffbfffff;
+            send_ppu_value(my_board[num]);
             send_board_value(101);
         } else {
+            my_board[num] = my_board[num] | 0xff7fffff;
+            send_ppu_value(my_board[num]);
             send_board_value(100);
         }
     } else if(num == 100) {
@@ -117,10 +121,15 @@ void place_ship(int pos, int size, int v) {
     }
 }
 
-int main() {
+void initialize_boards() {
     for(int i = 0; i < 100; i++) {
         board[i] = i << 24;
+        my_board[i] = 0x80000000 | (i << 24);
     }
+}
+
+int main() {
+    initialize_boards();
     place_ship(mod(rand(), 100), 2, 0);
     place_ship(mod(rand(), 100), 3, 1);
     place_ship(mod(rand(), 100), 3, 1);
