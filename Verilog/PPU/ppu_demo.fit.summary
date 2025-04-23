@@ -1,16 +1,16 @@
-Fitter Status : Successful - Tue Apr 22 20:27:37 2025
+Fitter Status : Successful - Wed Apr 23 15:51:19 2025
 Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 Revision Name : ppu_demo
 Top-level Entity Name : ppu_demo
 Family : Cyclone V
 Device : 5CSEMA5F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 541 / 32,070 ( 2 % )
-Total registers : 610
+Logic utilization (in ALMs) : 544 / 32,070 ( 2 % )
+Total registers : 606
 Total pins : 37 / 457 ( 8 % )
 Total virtual pins : 0
-Total block memory bits : 427,368 / 4,065,280 ( 11 % )
-Total RAM Blocks : 56 / 397 ( 14 % )
+Total block memory bits : 478,656 / 4,065,280 ( 12 % )
+Total RAM Blocks : 64 / 397 ( 16 % )
 Total DSP Blocks : 4 / 87 ( 5 % )
 Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0

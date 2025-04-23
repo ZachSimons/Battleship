@@ -33,14 +33,16 @@ output VGA_BLANK_N, VGA_HS, VGA_SYNC_N, VGA_VS, VGA_CLK;
 
 
 // game board params
-parameter BOARD_WIDTH = 173;
-parameter BOARD_HEIGHT = 173;
+parameter BOARD_WIDTH = 173; // includes border size
+parameter BOARD_HEIGHT = 173; // includes border size
 parameter BORDER_WIDTH = 6;
 parameter SQUARE_SIZE = 16;
 parameter BOARD_OFFSET_X = 234;
 parameter BOARD1_OFFSET_Y = 34;
-parameter NUMBERS_HEIGHT = 12;
-parameter BOARD2_OFFSET_Y = BOARD1_OFFSET_Y + NUMBERS_HEIGHT + BOARD_HEIGHT;
+parameter LETTERS_HEIGHT = 22;
+parameter NUMBERS_WIDTH = 23;
+
+parameter BOARD2_OFFSET_Y = BOARD1_OFFSET_Y + LETTERS_HEIGHT + BOARD_HEIGHT;
 
 // water params
 parameter SHORELINE_OFFSET_Y = 416;
@@ -56,13 +58,13 @@ parameter SHIP5_WIDTH = 81;
 parameter HIT_MISS_WIDTH = 17;
 
 // row pixels
-parameter ROW0_B0 = BOARD1_OFFSET_Y + NUMBERS_HEIGHT + BORDER_WIDTH;
+parameter ROW0_B0 = BOARD1_OFFSET_Y + LETTERS_HEIGHT + BORDER_WIDTH; // figure out why we need to subtract 1
 parameter ROW10_B0 =  ROW0_B0 + (SQUARE_SIZE * 10);
-parameter ROW0_B1 = BOARD2_OFFSET_Y + NUMBERS_HEIGHT + BORDER_WIDTH;
+parameter ROW0_B1 = BOARD2_OFFSET_Y + LETTERS_HEIGHT + BORDER_WIDTH;
 parameter ROW10_B1 =  ROW0_B1 + (SQUARE_SIZE * 10);
 
 // column pixels
-parameter COL0 = BOARD_OFFSET_X + BORDER_WIDTH;
+parameter COL0 = BOARD_OFFSET_X + NUMBERS_WIDTH + BORDER_WIDTH;
 parameter COL10 = COL0 + (SQUARE_SIZE * 10);
 
 logic [9:0] next_x, next_y;
@@ -70,6 +72,8 @@ logic [7:0] r_in, g_in, b_in;
 logic [7:0] rgb;
 logic game_bound_logic;
 logic in_game_bound;
+logic letter_bound_logic;
+logic in_letter_bound;
 logic number_bound_logic;
 logic in_number_bound;
 
@@ -127,20 +131,28 @@ always_ff @(posedge vga_clk, negedge rst_n) begin
     end
 end
 
-// game boundary reg
-assign game_bound_logic = next_x < BOARD_WIDTH+BOARD_OFFSET_X && next_x > BOARD_OFFSET_X-1 && next_y < NUMBERS_HEIGHT+BOARD_HEIGHT+BOARD2_OFFSET_Y && next_y > BOARD1_OFFSET_Y-1;
-assign number_bound_logic =   next_x < BOARD_WIDTH+BOARD_OFFSET_X && 
+// game boundaries logic/regs
+assign game_bound_logic = next_x < NUMBERS_WIDTH+BOARD_WIDTH+BOARD_OFFSET_X && next_x > BOARD_OFFSET_X-1 && next_y < LETTERS_HEIGHT+BOARD_HEIGHT+BOARD2_OFFSET_Y && next_y > BOARD1_OFFSET_Y-1;
+
+assign letter_bound_logic =   next_x < BOARD_WIDTH+BOARD_OFFSET_X+NUMBERS_WIDTH && 
                               next_x > BOARD_OFFSET_X-1 && 
-                              ((next_y < BOARD1_OFFSET_Y+NUMBERS_HEIGHT && next_y > BOARD1_OFFSET_Y-1) || 
-                               (next_y < BOARD2_OFFSET_Y+NUMBERS_HEIGHT && next_y > BOARD2_OFFSET_Y-1));
+                              ((next_y < BOARD1_OFFSET_Y+LETTERS_HEIGHT
+                             && next_y > BOARD1_OFFSET_Y-1) || 
+                               (next_y < BOARD2_OFFSET_Y+LETTERS_HEIGHT
+                             && next_y > BOARD2_OFFSET_Y-1));
+
+assign number_bound_logic = next_x > BOARD_OFFSET_X-1 && next_x < BOARD_OFFSET_X+NUMBERS_WIDTH && next_y > BOARD1_OFFSET_Y-1 && next_y < LETTERS_HEIGHT+BOARD_HEIGHT+BOARD2_OFFSET_Y;
+
 
 always_ff @(posedge vga_clk) begin
     if (!rst_n) begin
         in_game_bound <= 0;
+        in_letter_bound <= 0;
         in_number_bound <= 0;
     end 
     else begin
         in_game_bound <= game_bound_logic;
+        in_letter_bound <= letter_bound_logic;
         in_number_bound <= number_bound_logic;
     end
 end
@@ -152,7 +164,7 @@ always_ff @(posedge vga_clk, negedge rst_n) begin
     if (!rst_n) begin
         board_addr <= 0;
     end
-    else if (board_addr == (BOARD_WIDTH * (BOARD_HEIGHT + NUMBERS_HEIGHT) - 1)) begin
+    else if (board_addr == ((BOARD_WIDTH + NUMBERS_WIDTH) * (BOARD_HEIGHT + LETTERS_HEIGHT) - 1)) begin
         board_addr <= 0;
     end
     else if (game_bound_logic) begin
@@ -221,10 +233,14 @@ assign curr_square_sel = curr_square_data[0];
 
 // board sprite memory
 logic [7:0] rgb_board;
-board_numbers_rom rom0 (
+board_labels_rom rom0 (
 	.address(board_addr),
 	.clock(vga_clk),
 	.q(rgb_board));
+
+// blue filter for game border
+logic [7:0] rgb_board_filtered;
+assign rgb_board_filtered = (rgb_board == 8'h14 || rgb_board == 8'hBC) ? (rgb_board >> 2) : rgb_board;
 
 // shoreline sprite memory
 logic [15:0] rgb_shoreline;
@@ -322,7 +338,7 @@ end
 logic [7:0] object_mux;
 always_comb begin
     case(curr_square_state & {2{(curr_square != 8'hFF)}})
-        2'b00 : object_mux = rgb_board; // board pixel
+        2'b00 : object_mux = rgb_board_filtered; // board pixel
         2'b01 : object_mux = curr_square[7] ? rgb_miss_ship : rgb_miss_player; // miss pixel
         2'b10 : object_mux = curr_square[7] ? rgb_hit_ship : rgb_hit_player; // hit pixel
         2'b11 : object_mux = ship_type_mux; // ship pixel
@@ -359,9 +375,9 @@ assign b_back = (next_y >= SHORELINE_OFFSET_Y) ? {rgb_shoreline[4:0], 3'b0} : {r
 
 // vga controller color inputs
 // set transparency on numbers & letters so black background doesn't show
-assign r_in = (in_game_bound) ? ((in_number_bound && ~(rgb >= 8'hB6)) ? {rgb_water[15:11], 3'b0} : {rgb[7:5], 5'b0}) : r_back;
-assign g_in = (in_game_bound) ? ((in_number_bound && ~(rgb >= 8'hB6)) ? {rgb_water[10:5], 2'b0} : {rgb[4:2], 5'b0}) : g_back;
-assign b_in = (in_game_bound) ? ((in_number_bound && ~(rgb >= 8'hB6)) ? {rgb_water[4:0], 3'b0} : {rgb[1:0], 6'b0}) : b_back;
+assign r_in = (in_game_bound) ? (((in_letter_bound || in_number_bound) & ~(rgb >= 8'hB6)) ? {rgb_water[15:11], 3'b0} : {rgb[7:5], 5'b0}) : r_back;
+assign g_in = (in_game_bound) ? (((in_letter_bound || in_number_bound) & ~(rgb >= 8'hB6)) ? {rgb_water[10:5], 2'b0} : {rgb[4:2], 5'b0}) : g_back;
+assign b_in = (in_game_bound) ? (((in_letter_bound || in_number_bound) & ~(rgb >= 8'hB6)) ? {rgb_water[4:0], 3'b0} : {rgb[1:0], 6'b0}) : b_back;
 
 // vga controller
 vga_driver draw   ( .clock(vga_clk),        // 25 MHz PLL
