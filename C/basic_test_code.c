@@ -3,6 +3,7 @@
 int toSnd;
 int activeSquare;
 int board[100];
+int my_board[100];
 
 int generate_encoding(int, int, int, int, int, int, int);
 void send_ppu_value(int);
@@ -17,8 +18,15 @@ void entry_point() {
 
 void exception_handler(int num) {
     if(num < 100) {
-        send_board_value(100);
+        if((my_board[num] >> 22) & 3) {
+            send_board_value(101);
+        } else {
+            send_board_value(100);
+        }
     } else if(num == 100) {
+        board[activeSquare] |= 1 << 22;
+        send_ppu_value(board[activeSquare]);
+    } else if(num == 101) {
         board[activeSquare] |= 2 << 22;
         send_ppu_value(board[activeSquare]);
     } else {
@@ -103,7 +111,9 @@ int generate_encoding(int board, int size, int state, int pos, int seg, int v, i
 void place_ship(int pos, int size, int v) {
     int inc = v ? 10 : 1;
     for(int i = 0; i < size; i++) {
-        send_ppu_value(generate_encoding(1, size, 3, pos + mult(i,inc), i, v, 0));
+        int square = pos + mult(inc,i);
+        my_board[square] = generate_encoding(1, size, 3, pos + mult(i,inc), i, v, 0);
+        send_ppu_value(my_board[square]);
     }
 }
 
