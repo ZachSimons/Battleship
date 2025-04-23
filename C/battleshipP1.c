@@ -81,7 +81,7 @@ int hit_counts[NUM_SQUARES];
 
 void entry_point() {
     asm volatile ("j main");
-    asm volatile ("ldi a0");
+    asm volatile ("rdi a0");
     asm volatile ("call exception_handler");
     asm volatile ("rti");
 }
@@ -211,6 +211,7 @@ int mod(int a, int b) {
             a += b;
         }
     }
+    return a;
 }
 
 int rand() {

@@ -43,6 +43,7 @@ int mod(int a, int b) {
             a += b;
         }
     }
+    return a;
 }
 
 int rand() {
