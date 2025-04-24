@@ -43,13 +43,21 @@ void exception_handler(int num) {
         board[activeSquare] &= ~SELECT_BIT;
         send_ppu_value(board[activeSquare]);
         if(num == 102) { // LEFT
-            activeSquare -= 1;
+            if(mod(activeSquare, 10)) {
+                activeSquare -= 1;
+            }
         } else if(num == 103) { // UP
-            activeSquare -= 10;
+            if(activeSquare > 9) {
+                activeSquare -= 10;
+            }
         } else if(num == 104) { // DOWN
-            activeSquare += 10;
+            if(activeSquare < 90) {
+                activeSquare += 10;
+            }
         } else if(num == 105) { // RIGHT
-            activeSquare += 1;
+            if(mod(activeSquare, 10) < 9) {
+                activeSquare += 1;
+            }
         } else if(num == 106) { // FIRE
             if(myTurn) {
                 send_board_value(activeSquare);
