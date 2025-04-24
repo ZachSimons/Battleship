@@ -44,7 +44,7 @@ void exception_handler(int num) {
         board[activeSquare] &= ~SELECT_BIT;
         send_ppu_value(board[activeSquare]);
         if(num == 102) { // LEFT
-            if(mod(activeSquare, 10)) {
+            if(mod(activeSquare, 10) > 0) {
                 activeSquare -= 1;
             }
         } else if(num == 103) { // UP
