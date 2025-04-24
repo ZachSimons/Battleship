@@ -11,9 +11,10 @@ int my_sunk[5];
 
 int generate_encoding(int, int, int, int, int, int, int);
 int mod(int, int);
+int mult(int, int);
 void send_ppu_value(int);
 void send_board_value(int);
-int check_sunk(int);
+int check_sunk();
 int check_lose();
 void reset_program();
 
@@ -29,10 +30,10 @@ void exception_handler(int num) {
         if(((my_board[num] >> 22) & 3) == 3) {
             my_board[num] = my_board[num] & 0xffbfffff;
             send_ppu_value(my_board[num]);
-            int isSunk = check_sinks();
+            int isSunk = check_sunk();
             if(isSunk) {
                 isSunk--;
-                if(checkLose()) {
+                if(check_lose()) {
                     send_board_value(0x00020000 | (isSunk << 8) | my_positions[isSunk]);
                 } else {
                     send_board_value(0x00010000 | (isSunk << 8) | my_positions[isSunk]);
@@ -184,7 +185,7 @@ int place_ship(int pos, int ship, int v) {
     return 1;
 }
 
-int check_sinks() {
+int check_sunk() {
     for(int i = 0; i < 5; i++) {
         if(my_sunk[i] == 0) {
             int pos = mod(my_positions[i], 100);
