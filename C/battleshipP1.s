@@ -50,6 +50,12 @@ enemy_sunk:
         .size   active_square, 4
 active_square:
         .zero   4
+        .globl  shot_square
+        .align  2
+        .type   shot_square, @object
+        .size   shot_square, 4
+shot_square:
+        .zero   4
         .globl  toSnd
         .align  2
         .type   toSnd, @object
@@ -99,11 +105,18 @@ entry_point:
         sw      a0,4(sp)
         addi    s0,sp,16
  #APP
-# 83 "battleshipP1.c" 1
-        ldi a0
+# 90 "battleshipP1.c" 1
+# 0 "" 2
+# 91 "battleshipP1.c" 1
+        rdi a0
+# 0 "" 2
+# 92 "battleshipP1.c" 1
         call exception_handler
 # 0 "" 2
+# 93 "battleshipP1.c" 1
+# 0 "" 2
  #NO_APP
+        nop
         lw      ra,12(sp)
         lw      s0,8(sp)
         lw      a0,4(sp)
@@ -136,6 +149,17 @@ exception_handler:
         slli    a5,a5,2
         add     a5,a3,a5
         sw      a4,0(a5)
+        lui     a5,%hi(my_board)
+        addi    a4,a5,%lo(my_board)
+        lw      a5,-52(s0)
+        slli    a5,a5,2
+        add     a5,a4,a5
+        lw      a5,0(a5)
+        mv      a0,a5
+        call    convert_encoding
+        mv      a5,a0
+        mv      a0,a5
+        call    send_ppu_value
         lui     a5,%hi(my_board)
         addi    a4,a5,%lo(my_board)
         lw      a5,-52(s0)
@@ -181,6 +205,9 @@ exception_handler:
         slli    a5,a5,2
         add     a5,a3,a5
         lw      a5,0(a5)
+        slli    a5,a5,8
+        slli    a5,a5,16
+        srli    a5,a5,16
         or      a5,a4,a5
         mv      a0,a5
         call    send_board_value
@@ -196,39 +223,87 @@ exception_handler:
         lui     a5,%hi(myTurn)
         li      a4,1
         sw      a4,%lo(myTurn)(a5)
-        j       .L22
+        j       .L23
 .L3:
         lw      a4,-52(s0)
         li      a5,107
         bne     a4,a5,.L9
         call    reset_program
-        j       .L22
+        j       .L23
 .L9:
         lw      a4,-52(s0)
         li      a5,100
         bne     a4,a5,.L10
-        lui     a5,%hi(active_square)
-        lw      a5,%lo(active_square)(a5)
+        lui     a5,%hi(myTurn)
+        sw      zero,%lo(myTurn)(a5)
+        lui     a5,%hi(shot_square)
+        lw      a5,%lo(shot_square)(a5)
         lui     a4,%hi(target_board)
         addi    a4,a4,%lo(target_board)
         add     a5,a4,a5
         li      a4,1
         sb      a4,0(a5)
+        lui     a5,%hi(shot_square)
+        lw      a5,%lo(shot_square)(a5)
+        lui     a4,%hi(target_board)
+        addi    a4,a4,%lo(target_board)
+        add     a5,a4,a5
+        lbu     a5,0(a5)
+        mv      a0,a5
+        lui     a5,%hi(shot_square)
+        lw      a3,%lo(shot_square)(a5)
+        lui     a5,%hi(active_square)
+        lw      a4,%lo(active_square)(a5)
+        lui     a5,%hi(shot_square)
+        lw      a5,%lo(shot_square)(a5)
+        sub     a5,a4,a5
+        seqz    a5,a5
+        andi    a5,a5,255
+        mv      a2,a5
+        mv      a1,a3
+        call    target_to_ppu_encoding
+        mv      a5,a0
+        mv      a0,a5
+        call    send_ppu_value
         call    rsi_inst
-        j       .L22
+        j       .L23
 .L10:
         lw      a4,-52(s0)
         li      a5,101
         bne     a4,a5,.L11
-        lui     a5,%hi(active_square)
-        lw      a5,%lo(active_square)(a5)
+        lui     a5,%hi(myTurn)
+        sw      zero,%lo(myTurn)(a5)
+        lui     a5,%hi(shot_square)
+        lw      a5,%lo(shot_square)(a5)
         lui     a4,%hi(target_board)
         addi    a4,a4,%lo(target_board)
         add     a5,a4,a5
         li      a4,2
         sb      a4,0(a5)
+        lui     a5,%hi(shot_square)
+        lw      a5,%lo(shot_square)(a5)
+        lui     a4,%hi(target_board)
+        addi    a4,a4,%lo(target_board)
+        add     a5,a4,a5
+        lbu     a5,0(a5)
+        mv      a0,a5
+        lui     a5,%hi(shot_square)
+        lw      a3,%lo(shot_square)(a5)
+        lui     a5,%hi(active_square)
+        lw      a4,%lo(active_square)(a5)
+        lui     a5,%hi(shot_square)
+        lw      a5,%lo(shot_square)(a5)
+        sub     a5,a4,a5
+        seqz    a5,a5
+        andi    a5,a5,255
+        mv      a2,a5
+        mv      a1,a3
+        call    target_to_ppu_encoding
+        mv      a5,a0
+        mv      a0,a5
+        call    send_ppu_value
         call    rsi_inst
-        j       .L22
+        j       .L23
 .L11:
         lw      a4,-52(s0)
         li      a5,106
@@ -236,19 +311,33 @@ exception_handler:
         lw      a4,-52(s0)
         li      a5,106
         bne     a4,a5,.L13
+        lui     a5,%hi(myTurn)
+        lw      a5,%lo(myTurn)(a5)
+        beq     a5,zero,.L23
+        lui     a5,%hi(active_square)
+        lw      a4,%lo(active_square)(a5)
+        lui     a5,%hi(shot_square)
+        sw      a4,%lo(shot_square)(a5)
         lui     a5,%hi(active_square)
         lw      a5,%lo(active_square)(a5)
         mv      a0,a5
         call    send_board_value
-        lui     a5,%hi(myTurn)
-        sw      zero,%lo(myTurn)(a5)
-        j       .L22
+        j       .L23
 .L13:
         lui     a5,%hi(active_square)
         lw      a5,%lo(active_square)(a5)
-        slli    a4,a5,24
-        li      a5,2130706432
-        and     a5,a4,a5
+        lui     a4,%hi(target_board)
+        addi    a4,a4,%lo(target_board)
+        add     a5,a4,a5
+        lbu     a5,0(a5)
+        mv      a4,a5
+        lui     a5,%hi(active_square)
+        lw      a5,%lo(active_square)(a5)
+        li      a2,0
+        mv      a1,a5
+        mv      a0,a4
+        call    target_to_ppu_encoding
+        mv      a5,a0
         mv      a0,a5
         call    send_ppu_value
         lw      a4,-52(s0)
@@ -315,27 +404,42 @@ exception_handler:
 .L15:
         lui     a5,%hi(active_square)
         lw      a5,%lo(active_square)(a5)
-        slli    a4,a5,24
-        li      a5,2130706432
-        and     a4,a4,a5
-        li      a5,32768
-        or      a5,a4,a5
+        lui     a4,%hi(target_board)
+        addi    a4,a4,%lo(target_board)
+        add     a5,a4,a5
+        lbu     a5,0(a5)
+        mv      a4,a5
+        lui     a5,%hi(active_square)
+        lw      a5,%lo(active_square)(a5)
+        li      a2,1
+        mv      a1,a5
+        mv      a0,a4
+        call    target_to_ppu_encoding
+        mv      a5,a0
         mv      a0,a5
         call    send_ppu_value
-        j       .L22
+        j       .L23
 .L12:
+        lw      a4,-52(s0)
+        li      a5,107
+        bne     a4,a5,.L18
+        call    reset_program
+        j       .L23
+.L18:
+        lui     a5,%hi(myTurn)
+        sw      zero,%lo(myTurn)(a5)
         lw      a5,-52(s0)
         srli    a5,a5,8
         andi    a5,a5,255
         sw      a5,-24(s0)
         lw      a4,-24(s0)
         li      a5,99
-        ble     a4,a5,.L18
+        ble     a4,a5,.L19
         li      a5,10
-        j       .L19
-.L18:
-        li      a5,1
+        j       .L20
 .L19:
+        li      a5,1
+.L20:
         sw      a5,-28(s0)
         li      a1,100
         lw      a0,-24(s0)
@@ -346,23 +450,44 @@ exception_handler:
         andi    a5,a5,255
         sw      a5,-36(s0)
         sw      zero,-20(s0)
-        j       .L20
-.L21:
+        j       .L21
+.L22:
         lw      a1,-20(s0)
         lw      a0,-28(s0)
         call    mult
         mv      a4,a0
         lw      a5,-24(s0)
-        add     a5,a4,a5
-        lui     a4,%hi(target_board)
-        addi    a4,a4,%lo(target_board)
+        add     a5,a5,a4
+        sw      a5,-40(s0)
+        lui     a5,%hi(target_board)
+        addi    a4,a5,%lo(target_board)
+        lw      a5,-40(s0)
         add     a5,a4,a5
         li      a4,3
         sb      a4,0(a5)
+        lui     a5,%hi(target_board)
+        addi    a4,a5,%lo(target_board)
+        lw      a5,-40(s0)
+        add     a5,a4,a5
+        lbu     a5,0(a5)
+        mv      a3,a5
+        lui     a5,%hi(active_square)
+        lw      a5,%lo(active_square)(a5)
+        lw      a4,-40(s0)
+        sub     a5,a4,a5
+        seqz    a5,a5
+        andi    a5,a5,255
+        mv      a2,a5
+        lw      a1,-40(s0)
+        mv      a0,a3
+        call    target_to_ppu_encoding
+        mv      a5,a0
+        mv      a0,a5
+        call    send_ppu_value
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L20:
+.L21:
         lui     a5,%hi(ship_sizes)
         addi    a4,a5,%lo(ship_sizes)
         lw      a5,-36(s0)
@@ -370,7 +495,7 @@ exception_handler:
         lbu     a5,0(a5)
         mv      a4,a5
         lw      a5,-20(s0)
-        blt     a5,a4,.L21
+        blt     a5,a4,.L22
         lui     a5,%hi(enemy_sunk)
         addi    a4,a5,%lo(enemy_sunk)
         lw      a5,-36(s0)
@@ -379,7 +504,7 @@ exception_handler:
         lw      a4,-24(s0)
         sw      a4,0(a5)
         call    rsi_inst
-.L22:
+.L23:
         nop
         lw      ra,60(sp)
         lw      s0,56(sp)
@@ -399,13 +524,13 @@ send_ppu_value:
         lw      a4,-20(s0)
         sw      a4,%lo(toSnd)(a5)
  #APP
-# 149 "battleshipP1.c" 1
+# 166 "battleshipP1.c" 1
         lui a0,%hi(toSnd)
 # 0 "" 2
-# 150 "battleshipP1.c" 1
+# 167 "battleshipP1.c" 1
         lw a0,%lo(toSnd)(a0)
 # 0 "" 2
-# 151 "battleshipP1.c" 1
+# 168 "battleshipP1.c" 1
         ugs a0
 # 0 "" 2
  #NO_APP
@@ -428,13 +553,13 @@ send_board_value:
         lw      a4,-20(s0)
         sw      a4,%lo(toSnd)(a5)
  #APP
-# 156 "battleshipP1.c" 1
+# 173 "battleshipP1.c" 1
         lui a0,%hi(toSnd)
 # 0 "" 2
-# 157 "battleshipP1.c" 1
+# 174 "battleshipP1.c" 1
         lw a0,%lo(toSnd)(a0)
 # 0 "" 2
-# 158 "battleshipP1.c" 1
+# 175 "battleshipP1.c" 1
         snd a0
 # 0 "" 2
  #NO_APP
@@ -444,6 +569,81 @@ send_board_value:
         addi    sp,sp,32
         jr      ra
         .size   send_board_value, .-send_board_value
+        .align  2
+        .globl  target_to_ppu_encoding
+        .type   target_to_ppu_encoding, @function
+target_to_ppu_encoding:
+        addi    sp,sp,-48
+        sw      ra,44(sp)
+        sw      s0,40(sp)
+        addi    s0,sp,48
+        sw      a0,-36(s0)
+        sw      a1,-40(s0)
+        sw      a2,-44(s0)
+        lw      a5,-40(s0)
+        slli    a5,a5,24
+        sw      a5,-20(s0)
+        lw      a4,-36(s0)
+        li      a5,1
+        bne     a4,a5,.L27
+        lw      a4,-20(s0)
+        li      a5,4194304
+        or      a5,a4,a5
+        sw      a5,-20(s0)
+        j       .L28
+.L27:
+        lw      a4,-36(s0)
+        li      a5,2
+        bne     a4,a5,.L29
+        lw      a4,-20(s0)
+        li      a5,8388608
+        or      a5,a4,a5
+        sw      a5,-20(s0)
+        j       .L28
+.L29:
+        lw      a4,-36(s0)
+        li      a5,3
+        bne     a4,a5,.L28
+        lw      a5,-36(s0)
+        srai    a5,a5,8
+        slli    a4,a5,20
+        li      a5,12582912
+        or      a4,a4,a5
+        lw      a5,-36(s0)
+        srai    a5,a5,16
+        slli    a5,a5,17
+        or      a4,a4,a5
+        lw      a5,-36(s0)
+        srai    a5,a5,8
+        lui     a3,%hi(enemy_sunk)
+        addi    a3,a3,%lo(enemy_sunk)
+        slli    a5,a5,2
+        add     a5,a3,a5
+        lw      a3,0(a5)
+        li      a5,99
+        ble     a3,a5,.L30
+        li      a5,65536
+        j       .L31
+.L30:
+        li      a5,0
+.L31:
+        or      a5,a5,a4
+        lw      a4,-20(s0)
+        or      a5,a4,a5
+        sw      a5,-20(s0)
+.L28:
+        lw      a5,-44(s0)
+        slli    a5,a5,15
+        lw      a4,-20(s0)
+        or      a5,a4,a5
+        sw      a5,-20(s0)
+        lw      a5,-20(s0)
+        mv      a0,a5
+        lw      ra,44(sp)
+        lw      s0,40(sp)
+        addi    sp,sp,48
+        jr      ra
+        .size   target_to_ppu_encoding, .-target_to_ppu_encoding
         .align  2
         .globl  convert_encoding
         .type   convert_encoding, @function
@@ -464,17 +664,17 @@ convert_encoding:
         sw      a5,-20(s0)
         lw      a4,-20(s0)
         li      a5,2
-        bne     a4,a5,.L26
+        bne     a4,a5,.L34
         li      a5,3
         sw      a5,-20(s0)
-        j       .L27
-.L26:
+        j       .L35
+.L34:
         lw      a4,-20(s0)
         li      a5,3
-        bne     a4,a5,.L27
+        bne     a4,a5,.L35
         li      a5,2
         sw      a5,-20(s0)
-.L27:
+.L35:
         lw      a5,-36(s0)
         srai    a5,a5,17
         andi    a5,a5,7
@@ -498,30 +698,30 @@ convert_encoding:
         sw      a5,-24(s0)
         lw      a4,-28(s0)
         li      a5,2
-        beq     a4,a5,.L29
+        beq     a4,a5,.L37
         lw      a4,-28(s0)
         li      a5,3
-        bne     a4,a5,.L30
+        bne     a4,a5,.L38
         lw      a4,-24(s0)
         li      a5,1048576
         or      a5,a4,a5
         sw      a5,-24(s0)
-        j       .L29
-.L30:
+        j       .L37
+.L38:
         lw      a4,-28(s0)
         li      a5,4
-        bne     a4,a5,.L31
+        bne     a4,a5,.L39
         lw      a4,-24(s0)
         li      a5,2097152
         or      a5,a4,a5
         sw      a5,-24(s0)
-        j       .L29
-.L31:
+        j       .L37
+.L39:
         lw      a4,-24(s0)
         li      a5,3145728
         or      a5,a4,a5
         sw      a5,-24(s0)
-.L29:
+.L37:
         lw      a5,-36(s0)
         srai    a5,a5,14
         slli    a4,a5,17
@@ -549,42 +749,33 @@ convert_encoding:
         .globl  reset_program
         .type   reset_program, @function
 reset_program:
-        addi    sp,sp,-16
-        sw      ra,12(sp)
-        sw      s0,8(sp)
-        addi    s0,sp,16
  #APP
-# 187 "battleshipP1.c" 1
+# 217 "battleshipP1.c" 1
         addi sp,zero,0
+# 0 "" 2
+# 218 "battleshipP1.c" 1
         la a0,main
+# 0 "" 2
+# 219 "battleshipP1.c" 1
         rsi a0
 # 0 "" 2
  #NO_APP
-        nop
-        lw      ra,12(sp)
-        lw      s0,8(sp)
-        addi    sp,sp,16
-        jr      ra
         .size   reset_program, .-reset_program
         .align  2
         .globl  rsi_inst
         .type   rsi_inst, @function
 rsi_inst:
-        addi    sp,sp,-16
-        sw      ra,12(sp)
-        sw      s0,8(sp)
-        addi    s0,sp,16
  #APP
-# 196 "battleshipP1.c" 1
+# 223 "battleshipP1.c" 1
+        addi sp,zero,-32
+# 0 "" 2
+# 224 "battleshipP1.c" 1
         la a0,PRE_ACCELERATOR_LABEL
+# 0 "" 2
+# 225 "battleshipP1.c" 1
         rsi a0
 # 0 "" 2
  #NO_APP
-        nop
-        lw      ra,12(sp)
-        lw      s0,8(sp)
-        addi    sp,sp,16
-        jr      ra
         .size   rsi_inst, .-rsi_inst
         .align  2
         .globl  mult
@@ -598,8 +789,8 @@ mult:
         sw      a1,-40(s0)
         sw      zero,-20(s0)
         sw      zero,-24(s0)
-        j       .L36
-.L37:
+        j       .L44
+.L45:
         lw      a4,-20(s0)
         lw      a5,-36(s0)
         add     a5,a4,a5
@@ -607,10 +798,10 @@ mult:
         lw      a5,-24(s0)
         addi    a5,a5,1
         sw      a5,-24(s0)
-.L36:
+.L44:
         lw      a4,-24(s0)
         lw      a5,-40(s0)
-        blt     a4,a5,.L37
+        blt     a4,a5,.L45
         lw      a5,-20(s0)
         mv      a0,a5
         lw      ra,44(sp)
@@ -629,28 +820,28 @@ mod:
         sw      a0,-20(s0)
         sw      a1,-24(s0)
         lw      a5,-20(s0)
-        ble     a5,zero,.L44
-        j       .L41
-.L42:
+        ble     a5,zero,.L52
+        j       .L49
+.L50:
         lw      a4,-20(s0)
         lw      a5,-24(s0)
         sub     a5,a4,a5
         sw      a5,-20(s0)
-.L41:
+.L49:
         lw      a4,-20(s0)
         lw      a5,-24(s0)
-        bgt     a4,a5,.L42
-        j       .L43
-.L45:
+        bgt     a4,a5,.L50
+        j       .L51
+.L53:
         lw      a4,-20(s0)
         lw      a5,-24(s0)
         add     a5,a4,a5
         sw      a5,-20(s0)
-.L44:
+.L52:
         lw      a5,-20(s0)
-        blt     a5,zero,.L45
-.L43:
-        nop
+        blt     a5,zero,.L53
+.L51:
+        lw      a5,-20(s0)
         mv      a0,a5
         lw      ra,28(sp)
         lw      s0,24(sp)
@@ -666,7 +857,7 @@ rand:
         sw      s0,24(sp)
         addi    s0,sp,32
  #APP
-# 224 "battleshipP1.c" 1
+# 251 "battleshipP1.c" 1
         ldr a0
 # 0 "" 2
  #NO_APP
@@ -684,8 +875,8 @@ clear_boards:
         sw      s0,24(sp)
         addi    s0,sp,32
         sw      zero,-20(s0)
-        j       .L49
-.L50:
+        j       .L58
+.L59:
         lw      a5,-20(s0)
         slli    a4,a5,24
         li      a5,2130706432
@@ -704,10 +895,10 @@ clear_boards:
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L49:
+.L58:
         lw      a4,-20(s0)
         li      a5,99
-        ble     a4,a5,.L50
+        ble     a4,a5,.L59
         nop
         nop
         lw      ra,28(sp)
@@ -734,15 +925,15 @@ place_ship:
         lbu     a5,0(a5)
         sw      a5,-28(s0)
         lw      a5,-56(s0)
-        beq     a5,zero,.L52
+        beq     a5,zero,.L61
         li      a5,10
-        j       .L53
-.L52:
+        j       .L62
+.L61:
         li      a5,1
-.L53:
+.L62:
         sw      a5,-32(s0)
         lw      a5,-56(s0)
-        beq     a5,zero,.L54
+        beq     a5,zero,.L63
         lw      a5,-28(s0)
         addi    a5,a5,-1
         mv      a1,a5
@@ -752,10 +943,10 @@ place_ship:
         lw      a5,-52(s0)
         add     a4,a4,a5
         li      a5,99
-        ble     a4,a5,.L55
+        ble     a4,a5,.L64
         li      a5,0
-        j       .L56
-.L54:
+        j       .L65
+.L63:
         li      a1,10
         lw      a0,-52(s0)
         call    mod
@@ -768,13 +959,13 @@ place_ship:
         mv      a5,a0
         add     a4,s1,a5
         li      a5,9
-        ble     a4,a5,.L55
+        ble     a4,a5,.L64
         li      a5,0
-        j       .L56
-.L55:
+        j       .L65
+.L64:
         sw      zero,-20(s0)
-        j       .L57
-.L59:
+        j       .L66
+.L68:
         lw      a1,-20(s0)
         lw      a0,-32(s0)
         call    mult
@@ -788,20 +979,20 @@ place_ship:
         lw      a4,0(a5)
         li      a5,4194304
         and     a5,a4,a5
-        beq     a5,zero,.L58
+        beq     a5,zero,.L67
         li      a5,0
-        j       .L56
-.L58:
+        j       .L65
+.L67:
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L57:
+.L66:
         lw      a4,-20(s0)
         lw      a5,-28(s0)
-        blt     a4,a5,.L59
+        blt     a4,a5,.L68
         sw      zero,-24(s0)
-        j       .L60
-.L61:
+        j       .L69
+.L70:
         lw      a1,-24(s0)
         lw      a0,-32(s0)
         call    mult
@@ -852,10 +1043,10 @@ place_ship:
         lw      a5,-24(s0)
         addi    a5,a5,1
         sw      a5,-24(s0)
-.L60:
+.L69:
         lw      a4,-24(s0)
         lw      a5,-28(s0)
-        blt     a4,a5,.L61
+        blt     a4,a5,.L70
         lw      a1,-56(s0)
         li      a0,100
         call    mult
@@ -869,7 +1060,7 @@ place_ship:
         add     a5,a3,a5
         sw      a4,0(a5)
         li      a5,1
-.L56:
+.L65:
         mv      a0,a5
         lw      ra,60(sp)
         lw      s0,56(sp)
@@ -886,8 +1077,8 @@ check_lose:
         sw      s0,24(sp)
         addi    s0,sp,32
         sw      zero,-20(s0)
-        j       .L63
-.L66:
+        j       .L72
+.L75:
         lui     a5,%hi(my_sunk)
         addi    a4,a5,%lo(my_sunk)
         lw      a5,-20(s0)
@@ -895,19 +1086,19 @@ check_lose:
         add     a5,a4,a5
         lw      a4,0(a5)
         li      a5,-1
-        bne     a4,a5,.L64
+        bne     a4,a5,.L73
         li      a5,0
-        j       .L65
-.L64:
+        j       .L74
+.L73:
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L63:
+.L72:
         lw      a4,-20(s0)
         li      a5,4
-        ble     a4,a5,.L66
+        ble     a4,a5,.L75
         li      a5,1
-.L65:
+.L74:
         mv      a0,a5
         lw      ra,28(sp)
         lw      s0,24(sp)
@@ -923,14 +1114,14 @@ clear_possible_positions:
         sw      s0,24(sp)
         addi    s0,sp,32
         sw      zero,-20(s0)
-        j       .L68
-.L73:
+        j       .L77
+.L82:
         sw      zero,-24(s0)
-        j       .L69
-.L72:
+        j       .L78
+.L81:
         sw      zero,-28(s0)
-        j       .L70
-.L71:
+        j       .L79
+.L80:
         lw      a1,-24(s0)
         li      a0,100
         call    mult
@@ -952,24 +1143,24 @@ clear_possible_positions:
         lw      a5,-28(s0)
         addi    a5,a5,1
         sw      a5,-28(s0)
-.L70:
+.L79:
         lw      a4,-28(s0)
         li      a5,99
-        ble     a4,a5,.L71
+        ble     a4,a5,.L80
         lw      a5,-24(s0)
         addi    a5,a5,1
         sw      a5,-24(s0)
-.L69:
+.L78:
         lw      a4,-24(s0)
         li      a5,1
-        ble     a4,a5,.L72
+        ble     a4,a5,.L81
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L68:
+.L77:
         lw      a4,-20(s0)
         li      a5,4
-        ble     a4,a5,.L73
+        ble     a4,a5,.L82
         nop
         nop
         lw      ra,28(sp)
@@ -986,8 +1177,8 @@ clear_hit_counts:
         sw      s0,24(sp)
         addi    s0,sp,32
         sw      zero,-20(s0)
-        j       .L75
-.L76:
+        j       .L84
+.L85:
         lui     a5,%hi(hit_counts)
         addi    a4,a5,%lo(hit_counts)
         lw      a5,-20(s0)
@@ -997,10 +1188,10 @@ clear_hit_counts:
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L75:
+.L84:
         lw      a4,-20(s0)
         li      a5,99
-        ble     a4,a5,.L76
+        ble     a4,a5,.L85
         nop
         nop
         lw      ra,28(sp)
@@ -1043,15 +1234,15 @@ check_valid_position:
         lbu     a5,0(a5)
         sw      a5,-24(s0)
         lw      a5,-44(s0)
-        beq     a5,zero,.L79
+        beq     a5,zero,.L88
         li      a5,10
-        j       .L80
-.L79:
+        j       .L89
+.L88:
         li      a5,1
-.L80:
+.L89:
         sw      a5,-28(s0)
         lw      a5,-44(s0)
-        beq     a5,zero,.L81
+        beq     a5,zero,.L90
         lw      a5,-24(s0)
         addi    a5,a5,-1
         mv      a1,a5
@@ -1061,10 +1252,10 @@ check_valid_position:
         lw      a5,-40(s0)
         add     a4,a4,a5
         li      a5,99
-        ble     a4,a5,.L82
+        ble     a4,a5,.L91
         li      a5,0
-        j       .L83
-.L81:
+        j       .L92
+.L90:
         li      a1,10
         lw      a0,-40(s0)
         call    mod
@@ -1077,13 +1268,13 @@ check_valid_position:
         mv      a5,a0
         add     a4,s1,a5
         li      a5,9
-        ble     a4,a5,.L82
+        ble     a4,a5,.L91
         li      a5,0
-        j       .L83
-.L82:
+        j       .L92
+.L91:
         sw      zero,-20(s0)
-        j       .L84
-.L87:
+        j       .L93
+.L96:
         lw      a1,-20(s0)
         lw      a0,-28(s0)
         call    mult
@@ -1095,7 +1286,7 @@ check_valid_position:
         add     a5,a4,a5
         lbu     a4,0(a5)
         li      a5,1
-        beq     a4,a5,.L85
+        beq     a4,a5,.L94
         lw      a1,-20(s0)
         lw      a0,-28(s0)
         call    mult
@@ -1105,22 +1296,22 @@ check_valid_position:
         lui     a4,%hi(target_board)
         addi    a4,a4,%lo(target_board)
         add     a5,a4,a5
-        lbu     a4,0(a5)
-        li      a5,3
-        bne     a4,a5,.L86
-.L85:
+        lbu     a5,0(a5)
+        andi    a5,a5,1
+        beq     a5,zero,.L95
+.L94:
         li      a5,0
-        j       .L83
-.L86:
+        j       .L92
+.L95:
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L84:
+.L93:
         lw      a4,-20(s0)
         lw      a5,-24(s0)
-        blt     a4,a5,.L87
+        blt     a4,a5,.L96
         li      a5,1
-.L83:
+.L92:
         mv      a0,a5
         lw      ra,44(sp)
         lw      s0,40(sp)
@@ -1139,19 +1330,19 @@ square_in_configuration:
         sw      a0,-36(s0)
         sw      a1,-40(s0)
         sw      zero,-20(s0)
-        j       .L89
-.L96:
+        j       .L98
+.L105:
         lw      a5,-20(s0)
         lw      a4,-36(s0)
         add     a5,a4,a5
         lbu     a4,0(a5)
         li      a5,99
-        bleu    a4,a5,.L90
+        bleu    a4,a5,.L99
         li      a5,10
-        j       .L91
-.L90:
+        j       .L100
+.L99:
         li      a5,1
-.L91:
+.L100:
         sw      a5,-28(s0)
         lw      a5,-20(s0)
         lw      a4,-36(s0)
@@ -1162,8 +1353,8 @@ square_in_configuration:
         call    mod
         sw      a0,-32(s0)
         sw      zero,-24(s0)
-        j       .L92
-.L95:
+        j       .L101
+.L104:
         lw      a1,-24(s0)
         lw      a0,-28(s0)
         call    mult
@@ -1171,14 +1362,14 @@ square_in_configuration:
         lw      a5,-32(s0)
         add     a5,a4,a5
         lw      a4,-40(s0)
-        bne     a4,a5,.L93
+        bne     a4,a5,.L102
         li      a5,1
-        j       .L94
-.L93:
+        j       .L103
+.L102:
         lw      a5,-24(s0)
         addi    a5,a5,1
         sw      a5,-24(s0)
-.L92:
+.L101:
         lui     a5,%hi(ship_sizes)
         addi    a4,a5,%lo(ship_sizes)
         lw      a5,-20(s0)
@@ -1186,16 +1377,16 @@ square_in_configuration:
         lbu     a5,0(a5)
         mv      a4,a5
         lw      a5,-24(s0)
-        blt     a5,a4,.L95
+        blt     a5,a4,.L104
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L89:
+.L98:
         lw      a4,-20(s0)
         li      a5,4
-        ble     a4,a5,.L96
+        ble     a4,a5,.L105
         li      a5,0
-.L94:
+.L103:
         mv      a0,a5
         lw      ra,44(sp)
         lw      s0,40(sp)
@@ -1229,21 +1420,21 @@ calculate_overlap:
         sw      a5,-32(s0)
         lw      a4,-56(s0)
         li      a5,99
-        ble     a4,a5,.L98
+        ble     a4,a5,.L107
         li      a5,10
-        j       .L99
-.L98:
+        j       .L108
+.L107:
         li      a5,1
-.L99:
+.L108:
         sw      a5,-36(s0)
         lw      a4,-64(s0)
         li      a5,99
-        ble     a4,a5,.L100
+        ble     a4,a5,.L109
         li      a5,10
-        j       .L101
-.L100:
+        j       .L110
+.L109:
         li      a5,1
-.L101:
+.L110:
         sw      a5,-40(s0)
         li      a1,100
         lw      a0,-56(s0)
@@ -1254,11 +1445,11 @@ calculate_overlap:
         call    mod
         sw      a0,-48(s0)
         sw      zero,-20(s0)
-        j       .L102
-.L107:
+        j       .L111
+.L116:
         sw      zero,-24(s0)
-        j       .L103
-.L106:
+        j       .L112
+.L115:
         lw      a1,-20(s0)
         lw      a0,-36(s0)
         call    mult
@@ -1271,26 +1462,26 @@ calculate_overlap:
         mv      a4,a0
         lw      a5,-48(s0)
         add     a5,a4,a5
-        bne     s1,a5,.L104
+        bne     s1,a5,.L113
         li      a5,0
-        j       .L105
-.L104:
+        j       .L114
+.L113:
         lw      a5,-24(s0)
         addi    a5,a5,1
         sw      a5,-24(s0)
-.L103:
+.L112:
         lw      a4,-24(s0)
         lw      a5,-32(s0)
-        blt     a4,a5,.L106
+        blt     a4,a5,.L115
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L102:
+.L111:
         lw      a4,-20(s0)
         lw      a5,-28(s0)
-        blt     a4,a5,.L107
+        blt     a4,a5,.L116
         li      a5,1
-.L105:
+.L114:
         mv      a0,a5
         lw      ra,60(sp)
         lw      s0,56(sp)
@@ -1308,38 +1499,38 @@ check_valid_configuration:
         addi    s0,sp,48
         sw      a0,-36(s0)
         sw      zero,-20(s0)
-        j       .L109
-.L112:
+        j       .L118
+.L121:
         lui     a5,%hi(target_board)
         addi    a4,a5,%lo(target_board)
         lw      a5,-20(s0)
         add     a5,a4,a5
         lbu     a4,0(a5)
         li      a5,2
-        bne     a4,a5,.L110
+        bne     a4,a5,.L119
         lw      a1,-20(s0)
         lw      a0,-36(s0)
         call    square_in_configuration
         mv      a5,a0
-        bne     a5,zero,.L110
+        bne     a5,zero,.L119
         li      a5,0
-        j       .L111
-.L110:
+        j       .L120
+.L119:
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L109:
+.L118:
         lw      a4,-20(s0)
         li      a5,99
-        ble     a4,a5,.L112
+        ble     a4,a5,.L121
         sw      zero,-24(s0)
-        j       .L113
-.L117:
+        j       .L122
+.L126:
         lw      a5,-24(s0)
         addi    a5,a5,1
         sw      a5,-28(s0)
-        j       .L114
-.L116:
+        j       .L123
+.L125:
         lw      a5,-24(s0)
         lw      a4,-36(s0)
         add     a5,a4,a5
@@ -1354,26 +1545,26 @@ check_valid_configuration:
         lw      a0,-24(s0)
         call    calculate_overlap
         mv      a5,a0
-        bne     a5,zero,.L115
+        bne     a5,zero,.L124
         li      a5,0
-        j       .L111
-.L115:
+        j       .L120
+.L124:
         lw      a5,-28(s0)
         addi    a5,a5,1
         sw      a5,-28(s0)
-.L114:
+.L123:
         lw      a4,-28(s0)
         li      a5,4
-        ble     a4,a5,.L116
+        ble     a4,a5,.L125
         lw      a5,-24(s0)
         addi    a5,a5,1
         sw      a5,-24(s0)
-.L113:
+.L122:
         lw      a4,-24(s0)
         li      a5,3
-        ble     a4,a5,.L117
+        ble     a4,a5,.L126
         li      a5,1
-.L111:
+.L120:
         mv      a0,a5
         lw      ra,44(sp)
         lw      s0,40(sp)
@@ -1391,8 +1582,8 @@ run_accelerator:
         addi    s0,sp,64
         call    clear_accelerator_data
         sw      zero,-20(s0)
-        j       .L119
-.L127:
+        j       .L128
+.L136:
         lui     a5,%hi(enemy_sunk)
         addi    a4,a5,%lo(enemy_sunk)
         lw      a5,-20(s0)
@@ -1400,7 +1591,7 @@ run_accelerator:
         add     a5,a4,a5
         lw      a4,0(a5)
         li      a5,-1
-        beq     a4,a5,.L120
+        beq     a4,a5,.L129
         lui     a5,%hi(enemy_sunk)
         addi    a4,a5,%lo(enemy_sunk)
         lw      a5,-20(s0)
@@ -1420,20 +1611,20 @@ run_accelerator:
         add     a5,a5,a3
         li      a4,1
         sb      a4,0(a5)
-        j       .L121
-.L120:
+        j       .L130
+.L129:
         sw      zero,-24(s0)
-        j       .L122
-.L126:
+        j       .L131
+.L135:
         sw      zero,-28(s0)
-        j       .L123
-.L125:
+        j       .L132
+.L134:
         lw      a2,-24(s0)
         lw      a1,-28(s0)
         lw      a0,-20(s0)
         call    check_valid_position
         mv      a5,a0
-        beq     a5,zero,.L124
+        beq     a5,zero,.L133
         lw      a1,-24(s0)
         li      a0,100
         call    mult
@@ -1453,42 +1644,42 @@ run_accelerator:
         add     a5,a5,a3
         li      a4,1
         sb      a4,0(a5)
-.L124:
+.L133:
         lw      a5,-28(s0)
         addi    a5,a5,1
         sw      a5,-28(s0)
-.L123:
+.L132:
         lw      a4,-28(s0)
         li      a5,99
-        ble     a4,a5,.L125
+        ble     a4,a5,.L134
         lw      a5,-24(s0)
         addi    a5,a5,1
         sw      a5,-24(s0)
-.L122:
+.L131:
         lw      a4,-24(s0)
         li      a5,1
-        ble     a4,a5,.L126
-.L121:
+        ble     a4,a5,.L135
+.L130:
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L119:
+.L128:
         lw      a4,-20(s0)
         li      a5,4
-        ble     a4,a5,.L127
+        ble     a4,a5,.L136
         sw      zero,-32(s0)
-        j       .L128
-.L141:
+        j       .L137
+.L150:
         sw      zero,-36(s0)
-        j       .L129
-.L131:
+        j       .L138
+.L140:
         call    rand
         mv      a5,a0
         li      a1,200
         mv      a0,a5
         call    mod
         mv      a5,a0
-        andi    a4,a5,0xff
+        andi    a4,a5,255
         lw      a5,-36(s0)
         addi    a5,a5,-16
         add     a5,a5,s0
@@ -1510,31 +1701,31 @@ run_accelerator:
         add     a5,a3,a5
         add     a5,a5,a2
         lbu     a5,0(a5)
-        bne     a5,zero,.L130
+        bne     a5,zero,.L139
         lw      a5,-36(s0)
         addi    a5,a5,-1
         sw      a5,-36(s0)
-.L130:
+.L139:
         lw      a5,-36(s0)
         addi    a5,a5,1
         sw      a5,-36(s0)
-.L129:
+.L138:
         lw      a4,-36(s0)
         li      a5,4
-        ble     a4,a5,.L131
+        ble     a4,a5,.L140
         addi    a5,s0,-64
         mv      a0,a5
         call    check_valid_configuration
         mv      a5,a0
-        bne     a5,zero,.L132
+        bne     a5,zero,.L141
         lw      a5,-32(s0)
         addi    a5,a5,-1
         sw      a5,-32(s0)
-        j       .L133
-.L132:
+        j       .L142
+.L141:
         sw      zero,-40(s0)
-        j       .L134
-.L140:
+        j       .L143
+.L149:
         lui     a5,%hi(ship_sizes)
         addi    a4,a5,%lo(ship_sizes)
         lw      a5,-40(s0)
@@ -1555,16 +1746,16 @@ run_accelerator:
         add     a5,a5,s0
         lbu     a4,-48(a5)
         li      a5,99
-        bleu    a4,a5,.L135
+        bleu    a4,a5,.L144
         li      a5,10
-        j       .L136
-.L135:
+        j       .L145
+.L144:
         li      a5,1
-.L136:
+.L145:
         sb      a5,-59(s0)
         sw      zero,-44(s0)
-        j       .L137
-.L139:
+        j       .L146
+.L148:
         lbu     s1,-58(s0)
         lbu     a5,-59(s0)
         lw      a1,-44(s0)
@@ -1576,7 +1767,7 @@ run_accelerator:
         addi    a4,a4,%lo(target_board)
         add     a5,a4,a5
         lbu     a5,0(a5)
-        bne     a5,zero,.L138
+        bne     a5,zero,.L147
         lbu     s1,-58(s0)
         lbu     a5,-59(s0)
         lw      a1,-44(s0)
@@ -1595,36 +1786,36 @@ run_accelerator:
         slli    a5,a5,2
         add     a5,a3,a5
         sw      a4,0(a5)
-.L138:
+.L147:
         lw      a5,-44(s0)
         addi    a5,a5,1
         sw      a5,-44(s0)
-.L137:
+.L146:
         lbu     a5,-57(s0)
         lw      a4,-44(s0)
-        blt     a4,a5,.L139
+        blt     a4,a5,.L148
         lw      a5,-40(s0)
         addi    a5,a5,1
         sw      a5,-40(s0)
-.L134:
+.L143:
         lw      a4,-40(s0)
         li      a5,4
-        ble     a4,a5,.L140
-.L133:
+        ble     a4,a5,.L149
+.L142:
         lw      a5,-32(s0)
         addi    a5,a5,1
         sw      a5,-32(s0)
-.L128:
+.L137:
         lw      a4,-32(s0)
         li      a5,8192
         addi    a5,a5,-193
-        ble     a4,a5,.L141
+        ble     a4,a5,.L150
         li      a5,-1
         sw      a5,-48(s0)
         sw      zero,-52(s0)
         sw      zero,-56(s0)
-        j       .L142
-.L144:
+        j       .L151
+.L153:
         lui     a5,%hi(hit_counts)
         addi    a4,a5,%lo(hit_counts)
         lw      a5,-56(s0)
@@ -1632,7 +1823,7 @@ run_accelerator:
         add     a5,a4,a5
         lw      a5,0(a5)
         lw      a4,-48(s0)
-        bge     a4,a5,.L143
+        bge     a4,a5,.L152
         lui     a5,%hi(hit_counts)
         addi    a4,a5,%lo(hit_counts)
         lw      a5,-56(s0)
@@ -1642,14 +1833,14 @@ run_accelerator:
         sw      a5,-48(s0)
         lw      a5,-56(s0)
         sw      a5,-52(s0)
-.L143:
+.L152:
         lw      a5,-56(s0)
         addi    a5,a5,1
         sw      a5,-56(s0)
-.L142:
+.L151:
         lw      a4,-56(s0)
         li      a5,99
-        ble     a4,a5,.L144
+        ble     a4,a5,.L153
         lw      a5,-52(s0)
         mv      a0,a5
         lw      ra,60(sp)
@@ -1667,8 +1858,8 @@ check_sinks:
         sw      s0,40(sp)
         addi    s0,sp,48
         sw      zero,-20(s0)
-        j       .L147
-.L155:
+        j       .L156
+.L164:
         lui     a5,%hi(my_sunk)
         addi    a4,a5,%lo(my_sunk)
         lw      a5,-20(s0)
@@ -1676,7 +1867,7 @@ check_sinks:
         add     a5,a4,a5
         lw      a4,0(a5)
         li      a5,-1
-        bne     a4,a5,.L148
+        bne     a4,a5,.L157
         li      a5,1
         sw      a5,-24(s0)
         lui     a5,%hi(my_positions)
@@ -1686,12 +1877,12 @@ check_sinks:
         add     a5,a4,a5
         lw      a4,0(a5)
         li      a5,99
-        ble     a4,a5,.L149
+        ble     a4,a5,.L158
         li      a5,10
-        j       .L150
-.L149:
+        j       .L159
+.L158:
         li      a5,1
-.L150:
+.L159:
         sw      a5,-32(s0)
         lui     a5,%hi(my_positions)
         addi    a4,a5,%lo(my_positions)
@@ -1704,8 +1895,8 @@ check_sinks:
         call    mod
         sw      a0,-36(s0)
         sw      zero,-28(s0)
-        j       .L151
-.L153:
+        j       .L160
+.L162:
         lw      a1,-28(s0)
         lw      a0,-32(s0)
         call    mult
@@ -1719,13 +1910,13 @@ check_sinks:
         lw      a4,0(a5)
         li      a5,2097152
         and     a5,a4,a5
-        bne     a5,zero,.L152
+        bne     a5,zero,.L161
         sw      zero,-24(s0)
-.L152:
+.L161:
         lw      a5,-28(s0)
         addi    a5,a5,1
         sw      a5,-28(s0)
-.L151:
+.L160:
         lui     a5,%hi(ship_sizes)
         addi    a4,a5,%lo(ship_sizes)
         lw      a5,-20(s0)
@@ -1733,9 +1924,9 @@ check_sinks:
         lbu     a5,0(a5)
         mv      a4,a5
         lw      a5,-28(s0)
-        blt     a5,a4,.L153
+        blt     a5,a4,.L162
         lw      a5,-24(s0)
-        beq     a5,zero,.L148
+        beq     a5,zero,.L157
         lui     a5,%hi(my_positions)
         addi    a4,a5,%lo(my_positions)
         lw      a5,-20(s0)
@@ -1749,17 +1940,17 @@ check_sinks:
         add     a5,a3,a5
         sw      a4,0(a5)
         li      a5,1
-        j       .L154
-.L148:
+        j       .L163
+.L157:
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L147:
+.L156:
         lw      a4,-20(s0)
         li      a5,4
-        ble     a4,a5,.L155
+        ble     a4,a5,.L164
         li      a5,0
-.L154:
+.L163:
         mv      a0,a5
         lw      ra,44(sp)
         lw      s0,40(sp)
@@ -1843,10 +2034,10 @@ main:
         sw      a4,%lo(myTurn)(a5)
         call    clear_boards
         sw      zero,-20(s0)
-        j       .L157
-.L159:
+        j       .L166
+.L168:
         nop
-.L158:
+.L167:
         call    rand
         mv      a5,a0
         li      a1,100
@@ -1855,25 +2046,22 @@ main:
         mv      s1,a0
         call    rand
         mv      a5,a0
-        li      a1,2
-        mv      a0,a5
-        call    mod
-        mv      a5,a0
+        andi    a5,a5,1
         lw      a2,-20(s0)
         mv      a1,a5
         mv      a0,s1
         call    place_ship
         mv      a5,a0
-        beq     a5,zero,.L158
+        beq     a5,zero,.L167
         lw      a5,-20(s0)
         addi    a5,a5,1
         sw      a5,-20(s0)
-.L157:
+.L166:
         lw      a4,-20(s0)
         li      a5,4
-        ble     a4,a5,.L159
+        ble     a4,a5,.L168
  #APP
-# 460 "battleshipP1.c" 1
+# 487 "battleshipP1.c" 1
         PRE_ACCELERATOR_LABEL:
 # 0 "" 2
  #NO_APP
@@ -1881,11 +2069,8 @@ main:
         mv      a4,a0
         lui     a5,%hi(ai_target)
         sw      a4,%lo(ai_target)(a5)
-.L160:
-        j       .L160
-        nop
-        nop
-        nop
+.L169:
+        j       .L169
         .size   main, .-main
         .ident  "GCC: (g04696df09) 14.2.0"
         .section        .note.GNU-stack,"",@progbits
