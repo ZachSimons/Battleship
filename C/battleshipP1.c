@@ -7,6 +7,11 @@
 #define MISS  1
 #define HIT   2
 #define SUNK  3
+#define SET_SINK_TYPE(x) (x << 8)
+#define GET_SINK_TYPE(x) (x >> 8)
+#define SET_SINK_SEG(x) (x << 16)
+#define GET_SINK_SEG(x) (x >> 16)
+#define SINK_MASK 0x00000003
 
 /* 
  * Interrupt num values 
@@ -54,6 +59,7 @@ int mod(int, int);
 int rand();
 void send_ppu_value(int);
 void send_board_value(int);
+int target_to_ppu_encoding(int, int, int);
 int convert_encoding(int);
 void reset_program();
 void rsi_inst();
@@ -89,13 +95,14 @@ void entry_point() {
 void exception_handler(unsigned int num) {
     if(num < 100) {
         my_board[num] |= SET_M_BIT(1);
+        send_ppu_value(convert_encoding(my_board[num]));
         if(GET_E_BIT(my_board[num])) {
             if(check_sinks()) {
                 if(check_lose()) {
                     send_board_value(ACK_LOSE);
                     reset_program();
                 } else {
-                    send_board_value(SINK_BIT | SET_ACK_SINK_SHIP(GET_TYPE(my_board[num])) | my_positions[GET_TYPE(my_board[num])]);
+                    send_board_value(SINK_BIT | SET_ACK_SINK_SHIP(GET_TYPE(my_board[num])) | SET_ACK_SINK_POS(my_positions[GET_TYPE(my_board[num])]));
                 }
             } else {
                 send_board_value(ACK_HIT);
@@ -108,34 +115,43 @@ void exception_handler(unsigned int num) {
         reset_program();
     } else if(num == ACK_MISS) {
         target_board[active_square] = MISS;
+        send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 0));
         rsi_inst();
     } else if(num == ACK_HIT) {
         target_board[active_square] = HIT;
+        send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 0));
         rsi_inst();
     } else if(num < 107) {
-        if(num == PS2_ENTER) {
-            send_board_value(active_square);
-            myTurn = 0;
-        } else {
-            send_ppu_value(SET_SHIP_POS(active_square));
-            if(num == PS2_LEFT && mod(active_square, 10)) {
-                active_square -= 1;
-            } else if(num == PS2_UP && active_square > 9) {
-                active_square -= 10;
-            } else if(num == PS2_DOWN && active_square < 90) {
-                active_square += 10;
-            } else if(num == PS2_RIGHT && mod(active_square, 10) < 9) {
-                active_square += 1;
+        if(myTurn) {
+            if(num == PS2_ENTER) {
+                if(myTurn) {
+                    myTurn = 0;
+                    send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 0));
+                    send_board_value(active_square);
+                }
+            } else {
+                send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 0));
+                if(num == PS2_LEFT && mod(active_square, 10)) {
+                    active_square -= 1;
+                } else if(num == PS2_UP && active_square > 9) {
+                    active_square -= 10;
+                } else if(num == PS2_DOWN && active_square < 90) {
+                    active_square += 10;
+                } else if(num == PS2_RIGHT && mod(active_square, 10) < 9) {
+                    active_square += 1;
+                }
+                send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 1));
             }
-            send_ppu_value(SET_SHIP_POS(active_square) | SELECT_BIT);
         }
+    } else if(num == ACK_LOSE) {
+        reset_program();
     } else { // ACK_HIT + SINK
         int pos = GET_ACK_SINK_POS(num);
         int inc = pos > 99 ? 10 : 1;
         int square = mod(pos, 100);
         int ship = GET_ACK_SINK_SHIP(num);
         for(int i = 0; i < ship_sizes[ship]; i++) {
-            target_board[pos + mult(inc, i)] = SUNK;
+            target_board[pos + mult(inc, i)] = SET_SINK_TYPE(ship) | SET_SINK_SEG(i) | SUNK;
         }
         enemy_sunk[ship] = pos;
         rsi_inst();
@@ -154,6 +170,19 @@ void send_board_value(int value) {
     asm volatile ("lui a0,%hi(toSnd)");
     asm volatile ("lw a0,%lo(toSnd)(a0)");
     asm volatile ("snd a0");
+}
+
+int target_to_ppu_encoding(int value, int square, int sel) {
+    int result = square << 24;
+    if(value == MISS) {
+        result |= 0x00400000;
+    } else if(value == HIT) {
+        result |= 0x00800000;
+    } else if(SINK_MASK & value == SUNK) {
+        result |= 0x00c00000 | (GET_SINK_TYPE(value) << 20) | (GET_SINK_SEG(value) << 17) | ((enemy_sunk[GET_SINK_TYPE(value)] > 99) << 16);
+    }
+    result |= sel << 15;
+    return result;
 }
 
 int convert_encoding(int value) {
@@ -223,7 +252,7 @@ int rand() {
 void clear_boards() {
     for(int i = 0; i < NUM_SQUARES; i++) {
         my_board[i] = SET_SHIP_POS(i);
-        target_board[i] = 0;
+        target_board[i] = EMPTY;
     }
 }
 
@@ -296,7 +325,7 @@ int check_valid_position(int ship, int square, int v) {
         }
     }
     for(int i = 0; i < size; i++) {
-        if(target_board[square + mult(inc,i)] == MISS || target_board[square + mult(inc,i)] == SUNK) {
+        if(target_board[square + mult(inc,i)] == MISS || target_board[square + mult(inc,i)] & SINK_MASK == SUNK) {
             return 0;
         }
     }

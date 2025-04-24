@@ -32,10 +32,10 @@ void exception_handler(int num) {
         board[activeSquare] |= SELECT_BIT;
         send_ppu_value(board[activeSquare]);
     } else if(num == 100) {
-        board[activeSquare] |= 1 << 22;
+        board[activeSquare] |= (1 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
     } else if(num == 101) {
-        board[activeSquare] |= 2 << 22;
+        board[activeSquare] |= (2 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
     } else {
         if(myTurn) {
