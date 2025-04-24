@@ -6,11 +6,16 @@ int myTurn;
 int board[100];
 int my_board[100];
 int ship_sizes[5];
+int my_positions[5];
+int my_sunk[5];
 
 int generate_encoding(int, int, int, int, int, int, int);
 int mod(int, int);
 void send_ppu_value(int);
 void send_board_value(int);
+int check_sunk(int);
+int check_lose();
+void reset_program();
 
 void entry_point() {
     asm volatile ("j main");
@@ -24,15 +29,25 @@ void exception_handler(int num) {
         if(((my_board[num] >> 22) & 3) == 3) {
             my_board[num] = my_board[num] & 0xffbfffff;
             send_ppu_value(my_board[num]);
-            send_board_value(101);
+            int isSunk = check_sinks();
+            if(isSunk) {
+                isSunk--;
+                if(checkLose()) {
+                    send_board_value(0x00020000 | (isSunk << 8) | my_positions[isSunk]);
+                } else {
+                    send_board_value(0x00010000 | (isSunk << 8) | my_positions[isSunk]);
+                    myTurn = 1;
+                }
+            } else {
+                send_board_value(101);
+                myTurn = 1;
+            }
         } else {
             my_board[num] = my_board[num] | 0x00400000;
             send_ppu_value(my_board[num]);
             send_board_value(100);
+            myTurn = 1;
         }
-        myTurn = 1;
-        board[activeSquare] |= SELECT_BIT;
-        send_ppu_value(board[activeSquare]);
     } else if(num == 100) {
         myTurn = 0;
         board[activeSquare] |= (1 << 22) | SELECT_BIT;
@@ -41,7 +56,7 @@ void exception_handler(int num) {
         myTurn = 0;
         board[activeSquare] |= (2 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
-    } else {
+    } else if(num < 107) {
         board[activeSquare] &= ~SELECT_BIT;
         send_ppu_value(board[activeSquare]);
         if(num == 102) { // LEFT
@@ -61,12 +76,25 @@ void exception_handler(int num) {
                 activeSquare += 1;
             }
         } else if(num == 106) { // FIRE
-            if(myTurn) {
+            if(myTurn && ((board[activeSquare] & 0x00c00000) == 0)) {
                 send_board_value(activeSquare);
             }
         }
         board[activeSquare] |= SELECT_BIT;
         send_ppu_value(board[activeSquare]);
+    } else if(num == 107) {
+        reset_program();
+    } else {
+        myTurn = 0;
+        int ship = (num & 0x0000ff00) >> 8;
+        int pos = num & 0x000000ff;
+        int square = mod(pos, 100);
+        int inc = pos > 99 ? 10 : 1;
+        for(int i = 0; i < ship_sizes[ship]; i++) {
+            int grid = square + mult(inc, i);
+            board[grid] = generate_encoding(0, ship_sizes[ship], 3, grid, i, pos > 99, grid == activeSquare);
+            send_ppu_value(board[grid]);
+        }
     }
 }
 
@@ -130,7 +158,8 @@ int generate_encoding(int board, int size, int state, int pos, int seg, int v, i
     return result;
 }
 
-int place_ship(int pos, int size, int v) {
+int place_ship(int pos, int ship, int v) {
+    int size = ship_sizes[ship];
     int inc = v ? 10 : 1;
     if(v) {
         if(pos + mult(inc, size-1) > 99) {
@@ -146,12 +175,49 @@ int place_ship(int pos, int size, int v) {
             return 0;
         }
     }
+    my_positions[ship] = pos + mult(100, v);
     for(int i = 0; i < size; i++) {
         int square = pos + mult(inc,i);
         my_board[square] = generate_encoding(1, size, 3, pos + mult(i,inc), i, v, 0);
         send_ppu_value(my_board[square]);
     }
     return 1;
+}
+
+int check_sinks() {
+    for(int i = 0; i < 5; i++) {
+        if(my_sunk[i] == 0) {
+            int pos = mod(my_positions[i], 100);
+            int inc = my_positions[i] > 99 ? 10 : 1;
+            int valid = 1;
+            for(int j = 0; j < ship_sizes[i]; j++) {
+                if((my_board[pos + mult(inc,j)] & 0x00c00000) != 0x00800000) {
+                    valid = 0;
+                    break;
+                }
+            }
+            if(valid) {
+                my_sunk[i] = 1;
+                return i+1;
+            }
+        }
+    }
+    return 0;
+}
+
+int check_lose() {
+    for(int i = 0; i < 5; i++) {
+        if(my_sunk[i] == -1) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void reset_program() {
+    asm volatile ("addi sp,zero,0");
+    asm volatile ("la a0,main");
+    asm volatile ("rsi a0");
 }
 
 void initialize_boards() {
@@ -167,6 +233,11 @@ int main() {
     ship_sizes[2] = 3;
     ship_sizes[3] = 4;
     ship_sizes[4] = 5;
+    my_positions[0] = -1;
+    my_positions[1] = -1;
+    my_positions[2] = -1;
+    my_positions[3] = -1;
+    my_positions[4] = -1;
     myTurn = 1;
     initialize_boards();
     for(int i = 0; i < 5; i++) {
