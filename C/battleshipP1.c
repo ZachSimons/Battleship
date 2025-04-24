@@ -115,17 +115,18 @@ void exception_handler(unsigned int num) {
     } else if(num == ACK_LOSE) {
         reset_program();
     } else if(num == ACK_MISS) {
+        myTurn = 0;
         target_board[shot_square] = MISS;
         send_ppu_value(target_to_ppu_encoding(target_board[shot_square], shot_square, active_square == shot_square));
         rsi_inst();
     } else if(num == ACK_HIT) {
+        myTurn = 0;
         target_board[shot_square] = HIT;
         send_ppu_value(target_to_ppu_encoding(target_board[shot_square], shot_square, active_square == shot_square));
         rsi_inst();
     } else if(num < 107) {
         if(num == PS2_ENTER) {
             if(myTurn) {
-                myTurn = 0;
                 shot_square = active_square;
                 send_board_value(active_square);
             }
@@ -145,6 +146,7 @@ void exception_handler(unsigned int num) {
     } else if(num == ACK_LOSE) {
         reset_program();
     } else { // ACK_HIT + SINK
+        myTurn = 0;
         int pos = GET_ACK_SINK_POS(num);
         int inc = pos > 99 ? 10 : 1;
         int square = mod(pos, 100);
@@ -477,7 +479,7 @@ int main() {
         myTurn = 1;
         clear_boards();
         for(int i = 0; i < 5; i++) {
-            while(!place_ship(mod(rand(),100), mod(rand(),2), i)) {
+            while(!place_ship(mod(rand(),100), rand() & 1, i)) {
                 // Do nothing
             }
         }

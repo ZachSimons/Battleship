@@ -184,6 +184,17 @@ def parseSingleHiLo(param: str):
             return str(label_addresses[param.split('(')[1][:-1]] >> 12)
         else:
             return str(label_addresses[param.split('(')[1][:-1]] % 2**12)
+        
+def splitOffset(offset: int):
+    if(offset < 0):
+        offset += 2**32
+    if(offset & 2**11):
+        lower = offset & 0xfff
+        upper = (offset >> 12) + 1
+    else:
+        lower = offset & 0xfff
+        upper = offset >> 12
+    return [upper, lower]
 
 label_addresses = {}
 data_sizes = {}
@@ -337,14 +348,16 @@ if __name__ == '__main__':
                         outputFile.write(format(SND_CODE + rs1_reg(REGISTER_DICT[parameters[0]]), '08x') + '\n')
                     elif(instruction[0] == 'la'):
                         currentAddress += 4
-                        outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(0 if label_addresses[parameters[1]] < 0 and label_addresses[parameters[1]] & 2**11 == 1 else label_addresses[parameters[1]] >> 12), '08x') + '\n')
-                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(label_addresses[parameters[1]] % 2**12), '08x') + '\n')
+                        [upper, lower] = splitOffset(label_addresses[parameters[1]])
+                        outputFile.write(format(AUIPC_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(upper), '08x') + '\n')
+                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(lower), '08x') + '\n')
                     elif(instruction[0] == 'nop'):
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(0) + rs1_reg(0) + iTypeImm(0), '08x') + '\n')
                     elif(instruction[0] == 'li'):
                         currentAddress += 4
-                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(0 if int(parameters[1]) < 0 and int(parameters[1]) & 2**11 == 1 else int(parameters[1]) >> 12), '08x') + '\n')
-                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(int(parameters[1]) % 2**12), '08x') + '\n')
+                        [upper, lower] = splitOffset(int(parameters[1]))
+                        outputFile.write(format(LUI_CODE + rd_reg(REGISTER_DICT[parameters[0]]) + uTypeImm(upper), '08x') + '\n')
+                        outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[0]]) + iTypeImm(lower), '08x') + '\n')
                     elif(instruction[0] == 'mv'):
                         outputFile.write(format(OP_IMM_CODE + ADD + rd_reg(REGISTER_DICT[parameters[0]]) + rs1_reg(REGISTER_DICT[parameters[1]]) + iTypeImm(0), '08x') + '\n')
                     elif(instruction[0] == 'not'):
@@ -387,14 +400,16 @@ if __name__ == '__main__':
                         outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(1) + iTypeImm(0), '08x') + '\n')
                     elif(instruction[0] == 'call'):
                         offset = calculateOffset(currentAddress, label_addresses[parameters[0]])
+                        [upper, lower] = splitOffset(offset)
                         currentAddress += 4
-                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(0 if offset < 0 else offset >> 12), '08x') + '\n')
-                        outputFile.write(format(JALR_CODE + rd_reg(1) + rs1_reg(6) + iTypeImm(offset % 2**12), '08x') + '\n')
+                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(upper), '08x') + '\n')
+                        outputFile.write(format(JALR_CODE + rd_reg(1) + rs1_reg(6) + iTypeImm(lower), '08x') + '\n')
                     elif(instruction[0] == 'tail'):
                         offset = calculateOffset(currentAddress, label_addresses[parameters[0]])
+                        [upper, lower] = splitOffset(offset)
                         currentAddress += 4
-                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(0 if offset < 0 else offset >> 12), '08x') + '\n')
-                        outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(6) + iTypeImm(offset % 2**12), '08x') + '\n')
+                        outputFile.write(format(AUIPC_CODE + rd_reg(6) + uTypeImm(upper), '08x') + '\n')
+                        outputFile.write(format(JALR_CODE + rd_reg(0) + rs1_reg(6) + iTypeImm(lower), '08x') + '\n')
                     elif(instruction[0] == 'ecall'):
                         outputFile.write(format(0x73, '08x') + '\n')
                     else:
