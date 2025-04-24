@@ -5,6 +5,7 @@ int activeSquare;
 int myTurn;
 int board[100];
 int my_board[100];
+int ship_sizes[5];
 
 int generate_encoding(int, int, int, int, int, int, int);
 int mod(int, int);
@@ -156,7 +157,11 @@ void initialize_boards() {
 }
 
 int main() {
-    int ship_sizes[5] = {2, 3, 3, 4, 5};
+    ship_sizes[0] = 2;
+    ship_sizes[1] = 3;
+    ship_sizes[2] = 3;
+    ship_sizes[3] = 4;
+    ship_sizes[4] = 5;
     myTurn = 1;
     initialize_boards();
     for(int i = 0; i < 5; i++) {
