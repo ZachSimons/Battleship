@@ -129,12 +129,22 @@ int generate_encoding(int board, int size, int state, int pos, int seg, int v, i
     return result;
 }
 
-void place_ship(int pos, int size, int v) {
+int place_ship(int pos, int size, int v) {
     int inc = v ? 10 : 1;
-    for(int i = 0; i < size; i++) {
-        int square = pos + mult(inc,i);
-        my_board[square] = generate_encoding(1, size, 3, pos + mult(i,inc), i, v, 0);
-        send_ppu_value(my_board[square]);
+    if((v == 1 && (pos + mult(inc, size-1) < 100)) || (v == 0 && (mod(pos, 10) + mult(inc, size-1) < 10))) {
+        for(int i = 0; i < size; i++) {
+            if(my_board[pos + mult(inc, i)] & 0x00c00000 != 0x00c00000) {
+                return 0;
+            }
+        }
+        for(int i = 0; i < size; i++) {
+            int square = pos + mult(inc,i);
+            my_board[square] = generate_encoding(1, size, 3, pos + mult(i,inc), i, v, 0);
+            send_ppu_value(my_board[square]);
+        }
+        return 1;
+    } else {
+        return 0;
     }
 }
 
@@ -146,13 +156,14 @@ void initialize_boards() {
 }
 
 int main() {
+    int ship_sizes[5] = {2, 3, 3, 4, 5};
     myTurn = 1;
     initialize_boards();
-    place_ship(mod(rand(), 100), 2, 0);
-    place_ship(mod(rand(), 100), 3, 1);
-    place_ship(mod(rand(), 100), 3, 1);
-    place_ship(mod(rand(), 100), 4, 0);
-    place_ship(mod(rand(), 100), 5, 0);
+    for(int i = 0; i < 5; i++) {
+        if(place_ship(mod(rand(), 100), ship_sizes[i], rand() & 1) == 0) {
+            i--;
+        }
+    }
     activeSquare = 55;
     board[activeSquare] |= SELECT_BIT;
     send_ppu_value(board[activeSquare]);
