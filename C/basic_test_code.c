@@ -8,6 +8,13 @@ int my_board[100];
 int ship_sizes[5];
 int my_positions[5];
 int my_sunk[5];
+int enemy_sunk[5];
+
+#define ACCELERATOR_COUNT 8000
+int possible_positions[5][200];
+int hit_counts[100];
+int ai_target;
+int old_ai_target;
 
 int generate_encoding(int, int, int, int, int, int, int);
 int mod(int, int);
@@ -91,6 +98,7 @@ void exception_handler(int num) {
         int pos = num & 0x000000ff;
         int square = mod(pos, 100);
         int inc = pos > 99 ? 10 : 1;
+        enemy_sunk[ship] = pos;
         for(int i = 0; i < ship_sizes[ship]; i++) {
             int grid = square + mult(inc, i);
             board[grid] = generate_encoding(0, ship_sizes[ship], 3, grid, i, pos > 99, grid == activeSquare);
@@ -228,6 +236,151 @@ void initialize_boards() {
     }
 }
 
+void clear_possible_positions() {
+    for(int ship = 0; ship < 5; ship++) {
+        for(int v = 0; v < 2; v++) {
+            for(int square = 0; square < 100; square++) {
+                possible_positions[ship][mult(100,v) + square] = 0;
+            }
+        }
+    }
+}
+
+void clear_hit_counts() {
+    for(int i = 0; i < 100; i++) {
+        hit_counts[i] = 0;
+    }
+}
+
+void clear_accelerator_data() {
+    clear_possible_positions();
+    clear_hit_counts();
+}
+
+int check_valid_position(int ship, int square, int v) {
+    int size = ship_sizes[ship];
+    int inc = v ? 10 : 1;
+    if(v) {
+        if(square + mult(inc,(size-1)) > 99) {
+            return 0;
+        }
+    } else {
+        if (mod(square,10) + mult(inc,(size-1)) > 9) {
+            return 0;
+        }
+    }
+    for(int i = 0; i < size; i++) {
+        int state = board[square + mult(inc, i)] & 0x00c00000;
+        if(state == 0x00400000 || state == 0x00c00000) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int square_in_configuration(int* configuration, int square) {
+    for(int i = 0; i < 5; i++) {
+        int inc = configuration[i] > 99 ? 10 : 1;
+        int start = mod(configuration[i], 100);
+        for(int j = 0; j < ship_sizes[i]; j++) {
+            if(start + mult(inc,j) == square) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+int calculate_overlap(int lower, int lower_square, int upper, int upper_square) {
+    int lower_size = ship_sizes[lower];
+    int upper_size = ship_sizes[upper];
+    int inc_lower = (lower_square > 99) ? 10 : 1;
+    int inc_upper = (upper_square > 99) ? 10 : 1;
+    int lower_pos = mod(lower_square,100);
+    int upper_pos = mod(upper_square,100);
+    for(int i = 0; i < lower_size; i++) {
+        for(int j = 0; j < upper_size; j++) {
+            if(lower_pos + mult(inc_lower,i) == upper_pos + mult(inc_upper,j)) {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+int check_valid_configuration(int* configuration) {
+    for(int i = 0; i < 100; i++) {
+        if((board[i] & 0x00c00000) == 0x00800000) {
+            if(!square_in_configuration(configuration, i)) {
+                return 0;
+            }
+        }
+    }
+    for(int i = 0; i < 4; i++) {
+        for(int j = i+1; j < 5; j++) {
+            if(!calculate_overlap(i, configuration[i], j, configuration[j])) {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+int run_accelerator() {
+    clear_accelerator_data();
+    // Get all valid positions
+    for(int ship = 0; ship < 5; ship++) {
+        if(enemy_sunk[ship] != -1) {
+            possible_positions[ship][enemy_sunk[ship]] = 1;
+        } else {
+            for(int v = 0; v < 2; v++) {
+                for(int square = 0; square < 100; square++) {
+                    if(check_valid_position(ship, square, v)) {
+                        possible_positions[ship][mult(100,v) + square] = 1;
+                    }
+                }
+            }
+        }
+    }
+    // Evaluate configurations
+    for(int accel_cnt = 0; accel_cnt < ACCELERATOR_COUNT; accel_cnt++) {
+        int ship_configuration[5];
+        // Generate configuration
+        for(int ship = 0; ship < 5; ship++) {
+            ship_configuration[ship] = mod(rand(),200);
+            if(!possible_positions[ship][ship_configuration[ship]]) {
+                ship--;
+            }
+        }
+        // Check if configuration is legal (ACCELERATOR)
+        if(!check_valid_configuration(ship_configuration)) {
+            accel_cnt--;
+            continue;
+        }
+        // Mark positions
+        for(int ship = 0; ship < 5; ship++) {
+            char size = ship_sizes[ship];
+            unsigned char pos = mod(ship_configuration[ship],100);
+            unsigned char inc = ship_configuration[ship] >= 100 ? 10 : 1;
+            for(int i = 0; i < size; i++) {
+                if((board[pos + mult(inc,i)] & 0x00c00000) == 0) {
+                    hit_counts[pos + mult(inc,i)]++;
+                }
+            }
+        }
+    }
+    // Find max
+    int max = -1;
+    int target = 0;
+    for(int i = 0; i < 100; i++) {
+        if(hit_counts[i] > max) {
+            max = hit_counts[i];
+            target = i;
+        }
+    }
+    return target;
+}
+
 int main() {
     ship_sizes[0] = 2;
     ship_sizes[1] = 3;
@@ -239,6 +392,16 @@ int main() {
     my_positions[2] = -1;
     my_positions[3] = -1;
     my_positions[4] = -1;
+    my_sunk[0] = 0;
+    my_sunk[1] = 0;
+    my_sunk[2] = 0;
+    my_sunk[3] = 0;
+    my_sunk[4] = 0;
+    enemy_sunk[0] = -1;
+    enemy_sunk[1] = -1;
+    enemy_sunk[2] = -1;
+    enemy_sunk[3] = -1;
+    enemy_sunk[4] = -1;
     myTurn = 1;
     initialize_boards();
     for(int i = 0; i < 5; i++) {
@@ -249,7 +412,12 @@ int main() {
     activeSquare = 55;
     board[activeSquare] |= SELECT_BIT;
     send_ppu_value(board[activeSquare]);
+    ai_target = 55;
+    old_ai_target = 55;
     while(1) {
-        // do nothing
+        ai_target = run_accelerator();
+        send_ppu_value(board[old_ai_target]);
+        send_ppu_value(board[ai_target] | (1 << 14));
+        old_ai_target = ai_target;
     }
 }
