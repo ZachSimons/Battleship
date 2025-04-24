@@ -142,7 +142,7 @@ int place_ship(int pos, int size, int v) {
         }
     }
     for(int i = 0; i < size; i++) {
-        if(my_board[pos + mult(inc, i)] & 0x00c00000 == 0x00c00000) {
+        if((my_board[pos + mult(inc, i)] & 0x00c00000) == 0x00c00000) {
             return 0;
         }
     }
