@@ -134,7 +134,7 @@ int place_ship(int pos, int size, int v) {
     int inc = v ? 10 : 1;
     if((v == 1 && (pos + mult(inc, size-1) < 100)) || (v == 0 && (mod(pos, 10) + mult(inc, size-1) < 10))) {
         for(int i = 0; i < size; i++) {
-            if(my_board[pos + mult(inc, i)] & 0x00c00000 != 0x00c00000) {
+            if(my_board[pos + mult(inc, i)] & 0x00c00000 == 0x00c00000) {
                 return 0;
             }
         }
