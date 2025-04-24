@@ -7,6 +7,7 @@ int board[100];
 int my_board[100];
 
 int generate_encoding(int, int, int, int, int, int, int);
+int mod(int);
 void send_ppu_value(int);
 void send_board_value(int);
 
