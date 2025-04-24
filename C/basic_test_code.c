@@ -45,7 +45,7 @@ void exception_handler(int num) {
         board[activeSquare] &= ~SELECT_BIT;
         send_ppu_value(board[activeSquare]);
         if(num == 102) { // LEFT
-            if(mod(activeSquare, 10) > 0) {
+            if(mod(activeSquare, 10)) {
                 activeSquare -= 1;
             }
         } else if(num == 103) { // UP
@@ -72,7 +72,7 @@ void exception_handler(int num) {
 
 int mod(int a, int b) {
     if(a > 0) {
-        while(a > b) {
+        while(a >= b) {
             a -= b;
         }
     } else {
@@ -132,21 +132,26 @@ int generate_encoding(int board, int size, int state, int pos, int seg, int v, i
 
 int place_ship(int pos, int size, int v) {
     int inc = v ? 10 : 1;
-    if((v == 1 && (pos + mult(inc, size-1) < 100)) || (v == 0 && (mod(pos, 10) + mult(inc, size-1) < 10))) {
-        for(int i = 0; i < size; i++) {
-            if(my_board[pos + mult(inc, i)] & 0x00c00000 == 0x00c00000) {
-                return 0;
-            }
+    if(v) {
+        if(pos + mult(inc, size-1) > 99) {
+            return 0;
         }
-        for(int i = 0; i < size; i++) {
-            int square = pos + mult(inc,i);
-            my_board[square] = generate_encoding(1, size, 3, pos + mult(i,inc), i, v, 0);
-            send_ppu_value(my_board[square]);
-        }
-        return 1;
     } else {
-        return 0;
+        if(mod(pos, 10) + mult(inc, size-1) > 9) {
+            return 0;
+        }
     }
+    for(int i = 0; i < size; i++) {
+        if(my_board[pos + mult(inc, i)] & 0x00c00000 == 0x00c00000) {
+            return 0;
+        }
+    }
+    for(int i = 0; i < size; i++) {
+        int square = pos + mult(inc,i);
+        my_board[square] = generate_encoding(1, size, 3, pos + mult(i,inc), i, v, 0);
+        send_ppu_value(my_board[square]);
+    }
+    return 1;
 }
 
 void initialize_boards() {
