@@ -75,6 +75,7 @@ int my_sunk[MAX_SHIPS];
 int enemy_sunk[MAX_SHIPS];
 
 int active_square;
+int shot_square;
 int toSnd;
 int ai_target;
 int enemy_result;
@@ -114,34 +115,32 @@ void exception_handler(unsigned int num) {
     } else if(num == ACK_LOSE) {
         reset_program();
     } else if(num == ACK_MISS) {
-        target_board[active_square] = MISS;
-        send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 0));
+        target_board[shot_square] = MISS;
+        send_ppu_value(target_to_ppu_encoding(target_board[shot_square], shot_square, active_square == shot_square));
         rsi_inst();
     } else if(num == ACK_HIT) {
-        target_board[active_square] = HIT;
-        send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 0));
+        target_board[shot_square] = HIT;
+        send_ppu_value(target_to_ppu_encoding(target_board[shot_square], shot_square, active_square == shot_square));
         rsi_inst();
     } else if(num < 107) {
-        if(myTurn) {
-            if(num == PS2_ENTER) {
-                if(myTurn) {
-                    myTurn = 0;
-                    send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 0));
-                    send_board_value(active_square);
-                }
-            } else {
-                send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 0));
-                if(num == PS2_LEFT && mod(active_square, 10)) {
-                    active_square -= 1;
-                } else if(num == PS2_UP && active_square > 9) {
-                    active_square -= 10;
-                } else if(num == PS2_DOWN && active_square < 90) {
-                    active_square += 10;
-                } else if(num == PS2_RIGHT && mod(active_square, 10) < 9) {
-                    active_square += 1;
-                }
-                send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 1));
+        if(num == PS2_ENTER) {
+            if(myTurn) {
+                myTurn = 0;
+                shot_square = active_square;
+                send_board_value(active_square);
             }
+        } else {
+            send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 0));
+            if(num == PS2_LEFT && mod(active_square, 10)) {
+                active_square -= 1;
+            } else if(num == PS2_UP && active_square > 9) {
+                active_square -= 10;
+            } else if(num == PS2_DOWN && active_square < 90) {
+                active_square += 10;
+            } else if(num == PS2_RIGHT && mod(active_square, 10) < 9) {
+                active_square += 1;
+            }
+            send_ppu_value(target_to_ppu_encoding(target_board[active_square], active_square, 1));
         }
     } else if(num == ACK_LOSE) {
         reset_program();
@@ -151,7 +150,9 @@ void exception_handler(unsigned int num) {
         int square = mod(pos, 100);
         int ship = GET_ACK_SINK_SHIP(num);
         for(int i = 0; i < ship_sizes[ship]; i++) {
-            target_board[pos + mult(inc, i)] = SET_SINK_TYPE(ship) | SET_SINK_SEG(i) | SUNK;
+            int location = pos + mult(inc, i);
+            target_board[location] = SET_SINK_TYPE(ship) | SET_SINK_SEG(i) | SUNK;
+            send_ppu_value(target_to_ppu_encoding(target_board[location], location, location == active_square));
         }
         enemy_sunk[ship] = pos;
         rsi_inst();
@@ -217,7 +218,7 @@ void reset_program() {
 }
 
 void rsi_inst() {
-    // TODO SP RESET
+    asm volatile ("addi sp,zero,-32");
     asm volatile ("la a0,PRE_ACCELERATOR_LABEL");
     asm volatile ("rsi a0");
 }

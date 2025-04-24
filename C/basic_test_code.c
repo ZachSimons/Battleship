@@ -38,30 +38,24 @@ void exception_handler(int num) {
         board[activeSquare] |= (2 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
     } else {
-        if(myTurn) {
-            board[activeSquare] &= ~SELECT_BIT;
-            send_ppu_value(board[activeSquare]);
-            if(num == 102) { // LEFT
-                activeSquare -= 1;
-                board[activeSquare] |= SELECT_BIT;
-                send_ppu_value(board[activeSquare]);
-            } else if(num == 103) { // UP
-                activeSquare -= 10;
-                board[activeSquare] |= SELECT_BIT;
-                send_ppu_value(board[activeSquare]);
-            } else if(num == 104) { // DOWN
-                activeSquare += 10;
-                board[activeSquare] |= SELECT_BIT;
-                send_ppu_value(board[activeSquare]);
-            } else if(num == 105) { // RIGHT
-                activeSquare += 1;
-                board[activeSquare] |= SELECT_BIT;
-                send_ppu_value(board[activeSquare]);
-            } else if(num == 106) { // FIRE
+        board[activeSquare] &= ~SELECT_BIT;
+        send_ppu_value(board[activeSquare]);
+        if(num == 102) { // LEFT
+            activeSquare -= 1;
+        } else if(num == 103) { // UP
+            activeSquare -= 10;
+        } else if(num == 104) { // DOWN
+            activeSquare += 10;
+        } else if(num == 105) { // RIGHT
+            activeSquare += 1;
+        } else if(num == 106) { // FIRE
+            if(myTurn) {
                 myTurn = 0;
                 send_board_value(activeSquare);
             }
         }
+        board[activeSquare] |= SELECT_BIT;
+        send_ppu_value(board[activeSquare]);
     }
 }
 
