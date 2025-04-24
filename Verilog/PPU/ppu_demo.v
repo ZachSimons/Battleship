@@ -32,71 +32,75 @@ reg key_3_prev_1;
 reg key_3_prev_2;
 reg key_3_prev_3;
 reg [9:0] cmd_index;
-wire [16:0] ppu_cmds [0:35];
+wire [17:0] ppu_cmds [0:35];
 
 assign receive = key_3_prev_3 & (~key_3_prev_2);
 
+// ai square
+assign ppu_cmds[0] = {1'b0, 7'd25, 2'b00, 2'b00, 3'd0, 1'b0, 1'b0, 1'b1};
+assign ppu_cmds[1] = {1'b0, 7'd26, 2'b00, 2'b00, 3'd0, 1'b0, 1'b1, 1'b1};
+
 // ship 2 hor
-assign ppu_cmds[0] = {1'b1, 7'd25, 2'b11, 2'b00, 3'd0, 1'b0, 1'b0};
-assign ppu_cmds[1] = {1'b1, 7'd26, 2'b11, 2'b00, 3'd1, 1'b0, 1'b0};
+// assign ppu_cmds[0] = {1'b1, 7'd25, 2'b11, 2'b00, 3'd0, 1'b0, 1'b0, 1'b0};
+//assign ppu_cmds[1] = {1'b1, 7'd26, 2'b11, 2'b00, 3'd1, 1'b0, 1'b0, 1'b0};
 
 // ship 2 ver
-assign ppu_cmds[2] = {1'b1, 7'd27, 2'b11, 2'b00, 3'd0, 1'b1, 1'b0};
-assign ppu_cmds[3] = {1'b1, 7'd37, 2'b11, 2'b00, 3'd1, 1'b1, 1'b0};
+assign ppu_cmds[2] = {1'b1, 7'd27, 2'b11, 2'b00, 3'd0, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[3] = {1'b1, 7'd37, 2'b11, 2'b00, 3'd1, 1'b1, 1'b0, 1'b0};
 
 // ship 3 hor
-assign ppu_cmds[4] = {1'b1, 7'd42, 2'b11, 2'b01, 3'd0, 1'b0, 1'b0};
-assign ppu_cmds[5] = {1'b1, 7'd43, 2'b11, 2'b01, 3'd1, 1'b0, 1'b0};
-assign ppu_cmds[6] = {1'b1, 7'd44, 2'b11, 2'b01, 3'd2, 1'b0, 1'b0};
+assign ppu_cmds[4] = {1'b1, 7'd42, 2'b11, 2'b01, 3'd0, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[5] = {1'b1, 7'd43, 2'b11, 2'b01, 3'd1, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[6] = {1'b1, 7'd44, 2'b11, 2'b01, 3'd2, 1'b0, 1'b0, 1'b0};
 
 // ship 4 hor
-assign ppu_cmds[7] = {1'b1, 7'd96, 2'b11, 2'b10, 3'd0, 1'b0, 1'b0};
-assign ppu_cmds[8] = {1'b1, 7'd97, 2'b11, 2'b10, 3'd1, 1'b0, 1'b0};
-assign ppu_cmds[9] = {1'b1, 7'd98, 2'b11, 2'b10, 3'd2, 1'b0, 1'b0};
-assign ppu_cmds[10] = {1'b1, 7'd99, 2'b11, 2'b10, 3'd3, 1'b0, 1'b0};
+assign ppu_cmds[7] = {1'b1, 7'd96, 2'b11, 2'b10, 3'd0, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[8] = {1'b1, 7'd97, 2'b11, 2'b10, 3'd1, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[9] = {1'b1, 7'd98, 2'b11, 2'b10, 3'd2, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[10] = {1'b1, 7'd99, 2'b11, 2'b10, 3'd3, 1'b0, 1'b0, 1'b0};
 
 // ship 5 hor
-assign ppu_cmds[11] = {1'b1, 7'd0, 2'b11, 2'b11, 3'd0, 1'b0, 1'b0};
-assign ppu_cmds[12] = {1'b1, 7'd1, 2'b11, 2'b11, 3'd1, 1'b0, 1'b0};
-assign ppu_cmds[13] = {1'b1, 7'd2, 2'b11, 2'b11, 3'd2, 1'b0, 1'b0};
-assign ppu_cmds[14] = {1'b1, 7'd3, 2'b11, 2'b11, 3'd3, 1'b0, 1'b0};
-assign ppu_cmds[15] = {1'b1, 7'd4, 2'b11, 2'b11, 3'd4, 1'b0, 1'b0};
+assign ppu_cmds[11] = {1'b1, 7'd0, 2'b11, 2'b11, 3'd0, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[12] = {1'b1, 7'd1, 2'b11, 2'b11, 3'd1, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[13] = {1'b1, 7'd2, 2'b11, 2'b11, 3'd2, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[14] = {1'b1, 7'd3, 2'b11, 2'b11, 3'd3, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[15] = {1'b1, 7'd4, 2'b11, 2'b11, 3'd4, 1'b0, 1'b0, 1'b0};
 
 // ship 3 vert
-assign ppu_cmds[16] = {1'b1, 7'd45, 2'b11, 2'b01, 3'd0, 1'b1, 1'b0};
-assign ppu_cmds[17] = {1'b1, 7'd55, 2'b11, 2'b01, 3'd1, 1'b1, 1'b0};
-assign ppu_cmds[18] = {1'b1, 7'd65, 2'b11, 2'b01, 3'd2, 1'b1, 1'b0};
+assign ppu_cmds[16] = {1'b1, 7'd45, 2'b11, 2'b01, 3'd0, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[17] = {1'b1, 7'd55, 2'b11, 2'b01, 3'd1, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[18] = {1'b1, 7'd65, 2'b11, 2'b01, 3'd2, 1'b1, 1'b0, 1'b0};
 
 // ship 4 vert
-assign ppu_cmds[19] = {1'b1, 7'd9, 2'b11, 2'b10, 3'd0, 1'b1, 1'b0};
-assign ppu_cmds[20] = {1'b1, 7'd19, 2'b11, 2'b10, 3'd1, 1'b1, 1'b0};
-assign ppu_cmds[21] = {1'b1, 7'd29, 2'b11, 2'b10, 3'd2, 1'b1, 1'b0};
-assign ppu_cmds[22] = {1'b1, 7'd39, 2'b11, 2'b10, 3'd3, 1'b1, 1'b0}; 
+assign ppu_cmds[19] = {1'b1, 7'd9, 2'b11, 2'b10, 3'd0, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[20] = {1'b1, 7'd19, 2'b11, 2'b10, 3'd1, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[21] = {1'b1, 7'd29, 2'b11, 2'b10, 3'd2, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[22] = {1'b1, 7'd39, 2'b11, 2'b10, 3'd3, 1'b1, 1'b0, 1'b0}; 
 
 // ship 5 vert
-assign ppu_cmds[23] = {1'b1, 7'd50, 2'b11, 2'b11, 3'd0, 1'b1, 1'b0};
-assign ppu_cmds[24] = {1'b1, 7'd60, 2'b11, 2'b11, 3'd1, 1'b1, 1'b0};
-assign ppu_cmds[25] = {1'b1, 7'd70, 2'b11, 2'b11, 3'd2, 1'b1, 1'b0};
-assign ppu_cmds[26] = {1'b1, 7'd80, 2'b11, 2'b11, 3'd3, 1'b1, 1'b0};
-assign ppu_cmds[27] = {1'b1, 7'd90, 2'b11, 2'b11, 3'd4, 1'b1, 1'b0};
+assign ppu_cmds[23] = {1'b1, 7'd50, 2'b11, 2'b11, 3'd0, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[24] = {1'b1, 7'd60, 2'b11, 2'b11, 3'd1, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[25] = {1'b1, 7'd70, 2'b11, 2'b11, 3'd2, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[26] = {1'b1, 7'd80, 2'b11, 2'b11, 3'd3, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[27] = {1'b1, 7'd90, 2'b11, 2'b11, 3'd4, 1'b1, 1'b0, 1'b0};
 
 // miss sprites 
-assign ppu_cmds[28] = {1'b0, 7'd53, 2'b01, 2'b11, 3'd3, 1'b1, 1'b0}; // player board
-assign ppu_cmds[29] = {1'b1, 7'd63, 2'b01, 2'b11, 3'd4, 1'b1, 1'b0}; // ship board
+assign ppu_cmds[28] = {1'b0, 7'd53, 2'b01, 2'b11, 3'd3, 1'b1, 1'b0, 1'b0}; // player board
+assign ppu_cmds[29] = {1'b1, 7'd63, 2'b01, 2'b11, 3'd4, 1'b1, 1'b0, 1'b0}; // ship board
 
 // hit sprites
-assign ppu_cmds[30] = {1'b0, 7'd55, 2'b10, 2'b11, 3'd3, 1'b1, 1'b0}; // player board
-assign ppu_cmds[31] = {1'b1, 7'd65, 2'b10, 2'b11, 3'd4, 1'b1, 1'b0}; // ship board
+assign ppu_cmds[30] = {1'b0, 7'd55, 2'b10, 2'b11, 3'd3, 1'b1, 1'b0, 1'b0}; // player board
+assign ppu_cmds[31] = {1'b1, 7'd65, 2'b10, 2'b11, 3'd4, 1'b1, 1'b0, 1'b0}; // ship board
 
 // select with empty
-assign ppu_cmds[32] = {1'b0, 7'd69, 2'b00, 2'b11, 3'd3, 1'b1, 1'b1};
+assign ppu_cmds[32] = {1'b0, 7'd69, 2'b00, 2'b11, 3'd3, 1'b1, 1'b1, 1'b0};
 
 // select with miss
-assign ppu_cmds[33] = {1'b0, 7'd74, 2'b01, 2'b11, 3'd3, 1'b1, 1'b1};
+assign ppu_cmds[33] = {1'b0, 7'd74, 2'b01, 2'b11, 3'd3, 1'b1, 1'b1, 1'b0};
 
 // select with hit
-assign ppu_cmds[34] = {1'b0, 7'd76, 2'b10, 2'b11, 3'd3, 1'b1, 1'b1};
-assign ppu_cmds[35] = {1'b0, 7'd76, 2'b10, 2'b11, 3'd3, 1'b1, 1'b0}; // deselect
+assign ppu_cmds[34] = {1'b0, 7'd76, 2'b10, 2'b11, 3'd3, 1'b1, 1'b1, 1'b0};
+assign ppu_cmds[35] = {1'b0, 7'd76, 2'b10, 2'b11, 3'd3, 1'b1, 1'b0, 1'b0}; // deselect
 
 // vga_clk @ 25 MHz
 vga_pll pll (.refclk(CLOCK_50), .rst(1'b0), .outclk_0(vga_clk));
@@ -114,13 +118,14 @@ PPU ppu_mod (
 		.VGA_SYNC_N(VGA_SYNC_N),
 		.VGA_VS(VGA_VS),
 		.receive(receive),
-		.board(ppu_cmds[cmd_index][16]),
-        .square_update(ppu_cmds[cmd_index][15:9]),
-		.square_state(ppu_cmds[cmd_index][8:7]),
-		.ship_type(ppu_cmds[cmd_index][6:5]),
-		.ship_section(ppu_cmds[cmd_index][4:2]),
-        .vert(ppu_cmds[cmd_index][1]),
-		.square_sel(ppu_cmds[cmd_index][0]));
+		.board(ppu_cmds[cmd_index][17]),
+        .square_update(ppu_cmds[cmd_index][16:10]),
+		.square_state(ppu_cmds[cmd_index][9:8]),
+		.ship_type(ppu_cmds[cmd_index][7:6]),
+		.ship_section(ppu_cmds[cmd_index][5:3]),
+        .vert(ppu_cmds[cmd_index][2]),
+		.square_sel(ppu_cmds[cmd_index][1]),
+		.ai(ppu_cmds[cmd_index][0]));
 
 always @(posedge CLOCK_50, negedge rst_n) begin
 	if (!rst_n) begin

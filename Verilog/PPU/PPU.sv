@@ -16,7 +16,8 @@ module PPU (rst_n,
             ship_type,
             ship_section,
             vert,
-            square_sel);
+            square_sel,
+            ai);
 
 input rst_n, sys_clk, vga_clk;
 input receive;
@@ -27,6 +28,7 @@ input [1:0] ship_type;
 input [2:0] ship_section;
 input vert;
 input square_sel;
+input ai;
 
 output [7:0] r, g, b;
 output VGA_BLANK_N, VGA_HS, VGA_SYNC_N, VGA_VS, VGA_CLK;
@@ -79,13 +81,13 @@ logic in_number_bound;
 
 // updating info of each square
 // take in new info when receive is asserted
-logic [8:0] square_info [0:1][0:99];
+logic [9:0] square_info [0:1][0:99];
 always_ff @(posedge sys_clk, negedge rst_n) begin
     if (!rst_n) begin
-        square_info <= '{default:9'b0};
+        square_info <= '{default:10'b0};
     end
     else if (receive) begin
-        square_info[board][square_update] <= {square_state, ship_type, ship_section, vert, square_sel};
+        square_info[board][square_update] <= {square_state, ship_type, ship_section, vert, square_sel, ai};
     end
 end
 
@@ -185,7 +187,7 @@ assign water_addr = ((next_y * WATER_WIDTH) % (WATER_WIDTH * WATER_WIDTH)) + (ne
 
 // signals needed for ship address calculation
 logic [2:0] next_square_ship_sec;
-assign next_square_ship_sec = square_info[1][(square_y_b1 * 10) + square_x][4:2];
+assign next_square_ship_sec = square_info[1][(square_y_b1 * 10) + square_x][5:3];
 
 // address comb logic for ship2
 logic [31:0] ship2_addr_hor;
@@ -220,16 +222,18 @@ assign hit_miss_addr_b1 = (dy_b1[3:0] * HIT_MISS_WIDTH) + dx[3:0];
 
 // current square values
 // mux select values to output correct pixel
-logic [8:0] curr_square_data;
+logic [9:0] curr_square_data;
 logic [1:0] curr_square_state;
 logic [1:0] curr_ship_type; 
 logic curr_vert;
 logic curr_square_sel;
+logic curr_ai;
 assign curr_square_data = square_info[curr_square[7]][curr_square[6:0]];
-assign curr_square_state = curr_square_data[8:7];
-assign curr_ship_type = curr_square_data[6:5];
-assign curr_vert = curr_square_data[1];
-assign curr_square_sel = curr_square_data[0];
+assign curr_square_state = curr_square_data[9:8];
+assign curr_ship_type = curr_square_data[7:6];
+assign curr_vert = curr_square_data[2];
+assign curr_square_sel = curr_square_data[1];
+assign curr_ai = curr_square_data[0];
 
 // board sprite memory
 logic [7:0] rgb_board;
@@ -364,8 +368,13 @@ logic on_grid_x;
 assign on_grid_x = (curr_off_x == 0);
 assign on_grid_y = (curr_off_y_b0 == 0);
 
-// final rgb mux & calculations to checks if we need to invert pixel for square selection
-assign rgb = (~(on_grid_x | on_grid_y) & curr_square_sel) ? ~object_mux : object_mux;
+// final rgb mux & calculations to checks if we need to invert pixel or set pixel green for AI algo
+
+// make ai square on screen green
+logic [7:0] rgb_ai;
+assign rgb_ai = (~(on_grid_x | on_grid_y) & curr_ai) ? 8'b000_111_00 : object_mux;
+
+assign rgb = (~(on_grid_x | on_grid_y) & curr_square_sel) ? ~rgb_ai : rgb_ai;
 
 // logic to add shoreline or water background
 logic [7:0] r_back, g_back, b_back;
