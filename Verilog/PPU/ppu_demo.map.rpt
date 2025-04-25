@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ppu_demo
-Thu Apr 24 17:49:50 2025
+Fri Apr 25 18:04:57 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -22,49 +22,58 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
  14. General Register Statistics
  15. Inverted Register Statistics
  16. Multiplexer Restructuring Statistics (Restructuring Performed)
- 17. Source assignments for PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_nsg1:auto_generated
+ 17. Source assignments for PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated
  18. Source assignments for PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component|altsyncram_ujg1:auto_generated
  19. Source assignments for PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component|altsyncram_5ng1:auto_generated
- 20. Source assignments for PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component|altsyncram_md92:auto_generated
- 21. Source assignments for PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component|altsyncram_rd92:auto_generated
- 22. Source assignments for PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component|altsyncram_gg92:auto_generated
- 23. Source assignments for PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component|altsyncram_7h92:auto_generated
- 24. Source assignments for PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component|altsyncram_kmg1:auto_generated
- 25. Source assignments for PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component|altsyncram_tig1:auto_generated
- 26. Source assignments for PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component|altsyncram_rfg1:auto_generated
- 27. Source assignments for PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component|altsyncram_4cg1:auto_generated
- 28. Parameter Settings for User Entity Instance: vga_pll:pll|vga_pll_0002:vga_pll_inst|altera_pll:altera_pll_i
- 29. Parameter Settings for User Entity Instance: PPU:ppu_mod
- 30. Parameter Settings for User Entity Instance: PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component
- 31. Parameter Settings for User Entity Instance: PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component
- 32. Parameter Settings for User Entity Instance: PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component
- 33. Parameter Settings for User Entity Instance: PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component
- 34. Parameter Settings for User Entity Instance: PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component
- 35. Parameter Settings for User Entity Instance: PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component
- 36. Parameter Settings for User Entity Instance: PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component
- 37. Parameter Settings for User Entity Instance: PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component
- 38. Parameter Settings for User Entity Instance: PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component
- 39. Parameter Settings for User Entity Instance: PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component
- 40. Parameter Settings for User Entity Instance: PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component
- 41. Parameter Settings for User Entity Instance: PPU:ppu_mod|vga_driver:draw
- 42. altsyncram Parameter Settings by Entity Instance
- 43. Port Connectivity Checks: "PPU:ppu_mod|vga_driver:draw"
- 44. Port Connectivity Checks: "PPU:ppu_mod|hit_ship_rom:rom8"
- 45. Port Connectivity Checks: "PPU:ppu_mod|miss_ship_rom:rom7"
- 46. Port Connectivity Checks: "PPU:ppu_mod|hit_player_rom:rom6"
- 47. Port Connectivity Checks: "PPU:ppu_mod|miss_player_rom:rom5"
- 48. Port Connectivity Checks: "PPU:ppu_mod|ship5_rom:rom4"
- 49. Port Connectivity Checks: "PPU:ppu_mod|ship4_rom:rom3"
- 50. Port Connectivity Checks: "PPU:ppu_mod|ship3_rom:rom2"
- 51. Port Connectivity Checks: "PPU:ppu_mod|ship2_rom:rom1"
- 52. Port Connectivity Checks: "PPU:ppu_mod|water_rom:rom0_2"
- 53. Port Connectivity Checks: "PPU:ppu_mod|shoreline_rom:rom0_1"
- 54. Port Connectivity Checks: "PPU:ppu_mod|board_labels_rom:rom0"
- 55. Port Connectivity Checks: "vga_pll:pll"
- 56. Post-Synthesis Netlist Statistics for Top Partition
- 57. Elapsed Time Per Partition
- 58. Analysis & Synthesis Messages
- 59. Analysis & Synthesis Suppressed Messages
+ 20. Source assignments for PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated
+ 21. Source assignments for PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated
+ 22. Source assignments for PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component|altsyncram_5lg1:auto_generated
+ 23. Source assignments for PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component|altsyncram_md92:auto_generated
+ 24. Source assignments for PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component|altsyncram_rd92:auto_generated
+ 25. Source assignments for PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component|altsyncram_gg92:auto_generated
+ 26. Source assignments for PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component|altsyncram_7h92:auto_generated
+ 27. Source assignments for PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component|altsyncram_kmg1:auto_generated
+ 28. Source assignments for PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component|altsyncram_tig1:auto_generated
+ 29. Source assignments for PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component|altsyncram_rfg1:auto_generated
+ 30. Source assignments for PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component|altsyncram_4cg1:auto_generated
+ 31. Parameter Settings for User Entity Instance: vga_pll:pll|vga_pll_0002:vga_pll_inst|altera_pll:altera_pll_i
+ 32. Parameter Settings for User Entity Instance: PPU:ppu_mod
+ 33. Parameter Settings for User Entity Instance: PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component
+ 34. Parameter Settings for User Entity Instance: PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component
+ 35. Parameter Settings for User Entity Instance: PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component
+ 36. Parameter Settings for User Entity Instance: PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component
+ 37. Parameter Settings for User Entity Instance: PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component
+ 38. Parameter Settings for User Entity Instance: PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component
+ 39. Parameter Settings for User Entity Instance: PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component
+ 40. Parameter Settings for User Entity Instance: PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component
+ 41. Parameter Settings for User Entity Instance: PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component
+ 42. Parameter Settings for User Entity Instance: PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component
+ 43. Parameter Settings for User Entity Instance: PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component
+ 44. Parameter Settings for User Entity Instance: PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component
+ 45. Parameter Settings for User Entity Instance: PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component
+ 46. Parameter Settings for User Entity Instance: PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component
+ 47. Parameter Settings for User Entity Instance: PPU:ppu_mod|vga_driver:draw
+ 48. altsyncram Parameter Settings by Entity Instance
+ 49. Port Connectivity Checks: "PPU:ppu_mod|vga_driver:draw"
+ 50. Port Connectivity Checks: "PPU:ppu_mod|hit_ship_rom:rom8"
+ 51. Port Connectivity Checks: "PPU:ppu_mod|miss_ship_rom:rom7"
+ 52. Port Connectivity Checks: "PPU:ppu_mod|hit_player_rom:rom6"
+ 53. Port Connectivity Checks: "PPU:ppu_mod|miss_player_rom:rom5"
+ 54. Port Connectivity Checks: "PPU:ppu_mod|ship5_rom:rom4"
+ 55. Port Connectivity Checks: "PPU:ppu_mod|ship4_rom:rom3"
+ 56. Port Connectivity Checks: "PPU:ppu_mod|ship3_rom:rom2"
+ 57. Port Connectivity Checks: "PPU:ppu_mod|ship2_rom:rom1"
+ 58. Port Connectivity Checks: "PPU:ppu_mod|your_turn_rom:rom0_5"
+ 59. Port Connectivity Checks: "PPU:ppu_mod|waiting_rom:rom0_4"
+ 60. Port Connectivity Checks: "PPU:ppu_mod|title_rom:rom0_3"
+ 61. Port Connectivity Checks: "PPU:ppu_mod|water_rom:rom0_2"
+ 62. Port Connectivity Checks: "PPU:ppu_mod|shoreline_rom:rom0_1"
+ 63. Port Connectivity Checks: "PPU:ppu_mod|board_labels_rom:rom0"
+ 64. Port Connectivity Checks: "vga_pll:pll"
+ 65. Post-Synthesis Netlist Statistics for Top Partition
+ 66. Elapsed Time Per Partition
+ 67. Analysis & Synthesis Messages
+ 68. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -91,17 +100,17 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu Apr 24 17:49:50 2025          ;
+; Analysis & Synthesis Status     ; Successful - Fri Apr 25 18:04:56 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; ppu_demo                                       ;
 ; Top-level Entity Name           ; ppu_demo                                       ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 661                                            ;
+; Total registers                 ; 745                                            ;
 ; Total pins                      ; 37                                             ;
 ; Total virtual pins              ; 0                                              ;
-; Total block memory bits         ; 478,656                                        ;
-; Total DSP Blocks                ; 4                                              ;
+; Total block memory bits         ; 729,408                                        ;
+; Total DSP Blocks                ; 8                                              ;
 ; Total HSSI RX PCSs              ; 0                                              ;
 ; Total HSSI PMA RX Deserializers ; 0                                              ;
 ; Total HSSI TX PCSs              ; 0                                              ;
@@ -217,8 +226,7 @@ https://fpgasoftware.intel.com/eula.
 ;     Processor 5            ;   0.0%      ;
 ;     Processor 6            ;   0.0%      ;
 ;     Processor 7            ;   0.0%      ;
-;     Processor 8            ;   0.0%      ;
-;     Processors 9-14        ;   0.0%      ;
+;     Processors 8-14        ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -243,6 +251,9 @@ https://fpgasoftware.intel.com/eula.
 ; water_rom.v                      ; yes             ; User Wizard-Generated File             ; I:/ECE554/Battleship/Verilog/PPU/water_rom.v                                    ;         ;
 ; shoreline_rom.v                  ; yes             ; User Wizard-Generated File             ; I:/ECE554/Battleship/Verilog/PPU/shoreline_rom.v                                ;         ;
 ; board_labels_rom.v               ; yes             ; User Wizard-Generated File             ; I:/ECE554/Battleship/Verilog/PPU/board_labels_rom.v                             ;         ;
+; title_rom.v                      ; yes             ; User Wizard-Generated File             ; I:/ECE554/Battleship/Verilog/PPU/title_rom.v                                    ;         ;
+; waiting_rom.v                    ; yes             ; User Wizard-Generated File             ; I:/ECE554/Battleship/Verilog/PPU/waiting_rom.v                                  ;         ;
+; your_turn_rom.v                  ; yes             ; User Wizard-Generated File             ; I:/ECE554/Battleship/Verilog/PPU/your_turn_rom.v                                ;         ;
 ; altera_pll.v                     ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altera_pll.v          ;         ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
 ; stratix_ram_block.inc            ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
@@ -253,14 +264,25 @@ https://fpgasoftware.intel.com/eula.
 ; altrom.inc                       ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altrom.inc            ;         ;
 ; altram.inc                       ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altram.inc            ;         ;
 ; altdpram.inc                     ; yes             ; Megafunction                           ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altdpram.inc          ;         ;
-; db/altsyncram_nsg1.tdf           ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_nsg1.tdf                         ;         ;
+; db/altsyncram_b9a2.tdf           ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_b9a2.tdf                         ;         ;
 ; board_labels.mif                 ; yes             ; Auto-Found Memory Initialization File  ; I:/ECE554/Battleship/Verilog/PPU/board_labels.mif                               ;         ;
+; db/decode_ala.tdf                ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/decode_ala.tdf                              ;         ;
 ; db/decode_31a.tdf                ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/decode_31a.tdf                              ;         ;
 ; db/mux_qfb.tdf                   ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/mux_qfb.tdf                                 ;         ;
 ; db/altsyncram_ujg1.tdf           ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_ujg1.tdf                         ;         ;
 ; shoreline.mif                    ; yes             ; Auto-Found Memory Initialization File  ; I:/ECE554/Battleship/Verilog/PPU/shoreline.mif                                  ;         ;
 ; db/altsyncram_5ng1.tdf           ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_5ng1.tdf                         ;         ;
 ; water_tile.mif                   ; yes             ; Auto-Found Memory Initialization File  ; I:/ECE554/Battleship/Verilog/PPU/water_tile.mif                                 ;         ;
+; db/altsyncram_n6g1.tdf           ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_n6g1.tdf                         ;         ;
+; title.mif                        ; yes             ; Auto-Found Memory Initialization File  ; I:/ECE554/Battleship/Verilog/PPU/title.mif                                      ;         ;
+; db/decode_01a.tdf                ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/decode_01a.tdf                              ;         ;
+; db/mux_nfb.tdf                   ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/mux_nfb.tdf                                 ;         ;
+; db/altsyncram_1dg1.tdf           ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf                         ;         ;
+; waiting.mif                      ; yes             ; Auto-Found Memory Initialization File  ; I:/ECE554/Battleship/Verilog/PPU/waiting.mif                                    ;         ;
+; db/decode_u0a.tdf                ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/decode_u0a.tdf                              ;         ;
+; db/mux_lfb.tdf                   ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/mux_lfb.tdf                                 ;         ;
+; db/altsyncram_5lg1.tdf           ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_5lg1.tdf                         ;         ;
+; your_turn.mif                    ; yes             ; Auto-Found Memory Initialization File  ; I:/ECE554/Battleship/Verilog/PPU/your_turn.mif                                  ;         ;
 ; db/altsyncram_md92.tdf           ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_md92.tdf                         ;         ;
 ; ship_2.mif                       ; yes             ; Auto-Found Memory Initialization File  ; I:/ECE554/Battleship/Verilog/PPU/ship_2.mif                                     ;         ;
 ; db/altsyncram_rd92.tdf           ; yes             ; Auto-Generated Megafunction            ; I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_rd92.tdf                         ;         ;
@@ -285,80 +307,91 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+--------------+
 ; Resource                                    ; Usage        ;
 +---------------------------------------------+--------------+
-; Estimate of Logic utilization (ALMs needed) ; 645          ;
+; Estimate of Logic utilization (ALMs needed) ; 814          ;
 ;                                             ;              ;
-; Combinational ALUT usage for logic          ; 921          ;
-;     -- 7 input functions                    ; 31           ;
-;     -- 6 input functions                    ; 234          ;
-;     -- 5 input functions                    ; 88           ;
-;     -- 4 input functions                    ; 105          ;
-;     -- <=3 input functions                  ; 463          ;
+; Combinational ALUT usage for logic          ; 1155         ;
+;     -- 7 input functions                    ; 47           ;
+;     -- 6 input functions                    ; 299          ;
+;     -- 5 input functions                    ; 127          ;
+;     -- 4 input functions                    ; 102          ;
+;     -- <=3 input functions                  ; 580          ;
 ;                                             ;              ;
-; Dedicated logic registers                   ; 661          ;
+; Dedicated logic registers                   ; 745          ;
 ;                                             ;              ;
 ; I/O pins                                    ; 37           ;
 ; Total MLAB memory bits                      ; 0            ;
-; Total block memory bits                     ; 478656       ;
+; Total block memory bits                     ; 729408       ;
 ;                                             ;              ;
-; Total DSP Blocks                            ; 4            ;
+; Total DSP Blocks                            ; 8            ;
 ;                                             ;              ;
 ; Total PLLs                                  ; 1            ;
 ;     -- PLLs                                 ; 1            ;
 ;                                             ;              ;
 ; Maximum fan-out node                        ; KEY[0]~input ;
-; Maximum fan-out                             ; 658          ;
-; Total fan-out                               ; 8451         ;
-; Average fan-out                             ; 4.70         ;
+; Maximum fan-out                             ; 736          ;
+; Total fan-out                               ; 11024        ;
+; Average fan-out                             ; 5.11         ;
 +---------------------------------------------+--------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                         ;
-+----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
-; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                               ; Entity Name      ; Library Name ;
-+----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
-; |ppu_demo                                    ; 921 (20)            ; 661 (9)                   ; 478656            ; 4          ; 37   ; 0            ; |ppu_demo                                                                                                                         ; ppu_demo         ; work         ;
-;    |PPU:ppu_mod|                             ; 901 (793)           ; 652 (602)                 ; 478656            ; 4          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod                                                                                                             ; PPU              ; work         ;
-;       |board_labels_rom:rom0|                ; 23 (0)              ; 3 (0)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0                                                                                       ; board_labels_rom ; work         ;
-;          |altsyncram:altsyncram_component|   ; 23 (0)              ; 3 (0)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component                                                       ; altsyncram       ; work         ;
-;             |altsyncram_nsg1:auto_generated| ; 23 (0)              ; 3 (3)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_nsg1:auto_generated                        ; altsyncram_nsg1  ; work         ;
-;                |decode_31a:rden_decode|      ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_nsg1:auto_generated|decode_31a:rden_decode ; decode_31a       ; work         ;
-;                |mux_qfb:mux2|                ; 19 (19)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_nsg1:auto_generated|mux_qfb:mux2           ; mux_qfb          ; work         ;
-;       |hit_player_rom:rom6|                  ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_player_rom:rom6                                                                                         ; hit_player_rom   ; work         ;
-;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component                                                         ; altsyncram       ; work         ;
-;             |altsyncram_tig1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component|altsyncram_tig1:auto_generated                          ; altsyncram_tig1  ; work         ;
-;       |hit_ship_rom:rom8|                    ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_ship_rom:rom8                                                                                           ; hit_ship_rom     ; work         ;
-;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component                                                           ; altsyncram       ; work         ;
-;             |altsyncram_4cg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component|altsyncram_4cg1:auto_generated                            ; altsyncram_4cg1  ; work         ;
-;       |miss_player_rom:rom5|                 ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_player_rom:rom5                                                                                        ; miss_player_rom  ; work         ;
-;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component                                                        ; altsyncram       ; work         ;
-;             |altsyncram_kmg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component|altsyncram_kmg1:auto_generated                         ; altsyncram_kmg1  ; work         ;
-;       |miss_ship_rom:rom7|                   ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_ship_rom:rom7                                                                                          ; miss_ship_rom    ; work         ;
-;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component                                                          ; altsyncram       ; work         ;
-;             |altsyncram_rfg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component|altsyncram_rfg1:auto_generated                           ; altsyncram_rfg1  ; work         ;
-;       |ship2_rom:rom1|                       ; 0 (0)               ; 0 (0)                     ; 4488              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship2_rom:rom1                                                                                              ; ship2_rom        ; work         ;
-;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 4488              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component                                                              ; altsyncram       ; work         ;
-;             |altsyncram_md92:auto_generated| ; 0 (0)               ; 0 (0)                     ; 4488              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component|altsyncram_md92:auto_generated                               ; altsyncram_md92  ; work         ;
-;       |ship3_rom:rom2|                       ; 0 (0)               ; 0 (0)                     ; 6664              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship3_rom:rom2                                                                                              ; ship3_rom        ; work         ;
-;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 6664              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component                                                              ; altsyncram       ; work         ;
-;             |altsyncram_rd92:auto_generated| ; 0 (0)               ; 0 (0)                     ; 6664              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component|altsyncram_rd92:auto_generated                               ; altsyncram_rd92  ; work         ;
-;       |ship4_rom:rom3|                       ; 0 (0)               ; 0 (0)                     ; 8840              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship4_rom:rom3                                                                                              ; ship4_rom        ; work         ;
-;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 8840              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component                                                              ; altsyncram       ; work         ;
-;             |altsyncram_gg92:auto_generated| ; 0 (0)               ; 0 (0)                     ; 8840              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component|altsyncram_gg92:auto_generated                               ; altsyncram_gg92  ; work         ;
-;       |ship5_rom:rom4|                       ; 0 (0)               ; 0 (0)                     ; 11016             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship5_rom:rom4                                                                                              ; ship5_rom        ; work         ;
-;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 11016             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component                                                              ; altsyncram       ; work         ;
-;             |altsyncram_7h92:auto_generated| ; 0 (0)               ; 0 (0)                     ; 11016             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component|altsyncram_7h92:auto_generated                               ; altsyncram_7h92  ; work         ;
-;       |shoreline_rom:rom0_1|                 ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|shoreline_rom:rom0_1                                                                                        ; shoreline_rom    ; work         ;
-;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component                                                        ; altsyncram       ; work         ;
-;             |altsyncram_ujg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component|altsyncram_ujg1:auto_generated                         ; altsyncram_ujg1  ; work         ;
-;       |vga_driver:draw|                      ; 85 (85)             ; 47 (47)                   ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|vga_driver:draw                                                                                             ; vga_driver       ; work         ;
-;       |water_rom:rom0_2|                     ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|water_rom:rom0_2                                                                                            ; water_rom        ; work         ;
-;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component                                                            ; altsyncram       ; work         ;
-;             |altsyncram_5ng1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component|altsyncram_5ng1:auto_generated                             ; altsyncram_5ng1  ; work         ;
-;    |vga_pll:pll|                             ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll                                                                                                             ; vga_pll          ; vga_pll      ;
-;       |vga_pll_0002:vga_pll_inst|            ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll|vga_pll_0002:vga_pll_inst                                                                                   ; vga_pll_0002     ; vga_pll      ;
-;          |altera_pll:altera_pll_i|           ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll|vga_pll_0002:vga_pll_inst|altera_pll:altera_pll_i                                                           ; altera_pll       ; work         ;
-+----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                           ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
+; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                 ; Entity Name      ; Library Name ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
+; |ppu_demo                                    ; 1155 (20)           ; 745 (9)                   ; 729408            ; 8          ; 37   ; 0            ; |ppu_demo                                                                                                                           ; ppu_demo         ; work         ;
+;    |PPU:ppu_mod|                             ; 1135 (993)          ; 736 (680)                 ; 729408            ; 8          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod                                                                                                               ; PPU              ; work         ;
+;       |board_labels_rom:rom0|                ; 26 (0)              ; 6 (0)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0                                                                                         ; board_labels_rom ; work         ;
+;          |altsyncram:altsyncram_component|   ; 26 (0)              ; 6 (0)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component                                                         ; altsyncram       ; work         ;
+;             |altsyncram_b9a2:auto_generated| ; 26 (0)              ; 6 (6)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated                          ; altsyncram_b9a2  ; work         ;
+;                |decode_31a:rden_decode_a|    ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated|decode_31a:rden_decode_a ; decode_31a       ; work         ;
+;                |decode_31a:rden_decode_b|    ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated|decode_31a:rden_decode_b ; decode_31a       ; work         ;
+;                |mux_qfb:mux4|                ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated|mux_qfb:mux4             ; mux_qfb          ; work         ;
+;                |mux_qfb:mux5|                ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated|mux_qfb:mux5             ; mux_qfb          ; work         ;
+;       |hit_player_rom:rom6|                  ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_player_rom:rom6                                                                                           ; hit_player_rom   ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component                                                           ; altsyncram       ; work         ;
+;             |altsyncram_tig1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component|altsyncram_tig1:auto_generated                            ; altsyncram_tig1  ; work         ;
+;       |hit_ship_rom:rom8|                    ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_ship_rom:rom8                                                                                             ; hit_ship_rom     ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component                                                             ; altsyncram       ; work         ;
+;             |altsyncram_4cg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component|altsyncram_4cg1:auto_generated                              ; altsyncram_4cg1  ; work         ;
+;       |miss_player_rom:rom5|                 ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_player_rom:rom5                                                                                          ; miss_player_rom  ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component                                                          ; altsyncram       ; work         ;
+;             |altsyncram_kmg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component|altsyncram_kmg1:auto_generated                           ; altsyncram_kmg1  ; work         ;
+;       |miss_ship_rom:rom7|                   ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_ship_rom:rom7                                                                                            ; miss_ship_rom    ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component                                                            ; altsyncram       ; work         ;
+;             |altsyncram_rfg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 2312              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component|altsyncram_rfg1:auto_generated                             ; altsyncram_rfg1  ; work         ;
+;       |ship2_rom:rom1|                       ; 0 (0)               ; 0 (0)                     ; 4488              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship2_rom:rom1                                                                                                ; ship2_rom        ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 4488              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component                                                                ; altsyncram       ; work         ;
+;             |altsyncram_md92:auto_generated| ; 0 (0)               ; 0 (0)                     ; 4488              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component|altsyncram_md92:auto_generated                                 ; altsyncram_md92  ; work         ;
+;       |ship3_rom:rom2|                       ; 0 (0)               ; 0 (0)                     ; 6664              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship3_rom:rom2                                                                                                ; ship3_rom        ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 6664              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component                                                                ; altsyncram       ; work         ;
+;             |altsyncram_rd92:auto_generated| ; 0 (0)               ; 0 (0)                     ; 6664              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component|altsyncram_rd92:auto_generated                                 ; altsyncram_rd92  ; work         ;
+;       |ship4_rom:rom3|                       ; 0 (0)               ; 0 (0)                     ; 8840              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship4_rom:rom3                                                                                                ; ship4_rom        ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 8840              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component                                                                ; altsyncram       ; work         ;
+;             |altsyncram_gg92:auto_generated| ; 0 (0)               ; 0 (0)                     ; 8840              ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component|altsyncram_gg92:auto_generated                                 ; altsyncram_gg92  ; work         ;
+;       |ship5_rom:rom4|                       ; 0 (0)               ; 0 (0)                     ; 11016             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship5_rom:rom4                                                                                                ; ship5_rom        ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 11016             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component                                                                ; altsyncram       ; work         ;
+;             |altsyncram_7h92:auto_generated| ; 0 (0)               ; 0 (0)                     ; 11016             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component|altsyncram_7h92:auto_generated                                 ; altsyncram_7h92  ; work         ;
+;       |shoreline_rom:rom0_1|                 ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|shoreline_rom:rom0_1                                                                                          ; shoreline_rom    ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component                                                          ; altsyncram       ; work         ;
+;             |altsyncram_ujg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component|altsyncram_ujg1:auto_generated                           ; altsyncram_ujg1  ; work         ;
+;       |title_rom:rom0_3|                     ; 11 (0)              ; 2 (0)                     ; 164352            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3                                                                                              ; title_rom        ; work         ;
+;          |altsyncram:altsyncram_component|   ; 11 (0)              ; 2 (0)                     ; 164352            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component                                                              ; altsyncram       ; work         ;
+;             |altsyncram_n6g1:auto_generated| ; 11 (0)              ; 2 (2)                     ; 164352            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated                               ; altsyncram_n6g1  ; work         ;
+;                |decode_01a:rden_decode|      ; 3 (3)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated|decode_01a:rden_decode        ; decode_01a       ; work         ;
+;                |mux_nfb:mux2|                ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated|mux_nfb:mux2                  ; mux_nfb          ; work         ;
+;       |vga_driver:draw|                      ; 100 (100)           ; 47 (47)                   ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|vga_driver:draw                                                                                               ; vga_driver       ; work         ;
+;       |water_rom:rom0_2|                     ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|water_rom:rom0_2                                                                                              ; water_rom        ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component                                                              ; altsyncram       ; work         ;
+;             |altsyncram_5ng1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 65536             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component|altsyncram_5ng1:auto_generated                               ; altsyncram_5ng1  ; work         ;
+;       |your_turn_rom:rom0_5|                 ; 5 (0)               ; 1 (0)                     ; 86400             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|your_turn_rom:rom0_5                                                                                          ; your_turn_rom    ; work         ;
+;          |altsyncram:altsyncram_component|   ; 5 (0)               ; 1 (0)                     ; 86400             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component                                                          ; altsyncram       ; work         ;
+;             |altsyncram_5lg1:auto_generated| ; 5 (0)               ; 1 (1)                     ; 86400             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component|altsyncram_5lg1:auto_generated                           ; altsyncram_5lg1  ; work         ;
+;                |mux_lfb:mux2|                ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component|altsyncram_5lg1:auto_generated|mux_lfb:mux2              ; mux_lfb          ; work         ;
+;    |vga_pll:pll|                             ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll                                                                                                               ; vga_pll          ; vga_pll      ;
+;       |vga_pll_0002:vga_pll_inst|            ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll|vga_pll_0002:vga_pll_inst                                                                                     ; vga_pll_0002     ; vga_pll      ;
+;          |altera_pll:altera_pll_i|           ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|vga_pll:pll|vga_pll_0002:vga_pll_inst|altera_pll:altera_pll_i                                                             ; altera_pll       ; work         ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -367,7 +400,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+--------+------------------+
 ; Name                                                                                                        ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF              ;
 +-------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+--------+------------------+
-; PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_nsg1:auto_generated|ALTSYNCRAM ; AUTO ; ROM            ; 38416        ; 8            ; --           ; --           ; 307328 ; board_labels.mif ;
+; PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated|ALTSYNCRAM ; AUTO ; True Dual Port ; 38416        ; 8            ; 38416        ; 8            ; 307328 ; board_labels.mif ;
 ; PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component|altsyncram_tig1:auto_generated|ALTSYNCRAM   ; AUTO ; ROM            ; 289          ; 8            ; --           ; --           ; 2312   ; hit_player.mif   ;
 ; PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component|altsyncram_4cg1:auto_generated|ALTSYNCRAM     ; AUTO ; ROM            ; 289          ; 8            ; --           ; --           ; 2312   ; hit_ship.mif     ;
 ; PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component|altsyncram_kmg1:auto_generated|ALTSYNCRAM  ; AUTO ; ROM            ; 289          ; 8            ; --           ; --           ; 2312   ; miss_player.mif  ;
@@ -377,7 +410,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component|altsyncram_gg92:auto_generated|ALTSYNCRAM        ; AUTO ; True Dual Port ; 1105         ; 8            ; 1105         ; 8            ; 8840   ; ship_4.mif       ;
 ; PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component|altsyncram_7h92:auto_generated|ALTSYNCRAM        ; AUTO ; True Dual Port ; 1377         ; 8            ; 1377         ; 8            ; 11016  ; ship_5.mif       ;
 ; PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component|altsyncram_ujg1:auto_generated|ALTSYNCRAM  ; AUTO ; ROM            ; 4096         ; 16           ; --           ; --           ; 65536  ; shoreline.mif    ;
+; PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated|ALTSYNCRAM      ; AUTO ; ROM            ; 20544        ; 8            ; --           ; --           ; 164352 ; title.mif        ;
 ; PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component|altsyncram_5ng1:auto_generated|ALTSYNCRAM      ; AUTO ; ROM            ; 4096         ; 16           ; --           ; --           ; 65536  ; water_tile.mif   ;
+; PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component|altsyncram_5lg1:auto_generated|ALTSYNCRAM  ; AUTO ; ROM            ; 10800        ; 8            ; --           ; --           ; 86400  ; your_turn.mif    ;
 +-------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+--------+------------------+
 
 
@@ -387,9 +422,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Statistic                       ; Number Used ;
 +---------------------------------+-------------+
 ; Independent 9x9                 ; 4           ;
-; Total number of DSP blocks      ; 4           ;
+; Two Independent 18x18           ; 4           ;
+; Total number of DSP blocks      ; 8           ;
 ;                                 ;             ;
-; Fixed Point Unsigned Multiplier ; 4           ;
+; Fixed Point Unsigned Multiplier ; 8           ;
 +---------------------------------+-------------+
 
 
@@ -399,9 +435,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                             ; IP Include File    ;
 +--------+--------------+---------+--------------+--------------+---------------------------------------------+--------------------+
 ; Altera ; altera_pll   ; 23.1    ; N/A          ; N/A          ; |ppu_demo|vga_pll:pll                       ; vga_pll.v          ;
-; Altera ; ROM: 1-PORT  ; 23.1    ; N/A          ; N/A          ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0 ; board_labels_rom.v ;
+; Altera ; ROM: 2-PORT  ; 23.1    ; N/A          ; N/A          ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0 ; board_labels_rom.v ;
 ; Altera ; ROM: 1-PORT  ; 23.1    ; N/A          ; N/A          ; |ppu_demo|PPU:ppu_mod|shoreline_rom:rom0_1  ; shoreline_rom.v    ;
 ; Altera ; ROM: 1-PORT  ; 23.1    ; N/A          ; N/A          ; |ppu_demo|PPU:ppu_mod|water_rom:rom0_2      ; water_rom.v        ;
+; Altera ; ROM: 1-PORT  ; 23.1    ; N/A          ; N/A          ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3      ; title_rom.v        ;
+; Altera ; ROM: 1-PORT  ; 23.1    ; N/A          ; N/A          ; |ppu_demo|PPU:ppu_mod|waiting_rom:rom0_4    ; waiting_rom.v      ;
+; Altera ; ROM: 1-PORT  ; 23.1    ; N/A          ; N/A          ; |ppu_demo|PPU:ppu_mod|your_turn_rom:rom0_5  ; your_turn_rom.v    ;
 ; Altera ; ROM: 2-PORT  ; 23.1    ; N/A          ; N/A          ; |ppu_demo|PPU:ppu_mod|ship2_rom:rom1        ; ship2_rom.v        ;
 ; Altera ; ROM: 2-PORT  ; 23.1    ; N/A          ; N/A          ; |ppu_demo|PPU:ppu_mod|ship3_rom:rom2        ; ship3_rom.v        ;
 ; Altera ; ROM: 2-PORT  ; 23.1    ; N/A          ; N/A          ; |ppu_demo|PPU:ppu_mod|ship4_rom:rom3        ; ship4_rom.v        ;
@@ -447,6 +486,72 @@ Encoding Type:  One-Hot
 ; PPU:ppu_mod|vga_driver:draw|red_reg[0..2]  ; Stuck at GND due to stuck port data_in      ;
 ; PPU:ppu_mod|vga_driver:draw|green_reg[0,1] ; Stuck at GND due to stuck port data_in      ;
 ; PPU:ppu_mod|vga_driver:draw|blue_reg[0..2] ; Stuck at GND due to stuck port data_in      ;
+; PPU:ppu_mod|square_info[0][66][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][67][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][68][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][71][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][72][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][73][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][75][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][77][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][78][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][79][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][81][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][82][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][83][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][84][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][85][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][86][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][87][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][88][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][89][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][91][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][92][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][93][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][94][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][95][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][5][3]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][6][3]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][7][3]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][8][3]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][10][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][11][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][12][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][13][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][14][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][15][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][16][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][17][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][18][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][20][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][21][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][22][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][23][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][24][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][28][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][30][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][31][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][32][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][33][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][34][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][35][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][36][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][38][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][40][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][41][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][46][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][47][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][48][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][49][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][51][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][52][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][54][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][56][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][57][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][58][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][59][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][61][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][62][3]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][66][3]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][67][3]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][68][3]          ; Stuck at GND due to stuck port clock_enable ;
@@ -457,6 +562,20 @@ Encoding Type:  One-Hot
 ; PPU:ppu_mod|square_info[1][77][3]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][78][3]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][79][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][81][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][82][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][83][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][84][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][85][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][86][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][87][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][88][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][89][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][91][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][92][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][93][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][94][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][95][3]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][5][3]           ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][6][3]           ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][7][3]           ; Stuck at GND due to stuck port clock_enable ;
@@ -499,20 +618,72 @@ Encoding Type:  One-Hot
 ; PPU:ppu_mod|square_info[1][59][3]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][61][3]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][62][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][81][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][82][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][83][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][84][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][85][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][86][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][87][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][88][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][89][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][91][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][92][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][93][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][94][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][95][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][66][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][67][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][68][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][71][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][72][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][73][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][75][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][77][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][78][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][79][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][81][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][82][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][83][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][84][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][85][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][86][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][87][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][88][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][89][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][91][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][92][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][93][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][94][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][95][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][5][4]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][6][4]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][7][4]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][8][4]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][10][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][11][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][12][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][13][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][14][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][15][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][16][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][17][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][18][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][20][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][21][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][22][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][23][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][24][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][28][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][30][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][31][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][32][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][33][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][34][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][35][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][36][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][38][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][40][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][41][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][46][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][47][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][48][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][49][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][51][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][52][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][54][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][56][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][57][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][58][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][59][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][61][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][62][4]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][66][4]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][67][4]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][68][4]          ; Stuck at GND due to stuck port clock_enable ;
@@ -523,6 +694,20 @@ Encoding Type:  One-Hot
 ; PPU:ppu_mod|square_info[1][77][4]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][78][4]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][79][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][81][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][82][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][83][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][84][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][85][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][86][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][87][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][88][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][89][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][91][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][92][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][93][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][94][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][95][4]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][5][4]           ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][6][4]           ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][7][4]           ; Stuck at GND due to stuck port clock_enable ;
@@ -565,20 +750,72 @@ Encoding Type:  One-Hot
 ; PPU:ppu_mod|square_info[1][59][4]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][61][4]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][62][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][81][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][82][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][83][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][84][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][85][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][86][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][87][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][88][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][89][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][91][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][92][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][93][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][94][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][95][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][66][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][67][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][68][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][71][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][72][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][73][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][75][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][77][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][78][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][79][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][81][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][82][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][83][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][84][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][85][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][86][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][87][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][88][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][89][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][91][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][92][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][93][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][94][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][95][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][5][5]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][6][5]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][7][5]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][8][5]           ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][10][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][11][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][12][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][13][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][14][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][15][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][16][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][17][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][18][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][20][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][21][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][22][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][23][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][24][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][28][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][30][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][31][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][32][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][33][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][34][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][35][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][36][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][38][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][40][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][41][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][46][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][47][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][48][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][49][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][51][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][52][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][54][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][56][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][57][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][58][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][59][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][61][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][62][5]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][66][5]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][67][5]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][68][5]          ; Stuck at GND due to stuck port clock_enable ;
@@ -589,6 +826,20 @@ Encoding Type:  One-Hot
 ; PPU:ppu_mod|square_info[1][77][5]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][78][5]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][79][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][81][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][82][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][83][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][84][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][85][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][86][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][87][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][88][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][89][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][91][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][92][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][93][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][94][5]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[1][95][5]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][5][5]           ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][6][5]           ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][7][5]           ; Stuck at GND due to stuck port clock_enable ;
@@ -631,20 +882,6 @@ Encoding Type:  One-Hot
 ; PPU:ppu_mod|square_info[1][59][5]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][61][5]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][62][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][81][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][82][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][83][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][84][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][85][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][86][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][87][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][88][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][89][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][91][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][92][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][93][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][94][5]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][95][5]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[0][66][0]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[0][67][0]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[0][68][0]          ; Stuck at GND due to stuck port clock_enable ;
@@ -1597,23 +1834,16 @@ Encoding Type:  One-Hot
 ; PPU:ppu_mod|square_info[1][76][4]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[1][76][5]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[0][65][9]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][64][9]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[0][65][0]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][64][0]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[0][65][1]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][64][1]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[0][65][8]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][64][8]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[0][65][6]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][64][6]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[0][65][2]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][64][2]          ; Stuck at GND due to stuck port clock_enable ;
 ; PPU:ppu_mod|square_info[0][65][7]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][64][7]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][64][3]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][64][4]          ; Stuck at GND due to stuck port clock_enable ;
-; PPU:ppu_mod|square_info[1][64][5]          ; Stuck at GND due to stuck port clock_enable ;
-; Total Number of Removed Registers = 1177   ;                                             ;
+; PPU:ppu_mod|square_info[0][65][3]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][65][4]          ; Stuck at GND due to stuck port clock_enable ;
+; PPU:ppu_mod|square_info[0][65][5]          ; Stuck at GND due to stuck port clock_enable ;
+; Total Number of Removed Registers = 1368   ;                                             ;
 +--------------------------------------------+---------------------------------------------+
 
 
@@ -1622,12 +1852,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 661   ;
-; Number of registers using Synchronous Clear  ; 63    ;
-; Number of registers using Synchronous Load   ; 1     ;
-; Number of registers using Asynchronous Clear ; 637   ;
+; Total registers                              ; 745   ;
+; Number of registers using Synchronous Clear  ; 32    ;
+; Number of registers using Synchronous Load   ; 9     ;
+; Number of registers using Asynchronous Clear ; 714   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 617   ;
+; Number of registers using Clock Enable       ; 694   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -1637,14 +1867,14 @@ Encoding Type:  One-Hot
 +-----------------------------------------+---------+
 ; Inverted Register                       ; Fan out ;
 +-----------------------------------------+---------+
+; PPU:ppu_mod|curr_square[7]              ; 14      ;
+; PPU:ppu_mod|curr_square[6]              ; 10      ;
+; PPU:ppu_mod|curr_square[1]              ; 166     ;
+; PPU:ppu_mod|curr_square[0]              ; 164     ;
 ; PPU:ppu_mod|curr_square[5]              ; 26      ;
 ; PPU:ppu_mod|curr_square[4]              ; 36      ;
-; PPU:ppu_mod|curr_square[0]              ; 164     ;
-; PPU:ppu_mod|curr_square[1]              ; 166     ;
-; PPU:ppu_mod|curr_square[2]              ; 57      ;
 ; PPU:ppu_mod|curr_square[3]              ; 60      ;
-; PPU:ppu_mod|curr_square[6]              ; 10      ;
-; PPU:ppu_mod|curr_square[7]              ; 14      ;
+; PPU:ppu_mod|curr_square[2]              ; 57      ;
 ; key_3_prev_3                            ; 1       ;
 ; key_3_prev_2                            ; 2       ;
 ; key_3_prev_1                            ; 1       ;
@@ -1652,26 +1882,27 @@ Encoding Type:  One-Hot
 +-----------------------------------------+---------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                                                             ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                                                   ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|board_addr[29]                                                                                                         ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|blue_reg[4]                                                                                            ;
-; 5:1                ; 7 bits    ; 21 LEs        ; 21 LEs               ; 0 LEs                  ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|green_reg[7]                                                                                           ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|v_counter[6]                                                                                           ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|h_counter[4]                                                                                           ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_nsg1:auto_generated|mux_qfb:mux2|l3_w0_n0_mux_dataout ;
-; 128:1              ; 3 bits    ; 255 LEs       ; 204 LEs              ; 51 LEs                 ; No         ; |ppu_demo|PPU:ppu_mod|Mux1                                                                                                                   ;
-; 256:1              ; 7 bits    ; 1190 LEs      ; 959 LEs              ; 231 LEs                ; No         ; |ppu_demo|PPU:ppu_mod|curr_square_data[8]                                                                                                    ;
-; 30:1               ; 2 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|rgb[7]                                                                                                                 ;
-; 30:1               ; 5 bits    ; 100 LEs       ; 100 LEs              ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|rgb[4]                                                                                                                 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                                                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
+; 8:1                ; 8 bits    ; 40 LEs        ; 0 LEs                ; 40 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|green_reg[2]                                                                                ;
+; 8:1                ; 3 bits    ; 15 LEs        ; 12 LEs               ; 3 LEs                  ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|red_reg[6]                                                                                  ;
+; 8:1                ; 4 bits    ; 20 LEs        ; 16 LEs               ; 4 LEs                  ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|green_reg[7]                                                                                ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|v_counter[4]                                                                                ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|h_counter[4]                                                                                ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated|mux_nfb:mux2|result_node[4] ;
+; 10:1               ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|board_sel[7]                                                                                                ;
+; 256:1              ; 7 bits    ; 1190 LEs      ; 959 LEs              ; 231 LEs                ; No         ; |ppu_demo|PPU:ppu_mod|curr_square_data[0]                                                                                         ;
+; 256:1              ; 3 bits    ; 510 LEs       ; 411 LEs              ; 99 LEs                 ; No         ; |ppu_demo|PPU:ppu_mod|next_square_ship_sec[2]                                                                                     ;
+; 30:1               ; 2 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|rgb[7]                                                                                                      ;
+; 30:1               ; 5 bits    ; 100 LEs       ; 100 LEs              ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|rgb[2]                                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_nsg1:auto_generated ;
+; Source assignments for PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated ;
 +---------------------------------+--------------------+------+-----------------------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                                        ;
 +---------------------------------+--------------------+------+-----------------------------------------------------------+
@@ -1695,6 +1926,33 @@ Encoding Type:  One-Hot
 +---------------------------------+--------------------+------+------------------------------------------------------+
 ; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                    ;
 +---------------------------------+--------------------+------+------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Source assignments for PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated ;
++---------------------------------+--------------------+------+------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                   ;
++---------------------------------+--------------------+------+------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                    ;
++---------------------------------+--------------------+------+------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Source assignments for PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                     ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                      ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component|altsyncram_5lg1:auto_generated ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                       ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                        ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------------------+
@@ -2025,11 +2283,20 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; BOARD_HEIGHT       ; 173   ; Signed Integer              ;
 ; BORDER_WIDTH       ; 6     ; Signed Integer              ;
 ; SQUARE_SIZE        ; 16    ; Signed Integer              ;
-; BOARD_OFFSET_X     ; 234   ; Signed Integer              ;
-; BOARD1_OFFSET_Y    ; 34    ; Signed Integer              ;
-; LETTERS_HEIGHT     ; 22    ; Signed Integer              ;
+; BOARD0_OFFSET_X    ; 83    ; Signed Integer              ;
+; BOARD0_OFFSET_Y    ; 170   ; Signed Integer              ;
+; BOARD1_OFFSET_X    ; 361   ; Signed Integer              ;
+; BOARD1_OFFSET_Y    ; 170   ; Signed Integer              ;
+; LETTERS_HEIGHT     ; 23    ; Signed Integer              ;
 ; NUMBERS_WIDTH      ; 23    ; Signed Integer              ;
-; BOARD2_OFFSET_Y    ; 229   ; Signed Integer              ;
+; TITLE_OFFSET_X     ; 160   ; Signed Integer              ;
+; TITLE_OFFSET_Y     ; 16    ; Signed Integer              ;
+; TITLE_WIDTH        ; 321   ; Signed Integer              ;
+; TITLE_HEIGHT       ; 64    ; Signed Integer              ;
+; TURN_OFFSET_X      ; 170   ; Signed Integer              ;
+; TURN_OFFSET_Y      ; 94    ; Signed Integer              ;
+; TURN_WIDTH         ; 300   ; Signed Integer              ;
+; TURN_HEIGHT        ; 36    ; Signed Integer              ;
 ; SHORELINE_OFFSET_Y ; 416   ; Signed Integer              ;
 ; WATER_WIDTH        ; 64    ; Signed Integer              ;
 ; SHIP2_WIDTH        ; 33    ; Signed Integer              ;
@@ -2037,12 +2304,12 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; SHIP4_WIDTH        ; 65    ; Signed Integer              ;
 ; SHIP5_WIDTH        ; 81    ; Signed Integer              ;
 ; HIT_MISS_WIDTH     ; 17    ; Signed Integer              ;
-; ROW0_B0            ; 62    ; Signed Integer              ;
-; ROW10_B0           ; 222   ; Signed Integer              ;
-; ROW0_B1            ; 257   ; Signed Integer              ;
-; ROW10_B1           ; 417   ; Signed Integer              ;
-; COL0               ; 263   ; Signed Integer              ;
-; COL10              ; 423   ; Signed Integer              ;
+; ROW0               ; 199   ; Signed Integer              ;
+; ROW10              ; 359   ; Signed Integer              ;
+; COL0_B0            ; 112   ; Signed Integer              ;
+; COL10_B0           ; 272   ; Signed Integer              ;
+; COL0_B1            ; 390   ; Signed Integer              ;
+; COL10_B1           ; 550   ; Signed Integer              ;
 +--------------------+-------+-----------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -2058,7 +2325,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                       ;
 ; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                     ;
 ; WIDTH_BYTEENA                      ; 1                    ; Untyped                                            ;
-; OPERATION_MODE                     ; ROM                  ; Untyped                                            ;
+; OPERATION_MODE                     ; BIDIR_DUAL_PORT      ; Untyped                                            ;
 ; WIDTH_A                            ; 8                    ; Signed Integer                                     ;
 ; WIDTHAD_A                          ; 16                   ; Signed Integer                                     ;
 ; NUMWORDS_A                         ; 38416                ; Signed Integer                                     ;
@@ -2068,13 +2335,13 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                            ;
 ; INDATA_ACLR_A                      ; NONE                 ; Untyped                                            ;
 ; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                            ;
-; WIDTH_B                            ; 1                    ; Untyped                                            ;
-; WIDTHAD_B                          ; 1                    ; Untyped                                            ;
-; NUMWORDS_B                         ; 1                    ; Untyped                                            ;
-; INDATA_REG_B                       ; CLOCK1               ; Untyped                                            ;
-; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                            ;
+; WIDTH_B                            ; 8                    ; Signed Integer                                     ;
+; WIDTHAD_B                          ; 16                   ; Signed Integer                                     ;
+; NUMWORDS_B                         ; 38416                ; Signed Integer                                     ;
+; INDATA_REG_B                       ; CLOCK0               ; Untyped                                            ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK0               ; Untyped                                            ;
 ; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                            ;
-; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                            ;
+; ADDRESS_REG_B                      ; CLOCK0               ; Untyped                                            ;
 ; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                            ;
 ; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                            ;
 ; INDATA_ACLR_B                      ; NONE                 ; Untyped                                            ;
@@ -2084,7 +2351,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                            ;
 ; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                            ;
 ; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                                     ;
-; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                            ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Signed Integer                                     ;
 ; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                            ;
 ; BYTE_SIZE                          ; 8                    ; Untyped                                            ;
 ; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                            ;
@@ -2094,16 +2361,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                            ;
 ; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                            ;
 ; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                            ;
-; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                            ;
+; CLOCK_ENABLE_INPUT_B               ; BYPASS               ; Untyped                                            ;
 ; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                                            ;
-; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                            ;
+; CLOCK_ENABLE_OUTPUT_B              ; BYPASS               ; Untyped                                            ;
 ; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                            ;
 ; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                            ;
 ; ENABLE_ECC                         ; FALSE                ; Untyped                                            ;
 ; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                            ;
 ; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                            ;
 ; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                                            ;
-; CBXI_PARAMETER                     ; altsyncram_nsg1      ; Untyped                                            ;
+; CBXI_PARAMETER                     ; altsyncram_b9a2      ; Untyped                                            ;
 +------------------------------------+----------------------+----------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -2227,6 +2494,189 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                                       ;
 ; CBXI_PARAMETER                     ; altsyncram_5ng1      ; Untyped                                       ;
 +------------------------------------+----------------------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+-----------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                          ;
++------------------------------------+----------------------+-----------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                       ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                    ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                  ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                  ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                       ;
+; OPERATION_MODE                     ; ROM                  ; Untyped                                       ;
+; WIDTH_A                            ; 8                    ; Signed Integer                                ;
+; WIDTHAD_A                          ; 15                   ; Signed Integer                                ;
+; NUMWORDS_A                         ; 20544                ; Signed Integer                                ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                       ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                       ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                       ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                       ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                       ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                       ;
+; WIDTH_B                            ; 1                    ; Untyped                                       ;
+; WIDTHAD_B                          ; 1                    ; Untyped                                       ;
+; NUMWORDS_B                         ; 1                    ; Untyped                                       ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                       ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                       ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                       ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                       ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                       ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                       ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                       ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                       ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                       ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                       ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                       ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                       ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                                ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                       ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                       ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                       ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                       ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                       ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                       ;
+; INIT_FILE                          ; title.mif            ; Untyped                                       ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                       ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                       ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                       ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                       ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                                       ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                       ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                       ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                       ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                       ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                       ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                       ;
+; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                                       ;
+; CBXI_PARAMETER                     ; altsyncram_n6g1      ; Untyped                                       ;
++------------------------------------+----------------------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+-------------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                            ;
++------------------------------------+----------------------+-------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                         ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                      ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                    ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                    ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                  ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                         ;
+; OPERATION_MODE                     ; ROM                  ; Untyped                                         ;
+; WIDTH_A                            ; 8                    ; Signed Integer                                  ;
+; WIDTHAD_A                          ; 14                   ; Signed Integer                                  ;
+; NUMWORDS_A                         ; 10800                ; Signed Integer                                  ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                         ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                         ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                         ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                         ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                         ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                         ;
+; WIDTH_B                            ; 1                    ; Untyped                                         ;
+; WIDTHAD_B                          ; 1                    ; Untyped                                         ;
+; NUMWORDS_B                         ; 1                    ; Untyped                                         ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                         ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                         ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                         ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                         ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                         ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                         ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                         ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                         ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                         ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                         ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                         ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                         ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                                  ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                         ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                         ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                         ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                         ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                         ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                         ;
+; INIT_FILE                          ; waiting.mif          ; Untyped                                         ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                         ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                         ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                         ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                         ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                                         ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                         ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                         ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                         ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                         ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                         ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                         ;
+; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                                         ;
+; CBXI_PARAMETER                     ; altsyncram_1dg1      ; Untyped                                         ;
++------------------------------------+----------------------+-------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+---------------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                              ;
++------------------------------------+----------------------+---------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                           ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                        ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                      ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                      ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                    ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                           ;
+; OPERATION_MODE                     ; ROM                  ; Untyped                                           ;
+; WIDTH_A                            ; 8                    ; Signed Integer                                    ;
+; WIDTHAD_A                          ; 14                   ; Signed Integer                                    ;
+; NUMWORDS_A                         ; 10800                ; Signed Integer                                    ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                           ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                           ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                           ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                           ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                           ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                           ;
+; WIDTH_B                            ; 1                    ; Untyped                                           ;
+; WIDTHAD_B                          ; 1                    ; Untyped                                           ;
+; NUMWORDS_B                         ; 1                    ; Untyped                                           ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                           ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                           ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                           ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                           ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                           ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                           ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                           ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                           ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                           ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                           ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                           ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                           ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                                    ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                           ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                           ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                           ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                           ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                           ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                           ;
+; INIT_FILE                          ; your_turn.mif        ; Untyped                                           ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                           ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                           ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                           ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                           ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                                           ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                           ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                           ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                           ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                           ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                           ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                           ;
+; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                                           ;
+; CBXI_PARAMETER                     ; altsyncram_5lg1      ; Untyped                                           ;
++------------------------------------+----------------------+---------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -2750,15 +3200,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------------------+-------------------------------------------------------------------+
 ; Name                                      ; Value                                                             ;
 +-------------------------------------------+-------------------------------------------------------------------+
-; Number of entity instances                ; 11                                                                ;
+; Number of entity instances                ; 14                                                                ;
 ; Entity Instance                           ; PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component ;
-;     -- OPERATION_MODE                     ; ROM                                                               ;
+;     -- OPERATION_MODE                     ; BIDIR_DUAL_PORT                                                   ;
 ;     -- WIDTH_A                            ; 8                                                                 ;
 ;     -- NUMWORDS_A                         ; 38416                                                             ;
 ;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                      ;
-;     -- WIDTH_B                            ; 1                                                                 ;
-;     -- NUMWORDS_B                         ; 1                                                                 ;
-;     -- ADDRESS_REG_B                      ; CLOCK1                                                            ;
+;     -- WIDTH_B                            ; 8                                                                 ;
+;     -- NUMWORDS_B                         ; 38416                                                             ;
+;     -- ADDRESS_REG_B                      ; CLOCK0                                                            ;
 ;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                      ;
 ;     -- RAM_BLOCK_TYPE                     ; AUTO                                                              ;
 ;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                         ;
@@ -2777,6 +3227,39 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- OPERATION_MODE                     ; ROM                                                               ;
 ;     -- WIDTH_A                            ; 16                                                                ;
 ;     -- NUMWORDS_A                         ; 4096                                                              ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                      ;
+;     -- WIDTH_B                            ; 1                                                                 ;
+;     -- NUMWORDS_B                         ; 1                                                                 ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                            ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                      ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                              ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                         ;
+; Entity Instance                           ; PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component      ;
+;     -- OPERATION_MODE                     ; ROM                                                               ;
+;     -- WIDTH_A                            ; 8                                                                 ;
+;     -- NUMWORDS_A                         ; 20544                                                             ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                      ;
+;     -- WIDTH_B                            ; 1                                                                 ;
+;     -- NUMWORDS_B                         ; 1                                                                 ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                            ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                      ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                              ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                         ;
+; Entity Instance                           ; PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component    ;
+;     -- OPERATION_MODE                     ; ROM                                                               ;
+;     -- WIDTH_A                            ; 8                                                                 ;
+;     -- NUMWORDS_A                         ; 10800                                                             ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                      ;
+;     -- WIDTH_B                            ; 1                                                                 ;
+;     -- NUMWORDS_B                         ; 1                                                                 ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                            ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                      ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                              ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                         ;
+; Entity Instance                           ; PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component  ;
+;     -- OPERATION_MODE                     ; ROM                                                               ;
+;     -- WIDTH_A                            ; 8                                                                 ;
+;     -- NUMWORDS_A                         ; 10800                                                             ;
 ;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                      ;
 ;     -- WIDTH_B                            ; 1                                                                 ;
 ;     -- NUMWORDS_B                         ; 1                                                                 ;
@@ -2963,6 +3446,34 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "PPU:ppu_mod|your_turn_rom:rom0_5"                                                                                                                                                     ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                                                                                                                                             ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; address ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (14 bits) it drives.  The 18 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "PPU:ppu_mod|waiting_rom:rom0_4"                                                                                                                                                        ;
++---------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                                                                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; address ; Input  ; Warning  ; Input port expression (32 bits) is wider than the input port (14 bits) it drives.  The 18 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; q       ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                 ;
++---------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "PPU:ppu_mod|title_rom:rom0_3"                                                                                                                                                         ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                                                                                                                                             ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; address ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (15 bits) it drives.  The 17 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "PPU:ppu_mod|water_rom:rom0_2"                                                                                                                                                         ;
 +---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Port    ; Type  ; Severity ; Details                                                                                                                                                                             ;
@@ -2980,13 +3491,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "PPU:ppu_mod|board_labels_rom:rom0"                                                                                                                                                    ;
-+---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port    ; Type  ; Severity ; Details                                                                                                                                                                             ;
-+---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; address ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (16 bits) it drives.  The 16 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
-+---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "PPU:ppu_mod|board_labels_rom:rom0"                                                                                                                                                      ;
++-----------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port      ; Type  ; Severity ; Details                                                                                                                                                                             ;
++-----------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; address_a ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (16 bits) it drives.  The 16 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; address_b ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (16 bits) it drives.  The 16 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
++-----------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------+
@@ -3003,45 +3515,43 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 661                         ;
+; arriav_ff             ; 745                         ;
 ;     CLR               ; 28                          ;
 ;     CLR SCLR          ; 10                          ;
 ;     ENA               ; 9                           ;
-;     ENA CLR           ; 557                         ;
-;     ENA CLR SCLR      ; 42                          ;
-;     ENA SCLR          ; 8                           ;
-;     ENA SCLR SLD      ; 1                           ;
-;     SCLR              ; 2                           ;
-;     plain             ; 4                           ;
-; arriav_lcell_comb     ; 921                         ;
-;     arith             ; 180                         ;
-;         0 data inputs ; 8                           ;
-;         1 data inputs ; 97                          ;
-;         2 data inputs ; 45                          ;
-;         3 data inputs ; 7                           ;
-;         4 data inputs ; 20                          ;
-;         5 data inputs ; 3                           ;
-;     extend            ; 31                          ;
-;         7 data inputs ; 31                          ;
-;     normal            ; 663                         ;
+;     ENA CLR           ; 666                         ;
+;     ENA CLR SCLR      ; 10                          ;
+;     ENA SCLR SLD      ; 9                           ;
+;     SCLR              ; 3                           ;
+;     plain             ; 10                          ;
+; arriav_lcell_comb     ; 1155                        ;
+;     arith             ; 263                         ;
+;         0 data inputs ; 12                          ;
+;         1 data inputs ; 75                          ;
+;         2 data inputs ; 133                         ;
+;         3 data inputs ; 16                          ;
+;         4 data inputs ; 5                           ;
+;         5 data inputs ; 22                          ;
+;     extend            ; 47                          ;
+;         7 data inputs ; 47                          ;
+;     normal            ; 798                         ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 3                           ;
-;         2 data inputs ; 36                          ;
-;         3 data inputs ; 219                         ;
-;         4 data inputs ; 85                          ;
-;         5 data inputs ; 85                          ;
-;         6 data inputs ; 234                         ;
+;         1 data inputs ; 4                           ;
+;         2 data inputs ; 53                          ;
+;         3 data inputs ; 239                         ;
+;         4 data inputs ; 97                          ;
+;         5 data inputs ; 105                         ;
+;         6 data inputs ; 299                         ;
 ;     shared            ; 47                          ;
-;         0 data inputs ; 1                           ;
-;         1 data inputs ; 20                          ;
-;         2 data inputs ; 26                          ;
-; arriav_mac            ; 4                           ;
+;         1 data inputs ; 27                          ;
+;         2 data inputs ; 20                          ;
+; arriav_mac            ; 8                           ;
 ; boundary_port         ; 37                          ;
 ; generic_pll           ; 1                           ;
-; stratixv_ram_block    ; 136                         ;
+; stratixv_ram_block    ; 176                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 10.00                       ;
-; Average LUT depth     ; 6.64                        ;
+; Average LUT depth     ; 6.71                        ;
 +-----------------------+-----------------------------+
 
 
@@ -3050,7 +3560,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:04     ;
 +----------------+--------------+
 
 
@@ -3060,7 +3570,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Thu Apr 24 17:49:21 2025
+    Info: Processing started: Fri Apr 25 18:04:24 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ppu_demo -c ppu_demo
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
@@ -3096,6 +3606,12 @@ Info (12021): Found 1 design units, including 1 entities, in source file shoreli
     Info (12023): Found entity 1: shoreline_rom File: I:/ECE554/Battleship/Verilog/PPU/shoreline_rom.v Line: 40
 Info (12021): Found 1 design units, including 1 entities, in source file board_labels_rom.v
     Info (12023): Found entity 1: board_labels_rom File: I:/ECE554/Battleship/Verilog/PPU/board_labels_rom.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file title_rom.v
+    Info (12023): Found entity 1: title_rom File: I:/ECE554/Battleship/Verilog/PPU/title_rom.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file waiting_rom.v
+    Info (12023): Found entity 1: waiting_rom File: I:/ECE554/Battleship/Verilog/PPU/waiting_rom.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file your_turn_rom.v
+    Info (12023): Found entity 1: your_turn_rom File: I:/ECE554/Battleship/Verilog/PPU/your_turn_rom.v Line: 40
 Info (12127): Elaborating entity "ppu_demo" for the top level hierarchy
 Warning (10230): Verilog HDL assignment warning at ppu_demo.v(135): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 135
 Info (12128): Elaborating entity "vga_pll" for hierarchy "vga_pll:pll" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 106
@@ -3165,40 +3681,54 @@ Info (12133): Instantiated megafunction "vga_pll:pll|vga_pll_0002:vga_pll_inst|a
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
 Info (12128): Elaborating entity "PPU" for hierarchy "PPU:ppu_mod" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 128
-Warning (10230): Verilog HDL assignment warning at PPU.sv(110): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 110
-Warning (10230): Verilog HDL assignment warning at PPU.sv(112): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 112
-Warning (10230): Verilog HDL assignment warning at PPU.sv(113): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 113
-Warning (10230): Verilog HDL assignment warning at PPU.sv(124): truncated value with size 32 to match size of target (7) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 124
-Warning (10230): Verilog HDL assignment warning at PPU.sv(129): truncated value with size 32 to match size of target (7) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 129
+Warning (10230): Verilog HDL assignment warning at PPU.sv(123): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 123
+Warning (10230): Verilog HDL assignment warning at PPU.sv(125): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 125
+Warning (10230): Verilog HDL assignment warning at PPU.sv(128): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 128
+Warning (10230): Verilog HDL assignment warning at PPU.sv(138): truncated value with size 32 to match size of target (7) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 138
+Warning (10230): Verilog HDL assignment warning at PPU.sv(143): truncated value with size 32 to match size of target (7) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 143
+Warning (10230): Verilog HDL assignment warning at PPU.sv(203): truncated value with size 10 to match size of target (4) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 203
 Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "square_info" into its bus
-Info (12128): Elaborating entity "board_labels_rom" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 243
-Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/board_labels_rom.v Line: 82
-Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/board_labels_rom.v Line: 82
-Info (12133): Instantiated megafunction "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/board_labels_rom.v Line: 82
-    Info (12134): Parameter "address_aclr_a" = "NONE"
+Info (12128): Elaborating entity "board_labels_rom" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 262
+Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/board_labels_rom.v Line: 94
+Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/board_labels_rom.v Line: 94
+Info (12133): Instantiated megafunction "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/board_labels_rom.v Line: 94
+    Info (12134): Parameter "address_reg_b" = "CLOCK0"
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_input_b" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_b" = "BYPASS"
+    Info (12134): Parameter "indata_reg_b" = "CLOCK0"
     Info (12134): Parameter "init_file" = "board_labels.mif"
     Info (12134): Parameter "intended_device_family" = "Cyclone V"
-    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
     Info (12134): Parameter "lpm_type" = "altsyncram"
     Info (12134): Parameter "numwords_a" = "38416"
-    Info (12134): Parameter "operation_mode" = "ROM"
+    Info (12134): Parameter "numwords_b" = "38416"
+    Info (12134): Parameter "operation_mode" = "BIDIR_DUAL_PORT"
     Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_aclr_b" = "NONE"
     Info (12134): Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info (12134): Parameter "outdata_reg_b" = "UNREGISTERED"
+    Info (12134): Parameter "power_up_uninitialized" = "FALSE"
     Info (12134): Parameter "widthad_a" = "16"
+    Info (12134): Parameter "widthad_b" = "16"
     Info (12134): Parameter "width_a" = "8"
+    Info (12134): Parameter "width_b" = "8"
     Info (12134): Parameter "width_byteena_a" = "1"
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_nsg1.tdf
-    Info (12023): Found entity 1: altsyncram_nsg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_nsg1.tdf Line: 32
-Info (12128): Elaborating entity "altsyncram_nsg1" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_nsg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+    Info (12134): Parameter "width_byteena_b" = "1"
+    Info (12134): Parameter "wrcontrol_wraddress_reg_b" = "CLOCK0"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_b9a2.tdf
+    Info (12023): Found entity 1: altsyncram_b9a2 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_b9a2.tdf Line: 34
+Info (12128): Elaborating entity "altsyncram_b9a2" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_ala.tdf
+    Info (12023): Found entity 1: decode_ala File: I:/ECE554/Battleship/Verilog/PPU/db/decode_ala.tdf Line: 23
+Info (12128): Elaborating entity "decode_ala" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated|decode_ala:decode2" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_b9a2.tdf Line: 47
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_31a.tdf
     Info (12023): Found entity 1: decode_31a File: I:/ECE554/Battleship/Verilog/PPU/db/decode_31a.tdf Line: 23
-Info (12128): Elaborating entity "decode_31a" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_nsg1:auto_generated|decode_31a:rden_decode" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_nsg1.tdf Line: 40
+Info (12128): Elaborating entity "decode_31a" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated|decode_31a:rden_decode_a" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_b9a2.tdf Line: 49
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_qfb.tdf
     Info (12023): Found entity 1: mux_qfb File: I:/ECE554/Battleship/Verilog/PPU/db/mux_qfb.tdf Line: 23
-Info (12128): Elaborating entity "mux_qfb" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_nsg1:auto_generated|mux_qfb:mux2" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_nsg1.tdf Line: 41
-Info (12128): Elaborating entity "shoreline_rom" for hierarchy "PPU:ppu_mod|shoreline_rom:rom0_1" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 254
+Info (12128): Elaborating entity "mux_qfb" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated|mux_qfb:mux4" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_b9a2.tdf Line: 51
+Info (12128): Elaborating entity "shoreline_rom" for hierarchy "PPU:ppu_mod|shoreline_rom:rom0_1" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 275
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/shoreline_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/shoreline_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/shoreline_rom.v Line: 82
@@ -3219,7 +3749,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|shoreline_rom:rom0_1|altsyn
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ujg1.tdf
     Info (12023): Found entity 1: altsyncram_ujg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_ujg1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_ujg1" for hierarchy "PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component|altsyncram_ujg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "water_rom" for hierarchy "PPU:ppu_mod|water_rom:rom0_2" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 261
+Info (12128): Elaborating entity "water_rom" for hierarchy "PPU:ppu_mod|water_rom:rom0_2" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 282
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/water_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/water_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/water_rom.v Line: 82
@@ -3240,7 +3770,82 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|water_rom:rom0_2|altsyncram
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_5ng1.tdf
     Info (12023): Found entity 1: altsyncram_5ng1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_5ng1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_5ng1" for hierarchy "PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component|altsyncram_5ng1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "ship2_rom" for hierarchy "PPU:ppu_mod|ship2_rom:rom1" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 271
+Info (12128): Elaborating entity "title_rom" for hierarchy "PPU:ppu_mod|title_rom:rom0_3" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 289
+Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/title_rom.v Line: 82
+Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/title_rom.v Line: 82
+Info (12133): Instantiated megafunction "PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/title_rom.v Line: 82
+    Info (12134): Parameter "address_aclr_a" = "NONE"
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "init_file" = "title.mif"
+    Info (12134): Parameter "intended_device_family" = "Cyclone V"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+    Info (12134): Parameter "numwords_a" = "20544"
+    Info (12134): Parameter "operation_mode" = "ROM"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info (12134): Parameter "widthad_a" = "15"
+    Info (12134): Parameter "width_a" = "8"
+    Info (12134): Parameter "width_byteena_a" = "1"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_n6g1.tdf
+    Info (12023): Found entity 1: altsyncram_n6g1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_n6g1.tdf Line: 32
+Info (12128): Elaborating entity "altsyncram_n6g1" for hierarchy "PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_01a.tdf
+    Info (12023): Found entity 1: decode_01a File: I:/ECE554/Battleship/Verilog/PPU/db/decode_01a.tdf Line: 23
+Info (12128): Elaborating entity "decode_01a" for hierarchy "PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated|decode_01a:rden_decode" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_n6g1.tdf Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_nfb.tdf
+    Info (12023): Found entity 1: mux_nfb File: I:/ECE554/Battleship/Verilog/PPU/db/mux_nfb.tdf Line: 23
+Info (12128): Elaborating entity "mux_nfb" for hierarchy "PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated|mux_nfb:mux2" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_n6g1.tdf Line: 41
+Info (12128): Elaborating entity "waiting_rom" for hierarchy "PPU:ppu_mod|waiting_rom:rom0_4" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 297
+Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/waiting_rom.v Line: 82
+Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/waiting_rom.v Line: 82
+Info (12133): Instantiated megafunction "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/waiting_rom.v Line: 82
+    Info (12134): Parameter "address_aclr_a" = "NONE"
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "init_file" = "waiting.mif"
+    Info (12134): Parameter "intended_device_family" = "Cyclone V"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+    Info (12134): Parameter "numwords_a" = "10800"
+    Info (12134): Parameter "operation_mode" = "ROM"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info (12134): Parameter "widthad_a" = "14"
+    Info (12134): Parameter "width_a" = "8"
+    Info (12134): Parameter "width_byteena_a" = "1"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_1dg1.tdf
+    Info (12023): Found entity 1: altsyncram_1dg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 32
+Info (12128): Elaborating entity "altsyncram_1dg1" for hierarchy "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_u0a.tdf
+    Info (12023): Found entity 1: decode_u0a File: I:/ECE554/Battleship/Verilog/PPU/db/decode_u0a.tdf Line: 23
+Info (12128): Elaborating entity "decode_u0a" for hierarchy "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|decode_u0a:rden_decode" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_lfb.tdf
+    Info (12023): Found entity 1: mux_lfb File: I:/ECE554/Battleship/Verilog/PPU/db/mux_lfb.tdf Line: 23
+Info (12128): Elaborating entity "mux_lfb" for hierarchy "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|mux_lfb:mux2" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 41
+Info (12128): Elaborating entity "your_turn_rom" for hierarchy "PPU:ppu_mod|your_turn_rom:rom0_5" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 304
+Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/your_turn_rom.v Line: 82
+Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/your_turn_rom.v Line: 82
+Info (12133): Instantiated megafunction "PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/your_turn_rom.v Line: 82
+    Info (12134): Parameter "address_aclr_a" = "NONE"
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "init_file" = "your_turn.mif"
+    Info (12134): Parameter "intended_device_family" = "Cyclone V"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+    Info (12134): Parameter "numwords_a" = "10800"
+    Info (12134): Parameter "operation_mode" = "ROM"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info (12134): Parameter "widthad_a" = "14"
+    Info (12134): Parameter "width_a" = "8"
+    Info (12134): Parameter "width_byteena_a" = "1"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_5lg1.tdf
+    Info (12023): Found entity 1: altsyncram_5lg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_5lg1.tdf Line: 32
+Info (12128): Elaborating entity "altsyncram_5lg1" for hierarchy "PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component|altsyncram_5lg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+Info (12128): Elaborating entity "ship2_rom" for hierarchy "PPU:ppu_mod|ship2_rom:rom1" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 317
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship2_rom.v Line: 94
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship2_rom.v Line: 94
 Info (12133): Instantiated megafunction "PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/ship2_rom.v Line: 94
@@ -3271,7 +3876,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|ship2_rom:rom1|altsyncram:a
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_md92.tdf
     Info (12023): Found entity 1: altsyncram_md92 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_md92.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_md92" for hierarchy "PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component|altsyncram_md92:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "ship3_rom" for hierarchy "PPU:ppu_mod|ship3_rom:rom2" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 281
+Info (12128): Elaborating entity "ship3_rom" for hierarchy "PPU:ppu_mod|ship3_rom:rom2" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 327
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship3_rom.v Line: 94
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship3_rom.v Line: 94
 Info (12133): Instantiated megafunction "PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/ship3_rom.v Line: 94
@@ -3302,7 +3907,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|ship3_rom:rom2|altsyncram:a
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_rd92.tdf
     Info (12023): Found entity 1: altsyncram_rd92 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_rd92.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_rd92" for hierarchy "PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component|altsyncram_rd92:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "ship4_rom" for hierarchy "PPU:ppu_mod|ship4_rom:rom3" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 290
+Info (12128): Elaborating entity "ship4_rom" for hierarchy "PPU:ppu_mod|ship4_rom:rom3" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 336
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship4_rom.v Line: 94
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship4_rom.v Line: 94
 Info (12133): Instantiated megafunction "PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/ship4_rom.v Line: 94
@@ -3333,7 +3938,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|ship4_rom:rom3|altsyncram:a
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_gg92.tdf
     Info (12023): Found entity 1: altsyncram_gg92 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_gg92.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_gg92" for hierarchy "PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component|altsyncram_gg92:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "ship5_rom" for hierarchy "PPU:ppu_mod|ship5_rom:rom4" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 299
+Info (12128): Elaborating entity "ship5_rom" for hierarchy "PPU:ppu_mod|ship5_rom:rom4" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 345
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship5_rom.v Line: 94
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship5_rom.v Line: 94
 Info (12133): Instantiated megafunction "PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/ship5_rom.v Line: 94
@@ -3364,7 +3969,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|ship5_rom:rom4|altsyncram:a
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_7h92.tdf
     Info (12023): Found entity 1: altsyncram_7h92 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_7h92.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_7h92" for hierarchy "PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component|altsyncram_7h92:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "miss_player_rom" for hierarchy "PPU:ppu_mod|miss_player_rom:rom5" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 306
+Info (12128): Elaborating entity "miss_player_rom" for hierarchy "PPU:ppu_mod|miss_player_rom:rom5" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 352
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/miss_player_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/miss_player_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/miss_player_rom.v Line: 82
@@ -3385,7 +3990,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|miss_player_rom:rom5|altsyn
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_kmg1.tdf
     Info (12023): Found entity 1: altsyncram_kmg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_kmg1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_kmg1" for hierarchy "PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component|altsyncram_kmg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "hit_player_rom" for hierarchy "PPU:ppu_mod|hit_player_rom:rom6" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 313
+Info (12128): Elaborating entity "hit_player_rom" for hierarchy "PPU:ppu_mod|hit_player_rom:rom6" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 359
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/hit_player_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/hit_player_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/hit_player_rom.v Line: 82
@@ -3406,7 +4011,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|hit_player_rom:rom6|altsync
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_tig1.tdf
     Info (12023): Found entity 1: altsyncram_tig1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_tig1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_tig1" for hierarchy "PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component|altsyncram_tig1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "miss_ship_rom" for hierarchy "PPU:ppu_mod|miss_ship_rom:rom7" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 320
+Info (12128): Elaborating entity "miss_ship_rom" for hierarchy "PPU:ppu_mod|miss_ship_rom:rom7" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 366
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/miss_ship_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/miss_ship_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/miss_ship_rom.v Line: 82
@@ -3427,7 +4032,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|miss_ship_rom:rom7|altsyncr
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_rfg1.tdf
     Info (12023): Found entity 1: altsyncram_rfg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_rfg1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_rfg1" for hierarchy "PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component|altsyncram_rfg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "hit_ship_rom" for hierarchy "PPU:ppu_mod|hit_ship_rom:rom8" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 327
+Info (12128): Elaborating entity "hit_ship_rom" for hierarchy "PPU:ppu_mod|hit_ship_rom:rom8" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 373
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/hit_ship_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/hit_ship_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/hit_ship_rom.v Line: 82
@@ -3448,8 +4053,26 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|hit_ship_rom:rom8|altsyncra
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_4cg1.tdf
     Info (12023): Found entity 1: altsyncram_4cg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_4cg1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_4cg1" for hierarchy "PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component|altsyncram_4cg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "vga_driver" for hierarchy "PPU:ppu_mod|vga_driver:draw" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 407
-Warning (12241): 11 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info (12128): Elaborating entity "vga_driver" for hierarchy "PPU:ppu_mod|vga_driver:draw" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 469
+Warning (14284): Synthesized away the following node(s):
+    Warning (14285): Synthesized away the following RAM node(s):
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a0" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 42
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a1" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 63
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a2" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 84
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a3" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 105
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a4" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 126
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a5" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 147
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a6" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 168
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a7" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 189
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a8" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 210
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a9" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 231
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a10" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 252
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a11" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 273
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a12" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 294
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a13" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 315
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a14" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 336
+        Warning (14320): Synthesized away node "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|ram_block1a15" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 357
+Warning (12241): 14 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "VGA_B[0]" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 19
     Warning (13410): Pin "VGA_B[1]" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 19
@@ -3473,18 +4096,18 @@ Warning (21074): Design contains 5 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "CLOCK4_50" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 11
     Warning (15610): No output dependent on input pin "KEY[1]" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 15
     Warning (15610): No output dependent on input pin "KEY[2]" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 15
-Info (21057): Implemented 1663 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 2065 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 29 output pins
-    Info (21061): Implemented 1485 logic cells
-    Info (21064): Implemented 136 RAM segments
+    Info (21061): Implemented 1843 logic cells
+    Info (21064): Implemented 176 RAM segments
     Info (21065): Implemented 1 PLLs
-    Info (21062): Implemented 4 DSP elements
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 25 warnings
-    Info: Peak virtual memory: 4940 megabytes
-    Info: Processing ended: Thu Apr 24 17:49:50 2025
-    Info: Elapsed time: 00:00:29
-    Info: Total CPU time (on all processors): 00:00:19
+    Info (21062): Implemented 8 DSP elements
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 44 warnings
+    Info: Peak virtual memory: 4956 megabytes
+    Info: Processing ended: Fri Apr 25 18:04:57 2025
+    Info: Elapsed time: 00:00:33
+    Info: Total CPU time (on all processors): 00:00:22
 
 
 +------------------------------------------+

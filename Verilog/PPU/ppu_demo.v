@@ -45,13 +45,13 @@ assign ppu_cmds[1] = {1'b0, 7'd26, 2'b00, 2'b00, 3'd0, 1'b0, 1'b1, 1'b1};
 //assign ppu_cmds[1] = {1'b1, 7'd26, 2'b11, 2'b00, 3'd1, 1'b0, 1'b0, 1'b0};
 
 // ship 2 ver
-assign ppu_cmds[2] = {1'b1, 7'd27, 2'b11, 2'b00, 3'd0, 1'b1, 1'b0, 1'b0};
-assign ppu_cmds[3] = {1'b1, 7'd37, 2'b11, 2'b00, 3'd1, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[2] = {1'b0, 7'd27, 2'b11, 2'b00, 3'd0, 1'b1, 1'b0, 1'b0};
+assign ppu_cmds[3] = {1'b0, 7'd37, 2'b11, 2'b00, 3'd1, 1'b1, 1'b0, 1'b0};
 
 // ship 3 hor
-assign ppu_cmds[4] = {1'b1, 7'd42, 2'b11, 2'b01, 3'd0, 1'b0, 1'b0, 1'b0};
-assign ppu_cmds[5] = {1'b1, 7'd43, 2'b11, 2'b01, 3'd1, 1'b0, 1'b0, 1'b0};
-assign ppu_cmds[6] = {1'b1, 7'd44, 2'b11, 2'b01, 3'd2, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[4] = {1'b0, 7'd42, 2'b11, 2'b01, 3'd0, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[5] = {1'b0, 7'd43, 2'b11, 2'b01, 3'd1, 1'b0, 1'b0, 1'b0};
+assign ppu_cmds[6] = {1'b0, 7'd44, 2'b11, 2'b01, 3'd2, 1'b0, 1'b0, 1'b0};
 
 // ship 4 hor
 assign ppu_cmds[7] = {1'b1, 7'd96, 2'b11, 2'b10, 3'd0, 1'b0, 1'b0, 1'b0};
