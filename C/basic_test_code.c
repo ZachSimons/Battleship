@@ -1,6 +1,6 @@
 #define SELECT_BIT 0x00008000
-#define SET_MY_TURN 0x00002000
-#define SET_NOT_MY_TURN 0x00000000
+#define SET_MY_TURN 0x00003000
+#define SET_NOT_MY_TURN 0x00001000
 
 int toSnd;
 int activeSquare;
@@ -45,7 +45,7 @@ void exception_handler(int num) {
                 isSunk--;
                 if(check_lose()) {
                     send_board_value(0x00020000 | (isSunk << 8) | my_positions[isSunk]);
-                    send_ppu_value(0x000010000);
+                    send_ppu_value(0x00000800);
                 } else {
                     send_board_value(0x00010000 | (isSunk << 8) | my_positions[isSunk]);
                     send_ppu_value(SET_MY_TURN);
@@ -100,7 +100,7 @@ void exception_handler(int num) {
             }
         }
         board[activeSquare] |= SELECT_BIT;
-        send_ppu_value(board[activeSquare]);
+        send_ppu_value(board[activeSquare] | (activeSquare == ai_target ? 1 << 14 : 0));
     } else if(num == 107) {
         reset_program();
     } else {
@@ -118,7 +118,7 @@ void exception_handler(int num) {
             send_ppu_value(board[grid]);
         }
         if(num & 0x00020000) {
-            send_ppu_value(0x000018000);
+            send_ppu_value(0x00000c00);
         }
     }
 }
@@ -232,7 +232,7 @@ int check_sunk() {
 
 int check_lose() {
     for(int i = 0; i < 5; i++) {
-        if(my_sunk[i] == -1) {
+        if(!my_sunk[i]) {
             return 0;
         }
     }

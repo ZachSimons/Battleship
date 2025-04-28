@@ -195,7 +195,8 @@ execute proc_ex(
     .read_unsigned_mem(unsigned_ex_mem),
     .rd_en_mem(memrden_ex_mem),
     .branch(branch_ex_fe),
-    .seed(seed)
+    .seed(seed),
+    .interrupt(interrupt)
 );
 
 memory proc_mem(
@@ -310,7 +311,7 @@ always_ff @(posedge clk) begin
     end
     else if (~stall_interrupt)begin
         interrupt <= ((interrupt_key | interrupt_eth) & ~interrupt_latch) | pending_interrupt;
-        interrupt_data <= (((interrupt_key | interrupt_eth) & ~interrupt_latch) | pending_interrupt) ? interrupt_source_data : interrupt_data;
+        interrupt_data <= ((interrupt_key | interrupt_eth) & ~interrupt_latch) ? interrupt_source_data : interrupt_data;
         pending_interrupt <= 1'b0;
         interrupt_data_set <= 1'b0;
     end
@@ -319,7 +320,7 @@ always_ff @(posedge clk) begin
         pending_interrupt <= pending_interrupt ? 1'b1 : ((interrupt_key | interrupt_eth) & ~interrupt_latch);
         if (~interrupt_data_set) begin
             interrupt_data <= interrupt_source_data;
-            interrupt_data_set <= 1'b1;                 // might need a conditional to set this
+            interrupt_data_set <= ((interrupt_key | interrupt_eth) & ~interrupt_latch);                 // might need a conditional to set this
         end
         else begin
             interrupt_data <= interrupt_data;

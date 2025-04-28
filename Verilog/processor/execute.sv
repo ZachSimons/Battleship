@@ -28,6 +28,7 @@ module execute(
     input                   lui_ex,
     input                   acc_data,
     input                   sac_ex,
+    input                   interrupt,
     input           [9:0]   seed,
     output logic    [31:0]  interface_data,
     output logic    [31:0]  next_pc_mem,
@@ -52,6 +53,7 @@ module execute(
     logic [31:0] rdi_mux;
     logic [15:0] lfsr16;
     logic [31:0] acc_mux;
+    logic [31:0] rdi_data_ff;
 
     
 
@@ -119,8 +121,15 @@ module execute(
     assign random_mux = random_exe ? lfsr : alu_result_exe;
 
 
+    always_ff @(posedge clk, negedge rst_n) begin
+        if(~rst_n) begin
+            rdi_data_ff <= 0;
+        end else if(interrupt) begin
+            rdi_data_ff <= rdi_data;
+        end
+    end
     ////////////////RDI///////////////////////////////////
-    assign rdi_mux = rdi_ex ? rdi_data : random_mux; 
+    assign rdi_mux = rdi_ex ? rdi_data_ff : random_mux; 
 
 
     ////////////////ACCELERATOR DATA///////////////////////////////////
