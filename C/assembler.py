@@ -171,7 +171,7 @@ def calculateOffset(current: int, target: int):
 def parseAddress(address: str):
     if address.find('%') != -1:
         result = address.split('(')
-        return [result[2][:-1], label_addresses[result[1][:-1]]]
+        return [result[2][:-1], int(parseSingleHiLo(address))]
     else:
         result = address.split('(')
         return [result[1][:-1], int(result[0])]
@@ -180,20 +180,21 @@ def parseSingleHiLo(param: str):
     if(param.find('%') == -1):
         return param
     else:
+        [upper, lower] = splitOffset(label_addresses[param.split('(')[1][:-1]])
         if param.find('%hi') != -1:
-            return str(label_addresses[param.split('(')[1][:-1]] >> 12)
+            return str(upper)
         else:
-            return str(label_addresses[param.split('(')[1][:-1]] % 2**12)
+            return str(lower)
         
 def splitOffset(offset: int):
     if(offset < 0):
         offset += 2**32
     if(offset & 2**11):
         lower = offset & 0xfff
-        upper = (offset >> 12) + 1
+        upper = ((offset >> 12) + 1) & 0x000fffff
     else:
         lower = offset & 0xfff
-        upper = offset >> 12
+        upper = (offset >> 12) & 0x000fffff
     return [upper, lower]
 
 label_addresses = {}

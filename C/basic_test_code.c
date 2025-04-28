@@ -1,4 +1,6 @@
 #define SELECT_BIT 0x00008000
+#define SET_MY_TURN 0x00002000
+#define SET_NOT_MY_TURN 0x00000000
 
 int toSnd;
 int activeSquare;
@@ -15,6 +17,7 @@ int possible_positions[5][200];
 int hit_counts[100];
 int ai_target;
 int old_ai_target;
+int accelerator_ran;
 
 int generate_encoding(int, int, int, int, int, int, int);
 int mod(int, int);
@@ -34,7 +37,7 @@ void entry_point() {
 
 void exception_handler(int num) {
     if(num < 100) {
-        if(((my_board[num] >> 22) & 3) == 3) {
+        if(((my_board[num] & 0x00c00000) >> 22) == 3) {
             my_board[num] = my_board[num] & 0xffbfffff;
             send_ppu_value(my_board[num]);
             int isSunk = check_sunk();
@@ -42,26 +45,32 @@ void exception_handler(int num) {
                 isSunk--;
                 if(check_lose()) {
                     send_board_value(0x00020000 | (isSunk << 8) | my_positions[isSunk]);
+                    send_ppu_value(0x000010000);
                 } else {
                     send_board_value(0x00010000 | (isSunk << 8) | my_positions[isSunk]);
+                    send_ppu_value(SET_MY_TURN);
                     myTurn = 1;
                 }
             } else {
                 send_board_value(101);
+                send_ppu_value(SET_MY_TURN);
                 myTurn = 1;
             }
         } else {
             my_board[num] = my_board[num] | 0x00400000;
             send_ppu_value(my_board[num]);
             send_board_value(100);
+            send_ppu_value(SET_MY_TURN);
             myTurn = 1;
         }
     } else if(num == 100) {
         myTurn = 0;
+        send_ppu_value(SET_NOT_MY_TURN);
         board[activeSquare] |= (1 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
     } else if(num == 101) {
         myTurn = 0;
+        send_ppu_value(SET_NOT_MY_TURN);
         board[activeSquare] |= (2 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
     } else if(num < 107) {
@@ -94,6 +103,7 @@ void exception_handler(int num) {
         reset_program();
     } else {
         myTurn = 0;
+        send_ppu_value(SET_NOT_MY_TURN);
         int ship = (num & 0x0000ff00) >> 8;
         int pos = num & 0x000000ff;
         int square = mod(pos, 100);
@@ -103,6 +113,9 @@ void exception_handler(int num) {
             int grid = square + mult(inc, i);
             board[grid] = generate_encoding(0, ship_sizes[ship], 3, grid, i, pos > 99, grid == activeSquare);
             send_ppu_value(board[grid]);
+        }
+        if(num & 0x00020000) {
+            send_ppu_value(0x000018000);
         }
     }
 }
@@ -405,7 +418,7 @@ int main() {
     myTurn = 1;
     initialize_boards();
     for(int i = 0; i < 5; i++) {
-        if(place_ship(mod(rand(), 100), ship_sizes[i], rand() & 1) == 0) {
+        if(place_ship(mod(rand(), 100), i, rand() & 0x00000001) == 0) {
             i--;
         }
     }
@@ -419,5 +432,9 @@ int main() {
         send_ppu_value(board[old_ai_target]);
         send_ppu_value(board[ai_target] | (1 << 14));
         old_ai_target = ai_target;
+        accelerator_ran = 1;
+        while(accelerator_ran) {
+            // Do nothing
+        }
     }
 }
