@@ -31,7 +31,7 @@ input [2:0] ship_section;
 input vert;
 input square_sel;
 input ai;
-input turn;
+input [1:0] turn;
 input [1:0] finish;
 
 output [7:0] r, g, b;
@@ -61,6 +61,10 @@ parameter TURN_WIDTH = 300;
 parameter TURN_HEIGHT = 36;
 parameter SHORELINE_OFFSET_Y = 416;
 parameter WATER_WIDTH = 64;
+parameter FINISH_OFFSET_X = 180;
+parameter FINISH_OFFSET_Y = 220;
+parameter FINISH_WIDTH = 280;
+parameter FINISH_HEIGHT = 140;
 
 // ship params
 parameter SHIP2_WIDTH = 33;
@@ -97,19 +101,25 @@ logic [9:0] square_info [0:1][0:99];
 
 // update background/foreground sprites
 // bit ordering {turn, finish}
-logic [2:0] game_info;
-logic curr_turn, changing_turn;
-assign changing_turn = (~curr_turn & turn) | (curr_turn & ~turn);
+logic curr_turn;
+logic [1:0] curr_finish;
 
 always_ff @(posedge sys_clk, negedge rst_n) begin
     if (!rst_n) begin
         square_info <= '{default:10'b0};
-        game_info <= 0;
+        curr_turn <= 0;
+        curr_finish <= 0;
     end
     else if (receive) begin
-        if (changing_turn | finish) begin
-            game_info <= {turn, finish};
+        // turn update bit
+        if (turn[1]) begin
+            curr_turn <= turn[0];
         end
+        // finish update bit
+        else if (finish[1]) begin
+            curr_finish <= finish;
+        end
+        // else update square
         else begin
             square_info[board][square_update] <= {square_state, ship_type, ship_section, vert, square_sel, ai};
         end
@@ -168,13 +178,14 @@ end
 logic board_0_bound;
 logic in_board_0;
 logic board_1_bound;
-logic title_bound, turn_bound;
-logic in_title_bound, in_turn_bound;
+logic title_bound, turn_bound, finish_bound;
+logic in_title_bound, in_turn_bound, in_finish_bound;
 assign board_0_bound = next_x < BOARD0_OFFSET_X+NUMBERS_WIDTH+BOARD_WIDTH & next_x > BOARD0_OFFSET_X-1 & next_y < BOARD0_OFFSET_Y+LETTERS_HEIGHT+BOARD_WIDTH & next_y > BOARD0_OFFSET_Y-1; 
 assign board_1_bound = next_x < BOARD1_OFFSET_X+NUMBERS_WIDTH+BOARD_WIDTH & next_x > BOARD1_OFFSET_X-1 & next_y < BOARD1_OFFSET_Y+LETTERS_HEIGHT+BOARD_WIDTH & next_y > BOARD1_OFFSET_Y-1;
 assign game_bound_logic = board_0_bound | board_1_bound;
 assign title_bound = next_x < TITLE_OFFSET_X+TITLE_WIDTH & next_x >= TITLE_OFFSET_X & next_y < TITLE_OFFSET_Y+TITLE_HEIGHT & next_y >= TITLE_OFFSET_Y;
 assign turn_bound = next_x < TURN_OFFSET_X+TURN_WIDTH & next_x >= TURN_OFFSET_X & next_y < TURN_OFFSET_Y+TURN_HEIGHT & next_y >= TURN_OFFSET_Y;
+assign finish_bound = next_x < FINISH_OFFSET_X+FINISH_WIDTH & next_x >= FINISH_OFFSET_X & next_y < FINISH_OFFSET_Y+FINISH_HEIGHT & next_y >= FINISH_OFFSET_Y;
 
 // logic here assumes we are in game bound
 assign letter_bound_logic = next_y > BOARD0_OFFSET_Y-1 & next_y < BOARD0_OFFSET_Y+LETTERS_HEIGHT;
@@ -188,6 +199,7 @@ always_ff @(posedge vga_clk) begin
         in_number_bound <= 0;
         in_title_bound <= 0;
         in_turn_bound <= 0;
+        in_finish_bound <= 0;
     end 
     else begin
         in_board_0 <= board_0_bound;
@@ -196,6 +208,7 @@ always_ff @(posedge vga_clk) begin
         in_number_bound <= number_bound_logic;
         in_title_bound <= title_bound;
         in_turn_bound <= turn_bound;
+        in_finish_bound <= finish_bound;
     end
 end
 
@@ -220,6 +233,10 @@ assign shoreline_addr = ((next_y - SHORELINE_OFFSET_Y) * WATER_WIDTH) + (next_x 
 // address comb logic for water
 logic [31:0] water_addr;
 assign water_addr = ((next_y * WATER_WIDTH) % (WATER_WIDTH * WATER_WIDTH)) + (next_x % WATER_WIDTH);
+
+// address comb logic for end screen
+logic [31:0] finish_addr;
+assign finish_addr = ((next_y - FINISH_OFFSET_Y) * (FINISH_WIDTH) + (next_x - FINISH_OFFSET_X));
 
 // signals needed for ship/sprite address calculation
 logic [2:0] next_square_ship_sec;
@@ -268,15 +285,12 @@ logic [1:0] curr_ship_type;
 logic curr_vert;
 logic curr_square_sel;
 logic curr_ai;
-logic [1:0] curr_finish;
 assign curr_square_data = square_info[curr_square[7]][curr_square[6:0]];
 assign curr_square_state = curr_square_data[9:8];
 assign curr_ship_type = curr_square_data[7:6];
 assign curr_vert = curr_square_data[2];
 assign curr_square_sel = curr_square_data[1];
 assign curr_ai = curr_square_data[0];
-assign curr_turn = game_info[2];
-assign curr_finish = game_info[1:0];
 
 // board sprite memory
 logic [7:0] rgb_board_b0;
@@ -333,6 +347,23 @@ your_turn_rom rom0_5 (
 
 // comb logic to choose which subtext to display based off PPU data
 assign rgb_turn = curr_turn ? rgb_your_turn : rgb_waiting;
+
+// you win sprite memory
+logic [7:0] rgb_finish;
+logic [7:0] rgb_win;
+win_screen_rom rom0_6 (
+    .address(finish_addr),
+	.clock(vga_clk),
+	.q(rgb_win));
+
+// you lose sprite memory
+logic [7:0] rgb_lose;
+lose_screen_rom rom0_7 (
+    .address(finish_addr),
+	.clock(vga_clk),
+	.q(rgb_lose));
+
+assign rgb_finish = curr_finish[0] ? rgb_win : rgb_lose;
 
 // ship 2 sprite memrory
 logic [7:0] rgb_ship2_hor;
@@ -468,16 +499,24 @@ assign b_game_text = (in_title_bound & (rgb_title != 8'h00)) ? {rgb_title[1:0], 
                      (in_turn_bound & (rgb_turn != 8'h00)) ? {rgb_turn[1:0], 6'b0} :
                      {rgb_water[4:0], 3'b0};
 
+
+// back ground rgb values
 logic [7:0] r_back, g_back, b_back;
 assign r_back = (curr_y >= SHORELINE_OFFSET_Y) ? {rgb_shoreline[15:11], 3'b0} : r_game_text;
 assign g_back = (curr_y >= SHORELINE_OFFSET_Y) ? {rgb_shoreline[10:5], 2'b0} : g_game_text;
 assign b_back = (curr_y >= SHORELINE_OFFSET_Y) ? {rgb_shoreline[4:0], 3'b0} : b_game_text;
 
-// vga controller color inputs
+// main game rgb
 // set transparency on numbers & letters so black background doesn't show
-assign r_in = (in_game_bound) ? (((in_letter_bound || in_number_bound) & ~(rgb >= 8'hB6)) ? {rgb_water[15:11], 3'b0} : {rgb[7:5], 5'b0}) : r_back;
-assign g_in = (in_game_bound) ? (((in_letter_bound || in_number_bound) & ~(rgb >= 8'hB6)) ? {rgb_water[10:5], 2'b0} : {rgb[4:2], 5'b0}) : g_back;
-assign b_in = (in_game_bound) ? (((in_letter_bound || in_number_bound) & ~(rgb >= 8'hB6)) ? {rgb_water[4:0], 3'b0} : {rgb[1:0], 6'b0}) : b_back;
+logic [7:0] r_game, g_game, b_game;
+assign r_game = (in_game_bound) ? (((in_letter_bound || in_number_bound) & ~(rgb >= 8'hB6)) ? {rgb_water[15:11], 3'b0} : {rgb[7:5], 5'b0}) : r_back;
+assign g_game = (in_game_bound) ? (((in_letter_bound || in_number_bound) & ~(rgb >= 8'hB6)) ? {rgb_water[10:5], 2'b0} : {rgb[4:2], 5'b0}) : g_back;
+assign b_game = (in_game_bound) ? (((in_letter_bound || in_number_bound) & ~(rgb >= 8'hB6)) ? {rgb_water[4:0], 3'b0} : {rgb[1:0], 6'b0}) : b_back;
+
+// overiide all pixel in finish bound with finish sprite once game ends
+assign r_in = (in_finish_bound & curr_finish[1]) ? {rgb_finish[7:5], 5'b0} : r_game;
+assign g_in = (in_finish_bound & curr_finish[1]) ? {rgb_finish[4:2], 5'b0} : g_game;
+assign b_in = (in_finish_bound & curr_finish[1]) ? {rgb_finish[1:0], 6'b0} : b_game;
 
 // vga controller
 vga_driver draw   ( .clock(vga_clk),        // 25 MHz PLL

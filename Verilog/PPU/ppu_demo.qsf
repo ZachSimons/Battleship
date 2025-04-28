@@ -130,4 +130,6 @@ set_global_assignment -name QIP_FILE board_labels_rom.qip
 set_global_assignment -name QIP_FILE title_rom.qip
 set_global_assignment -name QIP_FILE waiting_rom.qip
 set_global_assignment -name QIP_FILE your_turn_rom.qip
+set_global_assignment -name QIP_FILE win_screen_rom.qip
+set_global_assignment -name QIP_FILE lose_screen_rom.qip
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
