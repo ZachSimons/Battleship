@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ppu_demo
-Fri Apr 25 19:10:28 2025
+Mon Apr 28 12:43:53 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -100,13 +100,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Apr 25 19:10:27 2025          ;
+; Analysis & Synthesis Status     ; Successful - Mon Apr 28 12:43:52 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; ppu_demo                                       ;
 ; Top-level Entity Name           ; ppu_demo                                       ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 733                                            ;
+; Total registers                 ; 743                                            ;
 ; Total pins                      ; 37                                             ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 815,808                                        ;
@@ -308,16 +308,16 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+--------------+
 ; Resource                                    ; Usage        ;
 +---------------------------------------------+--------------+
-; Estimate of Logic utilization (ALMs needed) ; 787          ;
+; Estimate of Logic utilization (ALMs needed) ; 801          ;
 ;                                             ;              ;
-; Combinational ALUT usage for logic          ; 1119         ;
-;     -- 7 input functions                    ; 40           ;
-;     -- 6 input functions                    ; 292          ;
-;     -- 5 input functions                    ; 139          ;
-;     -- 4 input functions                    ; 91           ;
-;     -- <=3 input functions                  ; 557          ;
+; Combinational ALUT usage for logic          ; 1135         ;
+;     -- 7 input functions                    ; 39           ;
+;     -- 6 input functions                    ; 307          ;
+;     -- 5 input functions                    ; 129          ;
+;     -- 4 input functions                    ; 147          ;
+;     -- <=3 input functions                  ; 513          ;
 ;                                             ;              ;
-; Dedicated logic registers                   ; 733          ;
+; Dedicated logic registers                   ; 743          ;
 ;                                             ;              ;
 ; I/O pins                                    ; 37           ;
 ; Total MLAB memory bits                      ; 0            ;
@@ -329,9 +329,9 @@ https://fpgasoftware.intel.com/eula.
 ;     -- PLLs                                 ; 1            ;
 ;                                             ;              ;
 ; Maximum fan-out node                        ; KEY[0]~input ;
-; Maximum fan-out                             ; 724          ;
-; Total fan-out                               ; 11061        ;
-; Average fan-out                             ; 5.20         ;
+; Maximum fan-out                             ; 734          ;
+; Total fan-out                               ; 11226        ;
+; Average fan-out                             ; 5.21         ;
 +---------------------------------------------+--------------+
 
 
@@ -340,8 +340,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
 ; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                 ; Entity Name      ; Library Name ;
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
-; |ppu_demo                                    ; 1119 (21)           ; 733 (9)                   ; 815808            ; 8          ; 37   ; 0            ; |ppu_demo                                                                                                                           ; ppu_demo         ; work         ;
-;    |PPU:ppu_mod|                             ; 1098 (970)          ; 724 (668)                 ; 815808            ; 8          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod                                                                                                               ; PPU              ; work         ;
+; |ppu_demo                                    ; 1135 (20)           ; 743 (9)                   ; 815808            ; 8          ; 37   ; 0            ; |ppu_demo                                                                                                                           ; ppu_demo         ; work         ;
+;    |PPU:ppu_mod|                             ; 1115 (986)          ; 734 (678)                 ; 815808            ; 8          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod                                                                                                               ; PPU              ; work         ;
 ;       |board_labels_rom:rom0|                ; 26 (0)              ; 6 (0)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0                                                                                         ; board_labels_rom ; work         ;
 ;          |altsyncram:altsyncram_component|   ; 26 (0)              ; 6 (0)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component                                                         ; altsyncram       ; work         ;
 ;             |altsyncram_b9a2:auto_generated| ; 26 (0)              ; 6 (6)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated                          ; altsyncram_b9a2  ; work         ;
@@ -381,7 +381,7 @@ https://fpgasoftware.intel.com/eula.
 ;             |altsyncram_n6g1:auto_generated| ; 11 (0)              ; 2 (2)                     ; 164352            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated                               ; altsyncram_n6g1  ; work         ;
 ;                |decode_01a:rden_decode|      ; 3 (3)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated|decode_01a:rden_decode        ; decode_01a       ; work         ;
 ;                |mux_nfb:mux2|                ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated|mux_nfb:mux2                  ; mux_nfb          ; work         ;
-;       |vga_driver:draw|                      ; 91 (91)             ; 47 (47)                   ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|vga_driver:draw                                                                                               ; vga_driver       ; work         ;
+;       |vga_driver:draw|                      ; 92 (92)             ; 47 (47)                   ; 0                 ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|vga_driver:draw                                                                                               ; vga_driver       ; work         ;
 ;       |waiting_rom:rom0_4|                   ; 0 (0)               ; 0 (0)                     ; 86400             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|waiting_rom:rom0_4                                                                                            ; waiting_rom      ; work         ;
 ;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 86400             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component                                                            ; altsyncram       ; work         ;
 ;             |altsyncram_1dg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 86400             ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated                             ; altsyncram_1dg1  ; work         ;
@@ -1859,17 +1859,7 @@ Encoding Type:  One-Hot
 ; PPU:ppu_mod|square_info[1][76][3]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
 ; PPU:ppu_mod|square_info[1][76][4]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
 ; PPU:ppu_mod|square_info[1][76][5]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
-; PPU:ppu_mod|square_info[0][65][9]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
-; PPU:ppu_mod|square_info[0][65][0]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
-; PPU:ppu_mod|square_info[0][65][1]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
-; PPU:ppu_mod|square_info[0][65][8]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
-; PPU:ppu_mod|square_info[0][65][6]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
-; PPU:ppu_mod|square_info[0][65][2]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
-; PPU:ppu_mod|square_info[0][65][7]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
-; PPU:ppu_mod|square_info[0][65][3]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
-; PPU:ppu_mod|square_info[0][65][4]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
-; PPU:ppu_mod|square_info[0][65][5]                                                                              ; Stuck at GND due to stuck port clock_enable                                                                                  ;
-; Total Number of Removed Registers = 1394                                                                       ;                                                                                                                              ;
+; Total Number of Removed Registers = 1384                                                                       ;                                                                                                                              ;
 +----------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -1878,12 +1868,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 733   ;
+; Total registers                              ; 743   ;
 ; Number of registers using Synchronous Clear  ; 34    ;
 ; Number of registers using Synchronous Load   ; 9     ;
-; Number of registers using Asynchronous Clear ; 700   ;
+; Number of registers using Asynchronous Clear ; 710   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 675   ;
+; Number of registers using Clock Enable       ; 684   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -1895,8 +1885,8 @@ Encoding Type:  One-Hot
 +-----------------------------------------+---------+
 ; PPU:ppu_mod|curr_square[5]              ; 26      ;
 ; PPU:ppu_mod|curr_square[4]              ; 36      ;
-; PPU:ppu_mod|curr_square[0]              ; 150     ;
-; PPU:ppu_mod|curr_square[1]              ; 152     ;
+; PPU:ppu_mod|curr_square[0]              ; 157     ;
+; PPU:ppu_mod|curr_square[1]              ; 159     ;
 ; PPU:ppu_mod|curr_square[2]              ; 57      ;
 ; PPU:ppu_mod|curr_square[3]              ; 60      ;
 ; PPU:ppu_mod|curr_square[6]              ; 10      ;
@@ -1915,15 +1905,15 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
 ; 8:1                ; 8 bits    ; 40 LEs        ; 0 LEs                ; 40 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|green_reg[2]                                                                                ;
 ; 8:1                ; 7 bits    ; 35 LEs        ; 28 LEs               ; 7 LEs                  ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|green_reg[7]                                                                                ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|v_counter[4]                                                                                ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|h_counter[4]                                                                                ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|rgb_turn[0]                                                                                                 ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated|mux_nfb:mux2|result_node[3] ;
-; 10:1               ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|board_sel[5]                                                                                                ;
-; 256:1              ; 7 bits    ; 1190 LEs      ; 959 LEs              ; 231 LEs                ; No         ; |ppu_demo|PPU:ppu_mod|curr_square_data[2]                                                                                         ;
-; 256:1              ; 3 bits    ; 510 LEs       ; 411 LEs              ; 99 LEs                 ; No         ; |ppu_demo|PPU:ppu_mod|next_square_ship_sec[2]                                                                                     ;
-; 30:1               ; 2 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|rgb[7]                                                                                                      ;
-; 30:1               ; 5 bits    ; 100 LEs       ; 100 LEs              ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|rgb[3]                                                                                                      ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|v_counter[5]                                                                                ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |ppu_demo|PPU:ppu_mod|vga_driver:draw|h_counter[9]                                                                                ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|rgb_turn[2]                                                                                                 ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated|mux_nfb:mux2|result_node[1] ;
+; 10:1               ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|board_sel[0]                                                                                                ;
+; 256:1              ; 7 bits    ; 1190 LEs      ; 959 LEs              ; 231 LEs                ; No         ; |ppu_demo|PPU:ppu_mod|curr_square_data[0]                                                                                         ;
+; 256:1              ; 3 bits    ; 510 LEs       ; 411 LEs              ; 99 LEs                 ; No         ; |ppu_demo|PPU:ppu_mod|next_square_ship_sec[0]                                                                                     ;
+; 30:1               ; 2 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|rgb[6]                                                                                                      ;
+; 30:1               ; 5 bits    ; 100 LEs       ; 100 LEs              ; 0 LEs                  ; No         ; |ppu_demo|PPU:ppu_mod|rgb[5]                                                                                                      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -3540,16 +3530,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 733                         ;
-;     CLR               ; 33                          ;
+; arriav_ff             ; 743                         ;
+;     CLR               ; 34                          ;
 ;     CLR SCLR          ; 10                          ;
 ;     ENA               ; 9                           ;
-;     ENA CLR           ; 647                         ;
+;     ENA CLR           ; 656                         ;
 ;     ENA CLR SCLR      ; 10                          ;
 ;     ENA SCLR SLD      ; 9                           ;
 ;     SCLR              ; 5                           ;
 ;     plain             ; 10                          ;
-; arriav_lcell_comb     ; 1119                        ;
+; arriav_lcell_comb     ; 1135                        ;
 ;     arith             ; 263                         ;
 ;         0 data inputs ; 12                          ;
 ;         1 data inputs ; 75                          ;
@@ -3557,16 +3547,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;         3 data inputs ; 16                          ;
 ;         4 data inputs ; 5                           ;
 ;         5 data inputs ; 22                          ;
-;     extend            ; 40                          ;
-;         7 data inputs ; 40                          ;
-;     normal            ; 769                         ;
+;     extend            ; 39                          ;
+;         7 data inputs ; 39                          ;
+;     normal            ; 786                         ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 4                           ;
-;         2 data inputs ; 49                          ;
-;         3 data inputs ; 220                         ;
-;         4 data inputs ; 86                          ;
-;         5 data inputs ; 117                         ;
-;         6 data inputs ; 292                         ;
+;         2 data inputs ; 48                          ;
+;         3 data inputs ; 177                         ;
+;         4 data inputs ; 142                         ;
+;         5 data inputs ; 107                         ;
+;         6 data inputs ; 307                         ;
 ;     shared            ; 47                          ;
 ;         1 data inputs ; 27                          ;
 ;         2 data inputs ; 20                          ;
@@ -3576,7 +3566,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; stratixv_ram_block    ; 192                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 10.00                       ;
-; Average LUT depth     ; 6.59                        ;
+; Average LUT depth     ; 6.62                        ;
 +-----------------------+-----------------------------+
 
 
@@ -3595,7 +3585,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Fri Apr 25 19:09:59 2025
+    Info: Processing started: Mon Apr 28 12:43:12 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ppu_demo -c ppu_demo
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
@@ -3706,16 +3696,16 @@ Info (12133): Instantiated megafunction "vga_pll:pll|vga_pll_0002:vga_pll_inst|a
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
 Info (12128): Elaborating entity "PPU" for hierarchy "PPU:ppu_mod" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 137
-Warning (10036): Verilog HDL or VHDL warning at PPU.sv(266): object "curr_finish" assigned a value but never read File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 266
-Warning (10230): Verilog HDL assignment warning at PPU.sv(134): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 134
-Warning (10230): Verilog HDL assignment warning at PPU.sv(136): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 136
-Warning (10230): Verilog HDL assignment warning at PPU.sv(139): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 139
-Warning (10230): Verilog HDL assignment warning at PPU.sv(149): truncated value with size 32 to match size of target (7) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 149
-Warning (10230): Verilog HDL assignment warning at PPU.sv(154): truncated value with size 32 to match size of target (7) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 154
-Warning (10230): Verilog HDL assignment warning at PPU.sv(222): truncated value with size 10 to match size of target (4) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 222
-Warning (10230): Verilog HDL assignment warning at PPU.sv(274): truncated value with size 2 to match size of target (1) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 274
+Warning (10036): Verilog HDL or VHDL warning at PPU.sv(271): object "curr_finish" assigned a value but never read File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 271
+Warning (10230): Verilog HDL assignment warning at PPU.sv(140): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 140
+Warning (10230): Verilog HDL assignment warning at PPU.sv(142): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 142
+Warning (10230): Verilog HDL assignment warning at PPU.sv(145): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 145
+Warning (10230): Verilog HDL assignment warning at PPU.sv(155): truncated value with size 32 to match size of target (7) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 155
+Warning (10230): Verilog HDL assignment warning at PPU.sv(160): truncated value with size 32 to match size of target (7) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 160
+Warning (10230): Verilog HDL assignment warning at PPU.sv(228): truncated value with size 10 to match size of target (4) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 228
+Warning (10230): Verilog HDL assignment warning at PPU.sv(279): truncated value with size 2 to match size of target (1) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 279
 Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "square_info" into its bus
-Info (12128): Elaborating entity "board_labels_rom" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 285
+Info (12128): Elaborating entity "board_labels_rom" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 290
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/board_labels_rom.v Line: 94
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/board_labels_rom.v Line: 94
 Info (12133): Instantiated megafunction "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/board_labels_rom.v Line: 94
@@ -3755,7 +3745,7 @@ Info (12128): Elaborating entity "decode_31a" for hierarchy "PPU:ppu_mod|board_l
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_qfb.tdf
     Info (12023): Found entity 1: mux_qfb File: I:/ECE554/Battleship/Verilog/PPU/db/mux_qfb.tdf Line: 23
 Info (12128): Elaborating entity "mux_qfb" for hierarchy "PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated|mux_qfb:mux4" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_b9a2.tdf Line: 51
-Info (12128): Elaborating entity "shoreline_rom" for hierarchy "PPU:ppu_mod|shoreline_rom:rom0_1" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 298
+Info (12128): Elaborating entity "shoreline_rom" for hierarchy "PPU:ppu_mod|shoreline_rom:rom0_1" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 303
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/shoreline_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/shoreline_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/shoreline_rom.v Line: 82
@@ -3776,7 +3766,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|shoreline_rom:rom0_1|altsyn
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ujg1.tdf
     Info (12023): Found entity 1: altsyncram_ujg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_ujg1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_ujg1" for hierarchy "PPU:ppu_mod|shoreline_rom:rom0_1|altsyncram:altsyncram_component|altsyncram_ujg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "water_rom" for hierarchy "PPU:ppu_mod|water_rom:rom0_2" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 305
+Info (12128): Elaborating entity "water_rom" for hierarchy "PPU:ppu_mod|water_rom:rom0_2" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 310
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/water_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/water_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/water_rom.v Line: 82
@@ -3797,7 +3787,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|water_rom:rom0_2|altsyncram
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_5ng1.tdf
     Info (12023): Found entity 1: altsyncram_5ng1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_5ng1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_5ng1" for hierarchy "PPU:ppu_mod|water_rom:rom0_2|altsyncram:altsyncram_component|altsyncram_5ng1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "title_rom" for hierarchy "PPU:ppu_mod|title_rom:rom0_3" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 312
+Info (12128): Elaborating entity "title_rom" for hierarchy "PPU:ppu_mod|title_rom:rom0_3" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 317
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/title_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/title_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/title_rom.v Line: 82
@@ -3824,7 +3814,7 @@ Info (12128): Elaborating entity "decode_01a" for hierarchy "PPU:ppu_mod|title_r
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_nfb.tdf
     Info (12023): Found entity 1: mux_nfb File: I:/ECE554/Battleship/Verilog/PPU/db/mux_nfb.tdf Line: 23
 Info (12128): Elaborating entity "mux_nfb" for hierarchy "PPU:ppu_mod|title_rom:rom0_3|altsyncram:altsyncram_component|altsyncram_n6g1:auto_generated|mux_nfb:mux2" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_n6g1.tdf Line: 41
-Info (12128): Elaborating entity "waiting_rom" for hierarchy "PPU:ppu_mod|waiting_rom:rom0_4" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 320
+Info (12128): Elaborating entity "waiting_rom" for hierarchy "PPU:ppu_mod|waiting_rom:rom0_4" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 325
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/waiting_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/waiting_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/waiting_rom.v Line: 82
@@ -3851,7 +3841,7 @@ Info (12128): Elaborating entity "decode_u0a" for hierarchy "PPU:ppu_mod|waiting
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_lfb.tdf
     Info (12023): Found entity 1: mux_lfb File: I:/ECE554/Battleship/Verilog/PPU/db/mux_lfb.tdf Line: 23
 Info (12128): Elaborating entity "mux_lfb" for hierarchy "PPU:ppu_mod|waiting_rom:rom0_4|altsyncram:altsyncram_component|altsyncram_1dg1:auto_generated|mux_lfb:mux2" File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_1dg1.tdf Line: 41
-Info (12128): Elaborating entity "your_turn_rom" for hierarchy "PPU:ppu_mod|your_turn_rom:rom0_5" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 327
+Info (12128): Elaborating entity "your_turn_rom" for hierarchy "PPU:ppu_mod|your_turn_rom:rom0_5" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 332
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/your_turn_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/your_turn_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/your_turn_rom.v Line: 82
@@ -3872,7 +3862,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|your_turn_rom:rom0_5|altsyn
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_5lg1.tdf
     Info (12023): Found entity 1: altsyncram_5lg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_5lg1.tdf Line: 32
 Info (12128): Elaborating entity "altsyncram_5lg1" for hierarchy "PPU:ppu_mod|your_turn_rom:rom0_5|altsyncram:altsyncram_component|altsyncram_5lg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "ship2_rom" for hierarchy "PPU:ppu_mod|ship2_rom:rom1" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 340
+Info (12128): Elaborating entity "ship2_rom" for hierarchy "PPU:ppu_mod|ship2_rom:rom1" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 345
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship2_rom.v Line: 94
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship2_rom.v Line: 94
 Info (12133): Instantiated megafunction "PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/ship2_rom.v Line: 94
@@ -3903,7 +3893,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|ship2_rom:rom1|altsyncram:a
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_md92.tdf
     Info (12023): Found entity 1: altsyncram_md92 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_md92.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_md92" for hierarchy "PPU:ppu_mod|ship2_rom:rom1|altsyncram:altsyncram_component|altsyncram_md92:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "ship3_rom" for hierarchy "PPU:ppu_mod|ship3_rom:rom2" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 350
+Info (12128): Elaborating entity "ship3_rom" for hierarchy "PPU:ppu_mod|ship3_rom:rom2" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 355
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship3_rom.v Line: 94
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship3_rom.v Line: 94
 Info (12133): Instantiated megafunction "PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/ship3_rom.v Line: 94
@@ -3934,7 +3924,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|ship3_rom:rom2|altsyncram:a
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_rd92.tdf
     Info (12023): Found entity 1: altsyncram_rd92 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_rd92.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_rd92" for hierarchy "PPU:ppu_mod|ship3_rom:rom2|altsyncram:altsyncram_component|altsyncram_rd92:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "ship4_rom" for hierarchy "PPU:ppu_mod|ship4_rom:rom3" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 359
+Info (12128): Elaborating entity "ship4_rom" for hierarchy "PPU:ppu_mod|ship4_rom:rom3" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 364
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship4_rom.v Line: 94
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship4_rom.v Line: 94
 Info (12133): Instantiated megafunction "PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/ship4_rom.v Line: 94
@@ -3965,7 +3955,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|ship4_rom:rom3|altsyncram:a
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_gg92.tdf
     Info (12023): Found entity 1: altsyncram_gg92 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_gg92.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_gg92" for hierarchy "PPU:ppu_mod|ship4_rom:rom3|altsyncram:altsyncram_component|altsyncram_gg92:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "ship5_rom" for hierarchy "PPU:ppu_mod|ship5_rom:rom4" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 368
+Info (12128): Elaborating entity "ship5_rom" for hierarchy "PPU:ppu_mod|ship5_rom:rom4" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 373
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship5_rom.v Line: 94
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/ship5_rom.v Line: 94
 Info (12133): Instantiated megafunction "PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/ship5_rom.v Line: 94
@@ -3996,7 +3986,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|ship5_rom:rom4|altsyncram:a
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_7h92.tdf
     Info (12023): Found entity 1: altsyncram_7h92 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_7h92.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_7h92" for hierarchy "PPU:ppu_mod|ship5_rom:rom4|altsyncram:altsyncram_component|altsyncram_7h92:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "miss_player_rom" for hierarchy "PPU:ppu_mod|miss_player_rom:rom5" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 375
+Info (12128): Elaborating entity "miss_player_rom" for hierarchy "PPU:ppu_mod|miss_player_rom:rom5" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 380
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/miss_player_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/miss_player_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/miss_player_rom.v Line: 82
@@ -4017,7 +4007,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|miss_player_rom:rom5|altsyn
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_kmg1.tdf
     Info (12023): Found entity 1: altsyncram_kmg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_kmg1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_kmg1" for hierarchy "PPU:ppu_mod|miss_player_rom:rom5|altsyncram:altsyncram_component|altsyncram_kmg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "hit_player_rom" for hierarchy "PPU:ppu_mod|hit_player_rom:rom6" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 382
+Info (12128): Elaborating entity "hit_player_rom" for hierarchy "PPU:ppu_mod|hit_player_rom:rom6" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 387
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/hit_player_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/hit_player_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/hit_player_rom.v Line: 82
@@ -4038,7 +4028,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|hit_player_rom:rom6|altsync
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_tig1.tdf
     Info (12023): Found entity 1: altsyncram_tig1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_tig1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_tig1" for hierarchy "PPU:ppu_mod|hit_player_rom:rom6|altsyncram:altsyncram_component|altsyncram_tig1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "miss_ship_rom" for hierarchy "PPU:ppu_mod|miss_ship_rom:rom7" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 389
+Info (12128): Elaborating entity "miss_ship_rom" for hierarchy "PPU:ppu_mod|miss_ship_rom:rom7" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 394
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/miss_ship_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/miss_ship_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/miss_ship_rom.v Line: 82
@@ -4059,7 +4049,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|miss_ship_rom:rom7|altsyncr
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_rfg1.tdf
     Info (12023): Found entity 1: altsyncram_rfg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_rfg1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_rfg1" for hierarchy "PPU:ppu_mod|miss_ship_rom:rom7|altsyncram:altsyncram_component|altsyncram_rfg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "hit_ship_rom" for hierarchy "PPU:ppu_mod|hit_ship_rom:rom8" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 396
+Info (12128): Elaborating entity "hit_ship_rom" for hierarchy "PPU:ppu_mod|hit_ship_rom:rom8" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 401
 Info (12128): Elaborating entity "altsyncram" for hierarchy "PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/hit_ship_rom.v Line: 82
 Info (12130): Elaborated megafunction instantiation "PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component" File: I:/ECE554/Battleship/Verilog/PPU/hit_ship_rom.v Line: 82
 Info (12133): Instantiated megafunction "PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component" with the following parameter: File: I:/ECE554/Battleship/Verilog/PPU/hit_ship_rom.v Line: 82
@@ -4080,7 +4070,7 @@ Info (12133): Instantiated megafunction "PPU:ppu_mod|hit_ship_rom:rom8|altsyncra
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_4cg1.tdf
     Info (12023): Found entity 1: altsyncram_4cg1 File: I:/ECE554/Battleship/Verilog/PPU/db/altsyncram_4cg1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_4cg1" for hierarchy "PPU:ppu_mod|hit_ship_rom:rom8|altsyncram:altsyncram_component|altsyncram_4cg1:auto_generated" File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "vga_driver" for hierarchy "PPU:ppu_mod|vga_driver:draw" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 493
+Info (12128): Elaborating entity "vga_driver" for hierarchy "PPU:ppu_mod|vga_driver:draw" File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 498
 Warning (12241): 14 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "VGA_B[0]" is stuck at GND File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 19
@@ -4105,18 +4095,18 @@ Warning (21074): Design contains 5 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "CLOCK4_50" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 11
     Warning (15610): No output dependent on input pin "KEY[1]" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 15
     Warning (15610): No output dependent on input pin "KEY[2]" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 15
-Info (21057): Implemented 2030 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 2056 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 29 output pins
-    Info (21061): Implemented 1792 logic cells
+    Info (21061): Implemented 1818 logic cells
     Info (21064): Implemented 192 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 8 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 28 warnings
-    Info: Peak virtual memory: 4956 megabytes
-    Info: Processing ended: Fri Apr 25 19:10:28 2025
-    Info: Elapsed time: 00:00:29
-    Info: Total CPU time (on all processors): 00:00:20
+    Info: Peak virtual memory: 4953 megabytes
+    Info: Processing ended: Mon Apr 28 12:43:53 2025
+    Info: Elapsed time: 00:00:41
+    Info: Total CPU time (on all processors): 00:00:19
 
 
 +------------------------------------------+

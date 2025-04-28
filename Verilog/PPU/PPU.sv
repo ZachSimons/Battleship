@@ -98,6 +98,8 @@ logic [9:0] square_info [0:1][0:99];
 // update background/foreground sprites
 // bit ordering {turn, finish}
 logic [2:0] game_info;
+logic curr_turn, changing_turn;
+assign changing_turn = (~curr_turn & turn) | (curr_turn & ~turn);
 
 always_ff @(posedge sys_clk, negedge rst_n) begin
     if (!rst_n) begin
@@ -105,8 +107,12 @@ always_ff @(posedge sys_clk, negedge rst_n) begin
         game_info <= 0;
     end
     else if (receive) begin
-        square_info[board][square_update] <= {square_state, ship_type, ship_section, vert, square_sel, ai};
-        game_info <= {turn, finish};
+        if (changing_turn | finish) begin
+            game_info <= {turn, finish};
+        end
+        else begin
+            square_info[board][square_update] <= {square_state, ship_type, ship_section, vert, square_sel, ai};
+        end
     end
 end
 
@@ -262,8 +268,7 @@ logic [1:0] curr_ship_type;
 logic curr_vert;
 logic curr_square_sel;
 logic curr_ai;
-logic curr_turn;
-logic curr_finish;
+logic [1:0] curr_finish;
 assign curr_square_data = square_info[curr_square[7]][curr_square[6:0]];
 assign curr_square_state = curr_square_data[9:8];
 assign curr_ship_type = curr_square_data[7:6];
