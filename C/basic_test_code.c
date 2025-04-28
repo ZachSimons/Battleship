@@ -66,11 +66,13 @@ void exception_handler(int num) {
     } else if(num == 100) {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
+        accelerator_ran = 0;
         board[activeSquare] |= (1 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
     } else if(num == 101) {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
+        accelerator_ran = 0;
         board[activeSquare] |= (2 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
     } else if(num < 107) {
@@ -104,6 +106,7 @@ void exception_handler(int num) {
     } else {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
+        accelerator_ran = 0;
         int ship = (num & 0x0000ff00) >> 8;
         int pos = num & 0x000000ff;
         int square = mod(pos, 100);
