@@ -252,6 +252,8 @@ int check_lose() {
 }
 
 void rsi_instruction() {
+    asm volatile ("addi sp,zero,-32");
+    asm volatile ("addi s0,sp,32")
     asm volatile ("lui a0,%hi(PRE_ACCEL_LABEL)");
     asm volatile ("addi a0,a0,%lo(PRE_ACCEL_LABEL)");
     asm volatile ("rsi a0");
