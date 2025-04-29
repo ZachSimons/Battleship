@@ -114,7 +114,10 @@ PPU ppu_i (
     .ship_type(ppu_data[21:20]),
     .ship_section(ppu_data[19:17]),
     .vert(ppu_data[16]),
-    .square_sel(ppu_data[15])
+    .square_sel(ppu_data[15]),
+    .ai(ppu_data[14]),
+    .turn(ppu_data[13:12]),
+    .finish(ppu_data[11:10])
 );
 
 

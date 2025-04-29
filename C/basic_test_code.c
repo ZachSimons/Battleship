@@ -419,6 +419,7 @@ int main() {
     enemy_sunk[3] = -1;
     enemy_sunk[4] = -1;
     myTurn = 1;
+    send_ppu_value(SET_MY_TURN);
     initialize_boards();
     for(int i = 0; i < 5; i++) {
         if(place_ship(mod(rand(), 100), i, rand() & 0x00000001) == 0) {
