@@ -3,6 +3,7 @@
 #define SET_NOT_MY_TURN 0x00002000
 
 int toSnd;
+int toSnd_board;
 int activeSquare;
 int myTurn;
 int board[100];
@@ -30,7 +31,6 @@ void send_accel_value(int);
 int check_sunk();
 int check_lose();
 void rsi_instruction();
-void reset_program();
 
 void entry_point() {
     asm volatile ("j main");
@@ -126,7 +126,7 @@ void exception_handler(int num) {
         board[activeSquare] |= SELECT_BIT;
         send_ppu_value(board[activeSquare] | (((activeSquare == ai_target) & accelerator_ran) ? 1 << 14 : 0));
     } else if(num == 107) {
-        reset_program();
+        send_board_value(toSnd_board);
     } else if(num < 0x00040000) {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
@@ -149,6 +149,8 @@ void exception_handler(int num) {
         if(num & 0x00020000) {
             send_ppu_value(0x00000c00);
         }
+    } else {
+        send_board_value(107);
     }
 }
 
@@ -187,9 +189,9 @@ void send_ppu_value(int value) {
 }
 
 void send_board_value(int value) {
-    toSnd = value;
-    asm volatile ("lui a0,%hi(toSnd)");
-    asm volatile ("lw a0,%lo(toSnd)(a0)");
+    toSnd_board = value;
+    asm volatile ("lui a0,%hi(toSnd_board)");
+    asm volatile ("lw a0,%lo(toSnd_board)(a0)");
     asm volatile ("snd a0");
 }
 
@@ -280,12 +282,6 @@ int check_lose() {
         }
     }
     return 1;
-}
-
-void reset_program() {
-    asm volatile ("addi sp,zero,0");
-    asm volatile ("la a0,main");
-    asm volatile ("rsi a0");
 }
 
 void initialize_boards() {
