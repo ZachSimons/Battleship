@@ -1,2 +1,2 @@
 Info (10281): Verilog HDL Declaration information at ppu_demo.v(20): object "VGA_CLK" differs only in case from object "vga_clk" in the same scope File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 20
-Info (10281): Verilog HDL Declaration information at PPU.sv(21): object "vga_clk" differs only in case from object "VGA_CLK" in the same scope File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 21
+Info (10281): Verilog HDL Declaration information at PPU.sv(24): object "vga_clk" differs only in case from object "VGA_CLK" in the same scope File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 24
