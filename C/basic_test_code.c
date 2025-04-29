@@ -17,6 +17,8 @@ int possible_positions[5][200];
 int hit_counts[100];
 int ai_target;
 int old_ai_target;
+int accelerator_ran;
+int accelerator_rerun;
 
 int generate_encoding(int, int, int, int, int, int, int);
 int mod(int, int);
@@ -25,7 +27,6 @@ void send_ppu_value(int);
 void send_board_value(int);
 int check_sunk();
 int check_lose();
-void rsi_instruction();
 void reset_program();
 
 void entry_point() {
@@ -66,20 +67,28 @@ void exception_handler(int num) {
     } else if(num == 100) {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
+        if(accelerator_ran) {
+            accelerator_ran = 0;
+        } else {
+            accelerator_rerun = 1;
+        }
         send_ppu_value(board[ai_target]);
         board[activeSquare] |= (1 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
-        rsi_instruction();
     } else if(num == 101) {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
+        if(accelerator_ran) {
+            accelerator_ran = 0;
+        } else {
+            accelerator_rerun = 1;
+        }
         send_ppu_value(board[ai_target]);
         board[activeSquare] |= (2 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
-        rsi_instruction();
     } else if(num < 107) {
         board[activeSquare] &= ~SELECT_BIT;
-        send_ppu_value(board[activeSquare] | (activeSquare == ai_target ? 1 << 14 : 0));
+        send_ppu_value(board[activeSquare] | (((activeSquare == ai_target) & accelerator_ran) ? 1 << 14 : 0));
         if(num == 102) { // LEFT
             if(mod(activeSquare, 10)) {
                 activeSquare -= 1;
@@ -102,12 +111,17 @@ void exception_handler(int num) {
             }
         }
         board[activeSquare] |= SELECT_BIT;
-        send_ppu_value(board[activeSquare] | (activeSquare == ai_target ? 1 << 14 : 0));
+        send_ppu_value(board[activeSquare] | (((activeSquare == ai_target) & accelerator_ran) ? 1 << 14 : 0));
     } else if(num == 107) {
         reset_program();
     } else {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
+        if(accelerator_ran) {
+            accelerator_ran = 0;
+        } else {
+            accelerator_rerun = 1;
+        }
         send_ppu_value(board[ai_target]);
         int ship = (num & 0x0000ff00) >> 8;
         int pos = num & 0x000000ff;
@@ -122,7 +136,6 @@ void exception_handler(int num) {
         if(num & 0x00020000) {
             send_ppu_value(0x00000c00);
         }
-        rsi_instruction();
     }
 }
 
@@ -240,14 +253,6 @@ int check_lose() {
         }
     }
     return 1;
-}
-
-void rsi_instruction() {
-    asm volatile ("addi sp,zero,-32");
-    asm volatile ("addi s0,sp,32");
-    asm volatile ("lui a0,%hi(PRE_ACCEL_LABEL)");
-    asm volatile ("addi a0,a0,%lo(PRE_ACCEL_LABEL)");
-    asm volatile ("rsi a0");
 }
 
 void reset_program() {
@@ -442,14 +447,20 @@ int main() {
     send_ppu_value(board[activeSquare]);
     ai_target = 55;
     old_ai_target = 55;
+    accelerator_ran = 0;
+    accelerator_rerun = 0;
     while(1) {
-        asm volatile ("PRE_ACCEL_LABEL:");
         ai_target = run_accelerator();
         send_ppu_value(board[old_ai_target]);
-        old_ai_target = ai_target;
         send_ppu_value(board[ai_target] | (1 << 14));
-        while(1) {
-            // Wait for interrupt
+        old_ai_target = ai_target;
+        if(accelerator_rerun) {
+            accelerator_rerun = 0;
+        } else {
+            accelerator_ran = 1;
+        }
+        while(accelerator_ran) {
+            // Do nothing
         }
     }
 }
