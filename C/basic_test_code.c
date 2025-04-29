@@ -12,7 +12,7 @@ int my_positions[5];
 int my_sunk[5];
 int enemy_sunk[5];
 
-#define ACCELERATOR_COUNT 8000
+#define ACCELERATOR_COUNT 800
 int possible_positions[5][200];
 int hit_counts[100];
 int ai_target;
@@ -65,8 +65,12 @@ void exception_handler(int num) {
         } else {
             if(((my_board[num] & 0x00c00000) >> 22) == 1) {
                 send_board_value(100);
+                send_ppu_value(SET_MY_TURN);
+                myTurn = 1;
             } else {
                 send_board_value(101);
+                send_ppu_value(SET_MY_TURN);
+                myTurn = 1;
             }
         }
     } else if(num == 100) {
