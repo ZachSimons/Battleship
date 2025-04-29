@@ -364,9 +364,6 @@ lose_screen_rom rom0_7 (
 	.q(rgb_lose));
 
 assign rgb_finish = curr_finish[0] ? rgb_win : rgb_lose;
-logic rgb_finish_filtered;
-// filter grey pixels white (too lazy to do in photoshop)
-assign rgb_finish_filtered = (rgb_finish == 8'hB6) ? 8'hFF : rgb_finish;
 
 // ship 2 sprite memrory
 logic [7:0] rgb_ship2_hor;
