@@ -56,12 +56,18 @@ void exception_handler(int num) {
                 send_ppu_value(SET_MY_TURN);
                 myTurn = 1;
             }
-        } else {
+        } else if(((my_board[num] & 0x00c00000) >> 22) == 0) {
             my_board[num] = my_board[num] | 0x00400000;
             send_ppu_value(my_board[num]);
             send_board_value(100);
             send_ppu_value(SET_MY_TURN);
             myTurn = 1;
+        } else {
+            if(((my_board[num] & 0x00c00000) >> 22) == 1) {
+                send_board_value(100);
+            } else {
+                send_board_value(101);
+            }
         }
     } else if(num == 100) {
         myTurn = 0;
