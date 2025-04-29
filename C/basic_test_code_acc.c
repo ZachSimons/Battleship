@@ -123,7 +123,7 @@ void exception_handler(int num) {
         send_ppu_value(board[activeSquare] | (((activeSquare == ai_target) & accelerator_ran) ? 1 << 14 : 0));
     } else if(num == 107) {
         reset_program();
-    } else {
+    } else if(num < 0x00040000) {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
         if(accelerator_ran) {
