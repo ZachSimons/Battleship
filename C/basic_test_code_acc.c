@@ -16,10 +16,12 @@ int enemy_sunk[5];
 int possible_positions[5][200];
 int hit_counts[100];
 int ai_target;
-int old_ai_target;
+int accelerator_ran;
+int accelerator_rerun;
 int acc_result;
 
 int generate_encoding(int, int, int, int, int, int, int);
+int generate_acc_encoding(int, int, int, int);
 int mod(int, int);
 int mult(int, int);
 void send_ppu_value(int);
@@ -68,20 +70,28 @@ void exception_handler(int num) {
     } else if(num == 100) {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
+        if(accelerator_ran) {
+            accelerator_ran = 0;
+        } else {
+            accelerator_rerun = 1;
+        }
         send_ppu_value(board[ai_target]);
         board[activeSquare] |= (1 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
-        rsi_instruction();
     } else if(num == 101) {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
+        if(accelerator_ran) {
+            accelerator_ran = 0;
+        } else {
+            accelerator_rerun = 1;
+        }
         send_ppu_value(board[ai_target]);
         board[activeSquare] |= (2 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
-        rsi_instruction();
     } else if(num < 107) {
         board[activeSquare] &= ~SELECT_BIT;
-        send_ppu_value(board[activeSquare] | (activeSquare == ai_target ? 1 << 14 : 0));
+        send_ppu_value(board[activeSquare] | (((activeSquare == ai_target) & accelerator_ran) ? 1 << 14 : 0));
         if(num == 102) { // LEFT
             if(mod(activeSquare, 10)) {
                 activeSquare -= 1;
@@ -104,12 +114,17 @@ void exception_handler(int num) {
             }
         }
         board[activeSquare] |= SELECT_BIT;
-        send_ppu_value(board[activeSquare] | (activeSquare == ai_target ? 1 << 14 : 0));
+        send_ppu_value(board[activeSquare] | (((activeSquare == ai_target) & accelerator_ran) ? 1 << 14 : 0));
     } else if(num == 107) {
         reset_program();
     } else {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
+        if(accelerator_ran) {
+            accelerator_ran = 0;
+        } else {
+            accelerator_rerun = 1;
+        }
         send_ppu_value(board[ai_target]);
         int ship = (num & 0x0000ff00) >> 8;
         int pos = num & 0x000000ff;
@@ -124,7 +139,6 @@ void exception_handler(int num) {
         if(num & 0x00020000) {
             send_ppu_value(0x00000c00);
         }
-        rsi_instruction();
     }
 }
 
@@ -195,6 +209,13 @@ int generate_encoding(int board, int size, int state, int pos, int seg, int v, i
     return result;
 }
 
+int generate_acc_encoding(int ship1, int pos1, int ship2, int pos2) {
+    int result = 0;
+    result |= (mod(pos1, 100) << 25) | ((pos1 > 99) << 24) | (ship1 << 21);
+    result |= (mod(pos2, 100) << 14) | ((pos2 > 99) << 13) | (ship2 << 10);
+    return result;
+}
+
 int place_ship(int pos, int ship, int v) {
     int size = ship_sizes[ship];
     int inc = v ? 10 : 1;
@@ -249,14 +270,6 @@ int check_lose() {
         }
     }
     return 1;
-}
-
-void rsi_instruction() {
-    asm volatile ("addi sp,zero,-32");
-    asm volatile ("addi s0,sp,32");
-    asm volatile ("lui a0,%hi(PRE_ACCEL_LABEL)");
-    asm volatile ("addi a0,a0,%lo(PRE_ACCEL_LABEL)");
-    asm volatile ("rsi a0");
 }
 
 void reset_program() {
@@ -345,9 +358,9 @@ int calculate_overlap(int lower, int lower_square, int upper, int upper_square) 
 }
 
 int check_valid_configuration(int* configuration) {
-    for(int i = 0; i < 5; i++) {
-        send_accel_value(generate_encoding(0, ship_sizes[i], 3, mod(my_positions[i], 100), i, my_positions > 99, 0));
-    }
+    send_accel_value(generate_acc_encoding(0, my_positions[0], 1, my_positions[1]));
+    send_accel_value(generate_acc_encoding(2, my_positions[2], 3, my_positions[3]));
+    send_accel_value(generate_acc_encoding(4, my_positions[4], 5, 5));
     asm volatile ("sac a1");
     asm volatile ("lui a5,%hi(acc_result)");
     asm volatile ("sw a1,%lo(acc_result)(a5)");
@@ -442,15 +455,19 @@ int main() {
     board[activeSquare] |= SELECT_BIT;
     send_ppu_value(board[activeSquare]);
     ai_target = 55;
-    old_ai_target = 55;
+    accelerator_ran = 0;
+    accelerator_rerun = 0;
+    acc_result = 0;
     while(1) {
-        asm volatile ("PRE_ACCEL_LABEL:");
         ai_target = run_accelerator();
-        send_ppu_value(board[old_ai_target]);
-        old_ai_target = ai_target;
-        send_ppu_value(board[ai_target] | (1 << 14));
-        while(1) {
-            // Wait for interrupt
+        if(accelerator_rerun) {
+            accelerator_rerun = 0;
+        } else {
+            accelerator_ran = 1;
+            send_ppu_value(board[ai_target] | (1 << 14));
+        }
+        while(accelerator_ran) {
+            // Do nothing
         }
     }
 }

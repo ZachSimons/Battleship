@@ -16,7 +16,6 @@ int enemy_sunk[5];
 int possible_positions[5][200];
 int hit_counts[100];
 int ai_target;
-int old_ai_target;
 int accelerator_ran;
 int accelerator_rerun;
 
@@ -446,18 +445,15 @@ int main() {
     board[activeSquare] |= SELECT_BIT;
     send_ppu_value(board[activeSquare]);
     ai_target = 55;
-    old_ai_target = 55;
     accelerator_ran = 0;
     accelerator_rerun = 0;
     while(1) {
         ai_target = run_accelerator();
-        send_ppu_value(board[old_ai_target]);
-        send_ppu_value(board[ai_target] | (1 << 14));
-        old_ai_target = ai_target;
         if(accelerator_rerun) {
             accelerator_rerun = 0;
         } else {
             accelerator_ran = 1;
+            send_ppu_value(board[ai_target] | (1 << 14));
         }
         while(accelerator_ran) {
             // Do nothing
