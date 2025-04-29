@@ -18,12 +18,14 @@ int hit_counts[100];
 int ai_target;
 int old_ai_target;
 int accelerator_ran;
+int acc_result;
 
 int generate_encoding(int, int, int, int, int, int, int);
 int mod(int, int);
 int mult(int, int);
 void send_ppu_value(int);
 void send_board_value(int);
+void send_accel_value(int);
 int check_sunk();
 int check_lose();
 void reset_program();
@@ -162,6 +164,13 @@ void send_board_value(int value) {
     asm volatile ("lui a0,%hi(toSnd)");
     asm volatile ("lw a0,%lo(toSnd)(a0)");
     asm volatile ("snd a0");
+}
+
+void send_accel_value(int value) {
+    toSnd = value;
+    asm volatile ("lui a0,%hi(toSnd)");
+    asm volatile ("lw a0,%lo(toSnd)(a0)");
+    asm volatile ("uad a0");
 }
 
 int generate_encoding(int board, int size, int state, int pos, int seg, int v, int sel) {
@@ -325,21 +334,13 @@ int calculate_overlap(int lower, int lower_square, int upper, int upper_square) 
 }
 
 int check_valid_configuration(int* configuration) {
-    for(int i = 0; i < 100; i++) {
-        if((board[i] & 0x00c00000) == 0x00800000) {
-            if(!square_in_configuration(configuration, i)) {
-                return 0;
-            }
-        }
+    for(int i = 0; i < 5; i++) {
+        send_accel_value(generate_encoding(0, ship_sizes[i], 3, mod(my_positions[i], 100), i, my_positions > 99, 0));
     }
-    for(int i = 0; i < 4; i++) {
-        for(int j = i+1; j < 5; j++) {
-            if(!calculate_overlap(i, configuration[i], j, configuration[j])) {
-                return 0;
-            }
-        }
-    }
-    return 1;
+    asm volatile ("sac a1");
+    asm volatile ("lui a5,%hi(acc_result)");
+    asm volatile ("sw a1,%lo(acc_result)(a5)");
+    return acc_result;
 }
 
 int run_accelerator() {
