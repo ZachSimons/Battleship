@@ -364,6 +364,13 @@ int calculate_overlap(int lower, int lower_square, int upper, int upper_square) 
 }
 
 int check_valid_configuration(int* configuration) {
+    for(int i = 0; i < 100; i++) {
+        if((board[i] & 0x00c00000) == 0x00800000) {
+            if(!square_in_configuration(configuration, i)) {
+                return 0;
+            }
+        }
+    }
     send_accel_value(generate_acc_encoding(0, my_positions[0], 1, my_positions[1]));
     send_accel_value(generate_acc_encoding(2, my_positions[2], 3, my_positions[3]));
     send_accel_value(generate_acc_encoding(4, my_positions[4], 5, 5));
