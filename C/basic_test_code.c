@@ -1,6 +1,6 @@
 #define SELECT_BIT 0x00008000
 #define SET_MY_TURN 0x00003000
-#define SET_NOT_MY_TURN 0x00001000
+#define SET_NOT_MY_TURN 0x00002000
 
 int toSnd;
 int activeSquare;
