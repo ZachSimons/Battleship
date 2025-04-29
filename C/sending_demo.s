@@ -259,7 +259,7 @@ exception_handler:
         bne     a4,a5,.L8
         lui     a5,%hi(myTurn)
         sw      zero,%lo(myTurn)(a5)
-        li      a0,4096
+        li      a0,8192
         call    send_ppu_value
         lui     a5,%hi(accelerator_ran)
         sw      zero,%lo(accelerator_ran)(a5)
@@ -295,7 +295,7 @@ exception_handler:
         bne     a4,a5,.L9
         lui     a5,%hi(myTurn)
         sw      zero,%lo(myTurn)(a5)
-        li      a0,4096
+        li      a0,8192
         call    send_ppu_value
         lui     a5,%hi(accelerator_ran)
         sw      zero,%lo(accelerator_ran)(a5)
@@ -485,7 +485,7 @@ exception_handler:
 .L18:
         lui     a5,%hi(myTurn)
         sw      zero,%lo(myTurn)(a5)
-        li      a0,4096
+        li      a0,8192
         call    send_ppu_value
         lui     a5,%hi(accelerator_ran)
         sw      zero,%lo(accelerator_ran)(a5)
@@ -2014,6 +2014,8 @@ main:
         lui     a5,%hi(myTurn)
         li      a4,1
         sw      a4,%lo(myTurn)(a5)
+        li      a0,12288
+        call    send_ppu_value
         call    initialize_boards
         sw      zero,-20(s0)
         j       .L157
