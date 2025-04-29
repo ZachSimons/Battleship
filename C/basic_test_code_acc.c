@@ -17,7 +17,6 @@ int possible_positions[5][200];
 int hit_counts[100];
 int ai_target;
 int old_ai_target;
-int accelerator_ran;
 int acc_result;
 
 int generate_encoding(int, int, int, int, int, int, int);
@@ -28,6 +27,7 @@ void send_board_value(int);
 void send_accel_value(int);
 int check_sunk();
 int check_lose();
+void rsi_instruction();
 void reset_program();
 
 void entry_point() {
@@ -68,15 +68,17 @@ void exception_handler(int num) {
     } else if(num == 100) {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
-        accelerator_ran = 0;
+        send_ppu_value(board[ai_target]);
         board[activeSquare] |= (1 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
+        rsi_instruction();
     } else if(num == 101) {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
-        accelerator_ran = 0;
+        send_ppu_value(board[ai_target]);
         board[activeSquare] |= (2 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
+        rsi_instruction();
     } else if(num < 107) {
         board[activeSquare] &= ~SELECT_BIT;
         send_ppu_value(board[activeSquare] | (activeSquare == ai_target ? 1 << 14 : 0));
@@ -108,7 +110,7 @@ void exception_handler(int num) {
     } else {
         myTurn = 0;
         send_ppu_value(SET_NOT_MY_TURN);
-        accelerator_ran = 0;
+        send_ppu_value(board[ai_target]);
         int ship = (num & 0x0000ff00) >> 8;
         int pos = num & 0x000000ff;
         int square = mod(pos, 100);
@@ -122,6 +124,7 @@ void exception_handler(int num) {
         if(num & 0x00020000) {
             send_ppu_value(0x00000c00);
         }
+        rsi_instruction();
     }
 }
 
@@ -246,6 +249,12 @@ int check_lose() {
         }
     }
     return 1;
+}
+
+void rsi_instruction() {
+    asm volatile ("lui a0,%hi(PRE_ACCEL_LABEL)");
+    asm volatile ("addi a0,a0,%lo(PRE_ACCEL_LABEL)");
+    asm volatile ("rsi a0");
 }
 
 void reset_program() {
@@ -433,13 +442,13 @@ int main() {
     ai_target = 55;
     old_ai_target = 55;
     while(1) {
+        asm volatile ("PRE_ACCEL_LABEL:");
         ai_target = run_accelerator();
         send_ppu_value(board[old_ai_target]);
-        send_ppu_value(board[ai_target] | (1 << 14));
         old_ai_target = ai_target;
-        accelerator_ran = 1;
-        while(accelerator_ran) {
-            // Do nothing
+        send_ppu_value(board[ai_target] | (1 << 14));
+        while(1) {
+            // Wait for interrupt
         }
     }
 }
