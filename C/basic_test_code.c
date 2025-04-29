@@ -13,7 +13,7 @@ int my_positions[5];
 int my_sunk[5];
 int enemy_sunk[5];
 
-#define ACCELERATOR_COUNT 10000
+#define ACCELERATOR_COUNT 1000
 int possible_positions[5][200];
 int hit_counts[100];
 int ai_target;
@@ -391,6 +391,7 @@ int run_accelerator() {
         }
         // Check if configuration is legal (ACCELERATOR)
         if(!check_valid_configuration(ship_configuration)) {
+            accel_cnt--;
             continue;
         }
         // Mark positions
