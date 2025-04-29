@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ppu_demo
-Mon Apr 28 18:07:46 2025
+Mon Apr 28 20:34:12 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -106,7 +106,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Mon Apr 28 18:07:46 2025          ;
+; Analysis & Synthesis Status     ; Successful - Mon Apr 28 20:34:12 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; ppu_demo                                       ;
 ; Top-level Entity Name           ; ppu_demo                                       ;
@@ -232,7 +232,8 @@ https://fpgasoftware.intel.com/eula.
 ;     Processor 5            ;   0.0%      ;
 ;     Processor 6            ;   0.0%      ;
 ;     Processor 7            ;   0.0%      ;
-;     Processors 8-14        ;   0.0%      ;
+;     Processor 8            ;   0.0%      ;
+;     Processors 9-14        ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -319,14 +320,14 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+--------------+
 ; Resource                                    ; Usage        ;
 +---------------------------------------------+--------------+
-; Estimate of Logic utilization (ALMs needed) ; 711          ;
+; Estimate of Logic utilization (ALMs needed) ; 707          ;
 ;                                             ;              ;
-; Combinational ALUT usage for logic          ; 1096         ;
-;     -- 7 input functions                    ; 7            ;
-;     -- 6 input functions                    ; 275          ;
-;     -- 5 input functions                    ; 166          ;
-;     -- 4 input functions                    ; 87           ;
-;     -- <=3 input functions                  ; 561          ;
+; Combinational ALUT usage for logic          ; 1086         ;
+;     -- 7 input functions                    ; 8            ;
+;     -- 6 input functions                    ; 277          ;
+;     -- 5 input functions                    ; 159          ;
+;     -- 4 input functions                    ; 90           ;
+;     -- <=3 input functions                  ; 552          ;
 ;                                             ;              ;
 ; Dedicated logic registers                   ; 419          ;
 ;                                             ;              ;
@@ -341,8 +342,8 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;              ;
 ; Maximum fan-out node                        ; KEY[0]~input ;
 ; Maximum fan-out                             ; 407          ;
-; Total fan-out                               ; 10767        ;
-; Average fan-out                             ; 5.75         ;
+; Total fan-out                               ; 10740        ;
+; Average fan-out                             ; 5.77         ;
 +---------------------------------------------+--------------+
 
 
@@ -351,8 +352,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
 ; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                 ; Entity Name      ; Library Name ;
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
-; |ppu_demo                                    ; 1096 (24)           ; 419 (9)                   ; 1443008           ; 9          ; 37   ; 0            ; |ppu_demo                                                                                                                           ; ppu_demo         ; work         ;
-;    |PPU:ppu_mod|                             ; 1072 (900)          ; 410 (351)                 ; 1443008           ; 9          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod                                                                                                               ; PPU              ; work         ;
+; |ppu_demo                                    ; 1086 (24)           ; 419 (9)                   ; 1443008           ; 9          ; 37   ; 0            ; |ppu_demo                                                                                                                           ; ppu_demo         ; work         ;
+;    |PPU:ppu_mod|                             ; 1062 (890)          ; 410 (351)                 ; 1443008           ; 9          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod                                                                                                               ; PPU              ; work         ;
 ;       |board_labels_rom:rom0|                ; 26 (0)              ; 6 (0)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0                                                                                         ; board_labels_rom ; work         ;
 ;          |altsyncram:altsyncram_component|   ; 26 (0)              ; 6 (0)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component                                                         ; altsyncram       ; work         ;
 ;             |altsyncram_b9a2:auto_generated| ; 26 (0)              ; 6 (6)                     ; 307328            ; 0          ; 0    ; 0            ; |ppu_demo|PPU:ppu_mod|board_labels_rom:rom0|altsyncram:altsyncram_component|altsyncram_b9a2:auto_generated                          ; altsyncram_b9a2  ; work         ;
@@ -2144,8 +2145,8 @@ Encoding Type:  One-Hot
 ; PPU:ppu_mod|square_info[0][3][3]                                                                                  ; Stuck at GND due to stuck port clock_enable                                                                                    ;
 ; PPU:ppu_mod|square_info[0][19][3]                                                                                 ; Stuck at GND due to stuck port clock_enable                                                                                    ;
 ; PPU:ppu_mod|square_info[0][50][3]                                                                                 ; Stuck at GND due to stuck port clock_enable                                                                                    ;
-; PPU:ppu_mod|square_info[0][4][3]                                                                                  ; Stuck at GND due to stuck port clock_enable                                                                                    ;
 ; PPU:ppu_mod|square_info[0][39][3]                                                                                 ; Stuck at GND due to stuck port clock_enable                                                                                    ;
+; PPU:ppu_mod|square_info[0][4][3]                                                                                  ; Stuck at GND due to stuck port clock_enable                                                                                    ;
 ; PPU:ppu_mod|square_info[0][9][3]                                                                                  ; Stuck at GND due to stuck port clock_enable                                                                                    ;
 ; PPU:ppu_mod|square_info[0][29][3]                                                                                 ; Stuck at GND due to stuck port clock_enable                                                                                    ;
 ; PPU:ppu_mod|square_info[0][60][3]                                                                                 ; Stuck at GND due to stuck port clock_enable                                                                                    ;
@@ -2691,7 +2692,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; SHORELINE_OFFSET_Y ; 416   ; Signed Integer              ;
 ; WATER_WIDTH        ; 64    ; Signed Integer              ;
 ; FINISH_OFFSET_X    ; 180   ; Signed Integer              ;
-; FINISH_OFFSET_Y    ; 220   ; Signed Integer              ;
+; FINISH_OFFSET_Y    ; 170   ; Signed Integer              ;
 ; FINISH_WIDTH       ; 280   ; Signed Integer              ;
 ; FINISH_HEIGHT      ; 140   ; Signed Integer              ;
 ; SHIP2_WIDTH        ; 33    ; Signed Integer              ;
@@ -4080,24 +4081,24 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     ENA SCLR SLD      ; 9                           ;
 ;     SCLR              ; 6                           ;
 ;     plain             ; 13                          ;
-; arriav_lcell_comb     ; 1096                        ;
-;     arith             ; 296                         ;
-;         0 data inputs ; 14                          ;
+; arriav_lcell_comb     ; 1086                        ;
+;     arith             ; 288                         ;
+;         0 data inputs ; 13                          ;
 ;         1 data inputs ; 75                          ;
-;         2 data inputs ; 161                         ;
-;         3 data inputs ; 19                          ;
+;         2 data inputs ; 155                         ;
+;         3 data inputs ; 18                          ;
 ;         4 data inputs ; 5                           ;
 ;         5 data inputs ; 22                          ;
-;     extend            ; 7                           ;
-;         7 data inputs ; 7                           ;
-;     normal            ; 746                         ;
+;     extend            ; 8                           ;
+;         7 data inputs ; 8                           ;
+;     normal            ; 743                         ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 4                           ;
-;         2 data inputs ; 83                          ;
-;         3 data inputs ; 157                         ;
-;         4 data inputs ; 82                          ;
-;         5 data inputs ; 144                         ;
-;         6 data inputs ; 275                         ;
+;         2 data inputs ; 81                          ;
+;         3 data inputs ; 158                         ;
+;         4 data inputs ; 85                          ;
+;         5 data inputs ; 137                         ;
+;         6 data inputs ; 277                         ;
 ;     shared            ; 47                          ;
 ;         1 data inputs ; 27                          ;
 ;         2 data inputs ; 20                          ;
@@ -4107,7 +4108,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; stratixv_ram_block    ; 272                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 10.00                       ;
-; Average LUT depth     ; 5.97                        ;
+; Average LUT depth     ; 6.00                        ;
 +-----------------------+-----------------------------+
 
 
@@ -4126,7 +4127,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Mon Apr 28 18:07:04 2025
+    Info: Processing started: Mon Apr 28 20:33:34 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ppu_demo -c ppu_demo
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
@@ -4173,8 +4174,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file win_scr
 Info (12021): Found 1 design units, including 1 entities, in source file lose_screen_rom.v
     Info (12023): Found entity 1: lose_screen_rom File: I:/ECE554/Battleship/Verilog/PPU/lose_screen_rom.v Line: 40
 Info (12127): Elaborating entity "ppu_demo" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at ppu_demo.v(155): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 155
-Info (12128): Elaborating entity "vga_pll" for hierarchy "vga_pll:pll" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 124
+Warning (10230): Verilog HDL assignment warning at ppu_demo.v(154): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 154
+Info (12128): Elaborating entity "vga_pll" for hierarchy "vga_pll:pll" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 123
 Info (12128): Elaborating entity "vga_pll_0002" for hierarchy "vga_pll:pll|vga_pll_0002:vga_pll_inst" File: I:/ECE554/Battleship/Verilog/PPU/vga_pll.v Line: 19
 Info (12128): Elaborating entity "altera_pll" for hierarchy "vga_pll:pll|vga_pll_0002:vga_pll_inst|altera_pll:altera_pll_i" File: I:/ECE554/Battleship/Verilog/PPU/vga_pll/vga_pll_0002.v Line: 85
 Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "wire_to_nowhere_64" into its bus
@@ -4240,7 +4241,7 @@ Info (12133): Instantiated megafunction "vga_pll:pll|vga_pll_0002:vga_pll_inst|a
     Info (12134): Parameter "duty_cycle17" = "50"
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
-Info (12128): Elaborating entity "PPU" for hierarchy "PPU:ppu_mod" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 148
+Info (12128): Elaborating entity "PPU" for hierarchy "PPU:ppu_mod" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 147
 Warning (10230): Verilog HDL assignment warning at PPU.sv(150): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 150
 Warning (10230): Verilog HDL assignment warning at PPU.sv(152): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 152
 Warning (10230): Verilog HDL assignment warning at PPU.sv(155): truncated value with size 32 to match size of target (10) File: I:/ECE554/Battleship/Verilog/PPU/PPU.sv Line: 155
@@ -4680,18 +4681,18 @@ Warning (21074): Design contains 5 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "CLOCK4_50" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 11
     Warning (15610): No output dependent on input pin "KEY[1]" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 15
     Warning (15610): No output dependent on input pin "KEY[2]" File: I:/ECE554/Battleship/Verilog/PPU/ppu_demo.v Line: 15
-Info (21057): Implemented 1771 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1761 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 29 output pins
-    Info (21061): Implemented 1452 logic cells
+    Info (21061): Implemented 1442 logic cells
     Info (21064): Implemented 272 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 9 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 26 warnings
-    Info: Peak virtual memory: 5009 megabytes
-    Info: Processing ended: Mon Apr 28 18:07:46 2025
-    Info: Elapsed time: 00:00:42
-    Info: Total CPU time (on all processors): 00:00:22
+    Info: Peak virtual memory: 4977 megabytes
+    Info: Processing ended: Mon Apr 28 20:34:13 2025
+    Info: Elapsed time: 00:00:39
+    Info: Total CPU time (on all processors): 00:00:21
 
 
 +------------------------------------------+

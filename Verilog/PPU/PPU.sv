@@ -62,7 +62,7 @@ parameter TURN_HEIGHT = 36;
 parameter SHORELINE_OFFSET_Y = 416;
 parameter WATER_WIDTH = 64;
 parameter FINISH_OFFSET_X = 180;
-parameter FINISH_OFFSET_Y = 220;
+parameter FINISH_OFFSET_Y = 170;
 parameter FINISH_WIDTH = 280;
 parameter FINISH_HEIGHT = 140;
 
