@@ -16,6 +16,7 @@ int enemy_sunk[5];
 #define ACCELERATOR_COUNT 1000
 int possible_positions[5][200];
 int hit_counts[100];
+int configuration[5];
 int ai_target;
 int ai_old_target;
 int acc_result;
@@ -317,7 +318,7 @@ int check_valid_position(int ship, int square, int v) {
     return 1;
 }
 
-int square_in_configuration(int* configuration, int square) {
+int square_in_configuration(int square) {
     for(int i = 0; i < 5; i++) {
         int inc = configuration[i] > 99 ? 10 : 1;
         int start = mod(configuration[i], 100);
@@ -347,7 +348,7 @@ int calculate_overlap(int lower, int lower_square, int upper, int upper_square) 
     return 1;
 }
 
-int check_valid_configuration(int* configuration) {
+int check_valid_configuration() {
     for(int i = 0; i < 100; i++) {
         if((board[i] & 0x00c00000) == 0x00800000) {
             if(!square_in_configuration(configuration, i)) {
@@ -382,24 +383,23 @@ int run_accelerator() {
     }
     // Evaluate configurations
     for(int accel_cnt = 0; accel_cnt < ACCELERATOR_COUNT; accel_cnt++) {
-        int ship_configuration[5];
         // Generate configuration
         for(int ship = 0; ship < 5; ship++) {
-            ship_configuration[ship] = mod(rand(),200);
-            if(!possible_positions[ship][ship_configuration[ship]]) {
+            configuration[ship] = mod(rand(),200);
+            if(!possible_positions[ship][configuration[ship]]) {
                 ship--;
             }
         }
         // Check if configuration is legal (ACCELERATOR)
-        if(!check_valid_configuration(ship_configuration)) {
+        if(!check_valid_configuration()) {
             accel_cnt--;
             continue;
         }
         // Mark positions
         for(int ship = 0; ship < 5; ship++) {
-            char size = ship_sizes[ship];
-            unsigned char pos = mod(ship_configuration[ship],100);
-            unsigned char inc = ship_configuration[ship] >= 100 ? 10 : 1;
+            int size = ship_sizes[ship];
+            int pos = mod(configuration[ship],100);
+            int inc = configuration[ship] >= 100 ? 10 : 1;
             for(int i = 0; i < size; i++) {
                 if((board[pos + mult(inc,i)] & 0x00c00000) == 0) {
                     hit_counts[pos + mult(inc,i)]++;
