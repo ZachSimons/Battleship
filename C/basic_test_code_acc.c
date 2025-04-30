@@ -473,10 +473,11 @@ int main() {
     acc_result = 0;
     while(1) {
         ai_target = run_accelerator();
+        accelerator_ran = 1;
         if(accelerator_rerun) {
             accelerator_rerun = 0;
+            accelerator_ran = 0;
         } else {
-            accelerator_ran = 1;
             send_ppu_value(board[ai_target] | (1 << 14));
         }
         while(accelerator_ran) {
