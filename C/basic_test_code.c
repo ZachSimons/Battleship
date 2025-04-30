@@ -86,7 +86,7 @@ void exception_handler(int num) {
         send_ppu_value(board[activeSquare]);
     } else if(num < 107) {
         board[activeSquare] &= ~SELECT_BIT;
-        send_ppu_value(board[activeSquare] | ((activeSquare == ai_target) ? 1 << 14 : 0));
+        send_ppu_value(board[activeSquare] | (((activeSquare == ai_target) && ((board[activeSquare] & 0x00c00000) == 0)) ? 1 << 14 : 0));
         if(num == 102) { // LEFT
             if(mod(activeSquare, 10)) {
                 activeSquare -= 1;
@@ -109,7 +109,7 @@ void exception_handler(int num) {
             }
         }
         board[activeSquare] |= SELECT_BIT;
-        send_ppu_value(board[activeSquare] | ((activeSquare == ai_target) ? 1 << 14 : 0));
+        send_ppu_value(board[activeSquare] | (((activeSquare == ai_target) && ((board[activeSquare] & 0x00c00000) == 0)) ? 1 << 14 : 0));
     } else if(num == 107) {
         send_board_value(toSnd_board);
     } else if(num < 0x00040000) {
@@ -440,6 +440,6 @@ int main() {
         ai_target = run_accelerator();
         send_ppu_value(board[ai_old_target]);
         ai_old_target = ai_target;
-        send_ppu_value(board[ai_target] | (1 << 14));
+        send_ppu_value(board[ai_target] | (((board[ai_target] & 0x00c00000) == 0) ? 1 << 14 : 0));
     }
 }
