@@ -45,7 +45,7 @@ module accelerator(
         if(~rst_n) begin //reset game state to a full board of 0's
             game_state = '{default: '0};
         end
-        else if (update_board && (data[31]==0) && (data[23:21]==2'b01))begin //if ppu is update AND its updating the enemy board AND its a miss/hit/ship THEN update gamestate board
+        else if (update_board && (data[31]==0) && (data[23:22]==2'b01))begin //if ppu is update AND its updating the enemy board AND its a miss/hit/ship THEN update gamestate board
             game_state[data[30:24]] <= 1; //on ppu gamestate update set square to respective status
         end
     end
