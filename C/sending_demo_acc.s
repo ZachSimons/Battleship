@@ -78,6 +78,12 @@ possible_positions:
         .size   hit_counts, 400
 hit_counts:
         .zero   400
+        .globl  configuration
+        .align  2
+        .type   configuration, @object
+        .size   configuration, 20
+configuration:
+        .zero   20
         .globl  ai_target
         .section        .sbss
         .align  2
@@ -97,6 +103,12 @@ ai_old_target:
         .size   acc_result, 4
 acc_result:
         .zero   4
+        .globl  ai_ran
+        .align  2
+        .type   ai_ran, @object
+        .size   ai_ran, 4
+ai_ran:
+        .zero   4
         .text
         .align  2
         .globl  entry_point
@@ -109,15 +121,15 @@ entry_point:
         sw      a0,4(sp)
         addi    s0,sp,16
  #APP
-# 35 "basic_test_code_acc.c" 1
-# 0 "" 2
-# 36 "basic_test_code_acc.c" 1
-        rdi a0
-# 0 "" 2
 # 37 "basic_test_code_acc.c" 1
-        call exception_handler
 # 0 "" 2
 # 38 "basic_test_code_acc.c" 1
+        rdi a0
+# 0 "" 2
+# 39 "basic_test_code_acc.c" 1
+        call exception_handler
+# 0 "" 2
+# 40 "basic_test_code_acc.c" 1
 # 0 "" 2
  #NO_APP
         nop
@@ -302,6 +314,8 @@ exception_handler:
         bne     a4,a5,.L10
         lui     a5,%hi(myTurn)
         sw      zero,%lo(myTurn)(a5)
+        lui     a5,%hi(ai_ran)
+        sw      zero,%lo(ai_ran)(a5)
         li      a0,8192
         call    send_ppu_value
         lui     a5,%hi(ai_target)
@@ -345,6 +359,8 @@ exception_handler:
         bne     a4,a5,.L11
         lui     a5,%hi(myTurn)
         sw      zero,%lo(myTurn)(a5)
+        lui     a5,%hi(ai_ran)
+        sw      zero,%lo(ai_ran)(a5)
         li      a0,8192
         call    send_ppu_value
         lui     a5,%hi(ai_target)
@@ -579,6 +595,8 @@ exception_handler:
         bge     a4,a5,.L23
         lui     a5,%hi(myTurn)
         sw      zero,%lo(myTurn)(a5)
+        lui     a5,%hi(ai_ran)
+        sw      zero,%lo(ai_ran)(a5)
         li      a0,8192
         call    send_ppu_value
         lui     a5,%hi(ai_target)
@@ -744,7 +762,7 @@ rand:
         sw      s0,24(sp)
         addi    s0,sp,32
  #APP
-# 156 "basic_test_code_acc.c" 1
+# 161 "basic_test_code_acc.c" 1
         ldr a0
 # 0 "" 2
  #NO_APP
@@ -798,13 +816,13 @@ send_ppu_value:
         lw      a4,-20(s0)
         sw      a4,%lo(toSnd)(a5)
  #APP
-# 170 "basic_test_code_acc.c" 1
+# 175 "basic_test_code_acc.c" 1
         lui a0,%hi(toSnd)
 # 0 "" 2
-# 171 "basic_test_code_acc.c" 1
+# 176 "basic_test_code_acc.c" 1
         lw a0,%lo(toSnd)(a0)
 # 0 "" 2
-# 172 "basic_test_code_acc.c" 1
+# 177 "basic_test_code_acc.c" 1
         ugs a0
 # 0 "" 2
  #NO_APP
@@ -827,13 +845,13 @@ send_board_value:
         lw      a4,-20(s0)
         sw      a4,%lo(toSnd_board)(a5)
  #APP
-# 177 "basic_test_code_acc.c" 1
+# 182 "basic_test_code_acc.c" 1
         lui a0,%hi(toSnd_board)
 # 0 "" 2
-# 178 "basic_test_code_acc.c" 1
+# 183 "basic_test_code_acc.c" 1
         lw a0,%lo(toSnd_board)(a0)
 # 0 "" 2
-# 179 "basic_test_code_acc.c" 1
+# 184 "basic_test_code_acc.c" 1
         snd a0
 # 0 "" 2
  #NO_APP
@@ -856,13 +874,13 @@ send_accel_value:
         lw      a4,-20(s0)
         sw      a4,%lo(toSnd)(a5)
  #APP
-# 184 "basic_test_code_acc.c" 1
+# 189 "basic_test_code_acc.c" 1
         lui a0,%hi(toSnd)
 # 0 "" 2
-# 185 "basic_test_code_acc.c" 1
+# 190 "basic_test_code_acc.c" 1
         lw a0,%lo(toSnd)(a0)
 # 0 "" 2
-# 186 "basic_test_code_acc.c" 1
+# 191 "basic_test_code_acc.c" 1
         uad a0
 # 0 "" 2
  #NO_APP
@@ -1567,13 +1585,13 @@ square_in_configuration:
         sw      s0,40(sp)
         addi    s0,sp,48
         sw      a0,-36(s0)
-        sw      a1,-40(s0)
         sw      zero,-20(s0)
         j       .L110
 .L117:
+        lui     a5,%hi(configuration)
+        addi    a4,a5,%lo(configuration)
         lw      a5,-20(s0)
         slli    a5,a5,2
-        lw      a4,-36(s0)
         add     a5,a4,a5
         lw      a4,0(a5)
         li      a5,99
@@ -1584,9 +1602,10 @@ square_in_configuration:
         li      a5,1
 .L112:
         sw      a5,-28(s0)
+        lui     a5,%hi(configuration)
+        addi    a4,a5,%lo(configuration)
         lw      a5,-20(s0)
         slli    a5,a5,2
-        lw      a4,-36(s0)
         add     a5,a4,a5
         lw      a5,0(a5)
         li      a1,100
@@ -1602,7 +1621,7 @@ square_in_configuration:
         mv      a4,a0
         lw      a5,-32(s0)
         add     a5,a4,a5
-        lw      a4,-40(s0)
+        lw      a4,-36(s0)
         bne     a4,a5,.L114
         li      a5,1
         j       .L115
@@ -1736,11 +1755,10 @@ calculate_overlap:
         .globl  check_valid_configuration
         .type   check_valid_configuration, @function
 check_valid_configuration:
-        addi    sp,sp,-48
-        sw      ra,44(sp)
-        sw      s0,40(sp)
-        addi    s0,sp,48
-        sw      a0,-36(s0)
+        addi    sp,sp,-32
+        sw      ra,28(sp)
+        sw      s0,24(sp)
+        addi    s0,sp,32
         sw      zero,-20(s0)
         j       .L130
 .L133:
@@ -1754,8 +1772,7 @@ check_valid_configuration:
         and     a4,a4,a5
         li      a5,8388608
         bne     a4,a5,.L131
-        lw      a1,-20(s0)
-        lw      a0,-36(s0)
+        lw      a0,-20(s0)
         call    square_in_configuration
         mv      a5,a0
         bne     a5,zero,.L131
@@ -1769,11 +1786,12 @@ check_valid_configuration:
         lw      a4,-20(s0)
         li      a5,99
         ble     a4,a5,.L133
-        lw      a5,-36(s0)
+        lui     a5,%hi(configuration)
+        addi    a5,a5,%lo(configuration)
         lw      a4,0(a5)
-        lw      a5,-36(s0)
-        addi    a5,a5,4
-        lw      a5,0(a5)
+        lui     a5,%hi(configuration)
+        addi    a5,a5,%lo(configuration)
+        lw      a5,4(a5)
         mv      a3,a5
         li      a2,1
         mv      a1,a4
@@ -1782,12 +1800,12 @@ check_valid_configuration:
         mv      a5,a0
         mv      a0,a5
         call    send_accel_value
-        lw      a5,-36(s0)
-        addi    a5,a5,8
-        lw      a4,0(a5)
-        lw      a5,-36(s0)
-        addi    a5,a5,12
-        lw      a5,0(a5)
+        lui     a5,%hi(configuration)
+        addi    a5,a5,%lo(configuration)
+        lw      a4,8(a5)
+        lui     a5,%hi(configuration)
+        addi    a5,a5,%lo(configuration)
+        lw      a5,12(a5)
         mv      a3,a5
         li      a2,3
         mv      a1,a4
@@ -1796,9 +1814,9 @@ check_valid_configuration:
         mv      a5,a0
         mv      a0,a5
         call    send_accel_value
-        lw      a5,-36(s0)
-        addi    a5,a5,16
-        lw      a5,0(a5)
+        lui     a5,%hi(configuration)
+        addi    a5,a5,%lo(configuration)
+        lw      a5,16(a5)
         li      a3,5
         li      a2,5
         mv      a1,a5
@@ -1808,13 +1826,13 @@ check_valid_configuration:
         mv      a0,a5
         call    send_accel_value
  #APP
-# 361 "basic_test_code_acc.c" 1
+# 366 "basic_test_code_acc.c" 1
         sac a1
 # 0 "" 2
-# 362 "basic_test_code_acc.c" 1
+# 367 "basic_test_code_acc.c" 1
         lui a5,%hi(acc_result)
 # 0 "" 2
-# 363 "basic_test_code_acc.c" 1
+# 368 "basic_test_code_acc.c" 1
         sw a1,%lo(acc_result)(a5)
 # 0 "" 2
  #NO_APP
@@ -1822,9 +1840,9 @@ check_valid_configuration:
         lw      a5,%lo(acc_result)(a5)
 .L132:
         mv      a0,a5
-        lw      ra,44(sp)
-        lw      s0,40(sp)
-        addi    sp,sp,48
+        lw      ra,28(sp)
+        lw      s0,24(sp)
+        addi    sp,sp,32
         jr      ra
         .size   check_valid_configuration, .-check_valid_configuration
         .align  2
@@ -1834,7 +1852,6 @@ run_accelerator:
         addi    sp,sp,-80
         sw      ra,76(sp)
         sw      s0,72(sp)
-        sw      s1,68(sp)
         addi    s0,sp,80
         call    clear_accelerator_data
         sw      zero,-20(s0)
@@ -1937,14 +1954,16 @@ run_accelerator:
         mv      a0,a5
         call    mod
         mv      a3,a0
-        lw      a4,-36(s0)
-        addi    a5,s0,-80
-        slli    a4,a4,2
+        lui     a5,%hi(configuration)
+        addi    a4,a5,%lo(configuration)
+        lw      a5,-36(s0)
+        slli    a5,a5,2
         add     a5,a4,a5
         sw      a3,0(a5)
-        lw      a4,-36(s0)
-        addi    a5,s0,-80
-        slli    a4,a4,2
+        lui     a5,%hi(configuration)
+        addi    a4,a5,%lo(configuration)
+        lw      a5,-36(s0)
+        slli    a5,a5,2
         add     a5,a4,a5
         lw      a2,0(a5)
         lui     a5,%hi(possible_positions)
@@ -1972,8 +1991,6 @@ run_accelerator:
         lw      a4,-36(s0)
         li      a5,4
         ble     a4,a5,.L147
-        addi    a5,s0,-80
-        mv      a0,a5
         call    check_valid_configuration
         mv      a5,a0
         bne     a5,zero,.L148
@@ -1991,20 +2008,21 @@ run_accelerator:
         slli    a5,a5,2
         add     a5,a4,a5
         lw      a5,0(a5)
-        sb      a5,-57(s0)
-        lw      a4,-40(s0)
-        addi    a5,s0,-80
-        slli    a4,a4,2
+        sw      a5,-60(s0)
+        lui     a5,%hi(configuration)
+        addi    a4,a5,%lo(configuration)
+        lw      a5,-40(s0)
+        slli    a5,a5,2
         add     a5,a4,a5
         lw      a5,0(a5)
         li      a1,100
         mv      a0,a5
         call    mod
-        mv      a5,a0
-        sb      a5,-58(s0)
-        lw      a4,-40(s0)
-        addi    a5,s0,-80
-        slli    a4,a4,2
+        sw      a0,-64(s0)
+        lui     a5,%hi(configuration)
+        addi    a4,a5,%lo(configuration)
+        lw      a5,-40(s0)
+        slli    a5,a5,2
         add     a5,a4,a5
         lw      a4,0(a5)
         li      a5,99
@@ -2014,17 +2032,16 @@ run_accelerator:
 .L151:
         li      a5,1
 .L152:
-        sb      a5,-59(s0)
+        sw      a5,-68(s0)
         sw      zero,-44(s0)
         j       .L153
 .L155:
-        lbu     s1,-58(s0)
-        lbu     a5,-59(s0)
         lw      a1,-44(s0)
-        mv      a0,a5
+        lw      a0,-68(s0)
         call    mult
-        mv      a5,a0
-        add     a5,s1,a5
+        mv      a4,a0
+        lw      a5,-64(s0)
+        add     a5,a4,a5
         lui     a4,%hi(board)
         addi    a4,a4,%lo(board)
         slli    a5,a5,2
@@ -2033,13 +2050,12 @@ run_accelerator:
         li      a5,12582912
         and     a5,a4,a5
         bne     a5,zero,.L154
-        lbu     s1,-58(s0)
-        lbu     a5,-59(s0)
         lw      a1,-44(s0)
-        mv      a0,a5
+        lw      a0,-68(s0)
         call    mult
-        mv      a5,a0
-        add     a5,s1,a5
+        mv      a4,a0
+        lw      a5,-64(s0)
+        add     a5,a4,a5
         lui     a4,%hi(hit_counts)
         addi    a3,a4,%lo(hit_counts)
         slli    a4,a5,2
@@ -2056,8 +2072,8 @@ run_accelerator:
         addi    a5,a5,1
         sw      a5,-44(s0)
 .L153:
-        lbu     a5,-57(s0)
         lw      a4,-44(s0)
+        lw      a5,-60(s0)
         blt     a4,a5,.L155
         lw      a5,-40(s0)
         addi    a5,a5,1
@@ -2109,7 +2125,6 @@ run_accelerator:
         mv      a0,a5
         lw      ra,76(sp)
         lw      s0,72(sp)
-        lw      s1,68(sp)
         addi    sp,sp,80
         jr      ra
         .size   run_accelerator, .-run_accelerator
@@ -2268,11 +2283,16 @@ main:
         sw      a4,%lo(ai_old_target)(a5)
         lui     a5,%hi(acc_result)
         sw      zero,%lo(acc_result)(a5)
-.L168:
+        lui     a5,%hi(ai_ran)
+        sw      zero,%lo(ai_ran)(a5)
+.L169:
         call    run_accelerator
         mv      a4,a0
         lui     a5,%hi(ai_target)
         sw      a4,%lo(ai_target)(a5)
+        lui     a5,%hi(ai_ran)
+        li      a4,1
+        sw      a4,%lo(ai_ran)(a5)
         lui     a5,%hi(ai_old_target)
         lw      a5,%lo(ai_old_target)(a5)
         lui     a4,%hi(board)
@@ -2311,25 +2331,17 @@ main:
         or      a5,a5,a4
         mv      a0,a5
         call    send_ppu_value
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
-        j       .L168
+        nop
+.L168:
+        lui     a5,%hi(ai_ran)
+        lw      a5,%lo(ai_ran)(a5)
+        bne     a5,zero,.L168
+        j       .L169
+        j       .L169
+        j       .L169
+        j       .L169
+        j       .L169
+        j       .L169
         .size   main, .-main
         .ident  "GCC: (g04696df09) 14.2.0"
         .section        .note.GNU-stack,"",@progbits
