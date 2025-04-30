@@ -355,9 +355,9 @@ int check_valid_configuration(int* configuration) {
             }
         }
     }
-    send_accel_value(generate_acc_encoding(0, my_positions[0], 1, my_positions[1]));
-    send_accel_value(generate_acc_encoding(2, my_positions[2], 3, my_positions[3]));
-    send_accel_value(generate_acc_encoding(4, my_positions[4], 5, 5));
+    send_accel_value(generate_acc_encoding(0, configuration[0], 1, configuration[1]));
+    send_accel_value(generate_acc_encoding(2, configuration[2], 3, configuration[3]));
+    send_accel_value(generate_acc_encoding(4, configuration[4], 5, 5));
     asm volatile ("sac a1");
     asm volatile ("lui a5,%hi(acc_result)");
     asm volatile ("sw a1,%lo(acc_result)(a5)");

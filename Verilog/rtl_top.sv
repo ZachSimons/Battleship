@@ -50,7 +50,7 @@ parameter HEX_14 = 7'b0000110;	// fourteen
 parameter HEX_15 = 7'b0001110;	// fifteen
 parameter OFF   = 7'b1111111;		// all off
 
-logic interrupt_board, interrupt_key_local, accelerator_data, sac, snd, uad, ppu_send, ppu_send_ff, sac_reg, fire, snd_ff;
+logic interrupt_board, interrupt_key_local, accelerator_data, sac, snd, uad, ppu_send, ppu_send_ff, sac_reg, fire, snd_ff, uad_ff;
 logic [31:0] interrupt_source_data, interface_data, spart_data;
 logic [31:0] ppu_reg, acc_reg, comm_reg;
 logic [1:0] direction;
@@ -68,12 +68,14 @@ always_ff @(posedge sys_clk) begin
         sac_reg <= 0;
         ppu_send_ff <= 0;
         snd_ff <= 0;
+        uad_ff <= 0;
         interrupt_board_ff <= 0;
     end
     else begin
         interrupt_board_ff <= interrupt_board ? spart_data[23:0] : interrupt_board_ff;
         ppu_send_ff <= ppu_send;
         snd_ff <= snd;
+        uad_ff <= uad;
         ppu_reg <= ppu_send ? interface_data : ppu_reg;
         acc_reg <= uad ? interface_data : acc_reg;
         comm_reg <= snd ? interface_data : comm_reg;
@@ -89,6 +91,16 @@ keyboard DUT (
     .direction(direction), 
     .fire(fire), 
     .done(interrupt_key_local)
+);
+
+accelerator accel (
+    .data(acc_reg),
+    .clk(sys_clk),
+    .rst_n(rst_n),
+    .update_ship(uad_ff),
+    .start(sac),
+    .update_board(ppu_send_ff),
+    .valid_out(accelerator_data)
 );
 
 ppu_top ppu_top_i (

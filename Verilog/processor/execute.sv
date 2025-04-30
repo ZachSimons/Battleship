@@ -116,7 +116,7 @@ module execute(
         end
     end
 
-    assign lfsr = {{16{lfsr16[15]}}, lfsr16};
+    assign lfsr = {24'h000000, lfsr16[7:0]};
     
     assign random_mux = random_exe ? lfsr : alu_result_exe;
 

@@ -437,15 +437,9 @@ int main() {
     ai_target = 55;
     ai_old_target = 55;
     while(1) {
-        while(1) {
-            while(1) {
-                while(1) {
-                    ai_target = run_accelerator();
-                    send_ppu_value(board[ai_old_target]);
-                    ai_old_target = ai_target;
-                    send_ppu_value(board[ai_target] | (((board[ai_target] & 0x00c00000) == 0) ? 1 << 14 : 0));
-                }
-            }
-        }
+        ai_target = run_accelerator();
+        send_ppu_value(board[ai_old_target]);
+        ai_old_target = ai_target;
+        send_ppu_value(board[ai_target] | (((board[ai_target] & 0x00c00000) == 0) ? 1 << 14 : 0));
     }
 }
