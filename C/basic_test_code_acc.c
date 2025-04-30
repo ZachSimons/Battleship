@@ -19,6 +19,7 @@ int hit_counts[100];
 int ai_target;
 int ai_old_target;
 int acc_result;
+int ai_ran;
 
 int generate_encoding(int, int, int, int, int, int, int);
 int generate_acc_encoding(int, int, int, int);
@@ -78,12 +79,14 @@ void exception_handler(int num) {
         }
     } else if(num == 100) {
         myTurn = 0;
+        ai_ran = 0;
         send_ppu_value(SET_NOT_MY_TURN);
         send_ppu_value(board[ai_target]);
         board[activeSquare] |= (1 << 22) | SELECT_BIT;
         send_ppu_value(board[activeSquare]);
     } else if(num == 101) {
         myTurn = 0;
+        ai_ran = 0;
         send_ppu_value(SET_NOT_MY_TURN);
         send_ppu_value(board[ai_target]);
         board[activeSquare] |= (2 << 22) | SELECT_BIT;
@@ -118,6 +121,7 @@ void exception_handler(int num) {
         send_board_value(toSnd_board);
     } else if(num < 0x00040000) {
         myTurn = 0;
+        ai_ran = 0;
         send_ppu_value(SET_NOT_MY_TURN);
         send_ppu_value(board[ai_target]);
         int ship = (num & 0x0000ff00) >> 8;
@@ -454,10 +458,15 @@ int main() {
     ai_target = 55;
     ai_old_target = 55;
     acc_result = 0;
+    ai_ran = 0;
     while(1) {
         ai_target = run_accelerator();
         send_ppu_value(board[ai_old_target]);
         ai_old_target = ai_target;
         send_ppu_value(board[ai_target] | (((board[ai_target] & 0x00c00000) == 0) ? 1 << 14 : 0));
+        ai_ran = 1;
+        while(ai_ran) {
+            // Do nothing
+        }
     }
 }
