@@ -351,7 +351,7 @@ int calculate_overlap(int lower, int lower_square, int upper, int upper_square) 
 int check_valid_configuration() {
     for(int i = 0; i < 100; i++) {
         if((board[i] & 0x00c00000) == 0x00800000) {
-            if(!square_in_configuration(configuration, i)) {
+            if(!square_in_configuration(i)) {
                 return 0;
             }
         }
