@@ -77,7 +77,7 @@ always_ff @(posedge sys_clk) begin
         snd_ff <= snd;
         uad_ff <= uad;
         ppu_reg <= ppu_send ? interface_data : ppu_reg;
-        acc_reg <= uad ? interface_data : acc_reg;
+        acc_reg <= (uad | ppu_send) ? interface_data : acc_reg;
         comm_reg <= snd ? interface_data : comm_reg;
         sac_reg <= (~sac_reg & sac) ? sac :  sac_reg;
     end
